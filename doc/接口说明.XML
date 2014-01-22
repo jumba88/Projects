@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>路港数据接口</name>
+    </assembly>
+    <members>
+        <member name="T:LuGangWebServer.DataServer">
+            <summary>
+            接口说明：
+            1、访问及返回字符编码gb2312。
+            2、请按参数类型对应调用，字符串类型将不能包含空格符及数据库非法字符
+            3、外部访问调用时,请看标注为"接口"的方法;标注为"私有"的方法请忽略。
+            4、返回结果为JSON字符串。
+            5、成功时的格式:{"result":true,"data":{……结果数据将在这里,也是JSON形成……}} 。其中result是否返回成功；data是数据内容。
+            6、列表说明：totalrowcount：所有记录数；currentrowcount：当前取的记录数；rows：记录集，是JsonArray数组。示例：{"result":true,"data":{"totalrowcount":"21","currentrowcount":"2","rows":[{"id":"5","title":"123123123","addtime":"2014-01-09 18:03:04"},{"id":"1","title":"fefef","addtime":"2014-01-10 16:16:32"}]}}
+            7、列表中单行数据说明：data：数据内容；row：一行记录。示例：{"result":true,"data":{"row":{"title":"fefef","content":"fefe"}}}
+            8、单项数据说明：data对象中的是每项数据。以登录结果为示例{"result":true,"data":{"token":"78d3337c-e4b7-448e-a6ab-4b2764ae9428","usertype":"物流企业","province":"广西壮族自治区","city":"柳州市","county":"柳南区"}}
+            9、失败时的格式:{"result":false,"msg":"失败的原因"}。
+            </summary>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.NewsTopList(System.Int32)">
+            <summary>
+            接口方法:通知公告 前几条
+            </summary>
+            <param name="topCount">要取前面的记录数</param>
+            <returns>JSON格式,结果中已包含总记录数,列表是JSON数组</returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.NewsList(System.Int32,System.Int32)">
+            <summary>
+            接口方法：通知公告 分页列表
+            </summary>
+            <param name="pageSize">分页大小</param>
+            <param name="pageIndex">当前页码,页码是1,2,3...类推</param>
+            <returns>JSON格式,结果中已包含总记录数,及列表是JSON数组</returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.NewsContent(System.Int64)">
+            <summary>
+            接口方法:公告内容
+            </summary>
+            <param name="newsid">公告的ID</param>
+            <returns>JSON格式对象</returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.TkzxList(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            接口方法:查询始发城市与目的城市的城际专线分页列表
+            </summary>
+            <param name="fromCityName">始发城市名,空格及其他数据库字符将被禁止</param>
+            <param name="toCityName">目的城市名,空格及其他数据库字符将被禁止</param>
+            <param name="pageSize">分页大小</param>
+            <param name="pageIndex">当前页码,页码是1,2,3...类推</param>
+            <returns>JSON格式,结果中已包含总记录数,及列表是JSON数组</returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.TkzxTJDList(System.Int64)">
+            <summary>
+            接口方法:查询某条城际快线的途径城市列表
+            </summary>
+            <param name="zxid">此专线的ID</param>
+            <returns>JSON格式,包含记录数及JSON数组;此结果中记录数较少,不需要分页的</returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.TkzxDetail(System.Int64)">
+            <summary>
+            接口方法:城际专线详情
+            </summary>
+            <param name="zxid">此专线的ID</param>
+            <returns>JSON格式对象</returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.WlyList(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            接口方法:查询某城市内的物流园及物流企业 分页列表
+            </summary>
+            <param name="city">城市名</param>
+            <param name="name">物流企业名称，支持模糊查询</param>
+            <param name="pageSize">分页大小</param>
+            <param name="pageIndex">当前页码,页码是1,2,3...类推</param>
+            <returns>JSON格式,结果中已包含总记录数,及列表是JSON数组</returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.WlyDetail(System.String)">
+            <summary>
+            接口方法：物流园,物流企业详情
+            </summary>
+            <param name="wlyNo">物流园物流企业的ID</param>
+            <returns>JSON格式对象</returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.PhList(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            接口方法：查询货源分页列表
+            </summary>
+            <param name="fromCityName">出发城市</param>
+            <param name="toCityName">目的城市</param>
+            <param name="pageSize">分页大小</param>
+            <param name="pageIndex">当前页码,页码是1,2,3...类推</param>
+            <returns>JSON格式,结果中已包含总记录数,及列表是JSON数组</returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.PhInfo(System.String)">
+            <summary>
+            接口方法:货源信息详情
+            </summary>
+            <param name="phid">ID</param>
+            <returns>JSON格式对象</returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.LZView(System.String)">
+            <summary>
+            接口方法:查询运单信息及流转记录
+            </summary>
+            <param name="fhCode">发货码</param>
+            <returns>JSON格式,但格式相比其他会特殊一些</returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.QRCode(System.String)">
+            <summary>
+            接口方法:发货码的二维码图像,结果数据类型为byte[]
+            </summary>
+            <param name="fhCode">发货码</param>
+            <returns>注意这里非JSON格式,而是byte[]</returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.DealingCount(System.String,System.String)">
+            <summary>
+            接口方法:得到待处理工单数,需要登录
+            </summary>
+            <param name="currentUserNo">当前用户帐号</param>
+            <param name="token">登录后得到的token凭证回传进来</param>
+            <returns>JSON格式对象</returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.Dealing(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            接口方法:待处理工单列表,需要登录
+            </summary>
+            <param name="currentUserNo">当前用户帐号></param>
+            <param name="token">登录后得到的token凭证回传进来</param>
+            <param name="pageSize">分页大小</param>
+            <param name="pageIndex">当前页码,页码是1,2,3...类推</param>
+            <returns>JSON格式,结果中已包含总记录数,及列表是JSON数组</returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.UserInfo(System.String,System.String,System.String)">
+            <summary>
+            接口方法:得一到登录帐号的用户信息
+            </summary>
+            <param name="userNo">当前用户帐号</param>
+            <param name="userType">用户组类型(不同用户组的信息数据不一样),正常登录后会获得</param>
+            <param name="token">凭证,正常登录后会获得</param>
+            <returns>JSON格式对象</returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.Login(System.String,System.String)">
+            <summary>
+            接口方法:执行登录验证,同时返回凭证
+            </summary>
+            <param name="userNO">用户帐号</param>
+            <param name="pass">密码</param>
+            <returns>JSON格式,data:{"token":"凭证","usertype":"用户组类型",province:"省名",city:"市名",county:"城区(县名)"}</returns>
+        </member>
+    </members>
+</doc>
