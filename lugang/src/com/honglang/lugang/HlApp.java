@@ -15,7 +15,6 @@ public class HlApp extends Application {
 
 	private List<Activity> activityList = new LinkedList<Activity>();
 	private Activity homeActivity;
-	private Object obj;
 	private static HlApp instance;
 	@Override
 	public void onCreate() {
