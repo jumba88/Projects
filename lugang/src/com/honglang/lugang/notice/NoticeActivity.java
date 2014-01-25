@@ -46,7 +46,7 @@ public class NoticeActivity extends Activity implements OnClickListener {
 		adapter = new NoticeAdapter(items, this);
 		
 		for (int i = 0; i < 5; i++) {
-			item.setNotice("新闻通知");
+			item.setNotice("鏂伴椈鍏憡");
 			item.setDate("2014/01/13");
 			items.add(item);
 		}

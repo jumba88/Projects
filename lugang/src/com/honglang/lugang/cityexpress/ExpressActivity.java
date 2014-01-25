@@ -46,10 +46,10 @@ public class ExpressActivity extends Activity implements OnClickListener {
 		adapter = new ExpressAdapter(items, this);
 		
 		for (int i = 0; i < 20; i++) {
-			item.setGoal("ÁøÖÝ--ÄÏÄþ");
-			item.setPrice("12Ôª");
-			item.setLight("24Ôª/Á¢·½");
-			item.setHeavy("18Ôª/¹«½ï");
+			item.setGoal("æŸ³å·ž--å—å®");
+			item.setPrice("12å…ƒ");
+			item.setLight("24å…ƒ/kg");
+			item.setHeavy("18å…ƒ/t");
 			items.add(item);
 		}
 		if(adapter != null){

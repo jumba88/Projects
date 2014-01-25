@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+    
+    <include layout="@layout/header"/>
+    <View android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#33B5E5"/>
+    <include layout="@layout/logo"/>
+    
+    <Button style="@style/tabfour"
+        android:text="@string/feedback"/>
+    
+    <Button style="@style/tabfour"
+        android:text="@string/about"/>
+    
+    <Button style="@style/tabfour"
+        android:text="@string/version"/>
+    
+    <Button android:id="@+id/logout"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:singleLine="true"
+        android:padding="2dp"
+        android:layout_marginTop="150dp"
+        android:background="#FF4444"
+        android:textSize="25sp"
+        android:textColor="@color/white"
+        android:text="@string/logout"/>
+
+</LinearLayout>

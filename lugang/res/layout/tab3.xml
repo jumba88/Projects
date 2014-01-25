@@ -5,10 +5,12 @@
     android:orientation="vertical" >
     
     <include layout="@layout/tab_header"/>
+    <include layout="@layout/logo"/>
     
     <LinearLayout android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="150dp"
         android:orientation="vertical">
     	<Button style="@style/tabone"
         	android:text="@string/singlein"/>
@@ -17,16 +19,5 @@
         	android:text="@string/multin"/>
     </LinearLayout>
     
-    <LinearLayout android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:orientation="vertical">
-        
-        <Button style="@style/tabone"
-        android:text="@string/singleout"/>
-    
-    	<Button style="@style/tabone"
-        android:text="@string/multiout"/>
-    </LinearLayout>
 
 </LinearLayout>

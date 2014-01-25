@@ -26,7 +26,7 @@ public class TruckDetailActivity extends Activity implements OnClickListener {
 
 	private void init(){
 		title = (TextView) this.findViewById(R.id.title);
-		title.setText("空车信息详情");
+		title.setText("绌鸿溅璇︽儏");
 		back = (Button) this.findViewById(R.id.back);
 		back.setOnClickListener(this);
 	}

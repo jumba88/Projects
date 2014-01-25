@@ -16,7 +16,7 @@ import android.widget.TextView;
 public class TabFour extends Fragment implements OnClickListener {
 
 	private TextView title;
-	private Button logout;
+//	private Button logout;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -29,8 +29,8 @@ public class TabFour extends Fragment implements OnClickListener {
 		title = (TextView) view.findViewById(R.id.title);
 		title.setText(R.string.tab4);
 		
-		logout = (Button) view.findViewById(R.id.logout);
-		logout.setOnClickListener(this);
+//		logout = (Button) view.findViewById(R.id.logout);
+//		logout.setOnClickListener(this);
 	}
 	
 	public void onLogout(){
@@ -39,15 +39,15 @@ public class TabFour extends Fragment implements OnClickListener {
 		getActivity().finish();
 	}
 
-	public static TabFour newInstance(){
-		TabFour tab = new TabFour();
-		return tab;
-	}
+//	public static TabFour newInstance(){
+//		TabFour tab = new TabFour();
+//		return tab;
+//	}
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.logout:
-			onLogout();
+//			onLogout();
 			break;
 
 		}

@@ -22,6 +22,7 @@
         
         <RadioButton android:id="@+id/one"
             style="@style/HomeTabs"
+            android:checked="true"
             android:text="@string/tab1"/>
         <RadioButton android:id="@+id/two"
             style="@style/HomeTabs"

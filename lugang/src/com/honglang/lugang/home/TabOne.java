@@ -21,6 +21,7 @@ import android.widget.TextView;
 public class TabOne extends Fragment implements OnClickListener {
 
 	private TextView title;
+	private Button city;
 	private Button express;
 	private Button company;
 	private Button truck;
@@ -38,6 +39,10 @@ public class TabOne extends Fragment implements OnClickListener {
 		super.onViewCreated(view, savedInstanceState);
 		title = (TextView) view.findViewById(R.id.title);
 		title.setText(R.string.tab1);
+		city = (Button) view.findViewById(R.id.city);
+		city.setText(R.string.setting);
+		city.setOnClickListener(this);
+		city.setVisibility(View.VISIBLE);
 		
 		express = (Button) view.findViewById(R.id.express);
 		company = (Button) view.findViewById(R.id.company);
@@ -54,14 +59,17 @@ public class TabOne extends Fragment implements OnClickListener {
 		notice.setOnClickListener(this);
 	}
 
-	public static TabOne newInstance(){
-		TabOne tab = new TabOne();
-		return tab;
-	}
+//	public static TabOne newInstance(){
+//		TabOne tab = new TabOne();
+//		return tab;
+//	}
 	
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+		case R.id.city:
+			getActivity().startActivity(new Intent(getActivity(),SettingActivity.class));
+			break;
 		case R.id.express:
 			getActivity().startActivity(new Intent(getActivity(),ExpressActivity.class));
 			break;

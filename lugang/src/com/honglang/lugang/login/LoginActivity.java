@@ -60,8 +60,9 @@ public class LoginActivity extends Activity {
 			return;
 		}
 		if(!TextUtils.isEmpty(userNo) && !TextUtils.isEmpty(pass)){
-			new LoginTask().execute(userNo,pass);
-			
+//			new LoginTask().execute(userNo,pass);
+			LoginActivity.this.startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+			LoginActivity.this.finish();
 		}
 	}
 	
@@ -71,20 +72,20 @@ public class LoginActivity extends Activity {
 		private String errMsg;
 		@Override
 		protected void onPreExecute() {
-			progress = ProgressDialog.show(LoginActivity.this, null, "µÇÂ¼ÖÐ...");
+			progress = ProgressDialog.show(LoginActivity.this, null, "ç™»å½•ä¸­...");
 			progress.setCancelable(false);
 			super.onPreExecute();
 		}
 		@Override
 		protected Boolean doInBackground(String... params) {
 			loginResult = Constant.login(params[0], params[1]);
-//			Log.i("Login", "" + loginResult);
-			JSONTokener jsonParser = new JSONTokener(loginResult);
-			if (jsonParser != null) {
+			Log.i("Login", "" + loginResult);
+			
+			if (loginResult != null && loginResult.length() > 0) {
 				try {
+					JSONTokener jsonParser = new JSONTokener(loginResult);
 					JSONObject json = (JSONObject) jsonParser.nextValue();
 					if (json.getBoolean("result")) {
-						//¼Ç×¡ÓÃ»§
 						setting.saveAccount(params[0]);
 						setting.savePwd(params[1]);
 						SessionManager.getInstance().setUsername(params[0]);

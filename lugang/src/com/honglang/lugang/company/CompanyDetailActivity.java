@@ -26,7 +26,7 @@ public class CompanyDetailActivity extends Activity implements OnClickListener {
 
 	private void init(){
 		title = (TextView) this.findViewById(R.id.title);
-		title.setText("物流企业详情");
+		title.setText("鐗╂祦浼佷笟璇︽儏");
 		back = (Button) this.findViewById(R.id.back);
 		back.setOnClickListener(this);
 	}

@@ -48,8 +48,8 @@ public class SearchActivity extends Activity implements OnClickListener {
 		
 		for (int i = 0; i < 7; i++) {
 			item.setCode("077219527");
-			item.setSender("张三");
-			item.setGetter("李四");
+			item.setSender("寮犱笁");
+			item.setGetter("鏉庡洓");
 			items.add(item);
 		}
 		if (adapter != null) {

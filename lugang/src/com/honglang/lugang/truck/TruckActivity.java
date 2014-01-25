@@ -46,9 +46,9 @@ public class TruckActivity extends Activity implements OnClickListener {
 		adapter = new TruckAdapter(items, this);
 		
 		for (int i = 0; i < 20; i++) {
-			item.setTruck("¹ðB9527");
-			item.setLocation("ÁøÖÝÊÐ");
-			item.setPark("ÐÂ¸ÅÄîÍ£³µ³¡");
+			item.setTruck("æ¡‚B9527");
+			item.setLocation("æŸ³å·žå¸‚");
+			item.setPark("æ–°æ¦‚å¿µåœè½¦åœº");
 			item.setUpdate("2014/1/13");
 			items.add(item);
 		}

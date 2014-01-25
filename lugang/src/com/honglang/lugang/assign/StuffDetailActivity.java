@@ -26,7 +26,7 @@ public class StuffDetailActivity extends Activity implements OnClickListener {
 
 	private void init(){
 		title = (TextView) this.findViewById(R.id.title);
-		title.setText("最新配货详情");
+		title.setText("璐х墿璇︽儏");
 		back = (Button) this.findViewById(R.id.back);
 		back.setOnClickListener(this);
 	}

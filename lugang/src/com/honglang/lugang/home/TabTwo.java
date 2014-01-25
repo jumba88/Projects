@@ -24,7 +24,7 @@ public class TabTwo extends Fragment {
 
 	private TextView title;
 	private Button city;
-	private static final String[] CONTENT = new String[]{"´ı´¦Àí¹¤µ¥","ÒÑÍê³É¹¤µ¥"};
+	private static final String[] CONTENT = new String[]{"å¾…å¤„ç†å·¥å•","å·²å®Œæˆå·¥å•"};
 	private List<Fragment> fragments;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -77,8 +77,8 @@ public class TabTwo extends Fragment {
 		
 	}
 	
-	public static TabTwo newInstance(){
-		TabTwo tab = new TabTwo();
-		return tab;
-	}
+//	public static TabTwo newInstance(){
+//		TabTwo tab = new TabTwo();
+//		return tab;
+//	}
 }

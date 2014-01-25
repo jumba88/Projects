@@ -1,6 +1,8 @@
 package com.honglang.lugang.home;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
@@ -16,57 +18,42 @@ import com.honglang.lugang.SessionManager;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.RadioGroup.OnCheckedChangeListener;
 
 public class HomeActivity extends  FragmentActivity implements OnClickListener{
 
 	private FragmentManager fManager;
 	private String handlingAction = "DealingCount";
+	public List<Fragment> fragments = new ArrayList<Fragment>();
+	FragmentTabAdapter tabAdapter;
 	private RadioGroup tabs;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
-		
-		new HandlingTask().execute((Void)null);
 		HlApp.getInstance().setHomeActivity(HomeActivity.this);
-		tabs = (RadioGroup) this.findViewById(R.id.tabs);
 		
-		tabs.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			
-			@Override
-			public void onCheckedChanged(RadioGroup group, int checkedId) {
-				Fragment tab = null;
-				switch (checkedId) {
-				case R.id.one:
-					tab = TabOne.newInstance();
-					break;
-				case R.id.two:
-					tab = TabTwo.newInstance();
-					break;
-				case R.id.three:
-					tab = TabThree.newInstance();
-					break;
-				case R.id.four:
-					tab = TabFour.newInstance();
-					break;
-				}
-				fManager = getSupportFragmentManager();
-				FragmentTransaction transaction = fManager.beginTransaction();
-				transaction.replace(R.id.content, tab).commit();
-			}
-		});
-		((RadioButton)tabs.findViewById(R.id.one)).setChecked(true);
+		fragments.add(new TabOne());
+		fragments.add(new TabTwo());
+		fragments.add(new TabThree());
+		fragments.add(new TabFour());
+		
+		tabs = (RadioGroup) this.findViewById(R.id.tabs);
+		tabAdapter = new FragmentTabAdapter(this, fragments, R.id.content, tabs);
+        tabAdapter.setOnRgsExtraCheckedChangedListener(new FragmentTabAdapter.OnRgsExtraCheckedChangedListener(){
+            @Override
+            public void OnRgsExtraCheckedChanged(RadioGroup radioGroup, int checkedId, int index) {
+                System.out.println("Extra---- " + index + " checked!!! ");
+            }
+        });
+		
+//		new HandlingTask().execute((Void)null);
 	}
 	
 	class HandlingTask extends AsyncTask<Void, Void, Boolean>{

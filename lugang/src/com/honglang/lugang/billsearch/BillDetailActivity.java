@@ -26,7 +26,7 @@ public class BillDetailActivity extends Activity implements OnClickListener {
 
 	private void init(){
 		title = (TextView) this.findViewById(R.id.title);
-		title.setText("ÔËµ¥ÏêÇé");
+		title.setText("è¿å•è¯¦æƒ…");
 		back = (Button) this.findViewById(R.id.back);
 		back.setOnClickListener(this);
 	}

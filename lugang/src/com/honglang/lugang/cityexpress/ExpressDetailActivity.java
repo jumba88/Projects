@@ -26,7 +26,7 @@ public class ExpressDetailActivity extends Activity implements OnClickListener {
 
 	private void init(){
 		title = (TextView) this.findViewById(R.id.title);
-		title.setText("城际快线详情");
+		title.setText("鍩庨檯蹇嚎璇︽儏");
 		back = (Button) this.findViewById(R.id.back);
 		back.setOnClickListener(this);
 	}

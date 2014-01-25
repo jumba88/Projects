@@ -26,7 +26,7 @@ public class NoticeDetailActivity extends Activity implements OnClickListener {
 
 	private void init(){
 		title = (TextView) this.findViewById(R.id.title);
-		title.setText("通知公告详情");
+		title.setText("通鏂伴椈鍏憡");
 		back = (Button) this.findViewById(R.id.back);
 		back.setOnClickListener(this);
 	}

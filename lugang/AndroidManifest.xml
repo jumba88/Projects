@@ -16,7 +16,7 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    
+
     <application
         android:name="com.honglang.lugang.HlApp"
         android:allowBackup="true"
@@ -87,6 +87,10 @@
         </activity>
         <activity
             android:name="com.honglang.lugang.truck.TruckDetailActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="com.honglang.lugang.home.SettingActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
     </application>

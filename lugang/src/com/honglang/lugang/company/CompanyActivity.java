@@ -46,9 +46,9 @@ public class CompanyActivity extends Activity implements OnClickListener {
 		adapter = new CompanyAdapter(items, this);
 		
 		for (int i = 0; i < 20; i++) {
-			item.setName("ÐÂ¸ÅÄîÎïÁ÷");
+			item.setName("æ–°æ¦‚å¿µç‰©æµ");
 			item.setPhone("0772-1010110");
-			item.setAddress("¹ãÎ÷ÁøÖÝÊÐÐÂ¸ÅÄîÎïÁ÷ÖÐÐÄ");
+			item.setAddress("å¹¿è¥¿æŸ³å·žå¸‚åŸŽä¸­åŒºå¼¯å¡˜è·¯ä¸œä¸‰å··");
 			items.add(item);
 		}
 		

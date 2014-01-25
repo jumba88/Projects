@@ -45,9 +45,9 @@ public class AssignActivity extends Activity implements OnClickListener {
 		adapter = new AssignAdapter(items, this);
 		
 		for (int i = 0; i < 20; i++) {
-			item.setStuff("µç±ùÏä");
-			item.setFrom("¹ãÎ÷-ÁøÖÝÊÐ-³ÇÖÐÇø");
-			item.setTo("¹ã¶«-ÉîÛÚÊÐ-ÂÞºþÇø");
+			item.setStuff("ç”µå†°ç®±");
+			item.setFrom("å¹¿è¥¿-å—å®å¸‚-é«˜æ–°åŒº");
+			item.setTo("å¹¿è¥¿-æŸ³å·žå¸‚-åŸŽä¸­åŒº");
 			item.setTotal("20t");
 			items.add(item);
 		}

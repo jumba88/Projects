@@ -31,7 +31,7 @@ public class HandlingFragment extends Fragment {
 		bills = new ArrayList<Bill>();
 		bill = new Bill();
 		for(int i=0; i<5; i++){
-			bill.setBill("·¢»õÂë" + (20140116+i));
+			bill.setBill("å‘è´§ç " + (20140116+i));
 			bill.setTime("2014");
 			bills.add(bill);
 		}

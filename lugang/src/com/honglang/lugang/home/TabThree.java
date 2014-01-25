@@ -25,8 +25,8 @@ public class TabThree extends Fragment {
 		title.setText(R.string.tab3);
 	}
 
-	public static TabThree newInstance(){
-		TabThree tab = new TabThree();
-		return tab;
-	}
+//	public static TabThree newInstance(){
+//		TabThree tab = new TabThree();
+//		return tab;
+//	}
 }
