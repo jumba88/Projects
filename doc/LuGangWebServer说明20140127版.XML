@@ -1,0 +1,572 @@
+﻿<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LuGangWebServer</name>
+    </assembly>
+    <members>
+        <member name="T:LuGangWebServer.DataServer">
+            <summary>
+		本文档,请用记事本,或编程工具打开.请不要用浏览器阅读,格式会乱而影响阅读.
+            00、<returns>每个方法说明的returns 中有示例JSON格式，及每个字段的含义。没有写示例的，还没能测试</returns>
+            接口说明：
+            1、访问及返回字符编码gb2312。
+            2、请按参数类型对应调用，字符串类型将不能包含空格符及数据库非法字符
+            3、外部访问调用时,请看标注为"接口"的方法;标注为"私有"的方法请忽略。
+            4、返回结果为JSON字符串。
+            5、成功时的格式:{"result":true,"data":{……结果数据将在这里,也是JSON形成……}} 。其中result是否返回成功；data是数据内容。
+            6、列表说明：totalrowcount：所有记录数；currentrowcount：当前取的记录数；rows：记录集，是JsonArray数组。示例：{"result":true,"data":{"totalrowcount":"21","currentrowcount":"2","rows":[{"id":"5","title":"123123123","addtime":"2014-01-09 18:03:04"},{"id":"1","title":"fefef","addtime":"2014-01-10 16:16:32"}]}}
+            7、列表中单行数据说明：data：数据内容；row：一行记录。示例：{"result":true,"data":{"row":{"title":"fefef","content":"fefe"}}}
+            8、单项数据说明：data对象中的是每项数据。以登录结果为示例{"result":true,"data":{"token":"78d3337c-e4b7-448e-a6ab-4b2764ae9428","usertype":"物流企业","province":"广西壮族自治区","city":"柳州市","county":"柳南区"}}
+            9、失败时的格式:{"result":false,"msg":"失败的原因"}。
+            </summary>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.NewsTopList(System.Int32)">
+            <summary>
+            接口方法:通知公告 前几条
+            </summary>
+            <param name="topCount">要取前面的记录数</param>
+            <returns>JSON格式,结果中已包含总记录数,列表是JSON数组
+            与 NewsList(int pageSize, int pageIndex)  一致
+            </returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.NewsList(System.Int32,System.Int32)">
+             <summary>
+             接口方法：通知公告 分页列表
+             </summary>
+             <param name="pageSize">分页大小</param>
+             <param name="pageIndex">当前页码,页码是1,2,3...类推</param>
+             <returns>JSON格式,结果中已包含总记录数,及列表是JSON数组
+            {
+                "result": true,
+                "data": {
+                    "totalrowcount": "2",总记录数
+                    "currentrowcount": "2",当前页内的记录数
+                    "rows": [
+                        {
+                            "id": "5",ID
+                            "title": "123123123",标题
+                            "addtime": "2014-01-09 18:03:04" 增加的时间
+                        },
+                        {
+                            "id": "1",
+                            "title": "fefef",
+                            "addtime": "2014-01-10 16:16:32"
+                        }
+                    ]
+                }
+            }
+             </returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.NewsContent(System.Int64)">
+             <summary>
+             接口方法:公告内容
+             </summary>
+             <param name="newsid">公告的ID</param>
+             <returns>JSON格式对象
+            {
+                "result": true,
+                "data": {
+                    "row": {
+                        "title": "123123123",公告标题
+                        "content": "<p> 123123</p> " 公告内容
+                    }
+                }
+            }
+             </returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.TkzxList(System.String,System.String,System.Int32,System.Int32)">
+             <summary>
+             接口方法:查询始发城市与目的城市的城际专线分页列表。查询出的线路中，始发与终点是双向互通的，注意表现出来
+             </summary>
+             <param name="fromCityName">始发城市名,空格及其他数据库字符将被禁止</param>
+             <param name="toCityName">目的城市名,空格及其他数据库字符将被禁止</param>
+             <param name="pageSize">分页大小</param>
+             <param name="pageIndex">当前页码,页码是1,2,3...类推</param>
+             <returns>JSON格式,结果中已包含总记录数,及列表是JSON数组
+            {
+                "result": true,
+                "data": {
+                    "totalrowcount": "11",
+                    "currentrowcount": "1",
+                    "rows": [
+                        {
+                            "id": "63",ID
+                            "fromcity": "广西-柳州市",出发地
+                            "tocity": "广西-北海市",到达地
+                            "haevyprice": "0",重货价 (价格为0 时,显示为--)
+                            "lightprice": "0",轻货价 (价格为0 时,显示为--)
+                            "minprice": "0"起步价 (价格为0 时,显示为--)
+                        }
+                    ]
+                }
+            }
+             </returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.TkzxTJDList(System.Int64)">
+             <summary>
+               接口方法:查询某条城际快线的途径城市列表。
+             </summary>
+             <param name="zxid">此专线的ID</param>
+             <returns>JSON格式,包含记录数及JSON数组;此结果中记录数较少,不需要分页的
+            {
+                "result": true,
+                "data": {
+                    "totalrowcount": "4",
+                    "currentrowcount": "4",
+                    "rows": [
+                        {
+                            "city": "广西-南宁市-宾阳县",途经点名称与快线的fromcity相当
+                            "address": "广西-南宁市-宾阳县宾阳路13号" 途经点的详细地址与快线的fromaddress相当
+                        },
+                        {
+                            "city": "广西-南宁市",
+                            "address": "广西-南宁市南梧大道188号"
+                        }
+                    ]
+                }
+            }
+             </returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.TkzxDetail(System.Int64)">
+             <summary>
+               接口方法:城际专线详情查。始发与终点是双向互通的，注意表现出来，以及途经站
+             </summary>
+             <param name="zxid">此专线的ID</param>
+             <returns>JSON格式对象
+            {
+                "result": true,
+                "data": {
+                    "row": {
+                        "fromcity": "广西-柳州市",
+                        "tocity": "广西-北海市",
+                        "fromaddress": "广西壮族自治区柳州市柳南区航五路新概念物流中心",始发站地址
+                        "toaddress": "西南大道23号",终点站地址
+                        "haevyprice": "0",重货价(价格为0 时,显示为--)
+                        "lightprice": "0",轻货价(价格为0 时,显示为--)
+                        "minprice": "0",起步价(价格为0 时,显示为--)
+                        "details": "",说明
+                        "wly_name": "新概念物流园",物流园
+                        "wly_phone": "0772-1010101",联系电话
+                    }
+                }
+            }
+             </returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.WlyList(System.String,System.String,System.Int32,System.Int32)">
+             <summary>
+             接口方法:查询某城市内的物流园及物流企业 分页列表
+             </summary>
+             <param name="city">城市名</param>
+             <param name="name">物流企业名称，支持模糊查询</param>
+             <param name="pageSize">分页大小</param>
+             <param name="pageIndex">当前页码,页码是1,2,3...类推</param>
+             <returns>JSON格式,结果中已包含总记录数,及列表是JSON数组
+            {
+                "result": true,
+                "data": {
+                    "totalrowcount": "42",
+                    "currentrowcount": "1",
+                    "rows": [
+                        {
+                            "no": "xgnwly",ID
+                            "fk_station": "05",暂未用到
+                            "name": "新概念物流园",名称 
+                            "qyjingyinfanwei": "测试",经营范围 
+                            "phone": "0772-1010101",联系电话 
+                            "address": "航五路新概念物流中心",公司地址 
+                            "qiyexinyu": "广西诚信企业"信誉度 
+                        }
+                    ]
+                }
+            }
+             </returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.WlyDetail(System.String)">
+             <summary>
+             接口方法：物流园,物流企业详情
+             </summary>
+             <param name="wlyNo">物流园物流企业的ID</param>
+             <returns>JSON格式对象
+            {
+                "result": true,
+                "data": {
+                    "row": {
+                        "province": "广西壮族自治区",
+                        "city": "柳州市",
+                        "county": "柳南区",
+                        "businessname": "新概念物流园",名称
+                        "qyjingyinfanwei": "测试",经营范围
+                        "qywanlaixianlu": "",往来线路
+                        "qiyexinyu": "广西诚信企业",诚信度
+                        "address": "航五路新概念物流中心",地址
+                        "phone": "0772-1010101",办公电话或手机
+                        "jychuanz": "0772-1010101"传真号码
+                    }
+                }
+            }
+             </returns>
+        </member>
+        <!-- 对于成员“M:LuGangWebServer.DataServer.PhList(System.String,System.String,System.Int32,System.Int32)”忽略有格式错误的 XML 注释 -->
+        <!-- 对于成员“M:LuGangWebServer.DataServer.PhInfo(System.String)”忽略有格式错误的 XML 注释 -->
+        <member name="M:LuGangWebServer.DataServer.CarInfoById(System.String)">
+             <summary>
+             接口方法:通过ID取空车信息
+             </summary>
+             <param name="id">空车信息的id</param>
+             <returns>
+             {
+                "result": true,
+                "data": {
+                    "row": {
+                        "chep": "桂B44444",           车牌
+                        "chex": "大型车",             车型
+                        "pingp": "东风",              品牌
+                        "rongl": "20",                容量
+                        "startaddr": "广东-深圳市",    始发地
+                        "endaddr": "广东-广州市",     目的地ww
+                        "price": "20",运价
+                        "realname": "超级物流",联系人
+                        "phone": "15107724685",联系电话
+                        "remark": ""     说明
+                    }
+                }
+            }</returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.CarInfoByChePai(System.String)">
+            <summary>
+            接口方法:通过车牌取空车信息
+            </summary>
+            <param name="chepai">车牌号</param>
+            <returns>JSON格式对象</returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.LZView(System.String)">
+             <summary>
+             接口方法:查询运单信息及流转记录
+             </summary>
+             <param name="fhCode">发货码</param>
+             <returns>JSON格式,但格式相比其他会特殊一些
+             以发货码"2014012100000842"为例
+            {
+                "result": true,
+                "data": {
+                    "form": {    //表单的信息
+                        "row": {
+                            "fhcode": "2014012100000842",    //发货码
+                            "id": "2286",    //表单的ID
+                            "keycode": "LZ2014012115331531",  //转流单号,暂无用
+                            "shr": "黄帅哥",    //收货人姓名
+                            "dianh": "15588776654",  //收货人电话
+                            "tocity": "广西-北海市",  //目的地
+                            "dizhi": "海城区滨海大道123号",  //收货人地址(与目的地连起来才是完整地址)
+                            "tyxingming": "VIP会员A",  //托运人姓名
+                            "tydianh": "0772-2826111",   //托运人电话
+                            "fromcity": "广西-柳州市",    //出发地
+                            "tydizhi": ""    //托运人地址(与出发地连起来才是完整地址)
+                        }
+                    },
+                    "list": {    //货物列表(至少一行,最多5行)
+                        "totalrowcount": "2",
+                        "currentrowcount": "2",
+                        "rows": [    //货物列表(至少一行,最多5行)
+                            {
+                                "wpmc": "飞利浦洗衣机",    //货物名称 
+                                "sl_danwei": "件",    //数量的单位
+                                "sl": "300", //总托运数量
+                                "yfsl": "300",   //已发货数量 
+                                "wfsl": "0", //未发货数量
+                                "yydsl": "0" //已运抵数量 
+                            },
+                            {
+                                "wpmc": "劳斯莱斯幻影",
+                                "sl_danwei": "车",
+                                "sl": "2",
+                                "yfsl": "2",
+                                "wfsl": "0",
+                                "yydsl": "0"
+                            }
+                        ]
+                    },
+                    "liuzhuan": {    //流转记录
+                        "totalrowcount": "9",
+                        "currentrowcount": "9",
+                        "rows": [        //流转记录,每行为一个记录,记录内只有一项(text),尽管转出"text"的内容即可;同时内容中可能含有\\n的换行符
+                            {
+                                "text": "飞利浦洗衣机（300） → 【广西省柳州市新概念物流有限责任公司】 联系电话（0772-2885988） 货物入库（2014-01-21 15:57） 劳斯莱斯幻影（2） → 【广西省柳州市新概念物流有限责任公司】 联系电话（0772-2885988） 货物入库（2014-01-21 15:57） "
+                            },
+                            {
+                                "text": "飞利浦洗衣机（150） → 【广西省柳州市新概念物流有限责任公司】 联系电话（0772-2885988） 柳州市→柳州市 车辆（桂B66666）已经中转给【物流企业A】 "
+                            },
+                            {
+                                "text": "飞利浦洗衣机（150） → 【广西省柳州市新概念物流有限责任公司】 联系电话（0772-2885988） 柳州市→柳州市 车辆（桂B55555）已经中转给【物流企业A】 "
+                            },
+                            {
+                                "text": "劳斯莱斯幻影（2） → 【广西省柳州市新概念物流有限责任公司】 联系电话（0772-2885988） 柳州市→柳州市 车辆（桂B12345）已经中转给【物流企业A】 "
+                            },
+                            {
+                                "text": "飞利浦洗衣机（150） → 【物流企业A】 联系电话（0772-3444444） 货物入库（2014-01-21 16:04） "
+                            },
+                            {
+                                "text": "劳斯莱斯幻影（2） → 【物流企业A】 联系电话（0772-3444444） 货物入库（2014-01-21 16:02） "
+                            },
+                            {
+                                "text": "飞利浦洗衣机（150） → 【物流企业A】 联系电话（0772-3444444） 货物入库（2014-01-21 16:07） "
+                            },
+                            {
+                                "text": "飞利浦洗衣机（300） → 【物流企业A】 联系电话（0772-3444444） 柳州市→柳州市 车辆（桂B12345） "
+                            },
+                            {
+                                "text": "劳斯莱斯幻影（2） → 【物流企业A】 联系电话（0772-3444444） 柳州市→柳州市 车辆（桂B22222） "
+                            }
+                        ]
+                    }
+                }
+            }
+             </returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.QRCode(System.String)">
+            <summary>
+            接口方法:发货码的二维码图像,结果数据类型为byte[]
+            </summary>
+            <param name="fhCode">发货码</param>
+            <returns>注意这里非JSON格式,而是byte[]</returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.DealingCount(System.String,System.String)">
+             <summary>
+             接口方法:得到待处理工单数,需要登录
+             </summary>
+             <param name="currentUserNo">当前用户帐号</param>
+             <param name="token">登录后得到的token凭证回传进来</param>
+             <returns>JSON格式对象
+            {
+                "result": true,
+                "data": {
+                    "count": "25" 待处理工单数
+                }
+            }
+             </returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.Dealing(System.String,System.String,System.Int32,System.Int32)">
+             <summary>
+             接口方法:待处理工单列表,需要登录
+             </summary>
+             <param name="currentUserNo">当前用户帐号></param>
+             <param name="token">登录后得到的token凭证回传进来</param>
+             <param name="pageSize">分页大小</param>
+             <param name="pageIndex">当前页码,页码是1,2,3...类推</param>
+             <returns>JSON格式,结果中已包含总记录数,及列表是JSON数组
+            {
+                "result": true,
+                "data": {
+                    "totalrowcount": "25",
+                    "currentrowcount": "1",
+                    "rows": [
+                        {
+                            "title": "发货码（2014012400000867）, 黄老大, 等待货物入库",   标题
+                            "form_oid": "1582",  表单ID
+                            "current_node_id": "10",  节点ID(说明:值为7时,有权限调用PaiCheShouHuoRuKu 方法,也就是物流公司派车到现场取货时,由物流公司在手机APP上当场录入信息从而入库完成 ;其他值,未提供给手机APP的处理方法)
+                            "trun_time": "2014-01-24 14:59"
+                        }
+                    ]
+                }
+            }
+             </returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.GetFormInfoByFormOid(System.Int64,System.String,System.String)">
+             <summary>
+             
+             </summary>
+             <param name="formOid">订单ID</param>
+             <param name="currentUserno">登录的用户帐号</param>
+             <param name="token">凭证</param>
+             <returns>JSON串
+             
+            {
+                "result": true,
+                "data": {
+                    "form": {        //表单信息
+                        "row": {
+                            "fhcode": "2014012600000651",    //发货码
+                            "formoid": "1407",               //表单ID ,与参数formOid的值 相等的(回传)
+                            "tocity": "广西-南宁市-西乡塘区"  //目的地
+                        }
+                    },
+                    "mxb": {     //货物列表
+                        "totalrowcount": "1",
+                        "currentrowcount": "1",
+                        "rows": [        货物列表,每行要形成数组回传哦
+                            {
+                                "OID": "1973",   //货号 (回传)
+                                "wplx": "水泥",   //货物类型
+                                "wpmc": "水泥",    物品名称
+                                "sl": "10",      //数量,大小0的整数    (回传)
+                                "sl_danwei": "件",    //数量单位
+                                "zl_danwei": "kg",   重量单位;有千克(kg)与吨(t) 可改变  (回传)
+                                "zongliang": "3",    总重量(回传)
+                                "tiji": "0",         总体积(回传)
+                                "tiji_danwei": "立方米",    体积的单位
+                                "yunfei": "0",       //运费,初始化0 (回传)金额类型输入不能为空,此项必须大于0
+                                "tihuofei": "0",     //提货费,初始化0  (回传)金额类型输入不能为空,至少输入0
+                                "songhuofei": "0",   //送货费,初始化0  (回传)金额类型输入不能为空,至少输入0
+                                "baof": "0",     //保险费,初始化0  (回传)金额类型输入不能为空,至少输入0
+                                "zongyunfei": "0",       //总运费,初始化0  (回传)金额类型输入不能为空,此项必须大于0,总运费=运费+提货费+送货费+保险费
+                                "tbjz": "0"      //投保价值,初始化0  (回传)金额类型输入不能为空,至少输入0
+                            },
+                            {
+                                "OID": "1974",
+                                "wplx": "化肥及农药",
+                                "wpmc": "农药",
+                                "sl": "20",
+                                "sl_danwei": "件",
+                                "zl_danwei": "kg",
+                                "zongliang": "0",
+                                "tiji": "0",
+                                "tiji_danwei": "立方米",
+                                "yunfei": "0",
+                                "tihuofei": "0",
+                                "songhuofei": "0",
+                                "baof": "0",
+                                "zongyunfei": "0",
+                                "tbjz": "0"
+                            }
+                        ]
+                    }
+                }
+            }
+             </returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.GetFormInfoByFhcode(System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="fhCode"></param>
+            <param name="currUserNo"></param>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.AutomaticEntry(System.Int64[],System.String,System.String)">
+            <summary>
+            用于扫描二维码的入库方式,在这之前,客户端先调用GetFormInfoByFhcode方法,取得表单信息,用其FORMOID调用此方法
+            </summary>
+            <param name="formOids">long(Int64)数组</param>
+            <param name="currentUserno"></param>
+            <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.PaiCheShouHuoRuKu(System.String,System.String,System.Int64,System.String)">
+             <summary>
+             入口是待处理工单,只有NODE_ID=7时,才能调用此方法,否则都按无权限操作而不进行处理(2014年1月27日注:转交工单时,内部实现逻辑似乎有些不对劲!但方法调用,参数等已确定.按说明调用即可)
+             </summary>
+             <param name="currentUserno"></param>
+             <param name="token"></param>
+             <param name="formOid">订单ID,不是发码码!!以待办事项作为入口</param>
+             <param name="jsonMxbArrayString">货物的明细信息 json数组形式
+             每个数据单元,要消除空格符与特殊字符,如"oid":"1234" 正确;  "oid":"1234 ", "oid":"12 34"此类含空格将错误
+            [
+                {
+                    "oid": "明细表ID",
+                    "sl": "数量",
+                    "tiji": "体积",
+                    "tiji_danwei": "体积的单位(目前只有 立方米 一项)",
+                    "zl": "重量",
+                    "zl_danwei": "重量单位(千克,吨 共两项选择其一)",
+                    "yunfei": "运费(不能为空值,至少输入0)",
+                    "baozhuangfei": "包装费(不能为空值,至少输入0)",
+                    "tihuofei": "提货费(不能为空值,至少输入0)",
+                    "songhuofei": "送货费(不能为空值,至少输入0)",
+                    "baof": "保险费(不能为空值,至少输入0)",
+                    "zongyunfei": "总运费(=运费+包装费+提货费+送货费+保险费)",
+                    "tbjz": "投保价值"
+                },
+                {
+                    "oid": "明细表ID",
+                    "sl": "数量",
+                    "tiji": "体积",
+                    "tiji_danwei": "体积的单位(目前只有 立方米 一项)",
+                    "zl": "重量",
+                    "zl_danwei": "重量单位(千克,吨 共两项选择其一)",
+                    "yunfei": "运费(不能为空值,至少输入0)",
+                    "baozhuangfei": "包装费(不能为空值,至少输入0)",
+                    "tihuofei": "提货费(不能为空值,至少输入0)",
+                    "songhuofei": "送货费(不能为空值,至少输入0)",
+                    "baof": "保险费(不能为空值,至少输入0)",
+                    "zongyunfei": "总运费(=运费+包装费+提货费+送货费+保险费)",
+                    "tbjz": "投保价值"
+                }
+            ]</param>
+             <returns></returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.HuoWuChuKu(System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            一个发货码内有几个货,要入是的哪件货?全部入????
+            </summary>
+            <param name="currentUserno"></param>
+            <param name="token"></param>
+            <param name="fhCode">发货码这个东东,不能吧?????????????!!</param>
+            <param name="chepai">车牌号</param>
+            <param name="siji">司机的姓名</param>
+            <param name="sijidh">司机电话</param>
+            <param name="sjsfz">司机身份证</param>
+            <returns></returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.UserInfo(System.String,System.String,System.String)">
+             <summary>
+             接口方法:得到登录帐号的用户信息
+             </summary>
+             <param name="userNo">当前用户帐号</param>
+             <param name="userType">用户组类型(不同用户组的信息数据不一样),正常登录后会获得</param>
+             <param name="token">凭证,正常登录后会获得</param>
+             <returns>JSON格式对象，两种形态：（物流企业｜物流园）二同一种，（VIP会员｜手机会员｜停车场会员｜普通会员｜其他用户组）五同另一种
+             物流企业｜物流园
+            {
+                "result": true,
+                "data": {
+                    "row": {
+                        "no": "javen",用户名
+                        "name": "神奇物流公司",户业名称
+                        "jgcode": "sas",机构代码
+                        "qyjingyinfanwei": "国内包裹,速递",经营范围
+                        "pbussinssname": "121",上级单位
+                        "phone": "0772-2505656",
+                        "address": "21",
+                        "postcode": "21",
+                        "frname": "21",
+                        "frzjtype": "身份证",
+                        "idcard": "212121212121212121",
+                        "jyuser": "21",
+                        "jyphone": "0772-2505656",
+                        "jychuanz": "0772-2505656",
+                        "jymobile": "",
+                        "email": "",
+                        "passtimu": "",
+                        "passanswer": "",
+                        "qywanlaixianlu": "柳州-南宁,柳州-桂林",
+                        "pno": "",
+                        "qiyexinyu": ""
+                    }
+                }
+            }
+             </returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.Login(System.String,System.String)">
+             <summary>
+             接口方法:执行登录验证,同时返回凭证
+             </summary>
+             <param name="userNO">用户帐号</param>
+             <param name="pass">密码</param>
+             <returns>JSON格式,
+            {
+                "result": true,
+                "data": {
+                    "token": "b5dfdf36-182d-4fb4-a740-2a48482a49c5",凭证（当调用需要登录的方法时，要回传此值）
+                    "no": "javen",用户帐号
+                    "name": "神奇物流公司",用户名
+                    "usertype": "物流企业",用户组类型:VIP会员、物流企业、物流园、手机会员、停车场会员、普通会员
+                    "province": "广西壮族自治区",省名
+                    "city": "柳州市",市名
+                    "county": "柳南区"城区(县名)
+                }
+            }
+             </returns>
+        </member>
+    </members>
+</doc>
