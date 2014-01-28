@@ -1,16 +1,9 @@
 package com.honglang.lugang.login;
 
-import java.io.IOException;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-import org.ksoap2.SoapEnvelope;
-import org.ksoap2.serialization.SoapObject;
-import org.ksoap2.serialization.SoapSerializationEnvelope;
-import org.ksoap2.transport.HttpResponseException;
-import org.ksoap2.transport.HttpTransportSE;
-import org.xmlpull.v1.XmlPullParserException;
 
 import com.honglang.lugang.Constant;
 import com.honglang.lugang.R;
@@ -60,9 +53,9 @@ public class LoginActivity extends Activity {
 			return;
 		}
 		if(!TextUtils.isEmpty(userNo) && !TextUtils.isEmpty(pass)){
-//			new LoginTask().execute(userNo,pass);
-			LoginActivity.this.startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-			LoginActivity.this.finish();
+			new LoginTask().execute(userNo,pass);
+//			LoginActivity.this.startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+//			LoginActivity.this.finish();
 		}
 	}
 	

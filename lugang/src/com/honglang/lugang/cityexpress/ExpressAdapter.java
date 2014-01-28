@@ -49,16 +49,18 @@ public class ExpressAdapter extends BaseAdapter {
 		}
 		
 		TextView num = (TextView) convertView.findViewById(R.id.number);
-		TextView goal = (TextView) convertView.findViewById(R.id.go);
+		TextView from = (TextView) convertView.findViewById(R.id.from);
+		TextView to = (TextView) convertView.findViewById(R.id.to);
 		TextView price = (TextView) convertView.findViewById(R.id.price);
 		TextView heavy = (TextView) convertView.findViewById(R.id.heavy);
 		TextView light = (TextView) convertView.findViewById(R.id.light);
 		
 		num.setText((position+1) + "");
-		goal.setText(item.getGoal());
-		price.setText(item.getPrice());
-		heavy.setText(item.getHeavy());
-		light.setText(item.getLight());
+		from.setText(item.getFromcity());
+		to.setText(item.getTocity());
+		price.setText(item.getMinprice());
+		heavy.setText(item.getHaevyprice());
+		light.setText(item.getLightprice());
 	
 		return convertView;
 	}

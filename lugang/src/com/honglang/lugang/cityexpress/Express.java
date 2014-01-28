@@ -9,32 +9,60 @@ public class Express implements Serializable {
 	 */
 	private static final long serialVersionUID = 8314880531306455904L;
 
-	private String goal;
-	private String price;
-	private String light;
-	private String heavy;
-	public String getGoal() {
-		return goal;
+	private String id;
+	private String fromcity;
+	private String tocity;
+	private String fromaddress;
+	private String toaddress;
+	private String minprice;
+	private String lightprice;
+	private String haevyprice;
+	public String getId() {
+		return id;
 	}
-	public void setGoal(String goal) {
-		this.goal = goal;
+	public void setId(String id) {
+		this.id = id;
 	}
-	public String getPrice() {
-		return price;
+	public String getFromcity() {
+		return fromcity;
 	}
-	public void setPrice(String price) {
-		this.price = price;
+	public void setFromcity(String fromcity) {
+		this.fromcity = fromcity;
 	}
-	public String getLight() {
-		return light;
+	public String getTocity() {
+		return tocity;
 	}
-	public void setLight(String light) {
-		this.light = light;
+	public void setTocity(String tocity) {
+		this.tocity = tocity;
 	}
-	public String getHeavy() {
-		return heavy;
+	public String getFromaddress() {
+		return fromaddress;
 	}
-	public void setHeavy(String heavy) {
-		this.heavy = heavy;
+	public void setFromaddress(String fromaddress) {
+		this.fromaddress = fromaddress;
+	}
+	public String getToaddress() {
+		return toaddress;
+	}
+	public void setToaddress(String toaddress) {
+		this.toaddress = toaddress;
+	}
+	public String getMinprice() {
+		return minprice;
+	}
+	public void setMinprice(String minprice) {
+		this.minprice = minprice;
+	}
+	public String getLightprice() {
+		return lightprice;
+	}
+	public void setLightprice(String lightprice) {
+		this.lightprice = lightprice;
+	}
+	public String getHaevyprice() {
+		return haevyprice;
+	}
+	public void setHaevyprice(String haevyprice) {
+		this.haevyprice = haevyprice;
 	}
 }

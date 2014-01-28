@@ -18,11 +18,16 @@
         <TextView style="@style/detail"
             android:text="路线"/>
         <TextView android:text="柳州市"
+            android:id="@+id/fromcity"
             android:textSize="15sp"
             android:layout_marginLeft="10dp"
             android:textColor="@android:color/holo_blue_dark"/>
-        <TextView android:text="="/>
+        <TextView android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="-->"/>
         <TextView android:text="北海市"
+            android:id="@+id/tocity"
             android:textSize="15sp"
             android:textColor="@android:color/holo_blue_dark"/>
         
@@ -31,6 +36,7 @@
         <TextView style="@style/detail"
             android:text="出发站地址"/>
         <TextView android:layout_columnSpan="3"
+            android:id="@+id/fromaddress"
             android:layout_width="200dp"
             android:layout_marginLeft="10dp"
             android:text="广西壮族自治区柳州市鱼峰区弯塘路东三巷110号A座119室"/>
@@ -40,6 +46,9 @@
         <TextView style="@style/detail"
             android:text="途经城市"/>
         <TextView android:text="南宁市,钦州市"
+            android:id="@+id/crosscity"
+            android:layout_width="200dp"
+            android:singleLine="true"
             android:layout_marginLeft="10dp"
             android:layout_columnSpan="3"/>
         
@@ -49,6 +58,7 @@
         <TextView style="@style/detail"
             android:text="到货站地址"/>
         <TextView android:layout_columnSpan="3"
+            android:id="@+id/toaddress"
             android:layout_width="200dp"
             android:layout_marginLeft="10dp"
             android:text="广西壮族自治区柳州市鱼峰区弯塘路东三巷110号A座119室"/>
@@ -57,6 +67,7 @@
         <TextView style="@style/detail"
             android:text="物流园"/>
         <TextView android:layout_columnSpan="3"
+            android:id="@+id/garden"
             android:layout_marginLeft="10dp"
             android:text="新概念物流园"/>
         <View style="@style/line"/>
@@ -64,9 +75,11 @@
         <TextView style="@style/detail"
             android:text="联系电话"/>
         <TextView android:layout_columnSpan="2"
+            android:id="@+id/tel"
             android:layout_marginLeft="10dp"
             android:text="0772-1010110"/>
-        <Button android:layout_height="30dp"
+        <Button android:id="@+id/dial"
+            android:layout_height="30dp"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:layout_marginLeft="10dp"
@@ -80,6 +93,7 @@
             android:text="起步价"/>
         <TextView android:layout_columnSpan="3"
             android:layout_marginLeft="10dp"
+            android:id="@+id/minprice"
             android:text="12元"/>
         <View style="@style/line"/>
         
@@ -87,6 +101,7 @@
             android:text="轻货价"/>
         <TextView android:layout_columnSpan="3"
             android:layout_marginLeft="10dp"
+            android:id="@+id/lightprice"
             android:text="24元/立方"/>
         <View style="@style/line"/>
         
@@ -94,12 +109,15 @@
             android:text="重货价"/>
         <TextView android:layout_columnSpan="3"
             android:layout_marginLeft="10dp"
+            android:id="@+id/haevyprice"
             android:text="12元/公斤"/>
         <View style="@style/line"/>
         
         <TextView style="@style/detail"
             android:text="说明"/>
-        <TextView android:layout_columnSpan="3"
+        <TextView android:id="@+id/details"
+            android:layout_columnSpan="3"
+            android:layout_width="200dp"
             android:layout_marginLeft="10dp"
             android:text=""/>
         

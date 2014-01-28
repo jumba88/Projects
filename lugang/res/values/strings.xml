@@ -17,10 +17,10 @@
     <string name="lastet">最新配货</string>
     <string name="billsearch">运单查询</string>
     <string name="notice">通知公告</string>
-    <string name="singlein">单货物入库</string>
-    <string name="multin">多货物入库</string>
-    <string name="singleout">单货物出库</string>
-    <string name="multiout">多货物出库</string>
+    <string name="singlein">入库记录</string>
+    <string name="multin">货物入库</string>
+    <string name="singleout">出库记录</string>
+    <string name="multiout">货物出库</string>
     <string name="feedback">留言反馈</string>
     <string name="about">关于我们</string>
     <string name="version">版本信息</string>
@@ -152,5 +152,6 @@
     <string name="wifi_type_label">类型</string>
     <string name="title_activity_setting">SettingActivity</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_history">HistoryActivity</string>
 
 </resources>

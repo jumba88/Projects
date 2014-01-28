@@ -2,6 +2,7 @@ package com.honglang.lugang.home;
 
 import com.honglang.lugang.R;
 import com.honglang.lugang.login.LoginActivity;
+import com.honglang.lugang.qrcode.HistoryActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 public class TabFour extends Fragment implements OnClickListener {
 
 	private TextView title;
+	private Button history;
 //	private Button logout;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,6 +30,8 @@ public class TabFour extends Fragment implements OnClickListener {
 		super.onViewCreated(view, savedInstanceState);
 		title = (TextView) view.findViewById(R.id.title);
 		title.setText(R.string.tab4);
+		history = (Button) view.findViewById(R.id.history);
+		history.setOnClickListener(this);
 		
 //		logout = (Button) view.findViewById(R.id.logout);
 //		logout.setOnClickListener(this);
@@ -49,7 +53,11 @@ public class TabFour extends Fragment implements OnClickListener {
 		case R.id.logout:
 //			onLogout();
 			break;
-
+		case R.id.history:
+			Intent intent = new Intent(getActivity(),HistoryActivity.class);
+			intent.putExtra("type", 2);
+			this.startActivity(intent);
+			break;
 		}
 		
 	}
