@@ -58,9 +58,9 @@ public class ExpressAdapter extends BaseAdapter {
 		num.setText((position+1) + "");
 		from.setText(item.getFromcity());
 		to.setText(item.getTocity());
-		price.setText(item.getMinprice());
-		heavy.setText(item.getHaevyprice());
-		light.setText(item.getLightprice());
+		price.setText(item.getMinprice()+"元");
+		heavy.setText(item.getHaevyprice()+"元/公斤");
+		light.setText(item.getLightprice()+"元/立方");
 	
 		return convertView;
 	}

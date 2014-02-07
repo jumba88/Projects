@@ -50,16 +50,16 @@ public class TruckAdapter extends BaseAdapter {
 		}
 		
 		TextView num = (TextView) convertView.findViewById(R.id.number);
-		TextView goal = (TextView) convertView.findViewById(R.id.truck);
+		TextView name = (TextView) convertView.findViewById(R.id.truck);
 		TextView price = (TextView) convertView.findViewById(R.id.loation);
 		TextView heavy = (TextView) convertView.findViewById(R.id.park);
 		TextView light = (TextView) convertView.findViewById(R.id.update);
 		
 		num.setText((position+1) + "");
-		goal.setText(item.getTruck());
-		price.setText(item.getLocation());
-		heavy.setText(item.getPark());
-		light.setText(item.getUpdate());
+		name.setText(item.getChep());
+		price.setText(item.getStartaddr());
+		heavy.setText(item.getEndaddr());
+		light.setText(item.getAdddate());
 	
 		return convertView;
 	}

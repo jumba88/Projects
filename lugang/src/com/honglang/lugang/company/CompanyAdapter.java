@@ -50,12 +50,12 @@ public class CompanyAdapter extends BaseAdapter {
 		}
 		
 		TextView num = (TextView) convertView.findViewById(R.id.number);
-		TextView goal = (TextView) convertView.findViewById(R.id.name);
+		TextView name = (TextView) convertView.findViewById(R.id.name);
 		TextView price = (TextView) convertView.findViewById(R.id.phone);
 		TextView heavy = (TextView) convertView.findViewById(R.id.address);
 		
 		num.setText((position+1) + "");
-		goal.setText(item.getName());
+		name.setText(item.getName());
 		price.setText(item.getPhone());
 		heavy.setText(item.getAddress());
 	

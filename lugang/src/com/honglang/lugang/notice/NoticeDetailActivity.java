@@ -14,13 +14,17 @@ import android.widget.TextView;
 
 public class NoticeDetailActivity extends Activity implements OnClickListener {
 
+	private Notice data;
 	private TextView title;
 	private Button back;
+	private TextView newstitle;
+	private TextView addtime;
+	private TextView content;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_notice_detail);
-		
+		data = (Notice) this.getIntent().getSerializableExtra("Notice");
 		init();
 	}
 
@@ -29,6 +33,13 @@ public class NoticeDetailActivity extends Activity implements OnClickListener {
 		title.setText("ͨ新闻公告");
 		back = (Button) this.findViewById(R.id.back);
 		back.setOnClickListener(this);
+		
+		newstitle = (TextView) this.findViewById(R.id.newstitle);
+		newstitle.setText(data.getTitle());
+		addtime = (TextView) this.findViewById(R.id.time);
+		addtime.setText(data.getAddtime());
+		content = (TextView) this.findViewById(R.id.content);
+		content.setText(data.getContent());
 	}
 //	@Override
 //	public boolean onCreateOptionsMenu(Menu menu) {

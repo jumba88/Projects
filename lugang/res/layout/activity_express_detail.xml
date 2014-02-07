@@ -102,7 +102,7 @@
         <TextView android:layout_columnSpan="3"
             android:layout_marginLeft="10dp"
             android:id="@+id/lightprice"
-            android:text="24元/立方"/>
+            android:text="24元/m³"/>
         <View style="@style/line"/>
         
         <TextView style="@style/detail"

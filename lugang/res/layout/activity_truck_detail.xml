@@ -10,4 +10,126 @@
         android:background="#33B5E5"/>
     <include layout="@layout/logo"/>
 
+    <GridLayout android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="4"
+        android:orientation="horizontal">
+        
+        <TextView style="@style/detail"
+            android:text="车牌"/>
+        <TextView android:text=""
+            android:id="@+id/name"
+            android:layout_columnSpan="3"
+            android:layout_marginLeft="10dp"
+            android:textSize="15sp"
+            android:textColor="@android:color/holo_blue_dark"/>
+        
+        <View style="@style/line"/>
+        
+        <TextView style="@style/detail"
+            android:text="车型"/>
+        <TextView android:layout_columnSpan="3"
+            android:id="@+id/model"
+            android:layout_width="200dp"
+            android:layout_marginLeft="10dp"
+            android:text=""/>
+        
+        <View style="@style/line"/>
+        
+        <TextView style="@style/detail"
+            android:text="品牌"/>
+        <TextView android:layout_columnSpan="3"
+            android:id="@+id/brand"
+            android:layout_width="200dp"
+            android:layout_marginLeft="10dp"
+            android:text=""/>
+        
+        <View style="@style/line"/>
+        
+        <TextView style="@style/detail"
+            android:text="容量"/>
+        <TextView android:layout_columnSpan="3"
+            android:id="@+id/cubage"
+            android:layout_width="200dp"
+            android:layout_marginLeft="10dp"
+            android:text=""/>
+        
+        <View style="@style/line"/>
+        
+        <TextView style="@style/detail"
+            android:text="运价"/>
+        <TextView android:layout_columnSpan="3"
+            android:id="@+id/price"
+            android:layout_width="200dp"
+            android:layout_marginLeft="10dp"
+            android:text=""/>
+        
+        <View style="@style/line"/>
+        
+        <TextView style="@style/detail"
+            android:text="出发地"/>
+        <TextView android:layout_columnSpan="3"
+            android:id="@+id/start"
+            android:layout_width="200dp"
+            android:layout_marginLeft="10dp"
+            android:text=""/>
+        
+        <View style="@style/line"/>
+        
+        <TextView style="@style/detail"
+            android:text="目的地"/>
+        <TextView android:layout_columnSpan="3"
+            android:id="@+id/end"
+            android:layout_width="200dp"
+            android:layout_marginLeft="10dp"
+            android:text=""/>
+        
+        <View style="@style/line"/>
+        
+        <TextView style="@style/detail"
+            android:text="联系人"/>
+        <TextView android:layout_columnSpan="3"
+            android:id="@+id/contact"
+            android:layout_marginLeft="10dp"
+            android:text=""/>
+        
+        <View style="@style/line"/>
+        
+        
+        <TextView style="@style/detail"
+            android:text="联系电话"/>
+        <TextView android:layout_columnSpan="2"
+            android:id="@+id/phone"
+            android:layout_marginLeft="10dp"
+            android:textColor="@android:color/holo_orange_light"
+            android:text="0772-1010110"/>
+        <Button android:layout_height="30dp"
+            android:id="@+id/dial"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/login_button_bg"
+            android:textColor="@android:color/white"
+            android:text="拨 打"/>
+        
+        <View style="@style/line"/>
+        
+        <TextView style="@style/detail"
+            android:text="发布时间"/>
+        <TextView android:layout_columnSpan="3"
+            android:id="@+id/time"
+            android:layout_marginLeft="10dp"
+            android:text="0772-1010110"/>
+        
+        <View style="@style/line"/>
+        
+        <TextView style="@style/detail"
+            android:text="说明"/>
+        <TextView android:text=""
+            android:id="@+id/remark"
+            android:layout_marginLeft="10dp"
+            android:layout_width="200dp"
+            android:layout_columnSpan="3"/>
+        
+    </GridLayout>
 </LinearLayout>

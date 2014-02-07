@@ -53,7 +53,7 @@ public class ExpressActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_express);
 		city = SessionManager.getInstance().getCity();
-		pageSize = 20;
+		pageSize = 40;
 		pageIndex = 1;
 		
 		init();
@@ -72,13 +72,6 @@ public class ExpressActivity extends Activity implements OnClickListener {
 //		Log.i("items", items.toString());
 		adapter = new ExpressAdapter(items, this);
 		
-//		for (int i = 0; i < 20; i++) {
-//			item.setGoal("柳州--南宁");
-//			item.setPrice("12元");
-//			item.setLight("24元/kg");
-//			item.setHeavy("18元/t");
-//			items.add(item);
-//		}
 		
 		if(adapter != null){
 			mListView.setAdapter(adapter);
@@ -148,8 +141,10 @@ public class ExpressActivity extends Activity implements OnClickListener {
 							item.setHaevyprice(obj.getString("haevyprice"));
 							item.setLightprice(obj.getString("lightprice"));
 							item.setMinprice(obj.getString("minprice"));
+							item.setDetails(obj.getString("details"));
+							item.setWly_name(obj.getString("wly_name"));
+							item.setWly_phone(obj.getString("wly_phone"));
 							items.add(item);
-//							Log.i(""+i, item.getTocity());
 						}
 						return 1;
 					} else {

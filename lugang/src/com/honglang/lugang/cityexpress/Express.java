@@ -17,6 +17,27 @@ public class Express implements Serializable {
 	private String minprice;
 	private String lightprice;
 	private String haevyprice;
+	private String details;
+	private String wly_name;
+	private String wly_phone;
+	public String getDetails() {
+		return details;
+	}
+	public void setDetails(String details) {
+		this.details = details;
+	}
+	public String getWly_name() {
+		return wly_name;
+	}
+	public void setWly_name(String wly_name) {
+		this.wly_name = wly_name;
+	}
+	public String getWly_phone() {
+		return wly_phone;
+	}
+	public void setWly_phone(String wly_phone) {
+		this.wly_phone = wly_phone;
+	}
 	public String getId() {
 		return id;
 	}

@@ -56,8 +56,8 @@ public class HistoryActivity extends Activity implements OnClickListener {
 		adapter = new NoticeAdapter(items, this);
 		
 		for (int i = 0; i < 5; i++) {
-			item.setNotice("2014012400000867");
-			item.setDate("2014/01/13");
+			item.setTitle("2014012400000867");
+			item.setAddtime("2014/01/13");
 			items.add(item);
 		}
 		if (adapter != null) {

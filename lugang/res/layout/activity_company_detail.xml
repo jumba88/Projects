@@ -18,6 +18,7 @@
         <TextView style="@style/detail"
             android:text="名称"/>
         <TextView android:text="新概念物流园"
+            android:id="@+id/name"
             android:layout_columnSpan="3"
             android:layout_marginLeft="10dp"
             android:textSize="15sp"
@@ -28,6 +29,7 @@
         <TextView style="@style/detail"
             android:text="地址"/>
         <TextView android:layout_columnSpan="3"
+            android:id="@+id/address"
             android:layout_width="200dp"
             android:layout_marginLeft="10dp"
             android:text="东五路新概念物流中心"/>
@@ -35,12 +37,34 @@
         <View style="@style/line"/>
         
         <TextView style="@style/detail"
+            android:text="企业信誉"/>
+        <TextView android:layout_columnSpan="3"
+            android:id="@+id/credit"
+            android:layout_width="200dp"
+            android:layout_marginLeft="10dp"
+            android:text=""/>
+        
+        <View style="@style/line"/>
+        
+        <TextView style="@style/detail"
+            android:text="经营范围"/>
+        <TextView android:layout_columnSpan="3"
+            android:id="@+id/scope"
+            android:layout_width="200dp"
+            android:layout_marginLeft="10dp"
+            android:text=""/>
+        
+        <View style="@style/line"/>
+        
+        <TextView style="@style/detail"
             android:text="办公电话"/>
         <TextView android:layout_columnSpan="2"
+            android:id="@+id/phone"
             android:layout_marginLeft="10dp"
             android:textColor="@android:color/holo_orange_light"
             android:text="0772-1010110"/>
         <Button android:layout_height="30dp"
+            android:id="@+id/dial"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:layout_marginLeft="10dp"
@@ -53,14 +77,16 @@
         <TextView style="@style/detail"
             android:text="传真号码"/>
         <TextView android:layout_columnSpan="3"
+            android:id="@+id/fax"
             android:layout_marginLeft="10dp"
             android:text="0772-1010110"/>
         
         <View style="@style/line"/>
         
         <TextView style="@style/detail"
-            android:text="简介"/>
+            android:text="往来线路"/>
         <TextView android:text=""
+            android:id="@+id/path"
             android:layout_marginLeft="10dp"
             android:layout_columnSpan="3"/>
         

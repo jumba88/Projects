@@ -12,7 +12,7 @@
     
     <TextView style="@style/header"
         android:layout_weight="1"
-        android:text="所在停车场"/>
+        android:text="目的地"/>
     
     <TextView style="@style/header"
         android:layout_weight="1"

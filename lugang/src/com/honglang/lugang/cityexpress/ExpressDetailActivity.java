@@ -4,8 +4,10 @@ import com.honglang.lugang.R;
 import com.honglang.lugang.R.layout;
 import com.honglang.lugang.R.menu;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,6 +31,7 @@ public class ExpressDetailActivity extends Activity implements OnClickListener {
 	private TextView lightprice;
 	private TextView haevyprice;
 	private TextView details;
+	private String number;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -52,14 +55,18 @@ public class ExpressDetailActivity extends Activity implements OnClickListener {
 		toaddress = (TextView) this.findViewById(R.id.toaddress);
 		toaddress.setText(data.getToaddress());
 		garden = (TextView) this.findViewById(R.id.garden);
+		garden.setText(data.getWly_name());
 		tel = (TextView) this.findViewById(R.id.tel);
+		number = data.getWly_phone();
+		tel.setText(number);
 		minprice = (TextView) this.findViewById(R.id.minprice);
-		minprice.setText(data.getMinprice());
+		minprice.setText(data.getMinprice()+"元");
 		lightprice = (TextView) this.findViewById(R.id.lightprice);
-		lightprice.setText(data.getLightprice());
+		lightprice.setText(data.getLightprice()+"元/立方");
 		haevyprice = (TextView) this.findViewById(R.id.haevyprice);
-		haevyprice.setText(data.getHaevyprice());
+		haevyprice.setText(data.getHaevyprice()+"元/公斤");
 		details = (TextView) this.findViewById(R.id.details);
+		details.setText(data.getDetails());
 		dial = (Button) this.findViewById(R.id.dial);
 		dial.setOnClickListener(this);
 	}
@@ -76,8 +83,11 @@ public class ExpressDetailActivity extends Activity implements OnClickListener {
 		case R.id.back:
 			this.finish();
 			break;
+		case R.id.dial:
+			Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + number.replace("-", "")));
+			this.startActivity(intent);
+			break;
 		}
-		
 	}
 
 }

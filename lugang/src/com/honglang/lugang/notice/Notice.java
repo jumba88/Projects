@@ -9,18 +9,25 @@ public class Notice implements Serializable {
 	 */
 	private static final long serialVersionUID = 2837344640967013880L;
 
-	private String notice;
-	private String date;
-	public String getNotice() {
-		return notice;
+	private String title;
+	private String content;
+	private String addtime;
+	public String getTitle() {
+		return title;
 	}
-	public void setNotice(String notice) {
-		this.notice = notice;
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	public String getDate() {
-		return date;
+	public String getContent() {
+		return content;
 	}
-	public void setDate(String date) {
-		this.date = date;
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public String getAddtime() {
+		return addtime;
+	}
+	public void setAddtime(String addtime) {
+		this.addtime = addtime;
 	}
 }

@@ -41,7 +41,7 @@
         android:layout_weight="1"
         android:id="@+id/park"
         android:textColor="@android:color/darker_gray"
-        android:text="所在停车场"/>
+        android:text="目的地"/>
     
     
     <TextView style="@style/header"
