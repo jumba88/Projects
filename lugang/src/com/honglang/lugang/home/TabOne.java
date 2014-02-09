@@ -2,21 +2,25 @@ package com.honglang.lugang.home;
 
 import com.honglang.lugang.R;
 import com.honglang.lugang.assign.AssignActivity;
+import com.honglang.lugang.billsearch.BillDetailActivity;
 import com.honglang.lugang.billsearch.SearchActivity;
 import com.honglang.lugang.cityexpress.ExpressActivity;
 import com.honglang.lugang.company.CompanyActivity;
 import com.honglang.lugang.notice.NoticeActivity;
 import com.honglang.lugang.truck.TruckActivity;
+import com.honglang.lugang.ui.ClearEditText;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class TabOne extends Fragment implements OnClickListener {
 
@@ -28,6 +32,7 @@ public class TabOne extends Fragment implements OnClickListener {
 	private Button assign;
 	private Button billsearch;
 	private Button notice;
+	private ClearEditText number;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -48,8 +53,9 @@ public class TabOne extends Fragment implements OnClickListener {
 		company = (Button) view.findViewById(R.id.company);
 		truck = (Button) view.findViewById(R.id.truck);
 		assign = (Button) view.findViewById(R.id.assign);
-		billsearch = (Button) view.findViewById(R.id.billsearch);
+		billsearch = (Button) view.findViewById(R.id.btn);
 		notice = (Button) view.findViewById(R.id.notice);
+		number = (ClearEditText) view.findViewById(R.id.search);
 		
 		express.setOnClickListener(this);
 		company.setOnClickListener(this);
@@ -82,8 +88,16 @@ public class TabOne extends Fragment implements OnClickListener {
 		case R.id.assign:
 			getActivity().startActivity(new Intent(getActivity(),AssignActivity.class));
 			break;
-		case R.id.billsearch:
-			getActivity().startActivity(new Intent(getActivity(),SearchActivity.class));
+		case R.id.btn:
+			String code = number.getText().toString().trim();
+			if (code != null && code.length() != 0) {
+				Intent intent = new Intent(getActivity(),BillDetailActivity.class);
+				intent.putExtra("number", code);
+				getActivity().startActivity(intent);
+			} else {
+				Toast.makeText(getActivity(), "请输入运单号", Toast.LENGTH_SHORT).show();
+				return;
+			}
 			break;
 		case R.id.notice:
 			getActivity().startActivity(new Intent(getActivity(),NoticeActivity.class));

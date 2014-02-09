@@ -25,6 +25,7 @@ import android.content.Intent;
 public class LoginActivity extends Activity {
 
 	private Setting setting;
+	private String account;
 	private ClearEditText username;
 	private ClearEditText password;
 	private String userNo;
@@ -39,6 +40,11 @@ public class LoginActivity extends Activity {
 		username = (ClearEditText) this.findViewById(R.id.username);
 		password = (ClearEditText) this.findViewById(R.id.password);
 		
+		account = setting.getAccount();
+		if(account != null){
+			username.setText(account);
+			password.setText(setting.getPwd());
+		}
 	}
 
 	public void onLogin(View v){

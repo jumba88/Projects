@@ -3,6 +3,10 @@ package com.honglang.lugang.billsearch;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.honglang.lugang.R;
 import com.honglang.lugang.R.layout;
 import com.honglang.lugang.R.menu;
@@ -24,9 +28,9 @@ public class SearchActivity extends Activity implements OnClickListener {
 	private TextView title;
 	private Button back;
 	private ListView mListView;
-	private Bill item;
-	private List<Bill> items;
+	private List<Record> items;
 	private SearchAdapter adapter;
+	private String record;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -42,16 +46,22 @@ public class SearchActivity extends Activity implements OnClickListener {
 		title.setText(R.string.billsearch);
 		
 		mListView = (ListView) this.findViewById(R.id.list_search);
-		item = new Bill();
-		items = new ArrayList<Bill>();
-		adapter = new SearchAdapter(items, this);
-		
-		for (int i = 0; i < 7; i++) {
-			item.setCode("077219527");
-			item.setSender("张三");
-			item.setGetter("李四");
-			items.add(item);
+		record = this.getIntent().getExtras().getString("record");
+		items = new ArrayList<Record>();
+		try {
+			JSONArray array = new JSONArray(record);
+			for (int i = 0; i < array.length(); i++) {
+				JSONObject obj = array.getJSONObject(i);
+				Record item = new Record();
+				item.setText(obj.toString());
+				items.add(item);
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
 		}
+		
+		
+		adapter = new SearchAdapter(items, this);
 		if (adapter != null) {
 			mListView.setAdapter(adapter);
 		}

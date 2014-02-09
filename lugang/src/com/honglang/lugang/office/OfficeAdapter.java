@@ -53,8 +53,8 @@ public class OfficeAdapter extends BaseAdapter {
 		TextView time = (TextView) convertView.findViewById(R.id.time);
 		
 		num.setText((position+1) + "");
-		b.setText(item.getBill());
-		time.setText(item.getTime());
+		b.setText(item.getTitle());
+		time.setText(item.getTrun_time());
 		
 		return convertView;
 	}

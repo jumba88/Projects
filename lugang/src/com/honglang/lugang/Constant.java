@@ -11,6 +11,12 @@ import org.ksoap2.transport.HttpResponseException;
 import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
 
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewGroup.MarginLayoutParams;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+
 public class Constant {
 
 	public static final String NAMESPACE = "http://www.6gang.com.cn/";
@@ -53,6 +59,26 @@ public class Constant {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	/** 解决scrollview与listview共存 */
+	public static void setListViewHeightBasedOnChildren(ListView listView) {
+		ListAdapter listAdapter = listView.getAdapter();
+		if (listAdapter == null) {
+			return;
+		}
+
+		int totalHeight = 0;
+		for (int i = 0; i < listAdapter.getCount(); i++) {
+			View listItem = listAdapter.getView(i, null, listView);
+			listItem.measure(0, 0);
+			totalHeight += listItem.getMeasuredHeight();
+		}
+
+		ViewGroup.LayoutParams params = listView.getLayoutParams();
+		params.height = totalHeight
+				+ (listView.getDividerHeight() * (listAdapter.getCount()));
+		((MarginLayoutParams) params).setMargins(0, 0, 0, 0);
+		listView.setLayoutParams(params);
 	}
 	
 }

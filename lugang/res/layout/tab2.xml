@@ -31,6 +31,7 @@
                     android:text="@string/loginname"/>
                 <TextView android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/user"
                     android:layout_margin="3dp"
                     android:text="xgnmg"
                     android:textSize="12sp"
@@ -52,6 +53,7 @@
                     android:text="@string/group"/>
                 <TextView android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/type"
                     android:layout_margin="3dp"
                     android:text="物流企业"
                     android:textSize="12sp"

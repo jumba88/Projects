@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.honglang.lugang.R;
+import com.honglang.lugang.SessionManager;
 import com.honglang.lugang.office.DoneFragment;
 import com.honglang.lugang.office.HandlingFragment;
 import com.viewpagerindicator.TabPageIndicator;
@@ -23,6 +24,8 @@ import android.widget.TextView;
 public class TabTwo extends Fragment {
 
 	private TextView title;
+	private TextView user;
+	private TextView type;
 	private Button city;
 	private static final String[] CONTENT = new String[]{"待处理工单","已完成工单"};
 	private List<Fragment> fragments;
@@ -38,7 +41,12 @@ public class TabTwo extends Fragment {
 		title = (TextView) view.findViewById(R.id.title);
 		title.setText(R.string.tab2);
 		city = (Button) view.findViewById(R.id.city);
+		city.setText(SessionManager.getInstance().getCity());
 		city.setVisibility(View.VISIBLE);
+		user = (TextView) view.findViewById(R.id.user);
+		user.setText(SessionManager.getInstance().getUsername());
+		type = (TextView) view.findViewById(R.id.type);
+		type.setText(SessionManager.getInstance().getUsertype());
 		
 		fragments = new ArrayList<Fragment>();
 		fragments.add(new HandlingFragment());

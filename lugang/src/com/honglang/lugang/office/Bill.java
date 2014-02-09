@@ -9,40 +9,32 @@ public class Bill implements Serializable {
 	 */
 	private static final long serialVersionUID = 7031077966715377323L;
 
-	public String bill;
-	public String time;
-	public String code;
-	public String sender;
-	public String getter;
-	public String getBill() {
-		return bill;
+	public String title;
+	public String trun_time;
+	public String form_oid;
+	public String current_node_id;
+	public String getTitle() {
+		return title;
 	}
-	public void setBill(String bill) {
-		this.bill = bill;
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	public String getTime() {
-		return time;
+	public String getTrun_time() {
+		return trun_time;
 	}
-	public void setTime(String time) {
-		this.time = time;
+	public void setTrun_time(String trun_time) {
+		this.trun_time = trun_time;
 	}
-	public String getCode() {
-		return code;
+	public String getForm_oid() {
+		return form_oid;
 	}
-	public void setCode(String code) {
-		this.code = code;
+	public void setForm_oid(String form_oid) {
+		this.form_oid = form_oid;
 	}
-	public String getSender() {
-		return sender;
+	public String getCurrent_node_id() {
+		return current_node_id;
 	}
-	public void setSender(String sender) {
-		this.sender = sender;
+	public void setCurrent_node_id(String current_node_id) {
+		this.current_node_id = current_node_id;
 	}
-	public String getGetter() {
-		return getter;
-	}
-	public void setGetter(String getter) {
-		this.getter = getter;
-	}
-	
 }

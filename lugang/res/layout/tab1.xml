@@ -11,6 +11,24 @@
         android:background="#33B5E5"/>
     <include layout="@layout/logo"/>
     
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <com.honglang.lugang.ui.ClearEditText 
+            android:id="@+id/search"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="3"
+            android:hint="请输入运单号"
+            android:inputType="number"/>
+        
+        <Button android:id="@+id/btn"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="运单查询"/>
+    </LinearLayout>
+    
     <Button style="@style/tabone"
         android:id="@+id/express"
         android:text="@string/express"/>
@@ -26,11 +44,11 @@
     <Button style="@style/tabone"
         android:id="@+id/assign"
         android:text="@string/lastet"/>
-    
+    <!-- 
     <Button style="@style/tabone"
         android:id="@+id/billsearch"
         android:text="@string/billsearch"/>
-    
+     -->
     <Button style="@style/tabone"
         android:id="@+id/notice"
         android:text="@string/notice"/>

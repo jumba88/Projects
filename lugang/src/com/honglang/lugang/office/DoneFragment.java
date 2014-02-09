@@ -30,11 +30,6 @@ public class DoneFragment extends Fragment {
 		
 		bills = new ArrayList<Bill>();
 		bill = new Bill();
-		for(int i=0; i<5; i++){
-			bill.setBill("发货码" + (20140116+i));
-			bill.setTime("2014");
-			bills.add(bill);
-		}
 		
 		adapter = new OfficeAdapter(bills, getActivity());
 		mListView = (ListView) view.findViewById(R.id.list_handling);
