@@ -56,10 +56,10 @@ public class AssignAdapter extends BaseAdapter {
 		TextView light = (TextView) convertView.findViewById(R.id.total);
 		
 		num.setText((position+1) + "");
-		goal.setText(item.getStuff());
-		price.setText(item.getFrom());
-		heavy.setText(item.getTo());
-		light.setText(item.getTotal());
+		goal.setText(item.getName());
+		price.setText(item.getStartaddr());
+		heavy.setText(item.getEndaddr());
+		light.setText(item.getZzl() + item.getZldanwei());
 	
 		return convertView;
 	}

@@ -14,11 +14,11 @@ import android.widget.TextView;
 
 public class SearchAdapter extends BaseAdapter {
 
-	private List<Record> items;
+	private List<String> items;
 	private LayoutInflater inflater;
 	private Activity activity;
 	
-	public SearchAdapter(List<Record> items, Activity activity) {
+	public SearchAdapter(List<String> items, Activity activity) {
 		super();
 		this.items = items;
 		this.activity = activity;
@@ -48,13 +48,13 @@ public class SearchAdapter extends BaseAdapter {
 		if(arg1 == null){
 			arg1 = inflater.inflate(R.layout.search_item, null);
 		}
-		Record item = items.get(arg0);
+		String item = items.get(arg0);
 		if(item == null){
 			return null;
 		}
 		TextView num = (TextView) arg1.findViewById(R.id.text);
 		
-		num.setText(item.getText());
+		num.setText(item.toString());
 		return arg1;
 	}
 

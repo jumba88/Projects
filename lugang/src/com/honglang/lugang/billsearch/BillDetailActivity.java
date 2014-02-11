@@ -57,7 +57,7 @@ public class BillDetailActivity extends Activity implements OnClickListener {
 	private ProgressDialog progress;
 	private String action = "LZView";
 	private List<HashMap<String, String>> stuffList;
-	private List<Record> recordList;
+	private List<String> recordList;
 	private HashMap<String, String> infoMap;
 	private HashMap<String, String> stuffMap;
 	private ListView mListView;
@@ -93,6 +93,7 @@ public class BillDetailActivity extends Activity implements OnClickListener {
 		sdial.setOnClickListener(this);
 		rec = this.findViewById(R.id.record);
 		rec.setOnClickListener(this);
+		recordList = new ArrayList<String>();
 		mListView = (ListView) this.findViewById(R.id.list);
 	}
 	
@@ -112,7 +113,7 @@ public class BillDetailActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.record:
 			Intent i = new Intent(BillDetailActivity.this, SearchActivity.class);
-			i.putExtra("record", recordList.toString());
+			i.putStringArrayListExtra("record", (ArrayList<String>) recordList);
 			this.startActivity(i);
 			break;
 		}		
@@ -121,7 +122,7 @@ public class BillDetailActivity extends Activity implements OnClickListener {
 	class SearchTask extends AsyncTask<Void, Void, Boolean>{
 
 		private String errMsg;
-		private String records;
+		private String records = "";
 		@Override
 		protected void onPreExecute() {
 			progress = ProgressDialog.show(BillDetailActivity.this, null, "正在查询 ...", false, false);
@@ -175,14 +176,11 @@ public class BillDetailActivity extends Activity implements OnClickListener {
 							stuffList.add(stuffMap);
 						}
 						
-						recordList = new ArrayList<Record>();
 						JSONObject record = data.getJSONObject("liuzhuan");
 						JSONArray rows = record.getJSONArray("rows");
 						for (int i = 0; i < rows.length(); i++) {
 							JSONObject obj = rows.getJSONObject(i);
-							Record recordMap = new Record();
-							recordMap.setText(obj.getString("text"));
-							recordList.add(recordMap);
+							recordList.add(obj.getString("text"));
 							records = records + obj.getString("text");
 						}
 						return true;

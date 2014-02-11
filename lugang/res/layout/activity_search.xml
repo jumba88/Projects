@@ -9,7 +9,6 @@
         android:layout_height="2dp"
         android:background="#33B5E5"/>
     <include layout="@layout/logo"/>
-    <include layout="@layout/search_header"/>
     
     <ListView android:id="@+id/list_search"
         android:layout_height="match_parent"
