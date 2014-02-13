@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -57,16 +58,24 @@ public class StuffDetailActivity extends Activity implements OnClickListener {
 		arriveTime = (TextView) this.findViewById(R.id.arriveTime);
 		arriveTime.setText(data.getYdqx());
 		totalCount = (TextView) this.findViewById(R.id.totalCount);
+		cubage = (TextView) this.findViewById(R.id.cubage);
 		if (data.getDanwei().equals("m&sup3;")) {
-			unit = "立方";
+//			unit = "立方";
+			Drawable drawable= getResources().getDrawable(R.drawable.m3);
+			drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+			totalCount.setCompoundDrawables(null, null, drawable, null);
+			cubage.setCompoundDrawables(null, null, drawable, null);
+			totalCount.setText(data.getSl());
+			cubage.setText(data.getRj());
 		} else {
 			unit = data.getDanwei();
+			totalCount.setText(data.getSl() + unit);
+			cubage.setText(data.getRj() + unit);
 		}
-		totalCount.setText(data.getSl() + unit);
+		
 		totalWeight = (TextView) this.findViewById(R.id.totalWeight);
 		totalWeight.setText(data.getZzl() + data.getZldanwei());
-		cubage = (TextView) this.findViewById(R.id.cubage);
-		cubage.setText(data.getRj() + unit);
+		
 		contact = (TextView) this.findViewById(R.id.contact);
 		contact.setText(data.getUsname());
 		number = data.getPhone();

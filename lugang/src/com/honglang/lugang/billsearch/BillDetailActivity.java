@@ -112,9 +112,13 @@ public class BillDetailActivity extends Activity implements OnClickListener {
 			this.startActivity(in);
 			break;
 		case R.id.record:
-			Intent i = new Intent(BillDetailActivity.this, SearchActivity.class);
-			i.putStringArrayListExtra("record", (ArrayList<String>) recordList);
-			this.startActivity(i);
+			if (recordList.size() > 0) {
+				Intent i = new Intent(BillDetailActivity.this, SearchActivity.class);
+				i.putStringArrayListExtra("record", (ArrayList<String>) recordList);
+				this.startActivity(i);
+			}else{
+				Toast.makeText(BillDetailActivity.this, "暂无流转记录", Toast.LENGTH_SHORT).show();
+			}
 			break;
 		}		
 	}
@@ -212,7 +216,11 @@ public class BillDetailActivity extends Activity implements OnClickListener {
 				sphone.setText(snumber);
 				start.setText(infoMap.get("fromcity"));
 				saddress.setText(infoMap.get("tydizhi"));
-				record.setText(records);
+				if (records.length() > 0) {
+					record.setText(records);
+				} else {
+					record.setText("暂无流转记录");
+				}
 				
 				adapter = new StuffAdapter(stuffList, BillDetailActivity.this);
 				if(adapter != null){
@@ -220,8 +228,15 @@ public class BillDetailActivity extends Activity implements OnClickListener {
 					mListView.setCacheColorHint(0);
 					Constant.setListViewHeightBasedOnChildren(mListView);
 				}
+				if(gnumber.length() > 0){
+					gdial.setVisibility(View.VISIBLE);
+				}
+				if(snumber.length() > 0){
+					sdial.setVisibility(View.VISIBLE);
+				}
 			}else{
-				Toast.makeText(BillDetailActivity.this, errMsg, Toast.LENGTH_SHORT).show();
+				Toast.makeText(BillDetailActivity.this, "查询不到该运单信息", Toast.LENGTH_SHORT).show();
+				BillDetailActivity.this.finish();
 			}
 			super.onPostExecute(result);
 		}

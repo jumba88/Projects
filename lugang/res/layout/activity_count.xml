@@ -15,20 +15,14 @@
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-
-            <GridLayout android:layout_width="wrap_content"
+    <GridLayout android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:columnCount="4"
         android:orientation="horizontal">
         
         <TextView
             style="@style/detail"
-            android:text="发货码" />
+            android:text="类型" />
 
         <TextView android:text=""
             android:id="@+id/name"
@@ -40,7 +34,7 @@
         <View style="@style/line"/>
         
         <TextView style="@style/detail"
-            android:text="收货人"/>
+            android:text="名称"/>
         <TextView android:layout_columnSpan="3"
             android:id="@+id/getter"
             android:layout_width="200dp"
@@ -50,26 +44,17 @@
         <View style="@style/line"/>
         
         <TextView style="@style/detail"
-            android:text="收货人电话"/>
-        <TextView android:layout_columnSpan="2"
+            android:text="数量"/>
+        <TextView android:layout_columnSpan="3"
             android:id="@+id/gphone"
             android:layout_marginLeft="10dp"
             android:textColor="@android:color/holo_orange_light"
             android:text=""/>
-        <Button android:layout_height="30dp"
-            android:id="@+id/gdial"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:layout_marginLeft="10dp"
-            android:visibility="invisible"
-            android:background="@drawable/login_button_bg"
-            android:textColor="@android:color/white"
-            android:text="拨 打"/>
         
         <View style="@style/line"/>
         
         <TextView style="@style/detail"
-            android:text="目的地"/>
+            android:text="数量单位"/>
         <TextView android:layout_columnSpan="3"
             android:id="@+id/end"
             android:layout_width="200dp"
@@ -78,8 +63,10 @@
         
         <View style="@style/line"/>
         
-        <TextView style="@style/detail"
-            android:text="收货人地址"/>
+        <TextView
+            style="@style/detail"
+            android:text="总重量" />
+
         <TextView android:layout_columnSpan="3"
             android:id="@+id/gaddress"
             android:layout_width="200dp"
@@ -88,8 +75,10 @@
         
         <View style="@style/line"/>
         
-        <TextView style="@style/detail"
-            android:text="托运人"/>
+        <TextView
+            style="@style/detail"
+            android:text="重量单位" />
+
         <TextView android:layout_columnSpan="3"
             android:id="@+id/sender"
             android:layout_width="200dp"
@@ -98,8 +87,10 @@
         
         <View style="@style/line"/>
         
-        <TextView style="@style/detail"
-            android:text="托运人电话"/>
+        <TextView
+            style="@style/detail"
+            android:text="总体积" />
+
         <TextView android:layout_columnSpan="2"
             android:id="@+id/sphone"
             android:layout_marginLeft="10dp"
@@ -117,8 +108,10 @@
         
         <View style="@style/line"/>
         
-        <TextView style="@style/detail"
-            android:text="出发地"/>
+        <TextView
+            style="@style/detail"
+            android:text="体积单位" />
+
         <TextView android:layout_columnSpan="3"
             android:id="@+id/start"
             android:layout_width="200dp"
@@ -127,8 +120,88 @@
         
         <View style="@style/line"/>
         
-        <TextView style="@style/detail"
-            android:text="托运人地址"/>
+        <TextView
+            style="@style/detail"
+            android:text="运费" />
+
+        <TextView android:layout_columnSpan="3"
+            android:id="@+id/saddress"
+            android:layout_width="200dp"
+            android:layout_marginLeft="10dp"
+            android:text=""/>
+        
+        <View style="@style/line"/>
+        <TextView
+            style="@style/detail"
+            android:text="提货费" />
+
+        <TextView android:layout_columnSpan="3"
+            android:id="@+id/saddress"
+            android:layout_width="200dp"
+            android:layout_marginLeft="10dp"
+            android:text=""/>
+        
+        <View style="@style/line"/>
+        <TextView
+            style="@style/detail"
+            android:text="送货费" />
+
+        <TextView android:layout_columnSpan="3"
+            android:id="@+id/saddress"
+            android:layout_width="200dp"
+            android:layout_marginLeft="10dp"
+            android:text=""/>
+        
+        <View style="@style/line"/>
+        <TextView
+            style="@style/detail"
+            android:text="保险费" />
+
+        <TextView android:layout_columnSpan="3"
+            android:id="@+id/saddress"
+            android:layout_width="200dp"
+            android:layout_marginLeft="10dp"
+            android:text=""/>
+        
+        <View style="@style/line"/>
+        <TextView
+            style="@style/detail"
+            android:text="总运费" />
+
+        <TextView android:layout_columnSpan="3"
+            android:id="@+id/saddress"
+            android:layout_width="200dp"
+            android:layout_marginLeft="10dp"
+            android:text=""/>
+        
+        <View style="@style/line"/>
+        <TextView
+            style="@style/detail"
+            android:text="投保价值" />
+
+        <TextView android:layout_columnSpan="3"
+            android:id="@+id/saddress"
+            android:layout_width="200dp"
+            android:layout_marginLeft="10dp"
+            android:text=""/>
+        
+        <View style="@style/line"/>
+        <TextView
+            style="@style/detail"
+            android:text="代收货款" />
+
+        <TextView android:layout_columnSpan="3"
+            android:id="@+id/saddress"
+            android:layout_width="200dp"
+            android:layout_marginLeft="10dp"
+            android:text=""/>
+        
+        <View style="@style/line"/>
+        <TextView
+            style="@style/detail"
+            android:editable="true"
+            android:text="货款" />
+
         <TextView android:layout_columnSpan="3"
             android:id="@+id/saddress"
             android:layout_width="200dp"
@@ -138,65 +211,6 @@
         <View style="@style/line"/>
         
     </GridLayout>
-
-            <LinearLayout
-                android:id="@+id/record"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:baselineAligned="false"
-                android:orientation="horizontal" >
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="8"
-                    android:layout_margin="5dp"
-                    android:orientation="vertical" >
-
-                    <TextView
-                        android:id="@+id/textView1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="流转记录"
-                        android:textColor="@android:color/darker_gray" />
-
-                    <TextView
-                        android:id="@+id/recordView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:singleLine="true" />
-                </LinearLayout>
-                
-                <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:orientation="horizontal" >
-                <ImageView 
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/yc_right"/>
-                </LinearLayout>
-
-            </LinearLayout>
-            <View style="@style/line"/>
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:textColor="@android:color/darker_gray"
-                    android:text="货物列表" />
-
-            <ListView
-                android:id="@+id/list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:divider="@android:color/transparent" >
-            </ListView>
-
-        </LinearLayout>
     </ScrollView>
 
 </LinearLayout>

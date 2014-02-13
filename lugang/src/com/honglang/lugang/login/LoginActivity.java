@@ -111,7 +111,7 @@ public class LoginActivity extends Activity {
 				LoginActivity.this.startActivity(new Intent(LoginActivity.this, HomeActivity.class));
 				LoginActivity.this.finish();
 			}else {
-				Toast.makeText(LoginActivity.this, errMsg, Toast.LENGTH_LONG).show();
+				Toast.makeText(LoginActivity.this, "登录失败," + errMsg, Toast.LENGTH_LONG).show();
 			}
 			progress.dismiss();
 			super.onPostExecute(result);
