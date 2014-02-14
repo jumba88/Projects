@@ -144,7 +144,7 @@ public class OrderActivity extends Activity implements OnClickListener {
 							JSONObject obj = rows.getJSONObject(i);
 							Log.i("suxoyo", obj.toString());
 							Order item = new Order();
-//							item.setOID(obj.getString("OID"));
+							item.setOid(obj.getString("oid"));
 							item.setWplx(obj.getString("wplx"));
 							item.setWpmc(obj.getString("wpmc"));
 							item.setSl(obj.getString("sl"));

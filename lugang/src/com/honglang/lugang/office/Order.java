@@ -9,7 +9,7 @@ public class Order implements Serializable {
 	 */
 	private static final long serialVersionUID = 4567113996695779926L;
 
-	private String OID;
+	private String oid;
 	private String wplx;
 	private String wpmc;
 	private String sl;
@@ -26,11 +26,12 @@ public class Order implements Serializable {
 	private String tbjz;
 	private String isdsf;
 	private String huok;
-	public String getOID() {
-		return OID;
+	
+	public String getOid() {
+		return oid;
 	}
-	public void setOID(String oID) {
-		OID = oID;
+	public void setOid(String oid) {
+		this.oid = oid;
 	}
 	public String getWplx() {
 		return wplx;

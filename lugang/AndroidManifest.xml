@@ -106,7 +106,8 @@
         </activity>
         <activity
             android:name="com.honglang.lugang.CountActivity"
-            android:theme="@android:style/Theme.Light.NoTitleBar" >
+            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustResize"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
         </activity>
     </application>
 

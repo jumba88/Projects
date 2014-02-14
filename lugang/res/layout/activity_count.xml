@@ -15,202 +15,220 @@
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
+        <LinearLayout android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:orientation="vertical">
     <GridLayout android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/login_edit_normal"
         android:columnCount="4"
         android:orientation="horizontal">
         
         <TextView
-            style="@style/detail"
+            style="@style/order"
             android:text="类型" />
 
         <TextView android:text=""
-            android:id="@+id/name"
+            android:id="@+id/type"
             android:layout_columnSpan="3"
             android:layout_marginLeft="10dp"
-            android:textSize="15sp"
-            android:textColor="@android:color/holo_blue_dark"/>
-        
+            android:textColor="@android:color/holo_blue_dark"
+            android:textSize="15sp">
+            </TextView>
+
         <View style="@style/line"/>
         
-        <TextView style="@style/detail"
+        <TextView style="@style/order"
             android:text="名称"/>
         <TextView android:layout_columnSpan="3"
-            android:id="@+id/getter"
+            android:id="@+id/name"
             android:layout_width="200dp"
             android:layout_marginLeft="10dp"
+            android:textColor="@android:color/holo_blue_dark"
             android:text=""/>
         
         <View style="@style/line"/>
         
-        <TextView style="@style/detail"
+        <TextView style="@style/order"
             android:text="数量"/>
-        <TextView android:layout_columnSpan="3"
-            android:id="@+id/gphone"
-            android:layout_marginLeft="10dp"
-            android:textColor="@android:color/holo_orange_light"
+        <EditText android:layout_columnSpan="2"
+            android:id="@+id/total"
+            style="@style/EditStyle"
+            android:inputType="number"
             android:text=""/>
         
-        <View style="@style/line"/>
+        <TextView android:layout_columnSpan="1"
+            android:id="@+id/totalUnit"
+            android:text="件" />
+        </GridLayout>
         
-        <TextView style="@style/detail"
-            android:text="数量单位"/>
-        <TextView android:layout_columnSpan="3"
-            android:id="@+id/end"
-            android:layout_width="200dp"
-            android:layout_marginLeft="10dp"
-            android:text=""/>
-        
-        <View style="@style/line"/>
+        <GridLayout android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/login_edit_normal"
+        android:columnCount="4"
+        android:orientation="horizontal">
         
         <TextView
-            style="@style/detail"
+            style="@style/order"
             android:text="总重量" />
 
-        <TextView android:layout_columnSpan="3"
-            android:id="@+id/gaddress"
-            android:layout_width="200dp"
-            android:layout_marginLeft="10dp"
+        <EditText android:layout_columnSpan="2"
+            android:id="@+id/weight"
+            style="@style/EditStyle"
+            android:inputType="number"
             android:text=""/>
         
-        <View style="@style/line"/>
-        
-        <TextView
-            style="@style/detail"
-            android:text="重量单位" />
 
-        <TextView android:layout_columnSpan="3"
-            android:id="@+id/sender"
-            android:layout_width="200dp"
-            android:layout_marginLeft="10dp"
-            android:text=""/>
+        <Spinner android:layout_columnSpan="1"
+            android:id="@+id/weightUnit" />
         
         <View style="@style/line"/>
         
         <TextView
-            style="@style/detail"
+            style="@style/order"
             android:text="总体积" />
 
-        <TextView android:layout_columnSpan="2"
-            android:id="@+id/sphone"
-            android:layout_marginLeft="10dp"
-            android:textColor="@android:color/holo_orange_light"
-            android:text=""/>
-        <Button android:layout_height="30dp"
-            android:id="@+id/sdial"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:layout_marginLeft="10dp"
-            android:visibility="invisible"
-            android:background="@drawable/login_button_bg"
-            android:textColor="@android:color/white"
-            android:text="拨 打"/>
-        
-        <View style="@style/line"/>
-        
-        <TextView
-            style="@style/detail"
-            android:text="体积单位" />
-
-        <TextView android:layout_columnSpan="3"
-            android:id="@+id/start"
-            android:layout_width="200dp"
-            android:layout_marginLeft="10dp"
+        <EditText android:layout_columnSpan="2"
+            android:id="@+id/cubage"
+            style="@style/EditStyle"
+            android:inputType="number"
             android:text=""/>
         
-        <View style="@style/line"/>
+        <TextView android:layout_columnSpan="1"
+            android:id="@+id/cubageUnit"
+            android:text="m3"/>
+        </GridLayout>
+        
+        <GridLayout android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/login_edit_normal"
+        android:columnCount="4"
+        android:orientation="horizontal">
         
         <TextView
-            style="@style/detail"
+            style="@style/order"
             android:text="运费" />
 
-        <TextView android:layout_columnSpan="3"
-            android:id="@+id/saddress"
-            android:layout_width="200dp"
-            android:layout_marginLeft="10dp"
+        <EditText android:layout_columnSpan="3"
+            android:id="@+id/yf"
+            style="@style/EditStyle"
+            android:inputType="numberDecimal"
             android:text=""/>
         
         <View style="@style/line"/>
         <TextView
-            style="@style/detail"
+            style="@style/order"
+            android:text="包装费" />
+
+        <EditText android:layout_columnSpan="3"
+            android:id="@+id/bzf"
+            style="@style/EditStyle"
+            android:inputType="numberDecimal"
+            android:text=""/>
+        
+        <View style="@style/line"/>
+        <TextView
+            style="@style/order"
             android:text="提货费" />
 
-        <TextView android:layout_columnSpan="3"
-            android:id="@+id/saddress"
-            android:layout_width="200dp"
-            android:layout_marginLeft="10dp"
+        <EditText android:layout_columnSpan="3"
+            android:id="@+id/thf"
+            style="@style/EditStyle"
+            android:inputType="numberDecimal"
             android:text=""/>
         
         <View style="@style/line"/>
         <TextView
-            style="@style/detail"
+            style="@style/order"
             android:text="送货费" />
 
-        <TextView android:layout_columnSpan="3"
-            android:id="@+id/saddress"
-            android:layout_width="200dp"
-            android:layout_marginLeft="10dp"
+        <EditText android:layout_columnSpan="3"
+            android:id="@+id/shf"
+            style="@style/EditStyle"
+            android:inputType="numberDecimal"
             android:text=""/>
         
         <View style="@style/line"/>
         <TextView
-            style="@style/detail"
+            style="@style/order"
             android:text="保险费" />
 
-        <TextView android:layout_columnSpan="3"
-            android:id="@+id/saddress"
-            android:layout_width="200dp"
-            android:layout_marginLeft="10dp"
+        <EditText android:layout_columnSpan="3"
+            android:id="@+id/bxf"
+            style="@style/EditStyle"
+            android:inputType="numberDecimal"
             android:text=""/>
         
         <View style="@style/line"/>
         <TextView
-            style="@style/detail"
+            style="@style/order"
             android:text="总运费" />
 
-        <TextView android:layout_columnSpan="3"
-            android:id="@+id/saddress"
-            android:layout_width="200dp"
-            android:layout_marginLeft="10dp"
+        <EditText android:layout_columnSpan="3"
+            android:id="@+id/zyf"
+            style="@style/EditStyle"
+            android:inputType="numberDecimal"
+            android:enabled="false"
+            android:textColor="@android:color/holo_red_dark"
             android:text=""/>
+        </GridLayout>
         
-        <View style="@style/line"/>
+        <GridLayout android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/login_edit_normal"
+        android:columnCount="4"
+        android:orientation="horizontal">
+        
         <TextView
-            style="@style/detail"
+            style="@style/order"
             android:text="投保价值" />
 
-        <TextView android:layout_columnSpan="3"
-            android:id="@+id/saddress"
-            android:layout_width="200dp"
-            android:layout_marginLeft="10dp"
+        <EditText android:layout_columnSpan="3"
+            android:id="@+id/tbjz"
+            style="@style/EditStyle"
+            android:inputType="numberDecimal"
             android:text=""/>
         
         <View style="@style/line"/>
         <TextView
-            style="@style/detail"
+            style="@style/order"
             android:text="代收货款" />
 
-        <TextView android:layout_columnSpan="3"
-            android:id="@+id/saddress"
-            android:layout_width="200dp"
+        <Switch android:layout_columnSpan="3"
+            android:id="@+id/dshk"
+            android:layout_width="100dp"
             android:layout_marginLeft="10dp"
-            android:text=""/>
+            android:enabled="false"
+            android:textOn="@string/yes"
+            android:textOff="@string/no"/>
         
         <View style="@style/line"/>
         <TextView
-            style="@style/detail"
-            android:editable="true"
+            style="@style/order"
             android:text="货款" />
 
-        <TextView android:layout_columnSpan="3"
-            android:id="@+id/saddress"
-            android:layout_width="200dp"
-            android:layout_marginLeft="10dp"
+        <EditText android:layout_columnSpan="3"
+            android:id="@+id/dk"
+            style="@style/EditStyle"
+            android:inputType="numberDecimal"
+            android:enabled="false"
             android:text=""/>
         
-        <View style="@style/line"/>
-        
     </GridLayout>
+    </LinearLayout>
     </ScrollView>
+    
+    <FrameLayout
+            android:id="@+id/embedded"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:layout_gravity="top|center_horizontal"
+            android:padding="6dp"
+            android:gravity="top|center_horizontal" />
 
 </LinearLayout>
