@@ -31,6 +31,15 @@ public class Constant {
         Matcher m = p.matcher(mobiles);
         return m.matches();
     }
+	/*
+	 * verify number
+	 */
+	public static boolean isNum(String str){
+		if (str == null || str.equals("")) {
+			return false;
+		}
+		return str.matches("^[-+]?(([0-9]+)([.]([0-9]+))?|([.]([0-9]+))?)$");
+	}
 	
 	public static String login(String userNo, String pass){
 		SoapObject request = new SoapObject(Constant.NAMESPACE, loginAction);

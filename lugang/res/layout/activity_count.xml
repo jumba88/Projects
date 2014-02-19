@@ -74,11 +74,10 @@
             style="@style/order"
             android:text="总重量" />
 
-        <EditText android:layout_columnSpan="2"
+        <Button android:layout_columnSpan="2"
             android:id="@+id/weight"
             style="@style/EditStyle"
-            android:inputType="number"
-            android:text=""/>
+            android:text="0"/>
         
 
         <Spinner android:layout_columnSpan="1"
@@ -90,15 +89,15 @@
             style="@style/order"
             android:text="总体积" />
 
-        <EditText android:layout_columnSpan="2"
+        <Button android:layout_columnSpan="2"
             android:id="@+id/cubage"
             style="@style/EditStyle"
-            android:inputType="number"
-            android:text=""/>
+            android:text="0"/>
         
         <TextView android:layout_columnSpan="1"
             android:id="@+id/cubageUnit"
-            android:text="m3"/>
+            android:background="@drawable/m3"
+            android:text=""/>
         </GridLayout>
         
         <GridLayout android:layout_width="wrap_content"
@@ -109,13 +108,26 @@
         android:orientation="horizontal">
         
         <TextView
+            android:layout_columnSpan="4"
+            android:id="@+id/allUnit"
+            android:layout_marginLeft="8dp"
+            android:textColor="@android:color/black"
+            android:visibility="gone"
+            android:text="" />
+        <TextView
+            android:layout_columnSpan="4"
+            android:layout_marginLeft="8dp"
+            android:textColor="@android:color/black"
+            android:text="总运费(元)=运费+包装费+提货费+送货费+保险费" />
+        <View style="@style/line"/>
+           
+        <TextView
             style="@style/order"
             android:text="运费" />
 
-        <EditText android:layout_columnSpan="3"
+        <Button android:layout_columnSpan="3"
             android:id="@+id/yf"
             style="@style/EditStyle"
-            android:inputType="numberDecimal"
             android:text=""/>
         
         <View style="@style/line"/>

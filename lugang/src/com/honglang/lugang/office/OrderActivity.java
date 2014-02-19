@@ -142,17 +142,20 @@ public class OrderActivity extends Activity implements OnClickListener {
 						JSONArray rows = mxb.getJSONArray("rows");
 						for (int i = 0; i < rows.length(); i++) {
 							JSONObject obj = rows.getJSONObject(i);
-							Log.i("suxoyo", obj.toString());
+//							Log.i("suxoyo", obj.toString());
 							Order item = new Order();
 							item.setOid(obj.getString("oid"));
 							item.setWplx(obj.getString("wplx"));
 							item.setWpmc(obj.getString("wpmc"));
+							item.setJl_danwei(obj.getString("jl_danwei"));
 							item.setSl(obj.getString("sl"));
 							item.setSl_danwei(obj.getString("sl_danwei"));
 							item.setZongliang(obj.getString("zongliang"));
+							item.setZl_danwei(obj.getString("zl_danwei").trim());
 							item.setTiji(obj.getString("tiji"));
 							item.setTiji_danwei(obj.getString("tiji_danwei"));
 							item.setYunfei(obj.getString("yunfei"));
+							item.setBaozhuangfei(obj.getString("baozhuangfei"));
 							item.setTihuofei(obj.getString("tihuofei"));
 							item.setSonghuofei(obj.getString("songhuofei"));
 							item.setBaof(obj.getString("baof"));

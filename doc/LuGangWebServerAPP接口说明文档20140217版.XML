@@ -500,9 +500,10 @@
         </member>
         <member name="M:LuGangWebServer.DataServer.GetFormInfoByFormOid(System.Int64,System.Int64,System.String,System.String)">
              <summary>
-             接口方法:获取派车取货的货物列表,为PaiCheShouHuoRuKu作准备数据
+             接口方法:获取派车取货的货物列表,为PaiCheShouHuoRuKu作准备数据,或对订单进行数据绑定
              </summary>
              <param name="formOid">订单ID</param>
+             <param name="nodeid">待处理工单中的node_id要回传</param>
              <param name="currentUserno">登录的用户帐号</param>
              <param name="token">凭证</param>
              <returns>JSON串
@@ -523,7 +524,7 @@
                         "currentrowcount": "1",
                         "rows": [        货物列表,每行要形成数组回传哦
                             {
-                                "OID": "1973",   //货号 (回传)
+                                "oid": "1973",   //货号 (回传)
                                 "wplx": "水泥",   //货物类型
                                 "wpmc": "水泥",    物品名称
                                 "sl": "10",      //数量,大小0的整数    (回传)
@@ -542,7 +543,7 @@
                                 "huok": "100.00"      //货款
                             },
                             {
-                                "OID": "1974",
+                                "oid": "1974",
                                 "wplx": "化肥及农药",
                                 "wpmc": "农药",
                                 "sl": "20",
@@ -579,6 +580,7 @@
                 {
                     "oid": "明细表ID",
                     "sl": "数量",
+                    "jl_danwei": "计量单位(t,kg,m3)",
                     "tiji": "体积",
                     "tiji_danwei": "体积的单位(目前只有 立方米 一项)",
                     "zl": "重量",
@@ -594,6 +596,7 @@
                 {
                     "oid": "明细表ID",
                     "sl": "数量",
+                    "jl_danwei": "计量单位(t,kg,m3)",
                     "tiji": "体积",
                     "tiji_danwei": "体积的单位(目前只有 立方米 一项)",
                     "zl": "重量",
@@ -743,12 +746,82 @@
             <param name="sjsfz">司机身份证(必填),司机信息可以手填 ,也可以从接口SiJiList里选择,SiJiInfo也可以读取单个司机信息</param>
             <returns></returns>
         </member>
-        <member name="M:LuGangWebServer.DataServer.WuLiuZhiJieRuKu(System.String,System.String,System.String)">
+        <member name="M:LuGangWebServer.DataServer.RuKuSaveOnly(System.String,System.String,System.Int64,System.Int64,System.String)">
              <summary>
-             物流公司直接收货入库，《货物入库流程二》
+             接口方法:暂存货物直接入库信息,与WuLiuZhiJieRuKu相似,但此接口只暂存信息(有些项并不要求必填),而接口WuLiuZhiJieRuKu既保存信息也进行工作注转交
+             先从GetFormInfoByFormOid接口获得数据绑定,再填写后回传
              </summary>
              <param name="currentUserNo"></param>
              <param name="token"></param>
+             <param name="formOid">订单ID</param>
+             <param name="nodeId">nodeId要回传</param>
+             <param name="jsonFormMxbString">生成的订单信息
+             填表单,最后生成以下json串,传入.必填项一定非空,否则将抛出异常
+             {
+                "form": {
+                        "istoub": "是否投保",    //选择型,是(Y),否(N),默认否,实际为bool型
+                        "istx": "是否提醒",      //选择型,是(Y),否(N),默认否,实际为bool型
+                        "ydqx": "送抵期限",      //日期型,
+                        "fhrxingming": "收货人单位/姓名",   //选填
+                        "fhrdianh": "收货人电话",     //选填,电话号码或手机号码
+                        "tocity": "目标城市",        //选填,广西-南宁市 或 广西-南宁市-青秀区(区域不是必须,但省与市必须提供)
+                        "fhrdizhi": "收货人地址",        //选填,不含城市.与目标城市连起来成为完整地址,如民族大道188号.连起来就是广西-南宁市民族大道188号
+                        "fhrsfz": "收货人身份证",     //选填
+                        "tyxingming": "托运人单位/姓名",    //选填
+                        "tydianh": "托运人电话",     //选填
+                        "fromcity": "始发城市",      //选填,同目标城市
+                        "tydizhi": "托运人地址",     //选填,不含城市.与始发城市连起来成为完整地址
+                        "tysfz": "企业代码/身份证",     //选填
+                        "shfs": "送货方式",      //选择型,送货(0),自提(1)
+                        "zffs0": "运费支付方式",   //选择型,现结(0),提付(1),记账(2) 
+                        "kdr": "开单人姓名",      //取当前登录人姓名,不可编辑
+                        "kdrdianh": "开单人电话", //选填,电话号码或手机号码
+                        "beizhu": "备注"       //选填
+                },
+                "mxb": [     //货物明细,至少1项,最多5项
+                     {
+                         "wplx": "类型",       //必填
+                         "wpmc": "品名",       //必填,
+                         "sl": "数量",         //必填,整数
+                         "sl_danwei": "数量的单位",    //必填,选择型,件(默认)\箱\包\车
+                         "zhongliang": "重量",     //重量与体积都叫总量,二者填一种,也可以两者都填.
+                         "zl_danwei": "重量的单位",    //选择型,kg与t  (千克与吨),默认kg
+                         "tiji": "体积",           //重量与体积都叫总量,二者填一种,也可以两者都填.
+                         "tiji_danwei": "体积的单位",  //目前只有m³(立方米)
+                         "yunfei": "运费",         //必填,金额型,不能空值,用0.00代替
+                         "baozhuangfei": "包装费",      //必填,金额型,不能空值,用0.00代替
+                         "tihuofei": "提货费",      //必填,金额型,不能空值,用0.00代替
+                         "songhuofei": "送货费",     //必填,金额型,不能空值,用0.00代替
+                         "baofei": "保险费",        //必填,金额型,不能空值,用0.00代替
+                         "zongyunfei": "总运费",    //总运费=运费+包装费+提货费+送货费+保险费
+                         "tbjz": "投保价值",     //必填,金额型,不能空值,用0.00代替
+                         "isdsf": "代收货款",    //必填,bool型,Y,N (是,否),也可以用true,false
+                         "huok": "货款"        //必填,金额型,不能空值,用0.00代替
+                     }
+                ]
+            }
+             </param>
+             <returns></returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.YanZhengTuoYunDan(System.String,System.String,System.String)">
+            <summary>
+            接口方法:验证托运单
+            </summary>
+            <param name="currentUserNo"></param>
+            <param name="token"></param>
+            <param name="fhCode"></param>
+            <returns>
+            json串
+             只有两种结果,result:true false
+            </returns>
+        </member>
+        <member name="M:LuGangWebServer.DataServer.WuLiuZhiJieRuKu(System.String,System.String,System.String,System.String)">
+             <summary>
+             接口方法:物流公司直接收货入库，《货物入库流程二》
+             </summary>
+             <param name="currentUserNo"></param>
+             <param name="token"></param>
+             <param name="fhCode">发货码</param>
              <param name="jsonFormMxbString">
              填表单,最后生成以下json串,传入.必填项一定非空,否则将抛出异常
              {
@@ -778,6 +851,7 @@
                          "wpmc": "品名",       //必填,
                          "sl": "数量",         //必填,整数
                          "sl_danwei": "数量的单位",    //必填,选择型,件(默认)\箱\包\车
+                    "jl_danwei": "计量单位",
                          "zhongliang": "重量",     //重量与体积都叫总量,二者填一种,也可以两者都填.
                          "zl_danwei": "重量的单位",    //选择型,kg与t  (千克与吨),默认kg
                          "tiji": "体积",           //重量与体积都叫总量,二者填一种,也可以两者都填.

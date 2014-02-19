@@ -13,12 +13,14 @@ public class Order implements Serializable {
 	private String wplx;
 	private String wpmc;
 	private String sl;
+	private String jl_danwei;
 	private String sl_danwei;
 	private String zl_danwei;
 	private String zongliang;
 	private String tiji;
 	private String tiji_danwei;
 	private String yunfei;
+	private String baozhuangfei;
 	private String tihuofei;
 	private String songhuofei;
 	private String baof;
@@ -27,6 +29,12 @@ public class Order implements Serializable {
 	private String isdsf;
 	private String huok;
 	
+	public String getJl_danwei() {
+		return jl_danwei;
+	}
+	public void setJl_danwei(String jl_danwei) {
+		this.jl_danwei = jl_danwei;
+	}
 	public String getOid() {
 		return oid;
 	}
@@ -80,6 +88,12 @@ public class Order implements Serializable {
 	}
 	public void setTiji_danwei(String tiji_danwei) {
 		this.tiji_danwei = tiji_danwei;
+	}
+	public String getBaozhuangfei() {
+		return baozhuangfei;
+	}
+	public void setBaozhuangfei(String baozhuangfei) {
+		this.baozhuangfei = baozhuangfei;
 	}
 	public String getYunfei() {
 		return yunfei;
