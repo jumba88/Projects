@@ -61,7 +61,6 @@ public class OrderActivity extends Activity implements OnClickListener {
 	private ProgressDialog progress;
 	private String action = "GetFormInfoByFormOid";
 	private String confirmAction = "PaiCheShouHuoRuKu";
-	private String sugStr;
 	private Bill bill;
 	private HashMap<String, String> infoMap;
 	public static int position;
@@ -146,7 +145,7 @@ public class OrderActivity extends Activity implements OnClickListener {
 			this.finish();
 			break;
 		case R.id.ok:
-			new ConfirmTask().execute((Void)null);
+			ok();
 			break;
 		case R.id.yes:
 			yes();
@@ -157,6 +156,15 @@ public class OrderActivity extends Activity implements OnClickListener {
 		}
 	}
 	
+	public void ok(){
+		for (int i = 0; i < items.size(); i++) {
+			if (Double.parseDouble(items.get(i).getYunfei()) == 0) {
+				Toast.makeText(OrderActivity.this, items.get(i).getWpmc()+"没有填写运费", Toast.LENGTH_SHORT).show();
+				return;
+			}
+		}
+		new ConfirmTask().execute((Void)null);
+	}
 	public void yes(){
 		if (sure.getText().toString().isEmpty()) {
 			Toast.makeText(OrderActivity.this, "确认人必须填写！", Toast.LENGTH_SHORT).show();
@@ -409,7 +417,7 @@ public class OrderActivity extends Activity implements OnClickListener {
 
 		@Override
 		protected Boolean doInBackground(Void... params) {
-			SoapObject rpc = new SoapObject(Constant.NAMESPACE, confirmAction);
+			SoapObject rpc = new SoapObject(Constant.NAMESPACE, "TuoYunQueRenYes");
 			rpc.addProperty("formOid", Long.parseLong(bill.getForm_oid()));
 			rpc.addProperty("tuoyunren", SessionManager.getInstance().getAccount().getName()+"");
 			rpc.addProperty("currentUserno", SessionManager.getInstance().getUsername());
@@ -466,7 +474,7 @@ public class OrderActivity extends Activity implements OnClickListener {
 		
 		@Override
 		protected Boolean doInBackground(Void... params) {
-			SoapObject rpc = new SoapObject(Constant.NAMESPACE, confirmAction);
+			SoapObject rpc = new SoapObject(Constant.NAMESPACE, "TuoYunQueRenNo");
 			rpc.addProperty("formOid", Long.parseLong(bill.getForm_oid()));
 			rpc.addProperty("tuoyunren", SessionManager.getInstance().getAccount().getName()+"");
 			rpc.addProperty("currentUserno", SessionManager.getInstance().getUsername());
