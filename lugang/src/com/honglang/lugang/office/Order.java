@@ -16,14 +16,14 @@ public class Order implements Serializable {
 	private String jl_danwei;
 	private String sl_danwei;
 	private String zl_danwei;
-	private String zongliang;
+	private String zl;
 	private String tiji;
 	private String tiji_danwei;
 	private String yunfei;
 	private String baozhuangfei;
 	private String tihuofei;
 	private String songhuofei;
-	private String baof;
+	private String baofei;
 	private String zongyunfei;
 	private String tbjz;
 	private String isdsf;
@@ -71,11 +71,11 @@ public class Order implements Serializable {
 	public void setZl_danwei(String zl_danwei) {
 		this.zl_danwei = zl_danwei;
 	}
-	public String getZongliang() {
-		return zongliang;
+	public String getZl() {
+		return zl;
 	}
-	public void setZongliang(String zongliang) {
-		this.zongliang = zongliang;
+	public void setZl(String zl) {
+		this.zl = zl;
 	}
 	public String getTiji() {
 		return tiji;
@@ -113,11 +113,11 @@ public class Order implements Serializable {
 	public void setSonghuofei(String songhuofei) {
 		this.songhuofei = songhuofei;
 	}
-	public String getBaof() {
-		return baof;
+	public String getBaofei() {
+		return baofei;
 	}
-	public void setBaof(String baof) {
-		this.baof = baof;
+	public void setBaofei(String baofei) {
+		this.baofei = baofei;
 	}
 	public String getZongyunfei() {
 		return zongyunfei;

@@ -1,38 +1,39 @@
 package com.honglang.lugang.home;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONObject;
+import org.json.JSONTokener;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
-import org.ksoap2.transport.HttpResponseException;
 import org.ksoap2.transport.HttpTransportSE;
-import org.xmlpull.v1.XmlPullParserException;
 
 import com.honglang.lugang.Constant;
 import com.honglang.lugang.HlApp;
 import com.honglang.lugang.R;
 import com.honglang.lugang.SessionManager;
+import com.honglang.lugang.login.UserInfo;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 public class HomeActivity extends  FragmentActivity implements OnClickListener{
 
-	private FragmentManager fManager;
-	private String handlingAction = "DealingCount";
 	public List<Fragment> fragments = new ArrayList<Fragment>();
 	FragmentTabAdapter tabAdapter;
 	private RadioGroup tabs;
+	
+	private long exitTime = 0;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -53,51 +54,35 @@ public class HomeActivity extends  FragmentActivity implements OnClickListener{
             }
         });
 		
-//		new HandlingTask().execute((Void)null);
+        new LoadTask().execute((Void)null);
 	}
 	
-	class HandlingTask extends AsyncTask<Void, Void, Boolean>{
-
-		@Override
-		protected Boolean doInBackground(Void... params) {
-			SoapObject rpc = new SoapObject(Constant.NAMESPACE, handlingAction);
-			rpc.addProperty("currentUserNo", SessionManager.getInstance().getUsername());
-			rpc.addProperty("token", SessionManager.getInstance().getTokene());
-			Log.i("TAG", SessionManager.getInstance().getTokene());
-//			rpc.addProperty("pageSize", 20);
-//			rpc.addProperty("pageIndex", 1);
-			
-			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER12);
-			envelope.dotNet = true;
-			envelope.setOutputSoapObject(rpc);
-			
-			HttpTransportSE transport = new HttpTransportSE(Constant.SERVICE_URL);
-			transport.debug = true;
-			
-			try {
-				transport.call(Constant.NAMESPACE + handlingAction, envelope);
-				SoapObject obj = (SoapObject) envelope.bodyIn;
-				if(obj != null){
-					Log.i("TAG", obj.getPropertyAsString("DealingCountResult"));
-					return true;
-				}
-			} catch (HttpResponseException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (XmlPullParserException e) {
-				e.printStackTrace();
-			}
-			return false;
-		}
-		
-	}
 //	@Override
 //	public boolean onCreateOptionsMenu(Menu menu) {
 //		// Inflate the menu; this adds items to the action bar if it is present.
 //		getMenuInflater().inflate(R.menu.home, menu);
 //		return true;
 //	}
+	
+	public void exit() {
+        if ((System.currentTimeMillis() - exitTime) > 2000) {
+            Toast.makeText(getApplicationContext(), "再按一次退出路港网",
+                    Toast.LENGTH_SHORT).show();
+            exitTime = System.currentTimeMillis();
+        } else {
+            finish();
+            System.exit(0);
+        }
+    }
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+            exit();
+            return false;
+        }
+		return super.onKeyDown(keyCode, event);
+	}
 
 	@Override
 	public void onClick(View v) {
@@ -105,5 +90,57 @@ public class HomeActivity extends  FragmentActivity implements OnClickListener{
 		
 	}
 	
+	//load the login user info
+	class LoadTask extends AsyncTask<Void, Void, Boolean>{
+
+		@Override
+		protected void onPreExecute() {
+			
+			super.onPreExecute();
+		}
+
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			SoapObject request = new SoapObject(Constant.NAMESPACE, "UserInfo");
+			request.addProperty("userNo", SessionManager.getInstance().getUsername());
+			request.addProperty("userType", SessionManager.getInstance().getUsertype());
+			request.addProperty("token", SessionManager.getInstance().getTokene());
+			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER12);
+			HttpTransportSE transport = new HttpTransportSE(Constant.SERVICE_URL);
+			transport.debug = true;
+			envelope.dotNet = true;
+			envelope.setOutputSoapObject(request);
+			
+			try {
+				transport.call(Constant.NAMESPACE + "UserInfo", envelope);
+				SoapObject response = (SoapObject) envelope.bodyIn;
+				if(response != null){
+					JSONTokener parser = new JSONTokener(response.getPropertyAsString("UserInfoResult"));
+					JSONObject json = (JSONObject) parser.nextValue();
+					Log.i("suxoyo", json.toString());
+					if (json.getBoolean("result")) {
+						JSONObject data = json.getJSONObject("data");
+						JSONObject info = data.getJSONObject("row");
+						UserInfo account = new UserInfo();
+						account.setName(info.getString("name"));
+						account.setIdcard(info.getString("idcard"));
+						account.setPhone(info.getString("phone"));
+						SessionManager.getInstance().setAccount(account);
+					}
+				}
+				
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			return false;
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			
+			super.onPostExecute(result);
+		}
+		
+	}
 
 }

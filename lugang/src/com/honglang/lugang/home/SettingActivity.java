@@ -1,5 +1,6 @@
 package com.honglang.lugang.home;
 
+import com.honglang.lugang.HlApp;
 import com.honglang.lugang.R;
 import com.honglang.lugang.R.id;
 import com.honglang.lugang.R.layout;
@@ -51,6 +52,7 @@ public class SettingActivity extends Activity implements OnClickListener {
 	public void onLogout(){
 		Intent intent = new Intent(this, LoginActivity.class);
 		this.startActivity(intent);
+		HlApp.getInstance().getHomeActivity().finish();
 		this.finish();
 	}
 

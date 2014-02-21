@@ -64,7 +64,7 @@ public class HandlingFragment extends Fragment {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				Bill bill = items.get(arg2);
-				if (bill.getCurrent_node_id().equals("7")) {
+				if (bill.getCurrent_node_id().equals("7") || bill.getCurrent_node_id().equals("9")) {
 					Intent intent = new Intent(getActivity(), OrderActivity.class);
 					intent.putExtra("bill", bill);
 					getActivity().startActivity(intent);

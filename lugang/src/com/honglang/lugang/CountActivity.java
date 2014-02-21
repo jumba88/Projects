@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -41,6 +42,7 @@ public class CountActivity extends Activity implements OnClickListener {
 	private TextView name;
 	public TextView allUnit;
 	private TextView totalUnit;
+	private TextView hint;
 	private EditText total;
 //	private EditText weight;
 	public Button weight;
@@ -57,6 +59,8 @@ public class CountActivity extends Activity implements OnClickListener {
 	public Spinner weightUnit;
 	private static final String[] UNIT = new String[]{"t","kg"};
 	private ArrayAdapter<String> adapter;
+	
+	private static boolean EDITABLE = false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -64,12 +68,22 @@ public class CountActivity extends Activity implements OnClickListener {
 		data = (Order) this.getIntent().getExtras().getSerializable("order");
 		init();
 		
-//		if (savedInstanceState == null) {
-//			// First-time init; create fragment to embed in activity.
-//			FragmentTransaction ft = getFragmentManager().beginTransaction();
-//            DialogFragment newFragment = CalcWeightDialog.newInstance();
-//            ft.add(R.id.embedded, newFragment).commit();
-//		}
+		if (SessionManager.getInstance().getUsertype().equals("物流企业")) {
+			confirm.setVisibility(View.VISIBLE);
+		}
+		if (SessionManager.getInstance().getUsertype().equals("VIP会员")) {
+			total.setFocusable(false);
+			weight.setEnabled(false);
+			cubage.setEnabled(false);
+			weightUnit.setEnabled(false);
+			yf.setEnabled(false);
+			bzf.setFocusable(false);
+			thf.setFocusable(false);
+			shf.setFocusable(false);
+			bxf.setFocusable(false);
+			hint.setVisibility(View.VISIBLE);
+			EDITABLE = true;
+		}
 	}
 	
 	private void init(){
@@ -77,10 +91,11 @@ public class CountActivity extends Activity implements OnClickListener {
 		title.setText("费用计算");
 		back = (Button) this.findViewById(R.id.back);
 		back.setOnClickListener(this);
-		confirm = (Button) this.findViewById(R.id.confirm);
+		confirm = (Button) this.findViewById(R.id.ok);
 		confirm.setText("确 认");
-		confirm.setVisibility(View.VISIBLE);
+		confirm.setOnClickListener(this);
 		
+		hint = (TextView) this.findViewById(R.id.hint);
 		type = (TextView) this.findViewById(R.id.type);
 		name = (TextView) this.findViewById(R.id.name);
 		totalUnit = (TextView) this.findViewById(R.id.totalUnit);
@@ -102,7 +117,7 @@ public class CountActivity extends Activity implements OnClickListener {
 		name.setText(data.getWpmc());
 		total.setText(data.getSl());
 		totalUnit.setText(data.getSl_danwei());
-		weight.setText(data.getZongliang());
+		weight.setText(data.getZl());
 		weight.setInputType(InputType.TYPE_NULL);
 //		weight.setOnTouchListener(new WeightTouchListener());
 		weight.setOnClickListener(this);
@@ -113,7 +128,7 @@ public class CountActivity extends Activity implements OnClickListener {
 		bzf.setText(data.getBaozhuangfei());
 		thf.setText(data.getTihuofei());
 		shf.setText(data.getSonghuofei());
-		bxf.setText(data.getBaof());
+		bxf.setText(data.getBaofei());
 		zyf.setText(data.getZongyunfei());
 		tbjz.setText(data.getTbjz());
 		dk.setText(data.getHuok());
@@ -123,6 +138,7 @@ public class CountActivity extends Activity implements OnClickListener {
 		shf.addTextChangedListener(new CalcWatcher());
 		thf.addTextChangedListener(new CalcWatcher());
 		bxf.addTextChangedListener(new CalcWatcher());
+		tbjz.addTextChangedListener(new CalcWatcher());
 		
 		isDsf = (Switch) this.findViewById(R.id.dshk);
 		if (data.getIsdsf().trim().equals("是")) {
@@ -154,18 +170,42 @@ public class CountActivity extends Activity implements OnClickListener {
 		case R.id.back:
 			this.finish();
 			break;
+		case R.id.ok:
+			Intent data = new Intent();
+			data.putExtra("item", getResult());
+			setResult(RESULT_OK, data);
+			this.finish();
+			break;
 		case R.id.weight:
 			showDialog();
 			break;
 		case R.id.cubage:
 			DialogFragment frag = CalcCubDialog.newInstance();
 			frag.show(getFragmentManager(), "cubage");
+			break;
 		case R.id.yf:
 			DialogFragment f = CalcMoneyDialog.newInstance();
 			f.show(getFragmentManager(), "money");
+			break;
 		}
 		
 	}
+	//get the final result
+	public Order getResult(){
+		data.setSl(total.getText().toString());
+		data.setZl(weight.getText().toString());
+		data.setZl_danwei(UNIT[weightUnit.getSelectedItemPosition()]);
+		data.setTiji(cubage.getText().toString());
+		data.setYunfei(yf.getText().toString());
+		data.setBaozhuangfei(bzf.getText().toString());
+		data.setTihuofei(thf.getText().toString());
+		data.setSonghuofei(shf.getText().toString());
+		data.setBaofei(bxf.getText().toString());
+		data.setZongyunfei(zyf.getText().toString());
+		data.setTbjz(tbjz.getText().toString());
+		return data;
+	}
+	
 	
 	public void showDialog(){
 		DialogFragment newFragment = CalcWeightDialog.newInstance(weightUnit.getSelectedItemPosition());
@@ -196,6 +236,8 @@ public class CountActivity extends Activity implements OnClickListener {
 			String th = thf.getText().toString().trim();
 			String sh = shf.getText().toString().trim();
 			String bx = bxf.getText().toString().trim();
+			
+			String tb = tbjz.getText().toString().trim();
 			if (Constant.isNum(bz) && Constant.isNum(th) && Constant.isNum(sh) && Constant.isNum(bx)) {
 				Double b = Double.parseDouble(bz);
 				Double t = Double.parseDouble(th);
@@ -204,6 +246,15 @@ public class CountActivity extends Activity implements OnClickListener {
 				Double sum = yun + b + t + ds + x;
 				DecimalFormat f = new DecimalFormat("0.00");
 				zyf.setText(f.format(sum));
+			}
+			if (EDITABLE) {
+				if (Constant.isNum(tb)) {
+					if (Double.parseDouble(tb) != Double.parseDouble(data.getTbjz())) {
+						confirm.setVisibility(View.VISIBLE);
+					}else{
+						confirm.setVisibility(View.GONE);
+					}
+				}
 			}
 		}
 

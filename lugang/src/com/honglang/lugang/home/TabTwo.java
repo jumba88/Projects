@@ -27,7 +27,7 @@ public class TabTwo extends Fragment {
 	private TextView user;
 	private TextView type;
 	private Button city;
-	private static final String[] CONTENT = new String[]{"待处理工单","已完成工单"};
+	private static String[] CONTENT;
 	private List<Fragment> fragments;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,6 +47,12 @@ public class TabTwo extends Fragment {
 		user.setText(SessionManager.getInstance().getUsername());
 		type = (TextView) view.findViewById(R.id.type);
 		type.setText(SessionManager.getInstance().getUsertype());
+		
+		if (SessionManager.getInstance().getUsertype().equals("物流企业")) {
+			CONTENT = new String[]{"待处理工单","已完成工单"};
+		} else {
+			CONTENT = new String[]{"待处理事项","已下单信息"};
+		}
 		
 		fragments = new ArrayList<Fragment>();
 		fragments.add(new HandlingFragment());

@@ -11,14 +11,17 @@
         android:background="#33B5E5"/>
     <include layout="@layout/logo"/>
     
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/yesno" >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical" >
 
             <GridLayout android:layout_width="wrap_content"
@@ -67,6 +70,57 @@
         <View style="@style/line"/>
         
     </GridLayout>
+            <GridLayout android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sureGrid"
+        android:visibility="gone"
+        android:columnCount="4"
+        android:orientation="horizontal">
+        
+         <TextView android:text="确认信息"
+            android:layout_columnSpan="4"
+            android:layout_marginLeft="10dp"
+            android:textSize="15sp"
+            android:textColor="@android:color/holo_blue_dark"/>       
+                
+        <TextView
+            style="@style/detail"
+            android:text="确认人" />
+
+        <EditText android:hint="确认人姓名"
+            android:id="@+id/sure"
+            android:layout_columnSpan="3"
+            android:layout_width="250dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="15sp" />
+        
+        <View style="@style/line"/>
+        
+        
+        <TextView style="@style/detail"
+            android:text="确认人电话"/>
+        <EditText android:layout_columnSpan="3"
+            android:id="@+id/surePhone"
+            android:layout_width="250dp"
+            android:layout_marginLeft="10dp"
+            android:hint="确认人电话"/>
+        
+        <View style="@style/line"/>
+        
+        <TextView style="@style/detail"
+            android:layout_gravity="top"
+            android:text="意见"/>
+        <EditText android:layout_columnSpan="3"
+            android:id="@+id/suggest"
+            android:layout_width="250dp"
+            android:layout_height="100dp"
+            android:gravity="top|left"
+            android:layout_marginLeft="10dp"
+            android:hint="如不同意必须填写意见"/>
+        
+        <View style="@style/line"/>
+        
+    </GridLayout>
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -84,5 +138,34 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/yesno"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/yes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:minHeight="1dp"
+            android:layout_weight="1"
+            android:textColor="@android:color/black"
+            android:text="同意托运" />
+
+        <Button
+            android:id="@+id/no"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:minHeight="1dp"
+            android:layout_weight="1"
+            android:textColor="@android:color/holo_red_dark"
+            android:text="不同意托运" />
+
+    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

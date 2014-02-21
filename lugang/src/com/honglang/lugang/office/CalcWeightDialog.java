@@ -1,5 +1,6 @@
 package com.honglang.lugang.office;
 
+import com.honglang.lugang.Constant;
 import com.honglang.lugang.CountActivity;
 import com.honglang.lugang.R;
 
@@ -278,118 +279,80 @@ public class CalcWeightDialog extends DialogFragment implements OnClickListener 
 			
 			switch (frag) {
 			case 0:
-				if (s01 != null && !s01.equals("")) {
+				if (Constant.isNum(s01) && Constant.isNum(s02)) {
 					i01 = Integer.parseInt(s01);
-					int sum = i01*i02;
-					line_result.setText(""+sum);
-					total.setText(""+(sum + r2 + r3 + r4 + r5 + r6 + r7));
-				}else{
-					i01 = 0;
-					total.setText(""+(0 + r2 + r3 + r4 + r5 + r6 + r7));
-				}
-				if (s02 != null && !s02.equals("")) {
 					i02 = Integer.parseInt(s02);
-					int sum = i01*i02;
-					line_result.setText(""+sum);
-					total.setText(""+(sum + r2 + r3 + r4 + r5 + r6 + r7));
-				}else{
-					i02 = 0;
+					int pro = i01*i02;
+					line_result.setText(""+pro);
+					total.setText(""+(pro + r2 + r3 + r4 + r5 + r6 + r7));
+				} else {
+					line_result.setText(""+0);
 					total.setText(""+(0 + r2 + r3 + r4 + r5 + r6 + r7));
 				}
 				break;
 
 			case 1:
-				if (s11 != null && !s11.equals("")) {
+				if (Constant.isNum(s11) && Constant.isNum(s12)) {
 					i11 = Integer.parseInt(s11);
-					int sum = i11*i12;
-					line1_result.setText(""+sum);
-					total.setText(""+(sum + r1 + r3 + r4 + r5 + r6 + r7));
-				}else{
-					total.setText(""+(r1 + r3 + r4 + r5 + r6 + r7));
-				}
-				if (s12 != null && !s12.equals("")) {
 					i12 = Integer.parseInt(s12);
-					int sum = i11*i12;
-					line1_result.setText(""+sum);
-					total.setText(""+(sum + r1 + r3 + r4 + r5 + r6 + r7));
-				}else{
-					total.setText(""+(r1 + r3 + r4 + r5 + r6 + r7));
+					int pro = i11*i12;
+					line1_result.setText(""+pro);
+					total.setText(""+(pro + r1 + r3 + r4 + r5 + r6 + r7));
+				} else {
+					line1_result.setText(""+0);
+					total.setText(""+(0 + r1 + r3 + r4 + r5 + r6 + r7));
 				}
 				break;
 			case 2:
-				if (s21 != null && !s21.equals("")) {
+				if (Constant.isNum(s21) && Constant.isNum(s22)) {
 					i21 = Integer.parseInt(s21);
-					int sum = i21*i22;
-					line2_result.setText(""+sum);
-					total.setText(""+(sum + r2 + r1 + r4 + r5 + r6 + r7));
-				}else{
-					total.setText(""+(r2 + r1 + r4 + r5 + r6 + r7));
-				}
-				if (s22 != null && !s22.equals("")) {
 					i22 = Integer.parseInt(s22);
-					int sum = i21*i22;
-					line2_result.setText(""+sum);
-					total.setText(""+(sum + r2 + r1 + r4 + r5 + r6 + r7));
-				}else{
-					total.setText(""+(r2 + r1 + r4 + r5 + r6 + r7));
+					int pro = i21*i22;
+					line2_result.setText(""+pro);
+					total.setText(""+(pro + r2 + r1 + r4 + r5 + r6 + r7));
+				} else {
+					line2_result.setText(""+0);
+					total.setText(""+(0 + r2 + r1 + r4 + r5 + r6 + r7));
 				}
 				break;
 			case 3:
-				if (s31 != null && !s31.equals("")) {
+				if (Constant.isNum(s31) && Constant.isNum(s32)) {
 					i31 = Integer.parseInt(s31);
-					int sum = i31*i32;
-					line3_result.setText(""+sum);
-					total.setText(""+(sum + r2 + r3 + r1 + r5 + r6 + r7));
-				}else{
-					total.setText(""+(r2 + r3 + r1 + r5 + r6 + r7));
-				}
-				if (s32 != null && !s32.equals("")) {
 					i32 = Integer.parseInt(s32);
-					int sum = i31*i32;
-					line3_result.setText(""+sum);
-					total.setText(""+(sum + r2 + r3 + r1 + r5 + r6 + r7));
-				}else{
-					total.setText(""+(r2 + r3 + r1 + r5 + r6 + r7));
+					int pro = i31*i32;
+					line3_result.setText(""+pro);
+					total.setText(""+(pro + r2 + r3 + r1 + r5 + r6 + r7));
+				} else {
+					line3_result.setText(""+0);
+					total.setText(""+(0 + r2 + r3 + r1 + r5 + r6 + r7));
 				}
 				break;
 			case 4:
-				if (s41 != null && !s41.equals("")) {
+				if (Constant.isNum(s41) && Constant.isNum(s42)) {
 					i41 = Integer.parseInt(s41);
-					int sum = i41*i42;
-					line4_result.setText(""+sum);
-					total.setText(""+(sum + r2 + r3 + r4 + r1 + r6 + r7));
-				}else{
-					total.setText(""+(r2 + r3 + r4 + r1 + r6 + r7));
-				}
-				if (s42 != null && !s42.equals("")) {
 					i42 = Integer.parseInt(s42);
-					int sum = i41*i42;
-					line4_result.setText(""+sum);
-					total.setText(""+(sum + r2 + r3 + r4 + r1 + r6 + r7));
-				}else{
-					total.setText(""+(r2 + r3 + r4 + r1 + r6 + r7));
+					int pro = i41*i42;
+					line4_result.setText(""+pro);
+					total.setText(""+(pro + r2 + r3 + r4 + r1 + r6 + r7));
+				} else {
+					line4_result.setText(""+0);
+					total.setText(""+(0 + r2 + r3 + r4 + r1 + r6 + r7));
 				}
 				break;
 			case 5:
-				if (s51 != null && !s51.equals("")) {
+				if (Constant.isNum(s51) && Constant.isNum(s52)) {
 					i51 = Integer.parseInt(s51);
-					int sum = i51*i52;
-					line5_result.setText(""+sum);
-					total.setText(""+(sum + r2 + r3 + r4 + r5 + r1 + r7));
-				}else{
-					total.setText(""+(r2 + r3 + r4 + r5 + r1 + r7));
-				}
-				if (s52 != null && !s52.equals("")) {
 					i52 = Integer.parseInt(s52);
-					int sum = i51*i52;
-					line5_result.setText(""+sum);
-					total.setText(""+(sum + r2 + r3 + r4 + r5 + r1 + r7));
-				}else{
-					total.setText(""+(r2 + r3 + r4 + r5 + r1 + r7));
+					int pro = i51*i52;
+					line5_result.setText(""+pro);
+					total.setText(""+(pro + r2 + r3 + r4 + r5 + r1 + r7));
+				} else {
+					line5_result.setText(""+0);
+					total.setText(""+(0 + r2 + r3 + r4 + r5 + r1 + r7));
 				}
 				break;
 			case 6:
-				if (ext != null && !ext.equals("")) {
+				if (Constant.isNum(ext)) {
 					iextra = Integer.parseInt(ext);
 					extra_result.setText(""+iextra);
 					total.setText(""+(iextra + r2 + r3 + r4 + r5 + r6 + r1));

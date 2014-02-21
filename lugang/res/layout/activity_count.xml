@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
         <LinearLayout android:layout_width="match_parent"
-	    android:layout_height="match_parent"
+	    android:layout_height="wrap_content"
 	    android:orientation="vertical">
     <GridLayout android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -81,6 +81,7 @@
         
 
         <Spinner android:layout_columnSpan="1"
+            android:clickable="false"
             android:id="@+id/weightUnit" />
         
         <View style="@style/line"/>
@@ -204,7 +205,14 @@
             style="@style/EditStyle"
             android:inputType="numberDecimal"
             android:text=""/>
-        
+        <TextView
+            android:id="@+id/hint"
+            android:layout_columnSpan="4"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:visibility="gone"
+            android:textColor="@android:color/holo_red_dark"
+            android:text="修改投保价值表示不同意确认" />
         <View style="@style/line"/>
         <TextView
             style="@style/order"

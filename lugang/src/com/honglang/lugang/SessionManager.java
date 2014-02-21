@@ -1,5 +1,7 @@
 package com.honglang.lugang;
 
+import com.honglang.lugang.login.UserInfo;
+
 public class SessionManager {
 
 	public static SessionManager instance;
@@ -7,6 +9,7 @@ public class SessionManager {
 	private String tokene;
 	private String usertype;
 	private String city;
+	private UserInfo Account;
 	public static SessionManager getInstance(){
 		if(instance == null){
 			instance = new SessionManager();
@@ -36,5 +39,11 @@ public class SessionManager {
 	}
 	public void setCity(String city) {
 		this.city = city;
+	}
+	public UserInfo getAccount() {
+		return Account;
+	}
+	public void setAccount(UserInfo account) {
+		Account = account;
 	}
 }
