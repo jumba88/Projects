@@ -164,7 +164,6 @@ public class DriverActivity extends Activity implements OnClickListener {
 			} catch (Exception e) {
 				e.printStackTrace();
 				errMsg = e.toString();
-				return false;
 			}
 			return false;
 		}

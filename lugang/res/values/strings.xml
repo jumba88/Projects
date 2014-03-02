@@ -11,6 +11,7 @@
     <string name="tab3">入库</string>
     <string name="tab4">出库</string>
     <string name="setting">设置</string>
+    <string name="qrsearch">二维码查询运单</string>
     <string name="express">城际快线</string>
     <string name="between">==</string>
     <string name="company">物流企业</string>
@@ -20,6 +21,7 @@
     <string name="notice">通知公告</string>
     <string name="singlein">入库记录</string>
     <string name="multin">货物入库</string>
+    <string name="blank">空白托运单入库</string>
     <string name="singleout">出库记录</string>
     <string name="multiout">货物出库</string>
     <string name="feedback">留言反馈</string>
@@ -4189,5 +4191,7 @@
     <string name="title_activity_form">FormActivity</string>
     <string name="title_activity_out">OutActivity</string>
     <string name="title_activity_driver">DriverActivity</string>
+    <string name="title_activity_blank">BlankActivity</string>
+    <string name="title_activity_stuff">StuffActivity</string>
 
 </resources>

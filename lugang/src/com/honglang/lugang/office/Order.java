@@ -28,7 +28,14 @@ public class Order implements Serializable {
 	private String tbjz;
 	private String isdsf;
 	private String huok;
+	private String zhongliang;
 	
+	public String getZhongliang() {
+		return zhongliang;
+	}
+	public void setZhongliang(String zhongliang) {
+		this.zhongliang = zhongliang;
+	}
 	public String getJl_danwei() {
 		return jl_danwei;
 	}

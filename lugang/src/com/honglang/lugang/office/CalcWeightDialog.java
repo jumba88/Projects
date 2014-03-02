@@ -2,6 +2,7 @@ package com.honglang.lugang.office;
 
 import com.honglang.lugang.Constant;
 import com.honglang.lugang.R;
+import com.honglang.lugang.StuffActivity;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -67,10 +68,11 @@ public class CalcWeightDialog extends DialogFragment implements OnClickListener 
 	private Button cancel;
 	
 	private int unit;
-	public static CalcWeightDialog newInstance(int unit){
+	public static CalcWeightDialog newInstance(int unit, int from){
 		CalcWeightDialog frag = new CalcWeightDialog();
 		Bundle args = new Bundle();
         args.putInt("unit", unit);
+        args.putInt("from", from);
         frag.setArguments(args);
 		return frag;
 	}
@@ -369,7 +371,12 @@ public class CalcWeightDialog extends DialogFragment implements OnClickListener 
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.confirm:
-			((CountActivity)getActivity()).weight.setText(total.getText());
+			if (getArguments().getInt("from") == 0) {
+				((CountActivity)getActivity()).weight.setText(total.getText());
+			}
+			if (getArguments().getInt("from") == 1) {
+//				((StuffActivity)getActivity()).weight.setText(total.getText());
+			}
 			dismiss();
 			break;
 		case R.id.cancel:

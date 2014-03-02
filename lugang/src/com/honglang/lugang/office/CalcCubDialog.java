@@ -66,8 +66,12 @@ public class CalcCubDialog extends DialogFragment implements OnClickListener {
 	private Button confirm;
 	private Button cancel;
 	
-	public static CalcCubDialog newInstance(){
-		return new CalcCubDialog();
+	public static CalcCubDialog newInstance(int from){
+		CalcCubDialog frag =  new CalcCubDialog();
+		Bundle args = new Bundle();
+        args.putInt("from", from);
+        frag.setArguments(args);
+		return frag;
 	}
 	
 	@Override
@@ -371,7 +375,12 @@ public class CalcCubDialog extends DialogFragment implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.confirm:
-			((CountActivity)getActivity()).cubage.setText(total.getText());
+			if (getArguments().getInt("from") == 0) {
+				((CountActivity)getActivity()).cubage.setText(total.getText());
+			}
+			if (getArguments().getInt("from") == 1) {
+//				((StuffActivity)getActivity()).cubage.setText(total.getText());
+			}
 			dismiss();
 			break;
 

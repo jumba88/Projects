@@ -30,6 +30,10 @@
     </LinearLayout>
     
     <Button style="@style/tabone"
+        android:id="@+id/qrsearch"
+        android:text="@string/qrsearch"/>
+    
+    <Button style="@style/tabone"
         android:id="@+id/express"
         android:text="@string/express"/>
     

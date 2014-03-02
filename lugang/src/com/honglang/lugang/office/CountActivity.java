@@ -66,7 +66,7 @@ public class CountActivity extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_count);
-		data = (Order) this.getIntent().getExtras().getSerializable("order");
+		
 		init();
 		
 		if (SessionManager.getInstance().getUsertype().equals("物流企业")) {
@@ -95,6 +95,7 @@ public class CountActivity extends Activity implements OnClickListener {
 		confirm = (Button) this.findViewById(R.id.ok);
 		confirm.setText("确 认");
 		confirm.setOnClickListener(this);
+		data = (Order) this.getIntent().getExtras().getSerializable("order");
 		
 		hint = (TextView) this.findViewById(R.id.hint);
 		type = (TextView) this.findViewById(R.id.type);
@@ -181,11 +182,11 @@ public class CountActivity extends Activity implements OnClickListener {
 			showDialog();
 			break;
 		case R.id.cubage:
-			DialogFragment frag = CalcCubDialog.newInstance();
+			DialogFragment frag = CalcCubDialog.newInstance(0);
 			frag.show(getFragmentManager(), "cubage");
 			break;
 		case R.id.yf:
-			DialogFragment f = CalcMoneyDialog.newInstance();
+			DialogFragment f = CalcMoneyDialog.newInstance(0);
 			f.show(getFragmentManager(), "money");
 			break;
 		}
@@ -209,7 +210,7 @@ public class CountActivity extends Activity implements OnClickListener {
 	
 	
 	public void showDialog(){
-		DialogFragment newFragment = CalcWeightDialog.newInstance(weightUnit.getSelectedItemPosition());
+		DialogFragment newFragment = CalcWeightDialog.newInstance(weightUnit.getSelectedItemPosition(),0);
         newFragment.show(getFragmentManager(), "weight");
 	}
 	

@@ -19,6 +19,7 @@ public class TabThree extends Fragment implements OnClickListener {
 	private TextView title;
 	private Button history;
 	private Button in;
+	private Button blank;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -34,6 +35,8 @@ public class TabThree extends Fragment implements OnClickListener {
 		history.setOnClickListener(this);
 		in = (Button) view.findViewById(R.id.in);
 		in.setOnClickListener(this);
+		blank = (Button) view.findViewById(R.id.blank);
+		blank.setOnClickListener(this);
 	}
 	@Override
 	public void onClick(View v) {
@@ -47,6 +50,11 @@ public class TabThree extends Fragment implements OnClickListener {
 			Intent i = new Intent(getActivity(),CaptureActivity.class);
 			i.putExtra("QRTYPE", 1);
 			this.startActivity(i);
+			break;
+		case R.id.blank:
+			Intent b = new Intent(getActivity(),CaptureActivity.class);
+			b.putExtra("QRTYPE", 2);
+			this.startActivity(b);
 			break;
 		}
 		

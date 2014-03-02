@@ -1,0 +1,243 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <include layout="@layout/header"/>
+    <View android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#33B5E5"/>
+    <include layout="@layout/logo"/>
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <LinearLayout android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical">
+    <GridLayout android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/login_edit_normal"
+        android:columnCount="4"
+        android:orientation="horizontal">
+        
+        <TextView
+            style="@style/order"
+            android:text="类型" />
+
+        <Spinner 
+            android:id="@+id/type"
+            android:layout_columnSpan="3"
+            android:layout_marginLeft="10dp" />
+
+        <View style="@style/line"/>
+        
+        <TextView style="@style/order"
+            android:text="名称"/>
+        <EditText android:layout_columnSpan="3"
+            android:id="@+id/name"
+            android:layout_width="200dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="left|center_vertical"
+            style="@style/EditStyle"
+            android:textColor="@android:color/holo_blue_dark"
+            android:text=""/>
+        
+        <View style="@style/line"/>
+        
+        <TextView style="@style/order"
+            android:text="数量"/>
+        <EditText android:layout_columnSpan="2"
+            android:id="@+id/total"
+            style="@style/EditStyle"
+            android:inputType="number"
+            android:text=""/>
+        
+        <TextView android:layout_columnSpan="1"
+            android:id="@+id/totalUnit"
+            android:text="件" />
+        </GridLayout>
+        
+        <GridLayout android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/login_edit_normal"
+        android:columnCount="4"
+        android:orientation="horizontal">
+        
+        <TextView
+            style="@style/order"
+            android:text="总重量" />
+
+        <Button android:layout_columnSpan="2"
+            android:id="@+id/weight"
+            style="@style/EditStyle"
+            android:text="0"/>
+        
+
+        <Spinner android:layout_columnSpan="1"
+            android:id="@+id/weightUnit" />
+        
+        <View style="@style/line"/>
+        
+        <TextView
+            style="@style/order"
+            android:text="总体积" />
+
+        <Button android:layout_columnSpan="2"
+            android:id="@+id/cubage"
+            style="@style/EditStyle"
+            android:text="0"/>
+        
+        <TextView android:layout_columnSpan="1"
+            android:id="@+id/cubageUnit"
+            android:background="@drawable/m3"
+            android:text=""/>
+        </GridLayout>
+        
+        <GridLayout android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/login_edit_normal"
+        android:columnCount="4"
+        android:orientation="horizontal">
+        
+        <TextView
+            android:layout_columnSpan="4"
+            android:id="@+id/allUnit"
+            android:layout_marginLeft="8dp"
+            android:textColor="@android:color/black"
+            android:visibility="gone"
+            android:text="" />
+        <TextView
+            android:layout_columnSpan="4"
+            android:layout_marginLeft="8dp"
+            android:textColor="@android:color/black"
+            android:text="总运费(元)=运费+包装费+提货费+送货费+保险费" />
+        <View style="@style/line"/>
+           
+        <TextView
+            style="@style/order"
+            android:text="运费" />
+
+        <Button android:layout_columnSpan="3"
+            android:id="@+id/yf"
+            style="@style/EditStyle"
+            android:text="0.00"/>
+        
+        <View style="@style/line"/>
+        <TextView
+            style="@style/order"
+            android:text="包装费" />
+
+        <EditText android:layout_columnSpan="3"
+            android:id="@+id/bzf"
+            style="@style/EditStyle"
+            android:inputType="numberDecimal"
+            android:text="0.00"/>
+        
+        <View style="@style/line"/>
+        <TextView
+            style="@style/order"
+            android:text="提货费" />
+
+        <EditText android:layout_columnSpan="3"
+            android:id="@+id/thf"
+            style="@style/EditStyle"
+            android:inputType="numberDecimal"
+            android:text="0.00"/>
+        
+        <View style="@style/line"/>
+        <TextView
+            style="@style/order"
+            android:text="送货费" />
+
+        <EditText android:layout_columnSpan="3"
+            android:id="@+id/shf"
+            style="@style/EditStyle"
+            android:inputType="numberDecimal"
+            android:text="0.00"/>
+        
+        <View style="@style/line"/>
+        <TextView
+            style="@style/order"
+            android:text="保险费" />
+
+        <EditText android:layout_columnSpan="3"
+            android:id="@+id/bxf"
+            style="@style/EditStyle"
+            android:inputType="numberDecimal"
+            android:text="0.00"/>
+        
+        <View style="@style/line"/>
+        <TextView
+            style="@style/order"
+            android:text="总运费" />
+
+        <EditText android:layout_columnSpan="3"
+            android:id="@+id/zyf"
+            style="@style/EditStyle"
+            android:inputType="numberDecimal"
+            android:enabled="false"
+            android:textColor="@android:color/holo_red_dark"
+            android:text="0.00"/>
+        </GridLayout>
+        
+        <GridLayout android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/login_edit_normal"
+        android:columnCount="4"
+        android:orientation="horizontal">
+        
+        <TextView
+            style="@style/order"
+            android:text="投保价值" />
+
+        <EditText android:layout_columnSpan="3"
+            android:id="@+id/tbjz"
+            style="@style/EditStyle"
+            android:inputType="numberDecimal"
+            android:text="0.00"/>
+        
+        <View style="@style/line"/>
+        <TextView
+            style="@style/order"
+            android:text="代收货款" />
+
+        <Switch android:layout_columnSpan="3"
+            android:id="@+id/dshk"
+            android:layout_width="100dp"
+            android:layout_marginLeft="10dp"
+            android:textOn="@string/yes"
+            android:textOff="@string/no"/>
+        
+        <View style="@style/line"/>
+        <TextView
+            style="@style/order"
+            android:text="货款" />
+
+        <EditText android:layout_columnSpan="3"
+            android:id="@+id/dk"
+            style="@style/EditStyle"
+            android:inputType="numberDecimal"
+            android:text="0.00"/>
+        
+    </GridLayout>
+    </LinearLayout>
+    </ScrollView>
+    
+    <FrameLayout
+            android:id="@+id/embedded"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:layout_gravity="top|center_horizontal"
+            android:padding="6dp"
+            android:gravity="top|center_horizontal" />
+
+</LinearLayout>

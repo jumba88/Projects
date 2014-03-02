@@ -10,6 +10,7 @@ import com.honglang.lugang.company.CompanyActivity;
 import com.honglang.lugang.notice.NoticeActivity;
 import com.honglang.lugang.truck.TruckActivity;
 import com.honglang.lugang.ui.ClearEditText;
+import com.honglang.zxing.CaptureActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import android.widget.Toast;
 public class TabOne extends Fragment implements OnClickListener {
 
 	private TextView title;
+	private Button qr;
 	private Button city;
 	private Button express;
 	private Button company;
@@ -49,6 +51,7 @@ public class TabOne extends Fragment implements OnClickListener {
 		city.setText(SessionManager.getInstance().getCity());
 		city.setVisibility(View.VISIBLE);
 		
+		qr = (Button) view.findViewById(R.id.qrsearch);
 		express = (Button) view.findViewById(R.id.express);
 		company = (Button) view.findViewById(R.id.company);
 		truck = (Button) view.findViewById(R.id.truck);
@@ -57,6 +60,7 @@ public class TabOne extends Fragment implements OnClickListener {
 		notice = (Button) view.findViewById(R.id.notice);
 		number = (ClearEditText) view.findViewById(R.id.search);
 		
+		qr.setOnClickListener(this);
 		express.setOnClickListener(this);
 		company.setOnClickListener(this);
 		truck.setOnClickListener(this);
@@ -75,6 +79,11 @@ public class TabOne extends Fragment implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.city:
 //			getActivity().startActivity(new Intent(getActivity(),SettingActivity.class));
+			break;
+		case R.id.qrsearch:
+			Intent i = new Intent(getActivity(),CaptureActivity.class);
+			i.putExtra("QRTYPE", 3);
+			getActivity().startActivity(i);
 			break;
 		case R.id.express:
 			getActivity().startActivity(new Intent(getActivity(),ExpressActivity.class));

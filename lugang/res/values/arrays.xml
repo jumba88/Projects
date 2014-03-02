@@ -98,6 +98,26 @@
     <item>Z</item>
   </string-array>
   
+  <string-array name="stuff_type">
+    <item>煤炭及制品</item>
+    <item>石油天然气几制品</item>
+    <item>金属矿石</item>
+    <item>钢铁</item>
+    <item>矿建材料</item>
+    <item>水泥</item>
+    <item>木材</item>
+    <item>非金属矿石</item>
+    <item>化肥及农药</item>
+    <item>盐</item>
+    <item>粮食</item>
+    <item>机械、设备和电器</item>
+    <item>化工原料及制品</item>
+    <item>有色金属</item>
+    <item>轻工、医药产品</item>
+    <item>农林牧渔业产品</item>
+    <item>其他货类</item>
+  </string-array>
+  
   <string-array name="preferences_front_light_values">
     <item>ON</item>
     <item>AUTO</item>

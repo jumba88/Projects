@@ -24,6 +24,7 @@ import com.google.zxing.ResultPoint;
 import com.google.zxing.client.result.ResultParser;
 import com.honglang.lugang.R;
 import com.honglang.lugang.billsearch.SearchActivity;
+import com.honglang.lugang.qrcode.BlankActivity;
 import com.honglang.lugang.qrcode.InActivity;
 import com.honglang.lugang.qrcode.OutActivity;
 import com.honglang.zxing.camera.CameraManager;
@@ -154,7 +155,10 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 			title.setText("扫描二维码入库");
 			break;
 		case 2:
-			title.setText("扫描二维码查询运单");
+			title.setText("扫描空白托运单");
+			break;
+		case 3:
+			title.setText("扫描查询运单");
 			break;
 		}
 
@@ -475,9 +479,14 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 				this.startActivity(i1);
 				break;
 			case 2:
-				Intent i2 = new Intent(CaptureActivity.this, SearchActivity.class);
-				i2.putExtra("number", rawResult.getText());
+				Intent i2 = new Intent(CaptureActivity.this, BlankActivity.class);
+				i2.putExtra("fhCode", rawResult.getText());
 				this.startActivity(i2);
+				break;
+			case 3:
+				Intent i3 = new Intent(CaptureActivity.this, SearchActivity.class);
+				i3.putExtra("number", rawResult.getText());
+				this.startActivity(i3);
 				break;
 			}
 			// Log.i("suxoyo", "handleDecode="+rawResult.getText());

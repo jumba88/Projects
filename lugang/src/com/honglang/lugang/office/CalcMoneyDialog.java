@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 
 import com.honglang.lugang.Constant;
 import com.honglang.lugang.R;
+import com.honglang.lugang.StuffActivity;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -46,8 +47,12 @@ public class CalcMoneyDialog extends DialogFragment implements OnClickListener {
 	private Double shf;
 	private Double bxf;
 	private String zong;
-	public static CalcMoneyDialog newInstance(){
-		return new CalcMoneyDialog();
+	public static CalcMoneyDialog newInstance(int from){
+		CalcMoneyDialog frag = new CalcMoneyDialog();
+		Bundle args = new Bundle();
+        args.putInt("from", from);
+        frag.setArguments(args);
+		return frag;
 	}
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -66,15 +71,26 @@ public class CalcMoneyDialog extends DialogFragment implements OnClickListener {
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
-		bzf = Double.parseDouble(((CountActivity)getActivity()).bzf.getText().toString());
-		thf = Double.parseDouble(((CountActivity)getActivity()).thf.getText().toString());
-		shf = Double.parseDouble(((CountActivity)getActivity()).shf.getText().toString());
-		bxf = Double.parseDouble(((CountActivity)getActivity()).bxf.getText().toString());
-		
 		unit = (Spinner) view.findViewById(R.id.unit);
-		weight = Integer.parseInt(((CountActivity)getActivity()).weight.getText().toString());
-		cubage = Integer.parseInt(((CountActivity)getActivity()).cubage.getText().toString());
-		position = ((CountActivity)getActivity()).weightUnit.getSelectedItemPosition();
+		if (getArguments().getInt("from") == 0) {
+			bzf = Double.parseDouble(((CountActivity)getActivity()).bzf.getText().toString());
+			thf = Double.parseDouble(((CountActivity)getActivity()).thf.getText().toString());
+			shf = Double.parseDouble(((CountActivity)getActivity()).shf.getText().toString());
+			bxf = Double.parseDouble(((CountActivity)getActivity()).bxf.getText().toString());
+			weight = Integer.parseInt(((CountActivity)getActivity()).weight.getText().toString());
+			cubage = Integer.parseInt(((CountActivity)getActivity()).cubage.getText().toString());
+			position = ((CountActivity)getActivity()).weightUnit.getSelectedItemPosition();
+		}
+		if (getArguments().getInt("from") == 0) {
+			bzf = Double.parseDouble(((StuffActivity)getActivity()).bzf.getText().toString());
+			thf = Double.parseDouble(((StuffActivity)getActivity()).thf.getText().toString());
+			shf = Double.parseDouble(((StuffActivity)getActivity()).shf.getText().toString());
+			bxf = Double.parseDouble(((StuffActivity)getActivity()).bxf.getText().toString());
+			weight = Integer.parseInt(((StuffActivity)getActivity()).weight.getText().toString());
+			cubage = Integer.parseInt(((StuffActivity)getActivity()).cubage.getText().toString());
+			position = ((StuffActivity)getActivity()).weightUnit.getSelectedItemPosition();
+		}
+		
 		switch (position) {
 		case 0:
 			UNIT = new String[]{"重量(t)","体积(m3)"};
@@ -180,17 +196,33 @@ public class CalcMoneyDialog extends DialogFragment implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.confirm:
-			((CountActivity)getActivity()).yf.setText(totalMoney.getText().toString());
-			((CountActivity)getActivity()).zyf.setText(zong);
-			String allUnit = zl.getText().toString().trim();
-			if (allUnit.contains("t")) {
-				((CountActivity)getActivity()).allUnit.setText("t");
+			if (getArguments().getInt("from") == 0) {
+				((CountActivity)getActivity()).yf.setText(totalMoney.getText().toString());
+				((CountActivity)getActivity()).zyf.setText(zong);
+				String allUnit = zl.getText().toString().trim();
+				if (allUnit.contains("t")) {
+					((CountActivity)getActivity()).allUnit.setText("t");
+				}
+				if (allUnit.contains("kg")) {
+					((CountActivity)getActivity()).allUnit.setText("kg");
+				}
+				if (allUnit.contains("m³")) {
+					((CountActivity)getActivity()).allUnit.setText("立方米");
+				}
 			}
-			if (allUnit.contains("kg")) {
-				((CountActivity)getActivity()).allUnit.setText("kg");
-			}
-			if (allUnit.contains("m3")) {
-				((CountActivity)getActivity()).allUnit.setText("立方米");
+			if (getArguments().getInt("from") == 1) {
+//				((StuffActivity)getActivity()).yf.setText(totalMoney.getText().toString());
+//				((StuffActivity)getActivity()).zyf.setText(zong);
+//				String allUnit = zl.getText().toString().trim();
+//				if (allUnit.contains("t")) {
+//					((StuffActivity)getActivity()).allUnit.setText("t");
+//				}
+//				if (allUnit.contains("kg")) {
+//					((StuffActivity)getActivity()).allUnit.setText("kg");
+//				}
+//				if (allUnit.contains("m³")) {
+//					((StuffActivity)getActivity()).allUnit.setText("m³");
+//				}
 			}
 			dismiss();
 			break;
