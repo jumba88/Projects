@@ -66,7 +66,7 @@ public class BillDetailActivity extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_bill_detail);
-		number = this.getIntent().getExtras().getString("number");
+		number = this.getIntent().getExtras().getString("code");
 		init();
 		new SearchTask().execute((Void)null);
 	}

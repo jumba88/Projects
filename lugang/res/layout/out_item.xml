@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="top|left"
+        android:focusable="false" />
+
+    <GridLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="8"
+        android:columnCount="3"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/form_id"
+            android:layout_width="100dp"
+            android:textColor="@android:color/holo_red_dark"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/stuff_name"
+            android:layout_columnSpan="2"
+            android:textColor="@android:color/holo_blue_dark"
+            android:text="" />
+        <TextView
+            android:id="@+id/weight"
+            android:layout_width="100dp"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/cubage"
+            android:layout_columnSpan="2"
+            android:text="" />
+        <TextView
+            android:id="@+id/count"
+            android:layout_width="100dp"
+            android:text="" />
+        <TextView
+            android:text="预装数量" />
+
+        <EditText
+            android:id="@+id/edit"
+            android:layout_width="100dp"
+            android:background="@drawable/login_edittext_bg"
+            android:gravity="left|center_vertical"
+            android:inputType="number"
+            android:hint="预装数量" />
+    </GridLayout>
+
+</LinearLayout>

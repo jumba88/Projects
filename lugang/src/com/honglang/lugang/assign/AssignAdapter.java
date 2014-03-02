@@ -59,7 +59,7 @@ public class AssignAdapter extends BaseAdapter {
 		goal.setText(item.getName());
 		price.setText(item.getStartaddr());
 		heavy.setText(item.getEndaddr());
-		light.setText(item.getZzl() + item.getZldanwei());
+		light.setText(item.getSl());
 	
 		return convertView;
 	}

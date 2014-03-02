@@ -1,7 +1,6 @@
 package com.honglang.lugang.office;
 
 import com.honglang.lugang.Constant;
-import com.honglang.lugang.CountActivity;
 import com.honglang.lugang.R;
 import com.honglang.lugang.office.CalcWeightDialog.CalcWatcher;
 

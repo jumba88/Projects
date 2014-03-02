@@ -16,13 +16,19 @@
             android:layout_columnSpan="2"
             android:layout_marginLeft="10dp"/>
         
-        <ImageView 
+        <Button 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:minHeight="1dp"
                     android:layout_gravity="right"
+                    android:gravity="right"
                     android:layout_columnSpan="4"
-                    android:layout_marginRight="10dp"
-                    android:src="@drawable/yc_right"/>
+                    android:layout_marginRight="20dp"
+                    android:drawableRight="@drawable/yc_right"
+                    android:background="@android:color/transparent"
+                    android:focusable="false"
+                    android:textSize="13sp"
+                    android:text="查看"/>
         
 		<TextView
             style="@style/detail"

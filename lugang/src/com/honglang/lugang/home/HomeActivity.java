@@ -117,7 +117,7 @@ public class HomeActivity extends  FragmentActivity implements OnClickListener{
 				if(response != null){
 					JSONTokener parser = new JSONTokener(response.getPropertyAsString("UserInfoResult"));
 					JSONObject json = (JSONObject) parser.nextValue();
-					Log.i("suxoyo", json.toString());
+//					Log.i("suxoyo", json.toString());
 					if (json.getBoolean("result")) {
 						JSONObject data = json.getJSONObject("data");
 						JSONObject info = data.getJSONObject("row");

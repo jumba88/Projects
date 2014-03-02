@@ -131,9 +131,7 @@ public final class ViewfinderView extends View {
 			canvas.drawBitmap(resultBitmap, null, frame, paint);
 		} else {
 
-			//			paint.setColor(laserColor);
-//			paint.setAlpha(SCANNER_ALPHA[scannerAlpha]);
-//			scannerAlpha = (scannerAlpha + 1) % SCANNER_ALPHA.length;
+			paint.setColor(laserColor);
 			canvas.drawRect(frame.left, frame.top, frame.left + ScreenRate,
 					frame.top + CORNER_WIDTH, paint);
 			canvas.drawRect(frame.left, frame.top, frame.left + CORNER_WIDTH,

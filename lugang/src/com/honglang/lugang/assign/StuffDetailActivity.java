@@ -58,18 +58,19 @@ public class StuffDetailActivity extends Activity implements OnClickListener {
 		arriveTime = (TextView) this.findViewById(R.id.arriveTime);
 		arriveTime.setText(data.getYdqx());
 		totalCount = (TextView) this.findViewById(R.id.totalCount);
+		totalCount.setText(data.getSl());
 		cubage = (TextView) this.findViewById(R.id.cubage);
 		if (data.getDanwei().equals("m&sup3;")) {
 //			unit = "立方";
 			Drawable drawable= getResources().getDrawable(R.drawable.m3);
 			drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
-			totalCount.setCompoundDrawables(null, null, drawable, null);
+//			totalCount.setCompoundDrawables(null, null, drawable, null);
 			cubage.setCompoundDrawables(null, null, drawable, null);
-			totalCount.setText(data.getSl());
+//			totalCount.setText(data.getSl());
 			cubage.setText(data.getRj());
 		} else {
 			unit = data.getDanwei();
-			totalCount.setText(data.getSl() + unit);
+//			totalCount.setText(data.getSl() + unit);
 			cubage.setText(data.getRj() + unit);
 		}
 		

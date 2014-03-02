@@ -60,11 +60,26 @@ public class ExpressDetailActivity extends Activity implements OnClickListener {
 		number = data.getWly_phone();
 		tel.setText(number);
 		minprice = (TextView) this.findViewById(R.id.minprice);
-		minprice.setText(data.getMinprice()+"元");
+		if (Double.parseDouble(data.getMinprice()) == 0) {
+			minprice.setText("--元");
+		} else {
+			minprice.setText(data.getMinprice()+"元");
+		}
+		
 		lightprice = (TextView) this.findViewById(R.id.lightprice);
-		lightprice.setText(data.getLightprice()+"元/立方");
+		if (Double.parseDouble(data.getLightprice()) == 0) {
+			lightprice.setText("--元/立方");
+		} else {
+			lightprice.setText(data.getLightprice()+"元/立方");
+		}
+		
 		haevyprice = (TextView) this.findViewById(R.id.haevyprice);
-		haevyprice.setText(data.getHaevyprice()+"元/公斤");
+		if (Double.parseDouble(data.getHaevyprice()) == 0) {
+			haevyprice.setText("--元/公斤");
+		} else {
+			haevyprice.setText(data.getHaevyprice()+"元/公斤");
+		}
+		
 		details = (TextView) this.findViewById(R.id.details);
 		details.setText(data.getDetails());
 		dial = (Button) this.findViewById(R.id.dial);

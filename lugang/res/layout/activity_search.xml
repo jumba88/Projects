@@ -10,6 +10,13 @@
         android:background="#33B5E5"/>
     <include layout="@layout/logo"/>
     
+    <TextView android:id="@+id/nothing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:visibility="gone"
+        android:textSize="20sp"
+        android:text="暂无流转记录"/>
     <ListView android:id="@+id/list_search"
         android:layout_height="match_parent"
         android:layout_width="match_parent"

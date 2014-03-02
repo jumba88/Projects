@@ -92,6 +92,7 @@
             android:layout_columnSpan="3"
             android:layout_width="250dp"
             android:layout_marginLeft="10dp"
+            android:background="@drawable/login_edittext_bg"
             android:textSize="15sp" />
         
         <View style="@style/line"/>
@@ -103,6 +104,7 @@
             android:id="@+id/surePhone"
             android:layout_width="250dp"
             android:layout_marginLeft="10dp"
+            android:background="@drawable/login_edittext_bg"
             android:hint="确认人电话"/>
         
         <View style="@style/line"/>
@@ -113,9 +115,11 @@
         <EditText android:layout_columnSpan="3"
             android:id="@+id/suggest"
             android:layout_width="250dp"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
+            android:minHeight="100dp"
             android:gravity="top|left"
             android:layout_marginLeft="10dp"
+            android:background="@drawable/login_edittext_bg"
             android:hint="如不同意必须填写意见"/>
         
         <View style="@style/line"/>

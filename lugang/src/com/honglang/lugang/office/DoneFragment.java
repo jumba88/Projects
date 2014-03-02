@@ -1,6 +1,7 @@
 package com.honglang.lugang.office;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -29,6 +30,7 @@ import android.widget.TextView;
 public class DoneFragment extends Fragment {
 
 	private TextView text;
+	private TextView time;
 	private List<Bill> items;
 	private OfficeAdapter adapter;
 	private ListView mListView;
@@ -49,6 +51,8 @@ public class DoneFragment extends Fragment {
 		
 		text = (TextView) view.findViewById(R.id.txt);
 		text.setText("已完成事项 ");
+		time = (TextView) view.findViewById(R.id.time);
+		time.setText("处理时间");
 		
 		pageSize = 40;
 		pageIndex = 1;
@@ -56,7 +60,7 @@ public class DoneFragment extends Fragment {
 		token = SessionManager.getInstance().getTokene();
 		items = new ArrayList<Bill>();
 		new DealingTask().execute((Void)null);
-		adapter = new OfficeAdapter(items, getActivity());
+		adapter = new OfficeAdapter(items, getActivity(), 1);
 		mListView = (ListView) view.findViewById(R.id.list_handling);
 		if(adapter != null){
 			mListView.setAdapter(adapter);
@@ -93,6 +97,7 @@ public class DoneFragment extends Fragment {
 							Bill item = new Bill();
 							item.setTitle(obj.getString("title"));
 							item.setTrun_time(obj.getString("trun_time"));
+							item.setDone_time(obj.getString("done_time"));
 							item.setCurrent_node_id(obj.getString("current_node_id"));
 							item.setForm_oid(obj.getString("form_oid"));
 							items.add(item);

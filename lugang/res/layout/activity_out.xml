@@ -1,0 +1,143 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <include layout="@layout/header" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#33B5E5" />
+
+    <include layout="@layout/logo" />
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <GridLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/login_edit_normal"
+                android:columnCount="4"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_columnSpan="4"
+                    android:layout_marginLeft="10dp"
+                    android:text="预配车单"
+                    android:textColor="@android:color/holo_blue_dark"
+                    android:textSize="15sp" />
+
+                <TextView
+                    style="@style/detail"
+                    android:text="车牌号" />
+
+                <Spinner
+                    android:id="@+id/province"
+                    android:layout_columnSpan="1" />
+
+                <Spinner
+                    android:id="@+id/code"
+                    android:layout_columnSpan="1" />
+
+                <EditText
+                    android:id="@+id/number"
+                    style="@style/EditStyle"
+                    android:layout_width="80dp"
+                    android:layout_columnSpan="1"
+                    android:layout_marginLeft="1dp"
+                    android:gravity="left|center_vertical"
+                    android:ems="5"
+                    android:text="" />
+
+                <View style="@style/line" />
+
+                <TextView
+                    style="@style/detail"
+                    android:text="司机姓名" />
+
+                <EditText
+                    android:id="@+id/driver"
+                    style="@style/EditStyle"
+                    android:layout_width="120dp"
+                    android:layout_columnSpan="2"
+                    android:gravity="left|center_vertical"
+                    android:text="" />
+
+                <Button android:id="@+id/choose"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="1dp"
+                    android:text="选择"/>
+                <View style="@style/line" />
+
+                <TextView
+                    style="@style/detail"
+                    android:text="联系电话" />
+
+                <EditText
+                    android:id="@+id/driver_number"
+                    style="@style/EditStyle"
+                    android:layout_width="220dp"
+                    android:layout_columnSpan="3"
+                    android:inputType="number"
+                    android:gravity="left|center_vertical"
+                    android:text="" />
+
+                <View style="@style/line" />
+
+                <TextView
+                    style="@style/detail"
+                    android:text="身份证号" />
+
+                <EditText
+                    android:id="@+id/driver_id"
+                    style="@style/EditStyle"
+                    android:layout_width="220dp"
+                    android:layout_columnSpan="3"
+                    android:inputType="number"
+                    android:gravity="left|center_vertical"
+                    android:ems="18"
+                    android:text="" />
+
+            </GridLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="目标库存"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="15sp" />
+            <TextView
+                android:id="@+id/stuffCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text=""
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="15sp" />
+
+            <ListView
+                android:id="@+id/stuffList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:divider="@android:color/darker_gray"
+                android:dividerHeight="1px"
+                android:scrollingCache="false" >
+            </ListView>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

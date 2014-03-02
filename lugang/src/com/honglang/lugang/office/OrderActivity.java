@@ -14,7 +14,6 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
 import com.honglang.lugang.Constant;
-import com.honglang.lugang.CountActivity;
 import com.honglang.lugang.R;
 import com.honglang.lugang.SessionManager;
 import com.honglang.lugang.R.layout;
@@ -68,6 +67,7 @@ public class OrderActivity extends Activity implements OnClickListener {
 	// Definition of the one requestCode we use for receiving results.
 	static final private int GET_CODE = 0;
 	
+	private static boolean checked = false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -128,6 +128,7 @@ public class OrderActivity extends Activity implements OnClickListener {
 				Intent intent = new Intent(OrderActivity.this, CountActivity.class);
 				intent.putExtra("order", order);
 				OrderActivity.this.startActivityForResult(intent, GET_CODE);
+				checked = true;
 			}
 		});
 	}
@@ -158,6 +159,10 @@ public class OrderActivity extends Activity implements OnClickListener {
 	
 	public void ok(){
 		for (int i = 0; i < items.size(); i++) {
+			if (Integer.parseInt(items.get(i).getSl()) == 0) {
+				Toast.makeText(OrderActivity.this, items.get(i).getWpmc()+"没有填写数量", Toast.LENGTH_SHORT).show();
+				return;
+			}
 			if (Double.parseDouble(items.get(i).getYunfei()) == 0) {
 				Toast.makeText(OrderActivity.this, items.get(i).getWpmc()+"没有填写运费", Toast.LENGTH_SHORT).show();
 				return;
@@ -166,30 +171,38 @@ public class OrderActivity extends Activity implements OnClickListener {
 		new ConfirmTask().execute((Void)null);
 	}
 	public void yes(){
-		if (sure.getText().toString().isEmpty()) {
-			Toast.makeText(OrderActivity.this, "确认人必须填写！", Toast.LENGTH_SHORT).show();
-			return;
+		if (checked) {
+			if (sure.getText().toString().isEmpty()) {
+				Toast.makeText(OrderActivity.this, "确认人必须填写！", Toast.LENGTH_SHORT).show();
+				return;
+			}
+			if (surePhone.getText().toString().isEmpty()) {
+				Toast.makeText(OrderActivity.this, "确认人电话必须填写！", Toast.LENGTH_SHORT).show();
+				return;
+			}
+			new YesTask().execute((Void)null);
+		} else {
+			Toast.makeText(OrderActivity.this, "请先查看核对货物信息再确认", Toast.LENGTH_SHORT).show();
 		}
-		if (surePhone.getText().toString().isEmpty()) {
-			Toast.makeText(OrderActivity.this, "确认人电话必须填写！", Toast.LENGTH_SHORT).show();
-			return;
-		}
-		new YesTask().execute((Void)null);
 	}
 	public void no(){
-		if (sure.getText().toString().isEmpty()) {
-			Toast.makeText(OrderActivity.this, "必须填写确认人！", Toast.LENGTH_SHORT).show();
-			return;
+		if (checked) {
+			if (sure.getText().toString().isEmpty()) {
+				Toast.makeText(OrderActivity.this, "必须填写确认人！", Toast.LENGTH_SHORT).show();
+				return;
+			}
+			if (surePhone.getText().toString().isEmpty()) {
+				Toast.makeText(OrderActivity.this, "必须填写确认人电话！", Toast.LENGTH_SHORT).show();
+				return;
+			}
+			if (suggest.getText().toString().isEmpty()) {
+				Toast.makeText(OrderActivity.this, "必须填写意见！", Toast.LENGTH_SHORT).show();
+				return;
+			}
+			new NoTask().execute((Void)null);
+		} else {
+			Toast.makeText(OrderActivity.this, "请先查看核对货物信息再确认", Toast.LENGTH_SHORT).show();
 		}
-		if (surePhone.getText().toString().isEmpty()) {
-			Toast.makeText(OrderActivity.this, "必须填写确认人电话！", Toast.LENGTH_SHORT).show();
-			return;
-		}
-		if (suggest.getText().toString().isEmpty()) {
-			Toast.makeText(OrderActivity.this, "必须填写意见！", Toast.LENGTH_SHORT).show();
-			return;
-		}
-		new NoTask().execute((Void)null);
 	}
 	
 	@Override
@@ -295,7 +308,7 @@ public class OrderActivity extends Activity implements OnClickListener {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				errMsg = e.toString();
+				errMsg = "加载工单失败,请检查您的网络是否正常";
 			}
 			return false;
 		}
@@ -397,9 +410,9 @@ public class OrderActivity extends Activity implements OnClickListener {
 		protected void onPostExecute(Boolean result) {
 			progress.dismiss();
 			if (result) {
-				Toast.makeText(OrderActivity.this, "货物入库成功", Toast.LENGTH_SHORT).show();
+				Toast.makeText(OrderActivity.this, "操作成功,信息已发送到下单人!", Toast.LENGTH_SHORT).show();
 			} else {
-				Toast.makeText(OrderActivity.this, "货物入库失败"+errMsg, Toast.LENGTH_SHORT).show();
+				Toast.makeText(OrderActivity.this, "操作失败,"+errMsg, Toast.LENGTH_SHORT).show();
 			}
 			super.onPostExecute(result);
 		}
@@ -474,11 +487,26 @@ public class OrderActivity extends Activity implements OnClickListener {
 		
 		@Override
 		protected Boolean doInBackground(Void... params) {
+			List<JSONObject> noList = new ArrayList<JSONObject>();
+			for (int i = 0; i < items.size(); i++) {
+				Order item = new Order();
+				JSONObject orderMap = new JSONObject();
+				item = items.get(i);
+				try {
+					orderMap.put("oid", item.getOid());
+					orderMap.put("tbjz", item.getTbjz());
+					noList.add(orderMap);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+			}
+			
 			SoapObject rpc = new SoapObject(Constant.NAMESPACE, "TuoYunQueRenNo");
 			rpc.addProperty("formOid", Long.parseLong(bill.getForm_oid()));
 			rpc.addProperty("tuoyunren", SessionManager.getInstance().getAccount().getName()+"");
 			rpc.addProperty("currentUserno", SessionManager.getInstance().getUsername());
 			rpc.addProperty("token", SessionManager.getInstance().getTokene());
+			rpc.addProperty("jsonMxbArrayString", noList.toString());
 			rpc.addProperty("yijian", suggest.getText().toString()+"");
 			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER12);
 			envelope.dotNet = true;

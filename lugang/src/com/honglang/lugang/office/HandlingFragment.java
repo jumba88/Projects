@@ -38,6 +38,8 @@ public class HandlingFragment extends Fragment {
 	private String action = "Dealing";
 	private String currentUserNo;
 	private String token;
+	
+	DealingTask task;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -53,7 +55,7 @@ public class HandlingFragment extends Fragment {
 		token = SessionManager.getInstance().getTokene();
 		items = new ArrayList<Bill>();
 //		new DealingTask().execute((Void)null);
-		adapter = new OfficeAdapter(items, getActivity());
+		adapter = new OfficeAdapter(items, getActivity(), 0);
 		mListView = (ListView) view.findViewById(R.id.list_handling);
 		if(adapter != null){
 			mListView.setAdapter(adapter);
@@ -75,12 +77,20 @@ public class HandlingFragment extends Fragment {
 	
 	@Override
 	public void onResume() {
-		new DealingTask().execute((Void)null);
+		if (task == null) {
+			task = new DealingTask();
+			task.execute((Void)null);
+		}else {
+			task = null;
+			task = new DealingTask();
+			task.execute((Void)null);
+		}
+//		new DealingTask().execute((Void)null);
 		Log.i("suxoyo", "onResume");
 		super.onResume();
 	}
 
-	class DealingTask extends AsyncTask<Void, Void, Boolean>{
+	public class DealingTask extends AsyncTask<Void, Void, Boolean>{
 
 		private String errMsg;
 		@Override
@@ -101,6 +111,7 @@ public class HandlingFragment extends Fragment {
 				if(response != null){
 					JSONTokener parser = new JSONTokener(response.getPropertyAsString("DealingResult"));
 					JSONObject json = (JSONObject) parser.nextValue();
+					Log.i("suxoyo", json.toString());
 					if (json.getBoolean("result")) {
 						items.clear();
 						JSONObject data = json.getJSONObject("data");

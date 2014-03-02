@@ -9,6 +9,7 @@ import com.honglang.lugang.office.DoneFragment;
 import com.honglang.lugang.office.HandlingFragment;
 import com.viewpagerindicator.TabPageIndicator;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -18,10 +19,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class TabTwo extends Fragment {
+public class TabTwo extends Fragment implements OnClickListener {
 
 	private TextView title;
 	private TextView user;
@@ -41,7 +43,8 @@ public class TabTwo extends Fragment {
 		title = (TextView) view.findViewById(R.id.title);
 		title.setText(R.string.tab2);
 		city = (Button) view.findViewById(R.id.city);
-		city.setText(SessionManager.getInstance().getCity());
+		city.setText(R.string.setting);
+		city.setOnClickListener(this);
 		city.setVisibility(View.VISIBLE);
 		user = (TextView) view.findViewById(R.id.user);
 		user.setText(SessionManager.getInstance().getUsername());
@@ -89,6 +92,15 @@ public class TabTwo extends Fragment {
 			return CONTENT.length;
 		}
 		
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.city:
+			getActivity().startActivity(new Intent(getActivity(),SettingActivity.class));
+			break;
+		}
 	}
 	
 //	public static TabTwo newInstance(){

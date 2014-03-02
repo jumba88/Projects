@@ -17,6 +17,7 @@
         	android:text="@string/singlein"/>
     
     	<Button style="@style/tabone"
+    	    android:id="@+id/in"
         	android:text="@string/multin"/>
     </LinearLayout>
     

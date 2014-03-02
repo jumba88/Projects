@@ -11,6 +11,7 @@ public class Bill implements Serializable {
 
 	public String title;
 	public String trun_time;
+	public String done_time;
 	public String form_oid;
 	public String current_node_id;
 	public String getTitle() {
@@ -24,6 +25,12 @@ public class Bill implements Serializable {
 	}
 	public void setTrun_time(String trun_time) {
 		this.trun_time = trun_time;
+	}
+	public String getDone_time() {
+		return done_time;
+	}
+	public void setDone_time(String done_time) {
+		this.done_time = done_time;
 	}
 	public String getForm_oid() {
 		return form_oid;

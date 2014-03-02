@@ -1,6 +1,7 @@
 package com.honglang.lugang.home;
 
 import com.honglang.lugang.R;
+import com.honglang.lugang.SessionManager;
 import com.honglang.lugang.assign.AssignActivity;
 import com.honglang.lugang.billsearch.BillDetailActivity;
 import com.honglang.lugang.billsearch.SearchActivity;
@@ -45,8 +46,7 @@ public class TabOne extends Fragment implements OnClickListener {
 		title = (TextView) view.findViewById(R.id.title);
 		title.setText(R.string.tab1);
 		city = (Button) view.findViewById(R.id.city);
-		city.setText(R.string.setting);
-		city.setOnClickListener(this);
+		city.setText(SessionManager.getInstance().getCity());
 		city.setVisibility(View.VISIBLE);
 		
 		express = (Button) view.findViewById(R.id.express);
@@ -74,7 +74,7 @@ public class TabOne extends Fragment implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.city:
-			getActivity().startActivity(new Intent(getActivity(),SettingActivity.class));
+//			getActivity().startActivity(new Intent(getActivity(),SettingActivity.class));
 			break;
 		case R.id.express:
 			getActivity().startActivity(new Intent(getActivity(),ExpressActivity.class));
@@ -91,7 +91,7 @@ public class TabOne extends Fragment implements OnClickListener {
 		case R.id.btn:
 			String code = number.getText().toString().trim();
 			if (code != null && code.length() != 0) {
-				Intent intent = new Intent(getActivity(),BillDetailActivity.class);
+				Intent intent = new Intent(getActivity(),SearchActivity.class);
 				intent.putExtra("number", code);
 				getActivity().startActivity(intent);
 			} else {

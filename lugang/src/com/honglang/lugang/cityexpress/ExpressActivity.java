@@ -39,6 +39,7 @@ public class ExpressActivity extends Activity implements OnClickListener {
 
 	private TextView title;
 	private Button back;
+	private Button ok;
 	private ListView mListView;
 //	private Express item;
 	private List<Express> items;
@@ -64,6 +65,10 @@ public class ExpressActivity extends Activity implements OnClickListener {
 		title.setText(R.string.express);
 		back = (Button) this.findViewById(R.id.back);
 		back.setOnClickListener(this);
+		ok = (Button) this.findViewById(R.id.ok);
+		ok.setText("查询");
+		ok.setVisibility(View.VISIBLE);
+		ok.setOnClickListener(this);
 		
 		mListView = (ListView) this.findViewById(R.id.list_express);
 //		item = new Express();
@@ -94,6 +99,11 @@ public class ExpressActivity extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.back:
 			this.finish();
+			break;
+		case R.id.ok:
+//			SearchExpressDialog dialog = new SearchExpressDialog(this, R.style.dialog);
+			SearchExpressDialog dialog = new SearchExpressDialog(this, android.R.style.Theme_Light_NoTitleBar);
+			dialog.show();
 			break;
 		}
 		

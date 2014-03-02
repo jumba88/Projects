@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:columnCount="4"
+    android:orientation="horizontal" >
+    
+    
+		<TextView
+            style="@style/detail"
+            android:layout_columnSpan="2"
+            android:text="类型" />
+
+        <TextView android:text=""
+            android:id="@+id/stuffType"
+            android:layout_columnSpan="2"
+            android:layout_marginLeft="10dp"/>
+        
+		<TextView
+            style="@style/detail"
+            android:layout_columnSpan="2"
+            android:text="品名" />
+
+        <TextView android:text=""
+            android:id="@+id/stuffName"
+            android:layout_columnSpan="2"
+            android:layout_marginLeft="10dp"/>
+    
+		<TextView
+            style="@style/detail"
+            android:layout_columnSpan="2"
+            android:text="数量" />
+
+        <TextView android:text=""
+            android:id="@+id/count"
+            android:layout_columnSpan="2"
+            android:layout_marginLeft="10dp"/>
+    
+		<TextView
+            style="@style/detail"
+            android:layout_columnSpan="2"
+            android:text="运费" />
+
+        <TextView android:text=""
+            android:id="@+id/money"
+            android:layout_columnSpan="2"
+            android:layout_marginLeft="10dp"/>
+        
+		<TextView
+            style="@style/detail"
+            android:layout_columnSpan="2"
+            android:text="车牌" />
+
+        <TextView android:text=""
+            android:id="@+id/truck"
+            android:layout_columnSpan="2"
+            android:layout_marginLeft="10dp"/>
+    
+</GridLayout>

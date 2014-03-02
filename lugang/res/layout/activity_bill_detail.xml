@@ -144,6 +144,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:baselineAligned="false"
+                android:visibility="gone"
                 android:orientation="horizontal" >
 
                 <LinearLayout
@@ -181,7 +182,7 @@
                 </LinearLayout>
 
             </LinearLayout>
-            <View style="@style/line"/>
+            
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

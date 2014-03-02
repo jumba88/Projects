@@ -7,7 +7,7 @@
     <string name="password">输入密码</string>
     <string name="login">登录</string>
     <string name="tab1">首页</string>
-    <string name="tab2">办公</string>
+    <string name="tab2">工单</string>
     <string name="tab3">入库</string>
     <string name="tab4">出库</string>
     <string name="setting">设置</string>
@@ -32,7 +32,7 @@
     <string name="arrivetime">到达时间</string>
     <string name="loginname">登录名:</string>
     <string name="group">用户组:</string>
-    <string name="record">流转记录</string>
+    <string name="record">货物流转记录</string>
     <string name="yes">是</string>
     <string name="no">否</string>
     <string name="confirm">确认</string>
@@ -88,7 +88,7 @@
     <string name="msg_default_format">格式</string>
     <string name="msg_default_meta">元数据</string>
     <string name="msg_default_mms_subject">Hi</string>
-    <string name="msg_default_status">请将条码置于取景框内扫描。  </string>
+    <string name="msg_default_status">请将条码置于取景框内扫描\n  \n音量+开启闪光灯,音量-关闭\n </string>
     <string name="msg_default_time">时间</string>
     <string name="msg_default_type">类型</string>
     <string name="msg_encode_contents_failed">无法根据已有数据生成条码。   </string>
@@ -4185,5 +4185,9 @@
     </string-array>
 
     <string name="title_activity_count">CountActivity</string>
+    <string name="title_activity_in">InActivity</string>
+    <string name="title_activity_form">FormActivity</string>
+    <string name="title_activity_out">OutActivity</string>
+    <string name="title_activity_driver">DriverActivity</string>
 
 </resources>

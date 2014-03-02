@@ -2,6 +2,7 @@ package com.honglang.lugang.home;
 
 import com.honglang.lugang.R;
 import com.honglang.lugang.qrcode.HistoryActivity;
+import com.honglang.zxing.CaptureActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ public class TabThree extends Fragment implements OnClickListener {
 
 	private TextView title;
 	private Button history;
+	private Button in;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -30,6 +32,8 @@ public class TabThree extends Fragment implements OnClickListener {
 		title.setText(R.string.tab3);
 		history = (Button) view.findViewById(R.id.history);
 		history.setOnClickListener(this);
+		in = (Button) view.findViewById(R.id.in);
+		in.setOnClickListener(this);
 	}
 	@Override
 	public void onClick(View v) {
@@ -38,6 +42,11 @@ public class TabThree extends Fragment implements OnClickListener {
 			Intent intent = new Intent(getActivity(),HistoryActivity.class);
 			intent.putExtra("type", 1);
 			this.startActivity(intent);
+			break;
+		case R.id.in:
+			Intent i = new Intent(getActivity(),CaptureActivity.class);
+			i.putExtra("QRTYPE", 1);
+			this.startActivity(i);
 			break;
 		}
 		

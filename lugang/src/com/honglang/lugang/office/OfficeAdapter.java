@@ -16,10 +16,12 @@ public class OfficeAdapter extends BaseAdapter {
 	private List<Bill> items;
 	private LayoutInflater inflater;
 	private Activity activity;
-	public OfficeAdapter(List<Bill> items, Activity activity) {
+	private int type;
+	public OfficeAdapter(List<Bill> items, Activity activity, int type) {
 		super();
 		this.items = items;
 		this.activity = activity;
+		this.type = type;
 		inflater = activity.getLayoutInflater();
 	}
 
@@ -54,7 +56,12 @@ public class OfficeAdapter extends BaseAdapter {
 		
 		num.setText((position+1) + "");
 		b.setText(item.getTitle());
-		time.setText(item.getTrun_time());
+		if (type == 0) {
+			time.setText(item.getTrun_time());
+		} else {
+			time.setText(item.getDone_time());
+		}
+		
 		
 		return convertView;
 	}

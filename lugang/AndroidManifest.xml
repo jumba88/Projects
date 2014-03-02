@@ -103,12 +103,34 @@
         </activity>
         <activity
             android:name="com.honglang.lugang.office.OrderActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustResize"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustResize" >
+        </activity>
+        <activity
+            android:name="com.honglang.lugang.office.CountActivity"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustResize" >
+        </activity>
+        <activity
+            android:name="com.honglang.zxing.CaptureActivity"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustResize" >
+        </activity>
+        <activity
+            android:name="com.honglang.lugang.qrcode.InActivity"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
         </activity>
         <activity
-            android:name="com.honglang.lugang.CountActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustResize"
+            android:name="com.honglang.lugang.qrcode.FormActivity"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
+        </activity>
+        <activity
+            android:name="com.honglang.lugang.qrcode.OutActivity"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustResize" >
+        </activity>
+        <activity
+            android:name="com.honglang.lugang.qrcode.DriverActivity"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
         </activity>
     </application>

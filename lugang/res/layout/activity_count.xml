@@ -81,7 +81,6 @@
         
 
         <Spinner android:layout_columnSpan="1"
-            android:clickable="false"
             android:id="@+id/weightUnit" />
         
         <View style="@style/line"/>

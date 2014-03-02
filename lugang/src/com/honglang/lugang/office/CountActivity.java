@@ -1,11 +1,12 @@
-package com.honglang.lugang;
+package com.honglang.lugang.office;
 
 import java.text.DecimalFormat;
 
-import com.honglang.lugang.office.CalcCubDialog;
-import com.honglang.lugang.office.CalcMoneyDialog;
-import com.honglang.lugang.office.CalcWeightDialog;
-import com.honglang.lugang.office.Order;
+import com.honglang.lugang.Constant;
+import com.honglang.lugang.R;
+import com.honglang.lugang.SessionManager;
+import com.honglang.lugang.R.id;
+import com.honglang.lugang.R.layout;
 
 import android.os.Bundle;
 import android.app.Activity;
