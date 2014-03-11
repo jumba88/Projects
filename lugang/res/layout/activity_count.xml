@@ -215,15 +215,29 @@
         <View style="@style/line"/>
         <TextView
             style="@style/order"
+            android:layout_gravity="right|center_vertical"
             android:text="代收货款" />
 
-        <Switch android:layout_columnSpan="3"
-            android:id="@+id/dshk"
-            android:layout_width="100dp"
-            android:layout_marginLeft="10dp"
-            android:enabled="false"
-            android:textOn="@string/yes"
-            android:textOff="@string/no"/>
+        <RadioGroup
+                    android:layout_columnSpan="3"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="left"
+                    android:orientation="horizontal" >
+                    <RadioButton android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dshk_yes"
+                        android:gravity="left|center"
+                        android:enabled="false"
+                        android:text="@string/yes"/>
+                    
+                    <RadioButton android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dshk_no"
+                        android:layout_marginLeft="20dp"
+                        android:gravity="left|center"
+                        android:enabled="false"
+                        android:text="@string/no"/>
+                 </RadioGroup>
         
         <View style="@style/line"/>
         <TextView

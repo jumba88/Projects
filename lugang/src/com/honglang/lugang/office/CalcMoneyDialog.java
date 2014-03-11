@@ -81,7 +81,7 @@ public class CalcMoneyDialog extends DialogFragment implements OnClickListener {
 			cubage = Integer.parseInt(((CountActivity)getActivity()).cubage.getText().toString());
 			position = ((CountActivity)getActivity()).weightUnit.getSelectedItemPosition();
 		}
-		if (getArguments().getInt("from") == 0) {
+		if (getArguments().getInt("from") == 1) {
 			bzf = Double.parseDouble(((StuffActivity)getActivity()).bzf.getText().toString());
 			thf = Double.parseDouble(((StuffActivity)getActivity()).thf.getText().toString());
 			shf = Double.parseDouble(((StuffActivity)getActivity()).shf.getText().toString());

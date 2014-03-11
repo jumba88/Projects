@@ -19,9 +19,9 @@
 
   <com.honglang.zxing.ViewfinderView
       android:id="@+id/viewfinder_view"
-      android:layout_width="fill_parent"
-      android:layout_height="fill_parent"
-      android:layout_centerVertical="true"/>
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerInParent="true" />
 
   <TextView
       android:id="@+id/status_view"

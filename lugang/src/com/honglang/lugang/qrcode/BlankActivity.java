@@ -1,5 +1,6 @@
 package com.honglang.lugang.qrcode;
 
+import java.util.Calendar;
 import java.util.HashMap;
 
 import org.json.JSONArray;
@@ -21,6 +22,10 @@ import com.honglang.lugang.office.CountActivity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.DialogFragment;
+import android.app.DatePickerDialog.OnDateSetListener;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.util.Log;
@@ -28,6 +33,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,13 +46,29 @@ public class BlankActivity extends Activity implements OnClickListener {
 	
 	private ProgressDialog progress;
 	
-	private Button add;
+	private Button date;
+	public Button to;
+	public Button from;
+	public Button add;
+	
+	private int mYear;
+    private int mMonth;
+    private int mDay;
+	static final int DATE_DIALOG_ID = 0;
+	static final int TO_DIALOG_ID = 1;
+	static final int FROM_DIALOG_ID = 2;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_blank);
 		
 		init();
+		
+		final Calendar c = Calendar.getInstance();
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+        updateDisplay();
 	}
 
 	private void init(){
@@ -62,15 +84,58 @@ public class BlankActivity extends Activity implements OnClickListener {
 		
 		new LoadTask().execute((Void)null);
 		
+		date = (Button) this.findViewById(R.id.ydqx);
+		date.setOnClickListener(this);
 		add = (Button) this.findViewById(R.id.add);
 		add.setOnClickListener(this);
+		to = (Button) this.findViewById(R.id.to);
+		to.setOnClickListener(this);
+		from = (Button) this.findViewById(R.id.from);
+		from.setOnClickListener(this);
 	}
 	
+	@Override
+	protected Dialog onCreateDialog(int id) {
+		switch (id) {
+		case DATE_DIALOG_ID:
+			return new DatePickerDialog(this, mDateSetListener, mYear, mMonth, mDay);
+		}
+		return null;
+	}
+
+	@Override
+	protected void onPrepareDialog(int id, Dialog dialog) {
+		switch (id) {
+		case DATE_DIALOG_ID:
+            dialog.setTitle("运抵期限");
+			((DatePickerDialog) dialog).updateDate(mYear, mMonth, mDay);
+            break;
+		}
+	}
+	
+	private void updateDisplay(){
+		date.setText(new StringBuilder().append(mYear).append("-").append(mMonth+1).append("-").append(mDay));
+	}
+	private OnDateSetListener mDateSetListener = new OnDateSetListener() {
+		
+		@Override
+		public void onDateSet(DatePicker view, int year, int monthOfYear,
+				int dayOfMonth) {
+			mYear = year;
+            mMonth = monthOfYear;
+            mDay = dayOfMonth;
+            updateDisplay();
+		}
+	};
+
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.back:
 			finish();
+			break;
+		case R.id.ydqx:
+			showDialog(DATE_DIALOG_ID);
 			break;
 		case R.id.add:
 			Intent intent = new Intent(this, StuffActivity.class);
@@ -78,6 +143,14 @@ public class BlankActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.ok:
 //			ok();
+			break;
+		case R.id.from:
+			DialogFragment frag = AreaDialog.newInstance(0);
+			frag.show(getFragmentManager(), "area");
+			break;
+		case R.id.to:
+			DialogFragment f = AreaDialog.newInstance(1);
+			f.show(getFragmentManager(), "area");
 			break;
 		}
 	}

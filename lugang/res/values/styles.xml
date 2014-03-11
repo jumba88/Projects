@@ -50,13 +50,13 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_width">80dp</item>
         <item name="android:gravity">right</item>
-        <item name="android:textColor">@android:color/darker_gray</item>
+        <item name="android:textColor">@android:color/black</item>
     </style>
     <style name="order">
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_width">70dp</item>
         <item name="android:gravity">right</item>
-        <item name="android:textColor">@android:color/darker_gray</item>
+        <item name="android:textColor">@android:color/black</item>
     </style>
     <style name="EditStyle">
         <item name="android:layout_height">wrap_content</item>

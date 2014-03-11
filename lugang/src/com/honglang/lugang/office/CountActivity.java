@@ -27,6 +27,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -38,7 +39,9 @@ public class CountActivity extends Activity implements OnClickListener {
 	private TextView title;
 	private Button back;
 	private Button confirm;
-	private Switch isDsf;
+//	private Switch isDsf;
+	private RadioButton yes;
+	private RadioButton no;
 	private TextView type;
 	private TextView name;
 	public TextView allUnit;
@@ -142,11 +145,13 @@ public class CountActivity extends Activity implements OnClickListener {
 		bxf.addTextChangedListener(new CalcWatcher());
 		tbjz.addTextChangedListener(new CalcWatcher());
 		
-		isDsf = (Switch) this.findViewById(R.id.dshk);
+//		isDsf = (Switch) this.findViewById(R.id.dshk);
+		yes = (RadioButton) this.findViewById(R.id.istx_yes);
+		no = (RadioButton) this.findViewById(R.id.istx_no);
 		if (data.getIsdsf().trim().equals("是")) {
-			isDsf.setChecked(true);
+			yes.setChecked(true);
 		} else {
-			isDsf.setChecked(false);
+			no.setChecked(false);
 		}
 		
 		weightUnit = (Spinner) this.findViewById(R.id.weightUnit);
