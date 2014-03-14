@@ -160,6 +160,9 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 		case 3:
 			title.setText("扫描查询运单");
 			break;
+		case 4:
+			title.setText("扫一扫");
+			break;
 		}
 
 		hasSurface = false;

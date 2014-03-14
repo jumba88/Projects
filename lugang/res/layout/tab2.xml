@@ -16,7 +16,8 @@
         android:background="@color/white"
         android:orientation="horizontal">
         
-            <LinearLayout android:layout_width="0dp"
+            <LinearLayout android:id="@+id/info"
+                android:layout_width="0dp"
         	android:layout_height="wrap_content"
         	android:layout_weight="1"
         	android:orientation="horizontal">
@@ -62,16 +63,16 @@
         
     </LinearLayout>
     
-    <com.viewpagerindicator.TabPageIndicator
-        android:id="@+id/indicator"
-        android:layout_height="wrap_content"
-        android:layout_width="fill_parent"
-        />
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        />
+    <Button style="@style/tabone"
+    	    android:id="@+id/dealing"
+        	android:text=""/>
+    
+    	<Button style="@style/tabone"
+    	    android:id="@+id/done"
+        	android:text=""/>
+    	
+    	<Button style="@style/tabone"
+    	    android:id="@+id/blank"
+        	android:text="扫一扫"/>
 
 </LinearLayout>

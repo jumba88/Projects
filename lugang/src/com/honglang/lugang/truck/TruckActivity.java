@@ -33,6 +33,8 @@ public class TruckActivity extends Activity implements OnClickListener {
 
 	private TextView title;
 	private Button back;
+	private Button ok;
+	
 	private ListView mListView;
 	private List<Truck> items;
 	private TruckAdapter adapter;
@@ -55,6 +57,10 @@ public class TruckActivity extends Activity implements OnClickListener {
 		title.setText(R.string.carinfo);
 		back = (Button) this.findViewById(R.id.back);
 		back.setOnClickListener(this);
+		ok = (Button) this.findViewById(R.id.ok);
+		ok.setText("查询");
+		ok.setVisibility(View.VISIBLE);
+		ok.setOnClickListener(this);
 		
 		mListView = (ListView) this.findViewById(R.id.list_truck);
 		items = new ArrayList<Truck>();
@@ -80,6 +86,10 @@ public class TruckActivity extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.back:
 			this.finish();
+			break;
+		case R.id.ok:
+			SearchTruckDialog dialog = new SearchTruckDialog(this, android.R.style.Theme_Light_NoTitleBar);
+			dialog.show();
 			break;
 		}
 		

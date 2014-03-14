@@ -71,10 +71,8 @@ public class ExpressActivity extends Activity implements OnClickListener {
 		ok.setOnClickListener(this);
 		
 		mListView = (ListView) this.findViewById(R.id.list_express);
-//		item = new Express();
 		items = new ArrayList<Express>();
 		new LoadTask().execute((Void)null);
-//		Log.i("items", items.toString());
 		adapter = new ExpressAdapter(items, this);
 		
 		
@@ -101,7 +99,6 @@ public class ExpressActivity extends Activity implements OnClickListener {
 			this.finish();
 			break;
 		case R.id.ok:
-//			SearchExpressDialog dialog = new SearchExpressDialog(this, R.style.dialog);
 			SearchExpressDialog dialog = new SearchExpressDialog(this, android.R.style.Theme_Light_NoTitleBar);
 			dialog.show();
 			break;
@@ -109,7 +106,7 @@ public class ExpressActivity extends Activity implements OnClickListener {
 		
 	}
 	
-	class LoadTask extends AsyncTask<Void, Void, Integer>{
+	class LoadTask extends AsyncTask<Void, Void, Boolean>{
 
 		private String errMsg;
 		@Override
@@ -120,7 +117,7 @@ public class ExpressActivity extends Activity implements OnClickListener {
 		}
 
 		@Override
-		protected Integer doInBackground(Void... params) {
+		protected Boolean doInBackground(Void... params) {
 			SoapObject rpc = new SoapObject(Constant.NAMESPACE, action);
 			rpc.addProperty("fromCityName", city);
 			rpc.addProperty("toCityName", "");
@@ -156,7 +153,7 @@ public class ExpressActivity extends Activity implements OnClickListener {
 							item.setWly_phone(obj.getString("wly_phone"));
 							items.add(item);
 						}
-						return 1;
+						return true;
 					} else {
 						errMsg = json.getString("msg");
 					}
@@ -164,15 +161,14 @@ public class ExpressActivity extends Activity implements OnClickListener {
 			} catch (Exception e) {
 				e.printStackTrace();
 				errMsg = e.toString();
-				return 0;
 			} 
-			return 0;
+			return false;
 		}
 
 		@Override
-		protected void onPostExecute(Integer result) {
+		protected void onPostExecute(Boolean result) {
 			progress.dismiss();
-			if (result == 1) {
+			if (result) {
 				adapter.notifyDataSetChanged();
 			}
 			

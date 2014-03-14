@@ -1,4 +1,4 @@
-package com.honglang.lugang.cityexpress;
+package com.honglang.lugang.truck;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ import org.ksoap2.transport.HttpTransportSE;
 
 import com.honglang.lugang.Constant;
 import com.honglang.lugang.R;
-import com.honglang.lugang.cityexpress.ExpressActivity.LoadTask;
+import com.honglang.lugang.truck.TruckActivity.LoadTask;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -22,36 +22,35 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.AdapterView.OnItemClickListener;
 
-public class SearchExpressDialog extends Dialog implements android.view.View.OnClickListener {
+public class SearchTruckDialog extends Dialog implements android.view.View.OnClickListener {
 
 	private EditText to;
 	private EditText from;
 	private Button search;
 	
 	private ListView mListView;
-	private List<Express> items;
-	private ExpressAdapter adapter;
+	private List<Truck> items;
+	private TruckAdapter adapter;
 	private int pageSize;
 	private int pageIndex;
-	private String action = "TkzxList";
+	private String action = "CarList";
 	
 	private Activity activity;
-	public SearchExpressDialog(Activity activity, int theme) {
+	public SearchTruckDialog(Activity activity, int theme) {
 		super(activity, theme);
 		this.activity = activity;
 	}
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.dialog_express);
+		setContentView(R.layout.dialog_truck);
 		
 		to = (EditText) findViewById(R.id.to);
 		from = (EditText) findViewById(R.id.from);
@@ -60,26 +59,24 @@ public class SearchExpressDialog extends Dialog implements android.view.View.OnC
 		
 		pageSize = 40;
 		pageIndex = 1;
-		mListView = (ListView) findViewById(R.id.list_express);
-		items = new ArrayList<Express>();
-		adapter = new ExpressAdapter(items, activity);
-		
+		mListView = (ListView) this.findViewById(R.id.list_truck);
+		items = new ArrayList<Truck>();
+		adapter = new TruckAdapter(items, activity);
 		if(adapter != null){
 			mListView.setAdapter(adapter);
 		}
-		mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		
+		mListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				Intent intent = new Intent(activity, ExpressDetailActivity.class);
-				intent.putExtra("Express", items.get(arg2));
+				Intent intent = new Intent(activity,TruckDetailActivity.class);
+				intent.putExtra("Truck", items.get(arg2));
 				activity.startActivity(intent);
 			}
 		});
-		
 	}
-
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -102,7 +99,6 @@ public class SearchExpressDialog extends Dialog implements android.view.View.OnC
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			
 		}
 
 		@Override
@@ -121,37 +117,38 @@ public class SearchExpressDialog extends Dialog implements android.view.View.OnC
 				transport.call(Constant.NAMESPACE + action, envelope);
 				SoapObject response = (SoapObject) envelope.bodyIn;
 				if(response != null){
-					JSONTokener parser = new JSONTokener(response.getPropertyAsString("TkzxListResult"));
+					JSONTokener parser = new JSONTokener(response.getPropertyAsString("CarListResult"));
 					JSONObject json = (JSONObject) parser.nextValue();
-					Log.i("suxoyo", json.toString());
 					if (json.getBoolean("result")) {
 						JSONObject data = json.getJSONObject("data");
 						JSONArray rows = data.getJSONArray("rows");
 						for (int i = 0; i < rows.length(); i++) {
 							JSONObject obj = rows.getJSONObject(i);
-							Express item = new Express();
-							item.setId(obj.getString("id"));
-							item.setFromcity(obj.getString("fromcity"));
-							item.setTocity(obj.getString("tocity"));
-							item.setFromaddress(obj.getString("fromaddress"));
-							item.setToaddress(obj.getString("toaddress"));
-							item.setHaevyprice(obj.getString("haevyprice"));
-							item.setLightprice(obj.getString("lightprice"));
-							item.setMinprice(obj.getString("minprice"));
-							item.setDetails(obj.getString("details"));
-							item.setWly_name(obj.getString("wly_name"));
-							item.setWly_phone(obj.getString("wly_phone"));
+							Truck item = new Truck();
+							item.setAdddate(obj.getString("adddate"));
+							item.setChep(obj.getString("chep"));
+							item.setChex(obj.getString("chex"));
+							item.setEndaddr(obj.getString("endaddr"));
+							item.setStartaddr(obj.getString("startaddr"));
+							item.setPhone(obj.getString("phone"));
+							item.setPrice(obj.getString("price"));
+							item.setRealname(obj.getString("realname"));
+							item.setRongl(obj.getString("rongl"));
+							item.setPingp(obj.getString("pingp"));
+							item.setRemark(obj.getString("remark"));
 							items.add(item);
 						}
 						return true;
 					} else {
 						errMsg = json.getString("msg");
+						return false;
 					}
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 				errMsg = e.toString();
-			} 
+				return false;
+			}
 			return false;
 		}
 
@@ -160,11 +157,9 @@ public class SearchExpressDialog extends Dialog implements android.view.View.OnC
 			if (result) {
 				adapter.notifyDataSetChanged();
 			}
-			
 			super.onPostExecute(result);
 		}
 		
 	}
-
 
 }

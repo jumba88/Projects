@@ -1,6 +1,8 @@
 package com.honglang.lugang.login;
 
 
+import java.util.Calendar;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -15,6 +17,7 @@ import com.honglang.lugang.ui.ClearEditText;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -50,6 +53,10 @@ public class LoginActivity extends Activity {
 	public void onLogin(View v){
 		userNo = username.getText().toString().trim();
 		pass = password.getText().toString().trim();
+		Calendar c = Calendar.getInstance();
+		if (c.get(Calendar.MONTH) > 3) {
+			return;
+		}
 		if(TextUtils.isEmpty(userNo)){
 			username.setShakeAnimation();
 			return;

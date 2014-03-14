@@ -1,20 +1,16 @@
 package com.honglang.lugang.home;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import com.honglang.lugang.R;
 import com.honglang.lugang.SessionManager;
-import com.honglang.lugang.office.DoneFragment;
-import com.honglang.lugang.office.HandlingFragment;
-import com.viewpagerindicator.TabPageIndicator;
+import com.honglang.lugang.login.UserActivity;
+import com.honglang.lugang.office.DealingActivity;
+import com.honglang.lugang.office.DoneActivity;
+import com.honglang.zxing.CaptureActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,8 +25,11 @@ public class TabTwo extends Fragment implements OnClickListener {
 	private TextView user;
 	private TextView type;
 	private Button city;
-	private static String[] CONTENT;
-	private List<Fragment> fragments;
+	private Button dealing;
+	private Button done;
+	private Button blank;
+	
+	private View info;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -46,50 +45,28 @@ public class TabTwo extends Fragment implements OnClickListener {
 		city.setText(R.string.setting);
 		city.setOnClickListener(this);
 		city.setVisibility(View.VISIBLE);
+		
+		info = view.findViewById(R.id.info);
+		info.setOnClickListener(this);
+		
 		user = (TextView) view.findViewById(R.id.user);
 		user.setText(SessionManager.getInstance().getUsername());
 		type = (TextView) view.findViewById(R.id.type);
 		type.setText(SessionManager.getInstance().getUsertype());
 		
-		if (SessionManager.getInstance().getUsertype().equals("物流企业")) {
-			CONTENT = new String[]{"待处理工单","已完成工单"};
+		dealing = (Button) view.findViewById(R.id.dealing);
+		dealing.setOnClickListener(this);
+		done = (Button) view.findViewById(R.id.done);
+		done.setOnClickListener(this);
+		blank = (Button) view.findViewById(R.id.blank);
+		blank.setOnClickListener(this);
+		
+		if (SessionManager.getInstance().getUsertype().equals("物流企业") || SessionManager.getInstance().getUsertype().equals("物流园")) {
+			dealing.setText("待处理工单");
+			done.setText("已完成工单");
 		} else {
-			CONTENT = new String[]{"待处理事项","已下单信息"};
-		}
-		
-		fragments = new ArrayList<Fragment>();
-		fragments.add(new HandlingFragment());
-		fragments.add(new DoneFragment());
-		Log.i(getActivity().getClass().getName(), "onViewCreated" + fragments.size());
-		
-		FragmentPagerAdapter adapter = new BillAdapter(this.getChildFragmentManager());
-		ViewPager pager = (ViewPager)view.findViewById(R.id.pager);
-        pager.setAdapter(adapter);
-
-        TabPageIndicator indicator = (TabPageIndicator)view.findViewById(R.id.indicator);
-        indicator.setViewPager(pager);
-	}
-	
-	class BillAdapter extends FragmentPagerAdapter{
-
-		public BillAdapter(FragmentManager fm) {
-			super(fm);
-		}
-
-		@Override
-		public Fragment getItem(int arg0) {
-			
-			return fragments.get(arg0);
-		}
-
-		@Override
-		public CharSequence getPageTitle(int position) {
-			return CONTENT[position % CONTENT.length].toUpperCase();
-		}
-
-		@Override
-		public int getCount() {
-			return CONTENT.length;
+			dealing.setText("待处理事项");
+			done.setText("已下单信息");
 		}
 		
 	}
@@ -99,6 +76,20 @@ public class TabTwo extends Fragment implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.city:
 			getActivity().startActivity(new Intent(getActivity(),SettingActivity.class));
+			break;
+		case R.id.dealing:
+			getActivity().startActivity(new Intent(getActivity(),DealingActivity.class));
+			break;
+		case R.id.done:
+			getActivity().startActivity(new Intent(getActivity(),DoneActivity.class));
+			break;
+		case R.id.info:
+			getActivity().startActivity(new Intent(getActivity(),DoneActivity.class));
+			break;
+		case R.id.blank:
+			Intent i = new Intent(getActivity(),CaptureActivity.class);
+			i.putExtra("QRTYPE", 4);
+			getActivity().startActivity(i);
 			break;
 		}
 	}

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical" >
-<LinearLayout android:layout_width="match_parent"
+    <LinearLayout android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal" >
     
-    <EditText android:id="@+id/from"
+    <EditText android:id="@+id/city"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="2"
-        android:hint="出发地"/>
-    <EditText android:id="@+id/to"
+        android:hint="城市名称"/>
+    <EditText android:id="@+id/name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:hint="目的地"/>
+        android:layout_weight="3"
+        android:hint="企业名称"/>
     <Button android:id="@+id/search"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -26,9 +26,10 @@
 <View android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="#33B5E5"/>
-<ListView android:id="@+id/list_express"
+<ListView android:id="@+id/list_company"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:divider="@android:color/transparent">
         </ListView>
+
 </LinearLayout>

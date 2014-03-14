@@ -13,28 +13,26 @@ import org.ksoap2.transport.HttpTransportSE;
 
 import com.honglang.lugang.Constant;
 import com.honglang.lugang.R;
-import com.honglang.lugang.R.layout;
-import com.honglang.lugang.cityexpress.Express;
-import com.honglang.lugang.cityexpress.ExpressActivity;
+import com.honglang.lugang.assign.AssignActivity.LoadTask;
 
+import android.app.Activity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
-public class AssignActivity extends Activity implements OnClickListener {
+public class SearchStuffDialog extends Dialog implements android.view.View.OnClickListener {
 
-	private TextView title;
-	private Button back;
-	private Button ok;
+	private EditText to;
+	private EditText from;
+	private Button search;
 	
 	private ListView mListView;
 	private List<Assign> items;
@@ -43,30 +41,27 @@ public class AssignActivity extends Activity implements OnClickListener {
 	private int pageIndex;
 	private ProgressDialog progress;
 	private String action = "PhList";
+	
+	private Activity activity;
+	public SearchStuffDialog(Activity activity, int theme) {
+		super(activity, theme);
+		this.activity = activity;
+	}
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_assign);
+		setContentView(R.layout.dialog_stuff);
+		
+		to = (EditText) findViewById(R.id.to);
+		from = (EditText) findViewById(R.id.from);
+		search = (Button) findViewById(R.id.search);
+		search.setOnClickListener(this);
+		
 		pageSize = 40;
 		pageIndex = 1;
-		
-		init();
-	}
-
-	private void init(){
-		title = (TextView) this.findViewById(R.id.title);
-		title.setText(R.string.lastet);
-		back = (Button) this.findViewById(R.id.back);
-		back.setOnClickListener(this);
-		ok = (Button) this.findViewById(R.id.ok);
-		ok.setText("查询");
-		ok.setVisibility(View.VISIBLE);
-		ok.setOnClickListener(this);
-		
 		mListView = (ListView) this.findViewById(R.id.list_assign);
 		items = new ArrayList<Assign>();
-		new LoadTask().execute((Void)null);
-		adapter = new AssignAdapter(items, this);
+		adapter = new AssignAdapter(items, activity);
 		if(adapter != null){
 			mListView.setAdapter(adapter);
 		}
@@ -76,9 +71,9 @@ public class AssignActivity extends Activity implements OnClickListener {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				Intent intent = new Intent(AssignActivity.this,StuffDetailActivity.class);
+				Intent intent = new Intent(activity,StuffDetailActivity.class);
 				intent.putExtra("Assign", items.get(arg2));
-				AssignActivity.this.startActivity(intent);
+				activity.startActivity(intent);
 				
 			}
 		});
@@ -86,32 +81,32 @@ public class AssignActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.back:
-			this.finish();
+		case R.id.search:
+			if (items.size() > 0) {
+				items.clear();
+				adapter.notifyDataSetChanged();
+			}
+			new LoadTask().execute((Void)null);
 			break;
-		case R.id.ok:
-			SearchStuffDialog dialog = new SearchStuffDialog(this, android.R.style.Theme_Light_NoTitleBar);
-			dialog.show();
+
+		default:
 			break;
 		}
-		
 	}
-
+	
 	class LoadTask extends AsyncTask<Void, Void, Integer>{
 
 		private String errMsg;
 		@Override
 		protected void onPreExecute() {
-			progress = ProgressDialog.show(AssignActivity.this, null, "加载中...");
-			progress.setCancelable(false);
 			super.onPreExecute();
 		}
 
 		@Override
 		protected Integer doInBackground(Void... params) {
 			SoapObject rpc = new SoapObject(Constant.NAMESPACE, action);
-			rpc.addProperty("fromCityName", "");
-			rpc.addProperty("toCityName", "");
+			rpc.addProperty("fromCityName", from.getText()+"");
+			rpc.addProperty("toCityName", to.getText()+"");
 			rpc.addProperty("pageSize", pageSize);
 			rpc.addProperty("pageIndex", pageIndex);
 			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER12);
@@ -162,7 +157,6 @@ public class AssignActivity extends Activity implements OnClickListener {
 
 		@Override
 		protected void onPostExecute(Integer result) {
-			progress.dismiss();
 			if (result == 1) {
 				adapter.notifyDataSetChanged();
 			}
@@ -172,12 +166,5 @@ public class AssignActivity extends Activity implements OnClickListener {
 		
 	}
 
-	
-//	@Override
-//	public boolean onCreateOptionsMenu(Menu menu) {
-//		// Inflate the menu; this adds items to the action bar if it is present.
-//		getMenuInflater().inflate(R.menu.assign, menu);
-//		return true;
-//	}
 
 }

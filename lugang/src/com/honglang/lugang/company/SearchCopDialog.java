@@ -1,6 +1,5 @@
 package com.honglang.lugang.company;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,69 +9,62 @@ import org.json.JSONTokener;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
-import org.ksoap2.transport.HttpResponseException;
 import org.ksoap2.transport.HttpTransportSE;
-import org.xmlpull.v1.XmlPullParserException;
 
 import com.honglang.lugang.Constant;
 import com.honglang.lugang.R;
-import com.honglang.lugang.SessionManager;
-import com.honglang.lugang.R.layout;
+import com.honglang.lugang.company.CompanyActivity.LoadTask;
 
+import android.app.Activity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
-public class CompanyActivity extends Activity implements OnClickListener {
+public class SearchCopDialog extends Dialog implements android.view.View.OnClickListener {
 
-	private TextView title;
-	private Button back;
-	private Button ok;
+	private EditText city;
+	private EditText name;
+	private Button search;
 	
 	private ListView mListView;
 	private List<Company> items;
 	private CompanyAdapter adapter;
-	private String city;
 	private int pageSize;
 	private int pageIndex;
 	private ProgressDialog progress;
 	private String action = "WlyList";
+	
+	private Activity activity;
+	public SearchCopDialog(Activity activity, int theme) {
+		super(activity, theme);
+		this.activity = activity;
+	}
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_company);
-		city = SessionManager.getInstance().getCity();
+		setContentView(R.layout.dialog_company);
+		
+		city = (EditText) findViewById(R.id.city);
+		name = (EditText) findViewById(R.id.name);
+		search = (Button) findViewById(R.id.search);
+		search.setOnClickListener(this);
+		
 		pageSize = 40;
 		pageIndex = 1;
 		
-		init();
-	}
-
-	private void init(){
-		title = (TextView) this.findViewById(R.id.title);
-		title.setText(R.string.company);
-		back = (Button) this.findViewById(R.id.back);
-		back.setOnClickListener(this);
-		ok = (Button) this.findViewById(R.id.ok);
-		ok.setText("查询");
-		ok.setVisibility(View.VISIBLE);
-		ok.setOnClickListener(this);
-		
 		mListView = (ListView) this.findViewById(R.id.list_company);
 		items = new  ArrayList<Company>();
-		new LoadTask().execute((Void)null);
 
-		adapter = new CompanyAdapter(items, this);
+		adapter = new CompanyAdapter(items, activity);
 		if(adapter != null){
 			mListView.setAdapter(adapter);
 		}
@@ -82,39 +74,40 @@ public class CompanyActivity extends Activity implements OnClickListener {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				Intent intent = new Intent(CompanyActivity.this,CompanyDetailActivity.class);
+				Intent intent = new Intent(activity,CompanyDetailActivity.class);
 				intent.putExtra("Company", items.get(arg2));
-				CompanyActivity.this.startActivity(intent);
+				activity.startActivity(intent);
 			}
 		});
 	}
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.back:
-			this.finish();
+		case R.id.search:
+			if (items.size() > 0) {
+				items.clear();
+				adapter.notifyDataSetChanged();
+			}
+			new LoadTask().execute((Void)null);
 			break;
-		case R.id.ok:
-			SearchCopDialog dialog = new SearchCopDialog(this, android.R.style.Theme_Light_NoTitleBar);
-			dialog.show();
+
+		default:
 			break;
 		}
-		
 	}
-
+	
 	class LoadTask extends AsyncTask<Void, Void, Boolean>{
 
 		@Override
 		protected void onPreExecute() {
-			progress = ProgressDialog.show(CompanyActivity.this, null, "加载中...", false, false);
 			super.onPreExecute();
 		}
 
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			SoapObject rpc = new SoapObject(Constant.NAMESPACE, action);
-			rpc.addProperty("city", city);
-			rpc.addProperty("name", "");
+			rpc.addProperty("city", city.getText()+"");
+			rpc.addProperty("name", name.getText()+"");
 			rpc.addProperty("pageSize", pageSize);
 			rpc.addProperty("pageIndex", pageIndex);
 			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER12);
@@ -159,7 +152,6 @@ public class CompanyActivity extends Activity implements OnClickListener {
 
 		@Override
 		protected void onPostExecute(Boolean result) {
-			progress.dismiss();
 			if(result){
 				adapter.notifyDataSetChanged();
 			}
@@ -167,11 +159,5 @@ public class CompanyActivity extends Activity implements OnClickListener {
 		}
 		
 	}
-//	@Override
-//	public boolean onCreateOptionsMenu(Menu menu) {
-//		// Inflate the menu; this adds items to the action bar if it is present.
-//		getMenuInflater().inflate(R.menu.company, menu);
-//		return true;
-//	}
 
 }

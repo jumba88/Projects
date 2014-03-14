@@ -146,12 +146,12 @@ public class CountActivity extends Activity implements OnClickListener {
 		tbjz.addTextChangedListener(new CalcWatcher());
 		
 //		isDsf = (Switch) this.findViewById(R.id.dshk);
-		yes = (RadioButton) this.findViewById(R.id.istx_yes);
-		no = (RadioButton) this.findViewById(R.id.istx_no);
+		yes = (RadioButton) this.findViewById(R.id.dshk_yes);
+		no = (RadioButton) this.findViewById(R.id.dshk_no);
 		if (data.getIsdsf().trim().equals("是")) {
 			yes.setChecked(true);
 		} else {
-			no.setChecked(false);
+			no.setChecked(true);
 		}
 		
 		weightUnit = (Spinner) this.findViewById(R.id.weightUnit);

@@ -6,6 +6,7 @@ import com.honglang.lugang.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.text.Html;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,7 +31,7 @@ public class NoticeDetailActivity extends Activity implements OnClickListener {
 
 	private void init(){
 		title = (TextView) this.findViewById(R.id.title);
-		title.setText("ͨ新闻公告");
+		title.setText("公告详情");
 		back = (Button) this.findViewById(R.id.back);
 		back.setOnClickListener(this);
 		
@@ -39,7 +40,7 @@ public class NoticeDetailActivity extends Activity implements OnClickListener {
 		addtime = (TextView) this.findViewById(R.id.time);
 		addtime.setText(data.getAddtime());
 		content = (TextView) this.findViewById(R.id.content);
-		content.setText(data.getContent());
+		content.setText(Html.fromHtml(data.getContent()));
 	}
 //	@Override
 //	public boolean onCreateOptionsMenu(Menu menu) {

@@ -1,0 +1,194 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/header"/>
+    <View android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#33B5E5"/>
+    <include layout="@layout/logo"/>
+
+    <ScrollView android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+     <GridLayout android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="4"
+        android:orientation="horizontal">
+        
+        <TextView style="@style/detail"
+            android:text="用户名"/>
+        <TextView android:text=""
+            android:id="@+id/no"
+            android:layout_columnSpan="3"
+            android:layout_width="120dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="15sp"
+            android:textColor="@android:color/holo_blue_dark"/>
+        
+        <View style="@style/line"/>
+        
+        <TextView style="@style/detail"
+            android:text="密码问题"/>
+        <TextView android:text=""
+            android:id="@+id/question"
+            android:layout_columnSpan="3"
+            android:layout_marginLeft="10dp"
+            android:layout_width="120dp"/>
+        
+        <View style="@style/line"/>
+        
+        <TextView style="@style/detail"
+            android:text="密码答案"/>
+        <TextView android:text=""
+            android:id="@+id/answer"
+            android:layout_columnSpan="3"
+            android:layout_marginLeft="10dp"
+            android:layout_width="120dp"/>
+        
+        <View style="@style/line"/>
+        
+        <TextView style="@style/detail"
+            android:text="安全邮箱"/>
+        <TextView android:text=""
+            android:id="@+id/email"
+            android:layout_columnSpan="3"
+            android:layout_marginLeft="10dp"
+            android:layout_width="120dp"/>
+        
+        <View style="@style/line"/>
+        
+        <TextView style="@style/detail"
+            android:text="户业名称"/>
+        <TextView android:text=""
+            android:id="@+id/name"
+            android:layout_width="200dp"
+            android:singleLine="true"
+            android:layout_marginLeft="10dp"
+            android:layout_columnSpan="3"/>
+        
+        <View style="@style/line"/>
+        
+        <TextView style="@style/detail"
+            android:text="机构代码"/>
+        <TextView android:text=""
+            android:id="@+id/code"
+            android:layout_width="200dp"
+            android:singleLine="true"
+            android:layout_marginLeft="10dp"
+            android:layout_columnSpan="3"/>
+        
+        <View style="@style/line"/>
+        
+        
+        <TextView style="@style/detail"
+            android:text="经营范围"/>
+        <TextView android:layout_columnSpan="3"
+            android:id="@+id/range"
+            android:layout_width="200dp"
+            android:layout_marginLeft="10dp"
+            android:text=""/>
+        <View style="@style/line"/>
+        
+        <TextView style="@style/detail"
+            android:text="上级单位"/>
+        <TextView android:layout_columnSpan="3"
+            android:id="@+id/superior"
+            android:layout_marginLeft="10dp"
+            android:text=""/>
+        <View style="@style/line"/>
+        
+        <TextView style="@style/detail"
+            android:text="户业地址"/>
+        <TextView android:layout_columnSpan="3"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/address"
+            android:text=""/>
+        <View style="@style/line"/>
+        
+        <TextView style="@style/detail"
+            android:text="邮政编码"/>
+        <TextView android:layout_columnSpan="3"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/postcode"
+            android:text=""/>
+        <View style="@style/line"/>
+        
+        
+        <TextView style="@style/detail"
+            android:text="法人代表"/>
+        <TextView android:layout_columnSpan="3"
+            android:id="@+id/legal"
+            android:layout_marginLeft="10dp"
+            android:text=""/>
+        <View style="@style/line"/>
+        
+        <TextView style="@style/detail"
+            android:text="证件类型"/>
+        <TextView android:layout_columnSpan="3"
+            android:id="@+id/type"
+            android:layout_marginLeft="10dp"
+            android:text=""/>
+        <View style="@style/line"/>
+        
+        <TextView style="@style/detail"
+            android:text="证件件号"/>
+        <TextView android:layout_columnSpan="3"
+            android:id="@+id/card"
+            android:layout_marginLeft="10dp"
+            android:text=""/>
+        <View style="@style/line"/>
+        
+        <TextView style="@style/detail"
+            android:text="经营负责人"/>
+        <TextView android:layout_columnSpan="3"
+            android:id="@+id/charger"
+            android:layout_marginLeft="10dp"
+            android:text=""/>
+        <View style="@style/line"/>
+        
+        <TextView style="@style/detail"
+            android:text="负责人电话"/>
+        <TextView android:layout_columnSpan="3"
+            android:id="@+id/tel"
+            android:layout_marginLeft="10dp"
+            android:text=""/>
+        <View style="@style/line"/>
+        
+        <TextView style="@style/detail"
+            android:text="办公电话"/>
+        <TextView android:layout_columnSpan="3"
+            android:id="@+id/phone"
+            android:layout_marginLeft="10dp"
+            android:text=""/>
+        <View style="@style/line"/>
+        
+        <TextView style="@style/detail"
+            android:text="手机号码"/>
+        <TextView android:layout_columnSpan="3"
+            android:id="@+id/mobile"
+            android:layout_marginLeft="10dp"
+            android:text=""/>
+        <View style="@style/line"/>
+        <TextView style="@style/detail"
+            android:text="企业信誉"/>
+        <TextView android:layout_columnSpan="3"
+            android:id="@+id/credit"
+            android:layout_marginLeft="10dp"
+            android:text=""/>
+        <View style="@style/line"/>
+        
+        
+        <TextView style="@style/detail"
+            android:text="往来线路"/>
+        <TextView android:id="@+id/path"
+            android:layout_columnSpan="3"
+            android:layout_width="200dp"
+            android:layout_marginLeft="10dp"
+            android:text=""/>
+        
+    </GridLayout>
+    </ScrollView>
+
+</LinearLayout>

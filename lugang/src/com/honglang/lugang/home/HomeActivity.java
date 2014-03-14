@@ -91,7 +91,7 @@ public class HomeActivity extends  FragmentActivity implements OnClickListener{
 	}
 	
 	//load the login user info
-	class LoadTask extends AsyncTask<Void, Void, Boolean>{
+	public class LoadTask extends AsyncTask<Void, Void, Boolean>{
 
 		@Override
 		protected void onPreExecute() {
@@ -117,14 +117,32 @@ public class HomeActivity extends  FragmentActivity implements OnClickListener{
 				if(response != null){
 					JSONTokener parser = new JSONTokener(response.getPropertyAsString("UserInfoResult"));
 					JSONObject json = (JSONObject) parser.nextValue();
-//					Log.i("suxoyo", json.toString());
+					Log.i("suxoyo", json.toString());
 					if (json.getBoolean("result")) {
 						JSONObject data = json.getJSONObject("data");
 						JSONObject info = data.getJSONObject("row");
 						UserInfo account = new UserInfo();
+						account.setNo(info.getString("no"));
 						account.setName(info.getString("name"));
 						account.setIdcard(info.getString("idcard"));
 						account.setPhone(info.getString("phone"));
+//						account.setJgcode(info.getString("jgcode"));
+//						account.setPbussinssname(info.getString("pbussinssname"));
+//						account.setAddress(info.getString("address"));
+//						account.setFrname(info.getString("frname"));
+//						account.setEmail(info.getString("email"));
+//						account.setFrzjtype(info.getString("frzjtype"));
+//						account.setJychuanz(info.getString("jychuanz"));
+//						account.setJymobile(info.getString("jymobile"));
+//						account.setJyphone(info.getString("jyphone"));
+//						account.setJyuser(info.getString("jyuser"));
+//						account.setPasstimu(info.getString("passtimu"));
+//						account.setPassanswer(info.getString("passanswer"));
+//						account.setPostcode(info.getString("postcode"));
+//						account.setQyjingyinfanwei(info.getString("qyjingyinfanwei"));
+//						account.setQywanlaixianlu(info.getString("qywanlaixianlu"));
+//						account.setQiyexinyu(info.getString("qiyexinyu"));
+						
 						SessionManager.getInstance().setAccount(account);
 					}
 				}

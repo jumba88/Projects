@@ -18,7 +18,7 @@
     <string name="carinfo">车源信息</string>
     <string name="lastet">配货信息</string>
     <string name="billsearch">运单查询</string>
-    <string name="notice">通知公告</string>
+    <string name="notice">新闻公告</string>
     <string name="singlein">入库记录</string>
     <string name="multin">货物入库</string>
     <string name="blank">空白托运单入库</string>
@@ -33,6 +33,7 @@
     <string name="done">已完成事项</string>
     <string name="arrivetime">到达时间</string>
     <string name="loginname">登录名:</string>
+    <string name="userinfo">用户信息</string>
     <string name="group">用户组:</string>
     <string name="record">货物流转记录</string>
     <string name="yes">是</string>
@@ -4192,5 +4193,8 @@
     <string name="title_activity_driver">DriverActivity</string>
     <string name="title_activity_blank">BlankActivity</string>
     <string name="title_activity_stuff">StuffActivity</string>
+    <string name="title_activity_dealing">DealingActivity</string>
+    <string name="title_activity_done">DoneActivity</string>
+    <string name="title_activity_user">UserActivity</string>
 
 </resources>

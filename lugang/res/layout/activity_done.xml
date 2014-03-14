@@ -4,13 +4,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
-    <include layout="@layout/office_header"/>
+    <include layout="@layout/header"/>
     
+    <View android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#33B5E5"/>
+    <include layout="@layout/logo"/>
+    <include layout="@layout/office_header"/>
+
     <ListView android:id="@+id/list_handling"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:dividerHeight="1px"
+        android:dividerHeight="1dp"
         android:divider="@android:color/darker_gray">
-    </ListView>
+        </ListView>
 
 </LinearLayout>
