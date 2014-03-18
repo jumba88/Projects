@@ -4,7 +4,7 @@ import java.text.DecimalFormat;
 
 import com.honglang.lugang.Constant;
 import com.honglang.lugang.R;
-import com.honglang.lugang.StuffActivity;
+import com.honglang.lugang.qrcode.StuffActivity;
 
 import android.app.Dialog;
 import android.app.DialogFragment;

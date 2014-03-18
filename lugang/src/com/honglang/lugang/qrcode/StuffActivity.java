@@ -1,8 +1,13 @@
-package com.honglang.lugang;
+package com.honglang.lugang.qrcode;
 
+import com.honglang.lugang.R;
+import com.honglang.lugang.R.array;
+import com.honglang.lugang.R.id;
+import com.honglang.lugang.R.layout;
 import com.honglang.lugang.office.CalcCubDialog;
 import com.honglang.lugang.office.CalcMoneyDialog;
 import com.honglang.lugang.office.CalcWeightDialog;
+import com.honglang.lugang.office.Order;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -37,6 +42,8 @@ public class StuffActivity extends Activity implements OnClickListener {
 	private static String[] STUFF_TYPE;
 	private ArrayAdapter<String> tAdapter;
 	private ArrayAdapter<String> uAdapter;
+	
+	private Order stuff;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

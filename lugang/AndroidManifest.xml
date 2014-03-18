@@ -139,7 +139,7 @@
             android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustResize" >
         </activity>
         <activity
-            android:name="com.honglang.lugang.StuffActivity"
+            android:name="com.honglang.lugang.qrcode.StuffActivity"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar"
             android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustResize" >
         </activity>

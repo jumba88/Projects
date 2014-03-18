@@ -1,7 +1,9 @@
 package com.honglang.lugang.qrcode;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -16,8 +18,9 @@ import com.honglang.lugang.R;
 import com.honglang.lugang.SessionManager;
 import com.honglang.lugang.R.layout;
 import com.honglang.lugang.R.menu;
-import com.honglang.lugang.StuffActivity;
 import com.honglang.lugang.office.CountActivity;
+import com.honglang.lugang.office.Order;
+import com.honglang.lugang.office.OrderAdapter;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -34,6 +37,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,12 +55,19 @@ public class BlankActivity extends Activity implements OnClickListener {
 	public Button from;
 	public Button add;
 	
+	private ListView mListView;
+	private List<Order> items;
+	private OrderAdapter adapter;
+	
 	private int mYear;
     private int mMonth;
     private int mDay;
+    
 	static final int DATE_DIALOG_ID = 0;
 	static final int TO_DIALOG_ID = 1;
 	static final int FROM_DIALOG_ID = 2;
+	public static final int ADD_CODE = 100;
+	public static final int EDIT_CODE = 101;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -92,6 +103,11 @@ public class BlankActivity extends Activity implements OnClickListener {
 		to.setOnClickListener(this);
 		from = (Button) this.findViewById(R.id.from);
 		from.setOnClickListener(this);
+		
+		mListView = (ListView) this.findViewById(R.id.stuffList);
+		items = new ArrayList<Order>();
+		adapter = new OrderAdapter(items, this);
+		mListView.setAdapter(adapter);
 	}
 	
 	@Override
@@ -139,7 +155,7 @@ public class BlankActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.add:
 			Intent intent = new Intent(this, StuffActivity.class);
-			this.startActivityForResult(intent, 111);
+			this.startActivityForResult(intent, ADD_CODE);
 			break;
 		case R.id.ok:
 //			ok();
@@ -153,6 +169,12 @@ public class BlankActivity extends Activity implements OnClickListener {
 			f.show(getFragmentManager(), "area");
 			break;
 		}
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		
 	}
 
 	class LoadTask extends AsyncTask<Void, Void, Boolean>{
