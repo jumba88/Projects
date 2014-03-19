@@ -108,6 +108,7 @@ public class BlankActivity extends Activity implements OnClickListener {
 		items = new ArrayList<Order>();
 		adapter = new OrderAdapter(items, this);
 		mListView.setAdapter(adapter);
+		Constant.setListViewHeightBasedOnChildren(mListView);
 	}
 	
 	@Override
@@ -155,6 +156,7 @@ public class BlankActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.add:
 			Intent intent = new Intent(this, StuffActivity.class);
+			intent.putExtra("action", ADD_CODE);
 			this.startActivityForResult(intent, ADD_CODE);
 			break;
 		case R.id.ok:
@@ -174,7 +176,21 @@ public class BlankActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		
+		switch (requestCode) {
+		case ADD_CODE:
+			if (resultCode == RESULT_OK) {
+				Order item = new Order();
+				item = (Order) data.getSerializableExtra("stuff");
+				items.add(item);
+				adapter.notifyDataSetChanged();
+				Constant.setListViewHeightBasedOnChildren(mListView);
+				Log.i("suxoyo", "onActivityResult"+item.getWplx());
+			}
+			break;
+
+		default:
+			break;
+		}
 	}
 
 	class LoadTask extends AsyncTask<Void, Void, Boolean>{

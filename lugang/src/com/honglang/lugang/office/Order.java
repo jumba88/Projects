@@ -20,6 +20,7 @@ public class Order implements Serializable {
 	private String tiji;
 	private String tiji_danwei;
 	private String yunfei;
+	private String baozhuang;
 	private String baozhuangfei;
 	private String tihuofei;
 	private String songhuofei;
@@ -30,6 +31,12 @@ public class Order implements Serializable {
 	private String huok;
 	private String zhongliang;
 	
+	public String getBaozhuang() {
+		return baozhuang;
+	}
+	public void setBaozhuang(String baozhuang) {
+		this.baozhuang = baozhuang;
+	}
 	public String getZhongliang() {
 		return zhongliang;
 	}

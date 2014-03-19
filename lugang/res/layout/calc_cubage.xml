@@ -20,7 +20,7 @@
             style="@style/EditStyle"
             android:layout_marginLeft="1dp"
             android:hint="长"
-            android:inputType="number" >
+            android:inputType="numberDecimal" >
                  <requestFocus />
         </EditText>
         <TextView
@@ -35,7 +35,7 @@
             android:layout_marginLeft="1dp"
             style="@style/EditStyle"
             android:hint="宽"
-            android:inputType="number" />
+            android:inputType="numberDecimal" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
             android:layout_marginLeft="1dp"
             style="@style/EditStyle"
             android:hint="高"
-            android:inputType="number" />
+            android:inputType="numberDecimal" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -67,7 +67,7 @@
             android:layout_width="50dp"
             android:layout_marginLeft="1dp"
             style="@style/EditStyle"
-            android:inputType="number" />
+            android:inputType="numberDecimal" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -101,7 +101,7 @@
             style="@style/EditStyle"
             android:layout_marginLeft="1dp"
             android:hint="长"
-            android:inputType="number" >
+            android:inputType="numberDecimal" >
                  <requestFocus />
         </EditText>
         <TextView
@@ -116,7 +116,7 @@
             android:layout_marginLeft="1dp"
             style="@style/EditStyle"
             android:hint="宽"
-            android:inputType="number" />
+            android:inputType="numberDecimal" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -129,7 +129,7 @@
             android:layout_marginLeft="1dp"
             style="@style/EditStyle"
             android:hint="高"
-            android:inputType="number" />
+            android:inputType="numberDecimal" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -148,7 +148,7 @@
             android:layout_width="50dp"
             android:layout_marginLeft="1dp"
             style="@style/EditStyle"
-            android:inputType="number" />
+            android:inputType="numberDecimal" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -181,7 +181,7 @@
             style="@style/EditStyle"
             android:layout_marginLeft="1dp"
             android:hint="长"
-            android:inputType="number" >
+            android:inputType="numberDecimal" >
                  <requestFocus />
         </EditText>
         <TextView
@@ -196,7 +196,7 @@
             android:layout_marginLeft="1dp"
             style="@style/EditStyle"
             android:hint="宽"
-            android:inputType="number" />
+            android:inputType="numberDecimal" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -209,7 +209,7 @@
             android:layout_marginLeft="1dp"
             style="@style/EditStyle"
             android:hint="高"
-            android:inputType="number" />
+            android:inputType="numberDecimal" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -228,7 +228,7 @@
             android:layout_width="50dp"
             android:layout_marginLeft="1dp"
             style="@style/EditStyle"
-            android:inputType="number" />
+            android:inputType="numberDecimal" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -261,7 +261,7 @@
             style="@style/EditStyle"
             android:layout_marginLeft="1dp"
             android:hint="长"
-            android:inputType="number" >
+            android:inputType="numberDecimal" >
                  <requestFocus />
         </EditText>
         <TextView
@@ -276,7 +276,7 @@
             android:layout_marginLeft="1dp"
             style="@style/EditStyle"
             android:hint="宽"
-            android:inputType="number" />
+            android:inputType="numberDecimal" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -289,7 +289,7 @@
             android:layout_marginLeft="1dp"
             style="@style/EditStyle"
             android:hint="高"
-            android:inputType="number" />
+            android:inputType="numberDecimal" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -308,7 +308,7 @@
             android:layout_width="50dp"
             android:layout_marginLeft="1dp"
             style="@style/EditStyle"
-            android:inputType="number" />
+            android:inputType="numberDecimal" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -341,7 +341,7 @@
             style="@style/EditStyle"
             android:layout_marginLeft="1dp"
             android:hint="长"
-            android:inputType="number" >
+            android:inputType="numberDecimal" >
                  <requestFocus />
         </EditText>
         <TextView
@@ -356,7 +356,7 @@
             android:layout_marginLeft="1dp"
             style="@style/EditStyle"
             android:hint="宽"
-            android:inputType="number" />
+            android:inputType="numberDecimal" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -369,7 +369,7 @@
             android:layout_marginLeft="1dp"
             style="@style/EditStyle"
             android:hint="高"
-            android:inputType="number" />
+            android:inputType="numberDecimal" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -388,7 +388,7 @@
             android:layout_width="50dp"
             android:layout_marginLeft="1dp"
             style="@style/EditStyle"
-            android:inputType="number" />
+            android:inputType="numberDecimal" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -421,7 +421,7 @@
             style="@style/EditStyle"
             android:layout_marginLeft="1dp"
             android:hint="长"
-            android:inputType="number" >
+            android:inputType="numberDecimal" >
                  <requestFocus />
         </EditText>
         <TextView
@@ -436,7 +436,7 @@
             android:layout_marginLeft="1dp"
             style="@style/EditStyle"
             android:hint="宽"
-            android:inputType="number" />
+            android:inputType="numberDecimal" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -449,7 +449,7 @@
             android:layout_marginLeft="1dp"
             style="@style/EditStyle"
             android:hint="高"
-            android:inputType="number" />
+            android:inputType="numberDecimal" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -468,7 +468,7 @@
             android:layout_width="50dp"
             android:layout_marginLeft="1dp"
             style="@style/EditStyle"
-            android:inputType="number" />
+            android:inputType="numberDecimal" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -499,7 +499,7 @@
             android:id="@+id/extra"
             android:layout_width="50dp"
             style="@style/EditStyle"
-            android:inputType="number" />
+            android:inputType="numberDecimal" />
 
         <TextView
             android:id="@+id/extra_result"

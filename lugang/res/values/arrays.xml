@@ -118,6 +118,16 @@
     <item>其他货类</item>
   </string-array>
   
+  <string-array name="pack_type">
+    <item>无包装</item>
+    <item>麻包</item>
+    <item>铁箱</item>
+    <item>木箱</item>
+    <item>纸箱</item>
+    <item>编织袋</item>
+    <item>塑料</item>
+  </string-array>
+  
   <string-array name="preferences_front_light_values">
     <item>ON</item>
     <item>AUTO</item>

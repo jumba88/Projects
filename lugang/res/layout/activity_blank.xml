@@ -340,8 +340,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:divider="@android:color/darker_gray"
-                android:dividerHeight="1px"
                 android:scrollingCache="false" >
             </ListView>
         </LinearLayout>

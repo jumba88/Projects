@@ -288,6 +288,7 @@ public class OrderActivity extends Activity implements OnClickListener {
 							item.setTiji(obj.getString("tiji"));
 							item.setTiji_danwei(obj.getString("tiji_danwei"));
 							item.setYunfei(obj.getString("yunfei"));
+							item.setBaozhuang(obj.getString("baozhuang"));
 							item.setBaozhuangfei(obj.getString("baozhuangfei"));
 							item.setTihuofei(obj.getString("tihuofei"));
 							item.setSonghuofei(obj.getString("songhuofei"));
