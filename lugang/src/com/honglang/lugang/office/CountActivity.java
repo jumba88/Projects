@@ -155,7 +155,6 @@ public class CountActivity extends Activity implements OnClickListener {
 		}
 		
 		weightUnit = (Spinner) this.findViewById(R.id.weightUnit);
-//		weightUnit.setOnItemSelectedListener(new SpinnerSelectedListener());
 		adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, UNIT);
 		// Specify the layout to use when the list of choices appears
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -163,11 +162,10 @@ public class CountActivity extends Activity implements OnClickListener {
 		weightUnit.setAdapter(adapter);
 		if (data.getZl_danwei().equals("t")) {
 			weightUnit.setSelection(0, true);
-			weightUnit.setOnItemSelectedListener(new SpinnerSelectedListener());
 		} else {
 			weightUnit.setSelection(1, true);
-			weightUnit.setOnItemSelectedListener(new SpinnerSelectedListener());
 		}
+		weightUnit.setOnItemSelectedListener(new SpinnerSelectedListener());
 		
 	}
 

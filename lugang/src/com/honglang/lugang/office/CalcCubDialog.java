@@ -3,6 +3,7 @@ package com.honglang.lugang.office;
 import com.honglang.lugang.Constant;
 import com.honglang.lugang.R;
 import com.honglang.lugang.office.CalcWeightDialog.CalcWatcher;
+import com.honglang.lugang.qrcode.StuffActivity;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -212,31 +213,31 @@ public class CalcCubDialog extends DialogFragment implements OnClickListener {
 		}
 		
 		public void getResult(int frag){
-			int iLength = 0;
-			int iWidth = 0;
-			int iHeight = 0;
-			int iCount = 0;
-			int iLength1 = 0;
-			int iWidth1 = 0;
-			int iHeight1 = 0;
-			int iCount1 = 0;
-			int iLength2 = 0;
-			int iWidth2 = 0;
-			int iHeight2 = 0;
-			int iCount2 = 0;
-			int iLength3 = 0;
-			int iWidth3 = 0;
-			int iHeight3 = 0;
-			int iCount3 = 0;
-			int iLength4 = 0;
-			int iWidth4 = 0;
-			int iHeight4 = 0;
-			int iCount4 = 0;
-			int iLength5 = 0;
-			int iWidth5 = 0;
-			int iHeight5 = 0;
-			int iCount5 = 0;
-			int iExtra = 0;
+			Double iLength = 0.00;
+			Double iWidth = 0.00;
+			Double iHeight = 0.00;
+			Double iCount = 0.00;
+			Double iLength1 = 0.00;
+			Double iWidth1 = 0.00;
+			Double iHeight1 = 0.00;
+			Double iCount1 = 0.00;
+			Double iLength2 = 0.00;
+			Double iWidth2 = 0.00;
+			Double iHeight2 = 0.00;
+			Double iCount2 = 0.00;
+			Double iLength3 = 0.00;
+			Double iWidth3 = 0.00;
+			Double iHeight3 = 0.00;
+			Double iCount3 = 0.00;
+			Double iLength4 = 0.00;
+			Double iWidth4 = 0.00;
+			Double iHeight4 = 0.00;
+			Double iCount4 = 0.00;
+			Double iLength5 = 0.00;
+			Double iWidth5 = 0.00;
+			Double iHeight5 = 0.00;
+			Double iCount5 = 0.00;
+			Double iExtra = 0.00;
 			
 			String sLength = length.getText().toString().trim();
 			String sWidth = width.getText().toString().trim();
@@ -264,21 +265,21 @@ public class CalcCubDialog extends DialogFragment implements OnClickListener {
 			String sCount5 = count5.getText().toString().trim();
 			String sExtra = extra.getText().toString().trim();
 			
-			int r0 = Integer.parseInt(result.getText().toString().trim());
-			int r1 = Integer.parseInt(result1.getText().toString().trim());
-			int r2 = Integer.parseInt(result2.getText().toString().trim());
-			int r3 = Integer.parseInt(result3.getText().toString().trim());
-			int r4 = Integer.parseInt(result4.getText().toString().trim());
-			int r5 = Integer.parseInt(result5.getText().toString().trim());
-			int r6 = Integer.parseInt(resultExtra.getText().toString().trim());
+			Double r0 = Double.parseDouble(result.getText().toString().trim());
+			Double r1 = Double.parseDouble(result1.getText().toString().trim());
+			Double r2 = Double.parseDouble(result2.getText().toString().trim());
+			Double r3 = Double.parseDouble(result3.getText().toString().trim());
+			Double r4 = Double.parseDouble(result4.getText().toString().trim());
+			Double r5 = Double.parseDouble(result5.getText().toString().trim());
+			Double r6 = Double.parseDouble(resultExtra.getText().toString().trim());
 			switch (frag) {
 			case 0:
 				if (Constant.isNum(sLength) && Constant.isNum(sWidth) && Constant.isNum(sHeight) && Constant.isNum(sCount)) {
-					iLength = Integer.parseInt(sLength);
-					iWidth = Integer.parseInt(sWidth);
-					iHeight = Integer.parseInt(sHeight);
-					iCount = Integer.parseInt(sCount);
-					int sum = iLength*iWidth*iHeight*iCount;
+					iLength = Double.parseDouble(sLength);
+					iWidth = Double.parseDouble(sWidth);
+					iHeight = Double.parseDouble(sHeight);
+					iCount = Double.parseDouble(sCount);
+					Double sum = iLength*iWidth*iHeight*iCount;
 					result.setText(sum+"");
 					total.setText(""+(sum + r1 + r2 + r3 + r4 + r5 + r6));
 				}else{
@@ -288,11 +289,11 @@ public class CalcCubDialog extends DialogFragment implements OnClickListener {
 				break;
 			case 1:
 				if (Constant.isNum(sLength1) && Constant.isNum(sWidth1) && Constant.isNum(sHeight1) && Constant.isNum(sCount1)) {
-					iLength1 = Integer.parseInt(sLength1);
-					iWidth1 = Integer.parseInt(sWidth1);
-					iHeight1 = Integer.parseInt(sHeight1);
-					iCount1 = Integer.parseInt(sCount1);
-					int sum = iLength1*iWidth1*iHeight1*iCount1;
+					iLength1 = Double.parseDouble(sLength1);
+					iWidth1 = Double.parseDouble(sWidth1);
+					iHeight1 = Double.parseDouble(sHeight1);
+					iCount1 = Double.parseDouble(sCount1);
+					Double sum = iLength1*iWidth1*iHeight1*iCount1;
 					result1.setText(sum+"");
 					total.setText(""+(sum + r0 + r2 + r3 + r4 + r5 + r6));
 				}else{
@@ -302,11 +303,11 @@ public class CalcCubDialog extends DialogFragment implements OnClickListener {
 				break;
 			case 2:
 				if (Constant.isNum(sLength2) && Constant.isNum(sWidth2) && Constant.isNum(sHeight2) && Constant.isNum(sCount2)) {
-					iLength2 = Integer.parseInt(sLength2);
-					iWidth2 = Integer.parseInt(sWidth2);
-					iHeight2 = Integer.parseInt(sHeight2);
-					iCount2 = Integer.parseInt(sCount2);
-					int sum = iLength2*iWidth2*iHeight2*iCount2;
+					iLength2 = Double.parseDouble(sLength2);
+					iWidth2 = Double.parseDouble(sWidth2);
+					iHeight2 = Double.parseDouble(sHeight2);
+					iCount2 = Double.parseDouble(sCount2);
+					Double sum = iLength2*iWidth2*iHeight2*iCount2;
 					result2.setText(sum+"");
 					total.setText(""+(sum + r1 + r0 + r3 + r4 + r5 + r6));
 				}else{
@@ -316,11 +317,11 @@ public class CalcCubDialog extends DialogFragment implements OnClickListener {
 				break;
 			case 3:
 				if (Constant.isNum(sLength3) && Constant.isNum(sWidth3) && Constant.isNum(sHeight3) && Constant.isNum(sCount3)) {
-					iLength3 = Integer.parseInt(sLength3);
-					iWidth3 = Integer.parseInt(sWidth3);
-					iHeight3 = Integer.parseInt(sHeight3);
-					iCount3 = Integer.parseInt(sCount3);
-					int sum = iLength3*iWidth3*iHeight3*iCount3;
+					iLength3 = Double.parseDouble(sLength3);
+					iWidth3 = Double.parseDouble(sWidth3);
+					iHeight3 = Double.parseDouble(sHeight3);
+					iCount3 = Double.parseDouble(sCount3);
+					Double sum = iLength3*iWidth3*iHeight3*iCount3;
 					result3.setText(sum+"");
 					total.setText(""+(sum + r1 + r2 + r0 + r4 + r5 + r6));
 				}else{
@@ -330,11 +331,11 @@ public class CalcCubDialog extends DialogFragment implements OnClickListener {
 				break;
 			case 4:
 				if (Constant.isNum(sLength4) && Constant.isNum(sWidth4) && Constant.isNum(sHeight4) && Constant.isNum(sCount4)) {
-					iLength4 = Integer.parseInt(sLength4);
-					iWidth4 = Integer.parseInt(sWidth4);
-					iHeight4 = Integer.parseInt(sHeight4);
-					iCount4 = Integer.parseInt(sCount4);
-					int sum = iLength4*iWidth4*iHeight4*iCount4;
+					iLength4 = Double.parseDouble(sLength4);
+					iWidth4 = Double.parseDouble(sWidth4);
+					iHeight4 = Double.parseDouble(sHeight4);
+					iCount4 = Double.parseDouble(sCount4);
+					Double sum = iLength4*iWidth4*iHeight4*iCount4;
 					result4.setText(sum+"");
 					total.setText(""+(sum + r1 + r2 + r3 + r0 + r5 + r6));
 				}else{
@@ -344,11 +345,11 @@ public class CalcCubDialog extends DialogFragment implements OnClickListener {
 				break;
 			case 5:
 				if (Constant.isNum(sLength5) && Constant.isNum(sWidth5) && Constant.isNum(sHeight5) && Constant.isNum(sCount5)) {
-					iLength5 = Integer.parseInt(sLength5);
-					iWidth5 = Integer.parseInt(sWidth5);
-					iHeight5 = Integer.parseInt(sHeight5);
-					iCount5 = Integer.parseInt(sCount5);
-					int sum = iLength5*iWidth5*iHeight5*iCount5;
+					iLength5 = Double.parseDouble(sLength5);
+					iWidth5 = Double.parseDouble(sWidth5);
+					iHeight5 = Double.parseDouble(sHeight5);
+					iCount5 = Double.parseDouble(sCount5);
+					Double sum = iLength5*iWidth5*iHeight5*iCount5;
 					result5.setText(sum+"");
 					total.setText(""+(sum + r1 + r2 + r3 + r4 + r0 + r6));
 				}else{
@@ -358,7 +359,7 @@ public class CalcCubDialog extends DialogFragment implements OnClickListener {
 				break;
 			case 6:
 				if (Constant.isNum(sExtra)) {
-					iExtra = Integer.parseInt(sExtra);
+					iExtra = Double.parseDouble(sExtra);
 					resultExtra.setText("" + iExtra);
 					total.setText(""+(iExtra + r1 + r2 + r3 + r4 + r5 + r0));
 				} else {
@@ -379,7 +380,7 @@ public class CalcCubDialog extends DialogFragment implements OnClickListener {
 				((CountActivity)getActivity()).cubage.setText(total.getText());
 			}
 			if (getArguments().getInt("from") == 1) {
-//				((StuffActivity)getActivity()).cubage.setText(total.getText());
+				((StuffActivity)getActivity()).cubage.setText(total.getText());
 			}
 			dismiss();
 			break;

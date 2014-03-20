@@ -375,7 +375,7 @@ public class CalcWeightDialog extends DialogFragment implements OnClickListener 
 				((CountActivity)getActivity()).weight.setText(total.getText());
 			}
 			if (getArguments().getInt("from") == 1) {
-//				((StuffActivity)getActivity()).weight.setText(total.getText());
+				((StuffActivity)getActivity()).weight.setText(total.getText());
 			}
 			dismiss();
 			break;

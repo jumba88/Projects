@@ -20,6 +20,7 @@ import com.honglang.lugang.R.layout;
 import com.honglang.lugang.R.menu;
 import com.honglang.lugang.office.CountActivity;
 import com.honglang.lugang.office.Order;
+import com.honglang.lugang.office.OrderActivity;
 import com.honglang.lugang.office.OrderAdapter;
 
 import android.os.AsyncTask;
@@ -35,6 +36,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
@@ -68,6 +71,8 @@ public class BlankActivity extends Activity implements OnClickListener {
 	static final int FROM_DIALOG_ID = 2;
 	public static final int ADD_CODE = 100;
 	public static final int EDIT_CODE = 101;
+	
+	public static int position;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -108,7 +113,19 @@ public class BlankActivity extends Activity implements OnClickListener {
 		items = new ArrayList<Order>();
 		adapter = new OrderAdapter(items, this);
 		mListView.setAdapter(adapter);
-		Constant.setListViewHeightBasedOnChildren(mListView);
+		mListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				position = arg2;
+				Order order = items.get(arg2);
+				Intent intent = new Intent(BlankActivity.this, StuffActivity.class);
+				intent.putExtra("action", EDIT_CODE);
+				intent.putExtra("stuff", order);
+				startActivityForResult(intent, EDIT_CODE);
+			}
+		});
 	}
 	
 	@Override
@@ -179,16 +196,17 @@ public class BlankActivity extends Activity implements OnClickListener {
 		switch (requestCode) {
 		case ADD_CODE:
 			if (resultCode == RESULT_OK) {
-				Order item = new Order();
-				item = (Order) data.getSerializableExtra("stuff");
-				items.add(item);
+				items.add((Order) data.getSerializableExtra("stuff"));
 				adapter.notifyDataSetChanged();
 				Constant.setListViewHeightBasedOnChildren(mListView);
-				Log.i("suxoyo", "onActivityResult"+item.getWplx());
 			}
 			break;
 
-		default:
+		case EDIT_CODE:
+			if (resultCode == RESULT_OK) {
+				items.set(position, (Order) data.getSerializableExtra("stuff"));
+				adapter.notifyDataSetChanged();
+			}
 			break;
 		}
 	}
