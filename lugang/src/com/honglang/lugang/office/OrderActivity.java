@@ -412,6 +412,7 @@ public class OrderActivity extends Activity implements OnClickListener {
 			progress.dismiss();
 			if (result) {
 				Toast.makeText(OrderActivity.this, "操作成功,信息已发送到下单人!", Toast.LENGTH_SHORT).show();
+				setResult(RESULT_OK);
 			} else {
 				Toast.makeText(OrderActivity.this, "操作失败,"+errMsg, Toast.LENGTH_SHORT).show();
 			}
@@ -470,6 +471,7 @@ public class OrderActivity extends Activity implements OnClickListener {
 			progress.dismiss();
 			if (result) {
 				Toast.makeText(OrderActivity.this, "您已同意托运", Toast.LENGTH_SHORT).show();
+				setResult(RESULT_OK);
 				OrderActivity.this.finish();
 			} else {
 				Toast.makeText(OrderActivity.this, "确认出错," + errMsg, Toast.LENGTH_SHORT).show();
@@ -541,6 +543,7 @@ public class OrderActivity extends Activity implements OnClickListener {
 			progress.dismiss();
 			if (result) {
 				Toast.makeText(OrderActivity.this, "您已不同意托运", Toast.LENGTH_SHORT).show();
+				setResult(RESULT_OK);
 				OrderActivity.this.finish();
 			} else {
 				Toast.makeText(OrderActivity.this, "确认出错," + errMsg, Toast.LENGTH_SHORT).show();

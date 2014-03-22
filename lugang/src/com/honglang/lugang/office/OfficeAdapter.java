@@ -56,6 +56,11 @@ public class OfficeAdapter extends BaseAdapter {
 		
 		num.setText((position+1) + "");
 		b.setText(item.getTitle());
+		if (item.getCurrent_node_id().equals("7") || item.getCurrent_node_id().equals("9")) {
+			b.setTextColor(activity.getResources().getColor(android.R.color.holo_red_dark));
+		} else {
+			b.setTextColor(activity.getResources().getColor(android.R.color.black));
+		}
 		if (type == 0) {
 			time.setText(item.getTrun_time());
 		} else {

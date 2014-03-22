@@ -94,12 +94,12 @@
 
                 <TextView
                     style="@style/detail"
+                    android:layout_gravity="right|center_vertical"
                     android:text="送货方式" />
 
                 <RadioGroup
                     android:layout_columnSpan="3"
                     android:layout_marginLeft="10dp"
-                    android:layout_gravity="top"
                     android:gravity="left"
                     android:orientation="horizontal" >
                     <RadioButton android:layout_width="wrap_content"
@@ -118,6 +118,37 @@
                  </RadioGroup>
 
                 <View style="@style/line" />
+                <TextView
+                    style="@style/detail"
+                    android:layout_columnSpan="4"
+                    android:text="支付方式" />
+
+                <RadioGroup
+                    android:layout_columnSpan="4"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="left"
+                    android:orientation="horizontal" >
+                    <RadioButton android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/xj"
+                        android:gravity="left|center"
+                        android:checked="true"
+                        android:text="现结"/>
+                    
+                    <RadioButton android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tf"
+                        android:layout_marginLeft="20dp"
+                        android:gravity="left|center"
+                        android:text="提付"/>
+                    
+                    <RadioButton android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/jz"
+                        android:layout_marginLeft="20dp"
+                        android:gravity="left|center"
+                        android:text="记账"/>
+                 </RadioGroup>
 
                 <View style="@style/line" />
 
@@ -317,7 +348,20 @@
                     android:gravity="left|center_vertical"
                     android:inputType="number"
                     android:text="" />
-                
+                <View style="@style/line"/>
+        
+		        <TextView style="@style/detail"
+		            android:layout_gravity="top"
+		            android:text="备注"/>
+		        <EditText android:layout_columnSpan="3"
+		            android:id="@+id/remark"
+		            android:layout_width="200dp"
+		            android:layout_height="wrap_content"
+		            android:minHeight="50dp"
+		            android:gravity="top|left"
+		            android:layout_marginLeft="10dp"
+		            android:background="@drawable/login_edittext_bg"
+		            android:hint=""/>
             </GridLayout>
 
             <TextView

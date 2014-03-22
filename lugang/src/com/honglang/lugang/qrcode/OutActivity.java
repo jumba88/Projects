@@ -253,8 +253,8 @@ public class OutActivity extends Activity implements OnClickListener {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				errMsg = "加载订单失败,请检查您的网络是否正常";
-//				errMsg = e.toString();
+//				errMsg = "加载订单失败,请检查您的网络是否正常";
+				errMsg = e.toString();
 			}
 			return false;
 		}

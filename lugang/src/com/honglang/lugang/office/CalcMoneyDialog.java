@@ -11,6 +11,7 @@ import android.app.DialogFragment;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,14 +27,17 @@ import android.widget.TextView;
 public class CalcMoneyDialog extends DialogFragment implements OnClickListener {
 
 	private int weight;
-	private int cubage;
+	private double cubage;
+	
+	//cache the weightUnit position
 	private int position;
 	public Spinner unit;
-	private static String[] UNIT = new String[]{"t","kg"};
+	private static String[] UNIT;
 	private ArrayAdapter<String> adapter;
 	
 	private TextView zl;
 	private TextView all;
+	private String allStr;
 	private TextView totalMoney;
 	
 	private EditText money;
@@ -47,6 +51,8 @@ public class CalcMoneyDialog extends DialogFragment implements OnClickListener {
 	private Double shf;
 	private Double bxf;
 	private String zong;
+	
+	DecimalFormat f = new DecimalFormat("0.00");
 	public static CalcMoneyDialog newInstance(int from){
 		CalcMoneyDialog frag = new CalcMoneyDialog();
 		Bundle args = new Bundle();
@@ -72,13 +78,17 @@ public class CalcMoneyDialog extends DialogFragment implements OnClickListener {
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		unit = (Spinner) view.findViewById(R.id.unit);
+		zl = (TextView) view.findViewById(R.id.zl);
+		all = (TextView) view.findViewById(R.id.all);
+		totalMoney = (TextView) view.findViewById(R.id.totalMoney);
+		
 		if (getArguments().getInt("from") == 0) {
 			bzf = Double.parseDouble(((CountActivity)getActivity()).bzf.getText().toString());
 			thf = Double.parseDouble(((CountActivity)getActivity()).thf.getText().toString());
 			shf = Double.parseDouble(((CountActivity)getActivity()).shf.getText().toString());
 			bxf = Double.parseDouble(((CountActivity)getActivity()).bxf.getText().toString());
 			weight = Integer.parseInt(((CountActivity)getActivity()).weight.getText().toString());
-			cubage = Integer.parseInt(((CountActivity)getActivity()).cubage.getText().toString());
+			cubage = Double.parseDouble(((CountActivity)getActivity()).cubage.getText().toString());
 			position = ((CountActivity)getActivity()).weightUnit.getSelectedItemPosition();
 		}
 		if (getArguments().getInt("from") == 1) {
@@ -87,7 +97,7 @@ public class CalcMoneyDialog extends DialogFragment implements OnClickListener {
 			shf = Double.parseDouble(((StuffActivity)getActivity()).shf.getText().toString());
 			bxf = Double.parseDouble(((StuffActivity)getActivity()).bxf.getText().toString());
 			weight = Integer.parseInt(((StuffActivity)getActivity()).weight.getText().toString());
-			cubage = Integer.parseInt(((StuffActivity)getActivity()).cubage.getText().toString());
+			cubage = Double.parseDouble(((StuffActivity)getActivity()).cubage.getText().toString());
 			position = ((StuffActivity)getActivity()).weightUnit.getSelectedItemPosition();
 		}
 		
@@ -104,14 +114,22 @@ public class CalcMoneyDialog extends DialogFragment implements OnClickListener {
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		// Apply the adapter to the spinner
 		unit.setAdapter(adapter);
-		if (weight == 0 && cubage > 0) {
+		if (weight == 0 && cubage > 0) {//calc by cubage
 			unit.setSelection(1, true);
+			zl.setText("总量(m3)");
+			all.setText(f.format(cubage));
+			allStr = String.valueOf(cubage);
+		}else{
+			unit.setSelection(0, true);
+			all.setText(weight+"");
+			allStr = String.valueOf(weight);
+			if (position == 0) {
+				zl.setText("总量(t)");
+			} else {
+				zl.setText("总量(kg)");
+			}
 		}
 		unit.setOnItemSelectedListener(new SpinnerSelectedListener());
-		
-		zl = (TextView) view.findViewById(R.id.zl);
-		all = (TextView) view.findViewById(R.id.all);
-		totalMoney = (TextView) view.findViewById(R.id.totalMoney);
 		
 		money = (EditText) view.findViewById(R.id.money);
 		distance = (EditText) view.findViewById(R.id.distance);
@@ -130,24 +148,27 @@ public class CalcMoneyDialog extends DialogFragment implements OnClickListener {
 		@Override
 		public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
 				long arg3) {
+			Log.i("suxoyo", "arg2="+arg2);
 			switch (position) {
 			case 0:
 				if (arg2 == 0) {
 					zl.setText("总量(t)");
-					all.setText(String.valueOf(weight));
+					allStr = String.valueOf(weight);
 				} else {
 					zl.setText("总量(m3)");
-					all.setText(String.valueOf(cubage));
+					allStr = String.valueOf(cubage);
 				}
+				all.setText(allStr);
 				break;
 			case 1:
 				if (arg2 == 0) {
 					zl.setText("总量(kg)");
-					all.setText(String.valueOf(weight));
+					allStr = String.valueOf(weight);
 				} else {
 					zl.setText("总量(m3)");
-					all.setText(String.valueOf(cubage));
+					allStr = String.valueOf(cubage);
 				}
+				all.setText(allStr);
 				break;
 			}
 		}
@@ -163,14 +184,15 @@ public class CalcMoneyDialog extends DialogFragment implements OnClickListener {
 
 		@Override
 		public void afterTextChanged(Editable s) {
-			int iall = Integer.parseInt(all.getText().toString());
+			Log.i("suxoyo", allStr);
+			double iall = Double.parseDouble(allStr);
 			String mStr = money.getText().toString().trim();
 			String dStr = distance.getText().toString().trim();
 			if (Constant.isNum(mStr) && Constant.isNum(dStr)) {
 				double imoney = Double.parseDouble(mStr);
 				double idis = Double.parseDouble(dStr);
 				double sum = iall * imoney * idis;
-				DecimalFormat f = new DecimalFormat("0.00");
+				
 				totalMoney.setText(f.format(sum));
 				zong = f.format(sum + bzf + thf +shf + bxf);
 			} else {
@@ -201,28 +223,28 @@ public class CalcMoneyDialog extends DialogFragment implements OnClickListener {
 				((CountActivity)getActivity()).zyf.setText(zong);
 				String allUnit = zl.getText().toString().trim();
 				if (allUnit.contains("t")) {
-					((CountActivity)getActivity()).allUnit.setText("t");
+					((CountActivity)getActivity()).allUnit = "t";
 				}
 				if (allUnit.contains("kg")) {
-					((CountActivity)getActivity()).allUnit.setText("kg");
+					((CountActivity)getActivity()).allUnit = "kg";
 				}
-				if (allUnit.contains("m³")) {
-					((CountActivity)getActivity()).allUnit.setText("立方米");
+				if (allUnit.contains("m")) {
+					((CountActivity)getActivity()).allUnit = "立方米";
 				}
 			}
 			if (getArguments().getInt("from") == 1) {
-//				((StuffActivity)getActivity()).yf.setText(totalMoney.getText().toString());
-//				((StuffActivity)getActivity()).zyf.setText(zong);
-//				String allUnit = zl.getText().toString().trim();
-//				if (allUnit.contains("t")) {
-//					((StuffActivity)getActivity()).allUnit.setText("t");
-//				}
-//				if (allUnit.contains("kg")) {
-//					((StuffActivity)getActivity()).allUnit.setText("kg");
-//				}
-//				if (allUnit.contains("m³")) {
-//					((StuffActivity)getActivity()).allUnit.setText("m³");
-//				}
+				((StuffActivity)getActivity()).yf.setText(totalMoney.getText().toString());
+				((StuffActivity)getActivity()).zyf.setText(zong);
+				String allUnit = zl.getText().toString().trim();
+				if (allUnit.contains("t")) {
+					((StuffActivity)getActivity()).allUnit = "t";
+				}
+				if (allUnit.contains("kg")) {
+					((StuffActivity)getActivity()).allUnit = "kg";
+				}
+				if (allUnit.contains("m³")) {
+					((StuffActivity)getActivity()).allUnit = "立方米";
+				}
 			}
 			dismiss();
 			break;

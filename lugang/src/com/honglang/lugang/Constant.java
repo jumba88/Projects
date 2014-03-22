@@ -20,7 +20,8 @@ import android.widget.ListView;
 public class Constant {
 
 	public static final String NAMESPACE = "http://www.6gang.com.cn/";
-	public static final String SERVICE_URL = "http://service.6gang.com.cn/DataServer.asmx";
+//	public static final String SERVICE_URL = "http://service.6gang.com.cn/DataServer.asmx";
+	public static final String SERVICE_URL = "http://6gang.gnway.cc:9898/DataServer.asmx";
 	public static final String loginAction = "Login";
 	
 	/*

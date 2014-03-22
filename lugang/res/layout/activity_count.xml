@@ -72,6 +72,17 @@
         
         <TextView
             style="@style/order"
+            android:text="包装" />
+
+        <Spinner 
+            android:id="@+id/pack"
+            android:layout_columnSpan="3"
+            android:layout_marginLeft="10dp" />
+
+        <View style="@style/line"/>    
+            
+        <TextView
+            style="@style/order"
             android:text="总重量" />
 
         <Button android:layout_columnSpan="2"
@@ -125,10 +136,14 @@
             style="@style/order"
             android:text="运费" />
 
-        <Button android:layout_columnSpan="3"
+        <EditText android:layout_columnSpan="2"
             android:id="@+id/yf"
             style="@style/EditStyle"
-            android:text=""/>
+            android:inputType="numberDecimal"
+            android:text="0.00"/>
+        <Button android:id="@+id/calc"
+            android:background="@drawable/calc_btn"
+            android:minHeight="1dp"/>
         
         <View style="@style/line"/>
         <TextView
@@ -254,14 +269,5 @@
     </GridLayout>
     </LinearLayout>
     </ScrollView>
-    
-    <FrameLayout
-            android:id="@+id/embedded"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:layout_gravity="top|center_horizontal"
-            android:padding="6dp"
-            android:gravity="top|center_horizontal" />
 
 </LinearLayout>

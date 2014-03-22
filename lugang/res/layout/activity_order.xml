@@ -116,7 +116,7 @@
             android:id="@+id/suggest"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:minHeight="100dp"
+            android:minHeight="50dp"
             android:gravity="top|left"
             android:layout_marginLeft="10dp"
             android:background="@drawable/login_edittext_bg"

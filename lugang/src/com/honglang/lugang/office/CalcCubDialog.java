@@ -1,5 +1,7 @@
 package com.honglang.lugang.office;
 
+import java.text.DecimalFormat;
+
 import com.honglang.lugang.Constant;
 import com.honglang.lugang.R;
 import com.honglang.lugang.office.CalcWeightDialog.CalcWatcher;
@@ -213,6 +215,7 @@ public class CalcCubDialog extends DialogFragment implements OnClickListener {
 		}
 		
 		public void getResult(int frag){
+			DecimalFormat f = new DecimalFormat("0.00");
 			Double iLength = 0.00;
 			Double iWidth = 0.00;
 			Double iHeight = 0.00;
@@ -280,11 +283,11 @@ public class CalcCubDialog extends DialogFragment implements OnClickListener {
 					iHeight = Double.parseDouble(sHeight);
 					iCount = Double.parseDouble(sCount);
 					Double sum = iLength*iWidth*iHeight*iCount;
-					result.setText(sum+"");
-					total.setText(""+(sum + r1 + r2 + r3 + r4 + r5 + r6));
+					result.setText(f.format(sum));
+					total.setText(f.format(sum + r1 + r2 + r3 + r4 + r5 + r6));
 				}else{
 					result.setText(0+"");
-					total.setText(""+(0 + r1 + r2 + r3 + r4 + r5 + r6));
+					total.setText(f.format(0.00 + r1 + r2 + r3 + r4 + r5 + r6));
 				}
 				break;
 			case 1:
@@ -294,11 +297,11 @@ public class CalcCubDialog extends DialogFragment implements OnClickListener {
 					iHeight1 = Double.parseDouble(sHeight1);
 					iCount1 = Double.parseDouble(sCount1);
 					Double sum = iLength1*iWidth1*iHeight1*iCount1;
-					result1.setText(sum+"");
-					total.setText(""+(sum + r0 + r2 + r3 + r4 + r5 + r6));
+					result1.setText(f.format(sum));
+					total.setText(f.format(sum + r0 + r2 + r3 + r4 + r5 + r6));
 				}else{
 					result1.setText(0+"");
-					total.setText(""+(0 + r0 + r2 + r3 + r4 + r5 + r6));
+					total.setText(f.format(0 + r0 + r2 + r3 + r4 + r5 + r6));
 				}
 				break;
 			case 2:
@@ -308,11 +311,11 @@ public class CalcCubDialog extends DialogFragment implements OnClickListener {
 					iHeight2 = Double.parseDouble(sHeight2);
 					iCount2 = Double.parseDouble(sCount2);
 					Double sum = iLength2*iWidth2*iHeight2*iCount2;
-					result2.setText(sum+"");
-					total.setText(""+(sum + r1 + r0 + r3 + r4 + r5 + r6));
+					result2.setText(f.format(sum));
+					total.setText(f.format(sum + r1 + r0 + r3 + r4 + r5 + r6));
 				}else{
 					result2.setText(0+"");
-					total.setText(""+(0 + r1 + r0 + r3 + r4 + r5 + r6));
+					total.setText(f.format(0 + r1 + r0 + r3 + r4 + r5 + r6));
 				}
 				break;
 			case 3:
@@ -323,10 +326,10 @@ public class CalcCubDialog extends DialogFragment implements OnClickListener {
 					iCount3 = Double.parseDouble(sCount3);
 					Double sum = iLength3*iWidth3*iHeight3*iCount3;
 					result3.setText(sum+"");
-					total.setText(""+(sum + r1 + r2 + r0 + r4 + r5 + r6));
+					total.setText(f.format(sum + r1 + r2 + r0 + r4 + r5 + r6));
 				}else{
 					result3.setText(0+"");
-					total.setText(""+(0 + r1 + r2 + r0 + r4 + r5 + r6));
+					total.setText(f.format(0 + r1 + r2 + r0 + r4 + r5 + r6));
 				}
 				break;
 			case 4:
@@ -336,11 +339,11 @@ public class CalcCubDialog extends DialogFragment implements OnClickListener {
 					iHeight4 = Double.parseDouble(sHeight4);
 					iCount4 = Double.parseDouble(sCount4);
 					Double sum = iLength4*iWidth4*iHeight4*iCount4;
-					result4.setText(sum+"");
-					total.setText(""+(sum + r1 + r2 + r3 + r0 + r5 + r6));
+					result4.setText(f.format(sum));
+					total.setText(f.format(sum + r1 + r2 + r3 + r0 + r5 + r6));
 				}else{
 					result4.setText(0+"");
-					total.setText(""+(0 + r1 + r2 + r3 + r0 + r5 + r6));
+					total.setText(f.format(0 + r1 + r2 + r3 + r0 + r5 + r6));
 				}
 				break;
 			case 5:
@@ -350,21 +353,21 @@ public class CalcCubDialog extends DialogFragment implements OnClickListener {
 					iHeight5 = Double.parseDouble(sHeight5);
 					iCount5 = Double.parseDouble(sCount5);
 					Double sum = iLength5*iWidth5*iHeight5*iCount5;
-					result5.setText(sum+"");
-					total.setText(""+(sum + r1 + r2 + r3 + r4 + r0 + r6));
+					result5.setText(f.format(sum));
+					total.setText(f.format(sum + r1 + r2 + r3 + r4 + r0 + r6));
 				}else{
 					result5.setText(0+"");
-					total.setText(""+(0 + r1 + r2 + r3 + r4 + r0 + r6));
+					total.setText(f.format(0 + r1 + r2 + r3 + r4 + r0 + r6));
 				}
 				break;
 			case 6:
 				if (Constant.isNum(sExtra)) {
 					iExtra = Double.parseDouble(sExtra);
 					resultExtra.setText("" + iExtra);
-					total.setText(""+(iExtra + r1 + r2 + r3 + r4 + r5 + r0));
+					total.setText(f.format(iExtra + r1 + r2 + r3 + r4 + r5 + r0));
 				} else {
 					resultExtra.setText("" + 0);
-					total.setText(""+(0 + r1 + r2 + r3 + r4 + r5 + r0));
+					total.setText(f.format(0 + r1 + r2 + r3 + r4 + r5 + r0));
 				}
 				break;
 			}

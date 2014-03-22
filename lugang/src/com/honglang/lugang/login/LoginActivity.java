@@ -12,6 +12,7 @@ import com.honglang.lugang.R;
 import com.honglang.lugang.SessionManager;
 import com.honglang.lugang.Setting;
 import com.honglang.lugang.home.HomeActivity;
+import com.honglang.lugang.qrcode.StuffActivity;
 import com.honglang.lugang.ui.ClearEditText;
 
 import android.os.AsyncTask;
@@ -54,7 +55,8 @@ public class LoginActivity extends Activity {
 		userNo = username.getText().toString().trim();
 		pass = password.getText().toString().trim();
 		Calendar c = Calendar.getInstance();
-		if (c.get(Calendar.MONTH) > 3) {
+		if (c.get(Calendar.MONTH) > 4) {
+			Toast.makeText(this, "测试版本过期", Toast.LENGTH_SHORT).show();
 			return;
 		}
 		if(TextUtils.isEmpty(userNo)){
@@ -67,7 +69,9 @@ public class LoginActivity extends Activity {
 		}
 		if(!TextUtils.isEmpty(userNo) && !TextUtils.isEmpty(pass)){
 			new LoginTask().execute(userNo,pass);
-//			LoginActivity.this.startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+//			Intent i = new Intent(LoginActivity.this, StuffActivity.class);
+//			i.putExtra("action", 100);
+//			LoginActivity.this.startActivity(i);
 //			LoginActivity.this.finish();
 		}
 	}

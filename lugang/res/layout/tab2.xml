@@ -73,6 +73,6 @@
     	
     	<Button style="@style/tabone"
     	    android:id="@+id/blank"
-        	android:text="扫一扫"/>
+        	android:text="扫描进入货物确认"/>
 
 </LinearLayout>

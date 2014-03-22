@@ -84,7 +84,7 @@ public class TabTwo extends Fragment implements OnClickListener {
 			getActivity().startActivity(new Intent(getActivity(),DoneActivity.class));
 			break;
 		case R.id.info:
-			getActivity().startActivity(new Intent(getActivity(),DoneActivity.class));
+			getActivity().startActivity(new Intent(getActivity(),UserActivity.class));
 			break;
 		case R.id.blank:
 			Intent i = new Intent(getActivity(),CaptureActivity.class);

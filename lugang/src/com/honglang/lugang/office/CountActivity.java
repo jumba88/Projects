@@ -44,14 +44,16 @@ public class CountActivity extends Activity implements OnClickListener {
 	private RadioButton no;
 	private TextView type;
 	private TextView name;
-	public TextView allUnit;
+//	public TextView allUnit;
+	public String allUnit;
 	private TextView totalUnit;
 	private TextView hint;
 	private EditText total;
 //	private EditText weight;
 	public Button weight;
 	public Button cubage;
-	public Button yf;
+	public Button calc;
+	public EditText yf;
 	public EditText bzf;
 	public EditText thf;
 	public EditText shf;
@@ -60,9 +62,12 @@ public class CountActivity extends Activity implements OnClickListener {
 	private EditText tbjz;
 	private EditText dk;
 	
+	public Spinner pack;
 	public Spinner weightUnit;
 	private static final String[] UNIT = new String[]{"t","kg"};
+	private static String[] PACK_TYPE;
 	private ArrayAdapter<String> adapter;
+	private ArrayAdapter<String> pAdapter;
 	
 	private static boolean EDITABLE = false;
 	@Override
@@ -79,6 +84,7 @@ public class CountActivity extends Activity implements OnClickListener {
 			total.setFocusable(false);
 			weight.setEnabled(false);
 			cubage.setEnabled(false);
+			calc.setEnabled(false);
 			weightUnit.setEnabled(false);
 			yf.setEnabled(false);
 			bzf.setFocusable(false);
@@ -107,8 +113,12 @@ public class CountActivity extends Activity implements OnClickListener {
 		total = (EditText) this.findViewById(R.id.total);
 		weight = (Button) this.findViewById(R.id.weight);
 		cubage = (Button) this.findViewById(R.id.cubage);
-		yf = (Button) this.findViewById(R.id.yf);
-		allUnit = (TextView) this.findViewById(R.id.allUnit);
+		cubage.setOnClickListener(this);
+		calc = (Button) this.findViewById(R.id.calc);
+		calc.setOnClickListener(this);
+		
+		yf = (EditText) this.findViewById(R.id.yf);
+//		allUnit = (TextView) this.findViewById(R.id.allUnit);
 		
 		bzf = (EditText) this.findViewById(R.id.bzf);
 		thf = (EditText) this.findViewById(R.id.thf);
@@ -127,9 +137,7 @@ public class CountActivity extends Activity implements OnClickListener {
 //		weight.setOnTouchListener(new WeightTouchListener());
 		weight.setOnClickListener(this);
 		cubage.setText(data.getTiji());
-		cubage.setOnClickListener(this);
 		yf.setText(data.getYunfei());
-		yf.setOnClickListener(this);
 		bzf.setText(data.getBaozhuangfei());
 		thf.setText(data.getTihuofei());
 		shf.setText(data.getSonghuofei());
@@ -137,8 +145,9 @@ public class CountActivity extends Activity implements OnClickListener {
 		zyf.setText(data.getZongyunfei());
 		tbjz.setText(data.getTbjz());
 		dk.setText(data.getHuok());
-		allUnit.setText(data.getZl_danwei());
+		allUnit = data.getZl_danwei();
 		
+		yf.addTextChangedListener(new CalcWatcher());
 		bzf.addTextChangedListener(new CalcWatcher());
 		shf.addTextChangedListener(new CalcWatcher());
 		thf.addTextChangedListener(new CalcWatcher());
@@ -152,6 +161,34 @@ public class CountActivity extends Activity implements OnClickListener {
 			yes.setChecked(true);
 		} else {
 			no.setChecked(true);
+		}
+		
+		pack = (Spinner) this.findViewById(R.id.pack);
+		PACK_TYPE = this.getResources().getStringArray(R.array.pack_type);
+		pAdapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_item, PACK_TYPE);
+		pAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		pack.setAdapter(pAdapter);
+		if (data.getBaozhuang().equals(PACK_TYPE[0])) {
+			pack.setSelection(0, true);
+		}
+		if (data.getBaozhuang().equals(PACK_TYPE[1])) {
+			pack.setSelection(1, true);
+		}
+		if (data.getBaozhuang().equals(PACK_TYPE[2])) {
+			pack.setSelection(2, true);
+		}
+		if (data.getBaozhuang().equals(PACK_TYPE[3])) {
+			pack.setSelection(3, true);
+		}
+		if (data.getBaozhuang().equals(PACK_TYPE[4])) {
+			pack.setSelection(4, true);
+		}
+		if (data.getBaozhuang().equals(PACK_TYPE[5])) {
+			pack.setSelection(5, true);
+		}
+		if (data.getBaozhuang().equals(PACK_TYPE[6])) {
+			pack.setSelection(6, true);
 		}
 		
 		weightUnit = (Spinner) this.findViewById(R.id.weightUnit);
@@ -188,7 +225,7 @@ public class CountActivity extends Activity implements OnClickListener {
 			DialogFragment frag = CalcCubDialog.newInstance(0);
 			frag.show(getFragmentManager(), "cubage");
 			break;
-		case R.id.yf:
+		case R.id.calc:
 			DialogFragment f = CalcMoneyDialog.newInstance(0);
 			f.show(getFragmentManager(), "money");
 			break;
@@ -208,6 +245,8 @@ public class CountActivity extends Activity implements OnClickListener {
 		data.setBaofei(bxf.getText().toString());
 		data.setZongyunfei(zyf.getText().toString());
 		data.setTbjz(tbjz.getText().toString());
+		data.setJl_danwei(allUnit);
+		data.setBaozhuang(PACK_TYPE[pack.getSelectedItemPosition()]);
 		return data;
 	}
 	
@@ -236,20 +275,22 @@ public class CountActivity extends Activity implements OnClickListener {
 
 		@Override
 		public void afterTextChanged(Editable s) {
-			Double yun = Double.parseDouble(yf.getText().toString());
+			String yun = yf.getText().toString().trim();
 			String bz = bzf.getText().toString().trim();
 			String th = thf.getText().toString().trim();
 			String sh = shf.getText().toString().trim();
 			String bx = bxf.getText().toString().trim();
 			
 			String tb = tbjz.getText().toString().trim();
-			if (Constant.isNum(bz) && Constant.isNum(th) && Constant.isNum(sh) && Constant.isNum(bx)) {
+			if (Constant.isNum(yun) && Constant.isNum(bz) && Constant.isNum(th) && Constant.isNum(sh) && Constant.isNum(bx)) {
+				Double y = Double.parseDouble(yun);
 				Double b = Double.parseDouble(bz);
 				Double t = Double.parseDouble(th);
 				Double ds = Double.parseDouble(sh);
 				Double x = Double.parseDouble(bx);
-				Double sum = yun + b + t + ds + x;
+				Double sum = y + b + t + ds + x;
 				DecimalFormat f = new DecimalFormat("0.00");
+//				bxf.setText(f.format(x));
 				zyf.setText(f.format(sum));
 			}
 			if (EDITABLE) {

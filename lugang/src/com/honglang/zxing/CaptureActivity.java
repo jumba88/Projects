@@ -161,7 +161,7 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 			title.setText("扫描查询运单");
 			break;
 		case 4:
-			title.setText("扫一扫");
+			title.setText("扫描进入货物确认");
 			break;
 		}
 

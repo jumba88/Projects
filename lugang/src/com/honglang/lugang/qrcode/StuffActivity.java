@@ -1,5 +1,7 @@
 package com.honglang.lugang.qrcode;
 
+import java.text.DecimalFormat;
+
 import com.honglang.lugang.Constant;
 import com.honglang.lugang.R;
 import com.honglang.lugang.R.array;
@@ -14,6 +16,8 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -35,7 +39,8 @@ public class StuffActivity extends Activity implements OnClickListener {
 
 	public Button weight;
 	public Button cubage;
-	public Button yf;
+	public Button calc;
+	public EditText yf;
 	public EditText name;
 	public EditText total;
 	public EditText bzf;
@@ -58,6 +63,8 @@ public class StuffActivity extends Activity implements OnClickListener {
 	private ArrayAdapter<String> tAdapter;
 	private ArrayAdapter<String> pAdapter;
 	private ArrayAdapter<String> uAdapter;
+	
+	public String allUnit;
 
 	private Order stuff;
 	private int action;
@@ -84,8 +91,10 @@ public class StuffActivity extends Activity implements OnClickListener {
 		weight.setOnClickListener(this);
 		cubage = (Button) this.findViewById(R.id.cubage);
 		cubage.setOnClickListener(this);
-		yf = (Button) this.findViewById(R.id.yf);
-		yf.setOnClickListener(this);
+		calc = (Button) this.findViewById(R.id.calc);
+		calc.setOnClickListener(this);
+		yf = (EditText) this.findViewById(R.id.yf);
+//		yf.setOnClickListener(this);
 
 		name = (EditText) this.findViewById(R.id.name);
 		total = (EditText) this.findViewById(R.id.total);
@@ -96,6 +105,12 @@ public class StuffActivity extends Activity implements OnClickListener {
 		zyf = (EditText) this.findViewById(R.id.zyf);
 		tbjz = (EditText) this.findViewById(R.id.tbjz);
 		dk = (EditText) this.findViewById(R.id.dk);
+		
+		yf.addTextChangedListener(new CalcWatcher());
+		bzf.addTextChangedListener(new CalcWatcher());
+		shf.addTextChangedListener(new CalcWatcher());
+		thf.addTextChangedListener(new CalcWatcher());
+		tbjz.addTextChangedListener(new CalcWatcher());
 
 		yes = (RadioButton) findViewById(R.id.dshk_yes);
 		no = (RadioButton) findViewById(R.id.dshk_no);
@@ -122,6 +137,7 @@ public class StuffActivity extends Activity implements OnClickListener {
 		action = getIntent().getIntExtra("action", 0);
 		if (action == 100) {
 			stuff = new Order();
+			allUnit = "t";
 		} else {
 			stuff = (Order) getIntent().getSerializableExtra("stuff");
 
@@ -203,6 +219,8 @@ public class StuffActivity extends Activity implements OnClickListener {
 			zyf.setText(stuff.getZongyunfei());
 			tbjz.setText(stuff.getTbjz());
 			dk.setText(stuff.getHuok());
+			
+			allUnit = stuff.getJl_danwei();
 
 		}
 		weightUnit.setOnItemSelectedListener(new SpinnerSelectedListener());
@@ -224,7 +242,7 @@ public class StuffActivity extends Activity implements OnClickListener {
 			DialogFragment frag = CalcCubDialog.newInstance(1);
 			frag.show(getFragmentManager(), "cubage");
 			break;
-		case R.id.yf:
+		case R.id.calc:
 			DialogFragment f = CalcMoneyDialog.newInstance(1);
 			f.show(getFragmentManager(), "money");
 			break;
@@ -302,11 +320,7 @@ public class StuffActivity extends Activity implements OnClickListener {
 		} else {
 			stuff.setIsdsf("否");
 		}
-		if (Integer.parseInt(weight.getText().toString()) == 0 && Double.parseDouble(cubage.getText().toString()) > 0) {
-			stuff.setJl_danwei("m³");
-		} else {
-			stuff.setJl_danwei(UNIT[weightUnit.getSelectedItemPosition()]);
-		}
+		stuff.setJl_danwei(allUnit);
 		
 		Intent data = new Intent();
 		data.putExtra("stuff", stuff);
@@ -334,6 +348,45 @@ public class StuffActivity extends Activity implements OnClickListener {
 		}
 		
 	}
+	
+	class CalcWatcher implements TextWatcher{
+
+		@Override
+		public void afterTextChanged(Editable s) {
+			String yun = yf.getText().toString().trim();
+			String bz = bzf.getText().toString().trim();
+			String th = thf.getText().toString().trim();
+			String sh = shf.getText().toString().trim();
+			String tb = tbjz.getText().toString().trim();
+			
+			if (Constant.isNum(yun) && Constant.isNum(bz) && Constant.isNum(th) && Constant.isNum(sh) && Constant.isNum(tb)) {
+				Double y = Double.parseDouble(yun);
+				Double b = Double.parseDouble(bz);
+				Double t = Double.parseDouble(th);
+				Double ds = Double.parseDouble(sh);
+				Double x = Double.parseDouble(tb)*2/1000;
+				Double sum = y + b + t + ds + x;
+				DecimalFormat f = new DecimalFormat("0.00");
+				bxf.setText(f.format(x));
+				zyf.setText(f.format(sum));
+			}
+			
+			}
+
+		@Override
+		public void beforeTextChanged(CharSequence s, int start, int count,
+				int after) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onTextChanged(CharSequence s, int start, int before,
+				int count) {
+			// TODO Auto-generated method stub
+			
+		}
+		}
 	// @Override
 	// public boolean onCreateOptionsMenu(Menu menu) {
 	// // Inflate the menu; this adds items to the action bar if it is present.

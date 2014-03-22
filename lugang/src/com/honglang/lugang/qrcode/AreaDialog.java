@@ -289,9 +289,11 @@ public class AreaDialog extends DialogFragment implements OnClickListener {
 			String a = p + "-" + c + "市-" + d;
 			if (getArguments().getInt("area") == 0) {
 				((BlankActivity)getActivity()).from.setText(a);
+				((BlankActivity)getActivity()).IS_FROM = true;
 			}
 			if (getArguments().getInt("area") == 1) {
 				((BlankActivity)getActivity()).to.setText(a);
+				((BlankActivity)getActivity()).IS_TO = true;
 			}
 			dismiss();
 			break;

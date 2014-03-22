@@ -79,10 +79,20 @@ public class DealingActivity extends Activity implements OnClickListener {
 				if (bill.getCurrent_node_id().equals("7") || bill.getCurrent_node_id().equals("9")) {
 					Intent intent = new Intent(DealingActivity.this, OrderActivity.class);
 					intent.putExtra("bill", bill);
-					startActivity(intent);
+					startActivityForResult(intent, 111);
 				}
 			}
 		});
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == 111) {
+			if (resultCode == RESULT_OK) {
+				new DealingTask().execute((Void)null);
+			}
+		}
+		super.onActivityResult(requestCode, resultCode, data);
 	}
 
 	@Override
