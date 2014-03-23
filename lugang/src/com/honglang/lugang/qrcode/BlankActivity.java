@@ -65,6 +65,8 @@ public class BlankActivity extends Activity implements OnClickListener {
 	public boolean IS_FROM = false;
 	public boolean IS_ADD = false;
 	
+	private TextView stuffCode;
+	
 	private RadioButton istb;
 	private RadioButton istx;
 	private RadioButton sh;
@@ -126,7 +128,7 @@ public class BlankActivity extends Activity implements OnClickListener {
         mYear = c.get(Calendar.YEAR);
         mMonth = c.get(Calendar.MONTH);
         mDay = c.get(Calendar.DAY_OF_MONTH);
-        updateDisplay();
+//        updateDisplay();
 	}
 
 	private void init(){
@@ -139,6 +141,8 @@ public class BlankActivity extends Activity implements OnClickListener {
 		confirm.setVisibility(View.VISIBLE);
 		confirm.setOnClickListener(this);
 		fhCode = this.getIntent().getStringExtra("fhCode");
+		stuffCode = (TextView) findViewById(R.id.stuffCode);
+		stuffCode.setText(fhCode);
 		
 		new LoadTask().execute((Void)null);
 		
@@ -238,6 +242,10 @@ public class BlankActivity extends Activity implements OnClickListener {
 			showDialog(DATE_DIALOG_ID);
 			break;
 		case R.id.add:
+			if (items.size() == 5) {
+				Toast.makeText(BlankActivity.this, "最多只能添加五项货物", Toast.LENGTH_SHORT).show();
+				return;
+			}
 			Intent intent = new Intent(this, StuffActivity.class);
 			intent.putExtra("action", ADD_CODE);
 			this.startActivityForResult(intent, ADD_CODE);
@@ -277,10 +285,10 @@ public class BlankActivity extends Activity implements OnClickListener {
 			Toast.makeText(this, "请填写收货人电话", Toast.LENGTH_SHORT).show();
 			return;
 		}
-		if (codeSh == null || codeSh.equals("")) {
-			Toast.makeText(this, "请填写收货人身份证号码", Toast.LENGTH_SHORT).show();
-			return;
-		}
+//		if (codeSh == null || codeSh.equals("")) {
+//			Toast.makeText(this, "请填写收货人身份证号码", Toast.LENGTH_SHORT).show();
+//			return;
+//		}
 		
 		if (nameTy == null || nameTy.equals("")) {
 			Toast.makeText(this, "请填写托运人姓名", Toast.LENGTH_SHORT).show();
@@ -290,10 +298,10 @@ public class BlankActivity extends Activity implements OnClickListener {
 			Toast.makeText(this, "请填写托运人电话", Toast.LENGTH_SHORT).show();
 			return;
 		}
-		if (codeTy == null || codeTy.equals("")) {
-			Toast.makeText(this, "请填写托运人身份证号码货企业代码", Toast.LENGTH_SHORT).show();
-			return;
-		}
+//		if (codeTy == null || codeTy.equals("")) {
+//			Toast.makeText(this, "请填写托运人身份证号码货企业代码", Toast.LENGTH_SHORT).show();
+//			return;
+//		}
 		
 		if (!IS_TO) {
 			Toast.makeText(this, "请填写收货人目标城市", Toast.LENGTH_SHORT).show();

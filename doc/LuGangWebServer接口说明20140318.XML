@@ -771,6 +771,8 @@
                 }
             }
              </returns>
+			 {"data":{"currentrowcount":"1","totalrowcount":"1","rows":[{"rkid":"2544","tiji":"0","tocity":"广西-南宁市","oid":"1578","zongliangdanwei":"kg","wpmc":"木材","zongliang":"0","fhcode":"2014031500001796","yusl":"20","huoh":"件"}]},"result":true}
+			 {"data":{"currentrowcount":"0","totalrowcount":"0","rows":[]},"result":true}
         </member>
         <member name="M:LuGangWebServer.DataServer.GetMxbByFhcodeForChuKu(System.String,System.String,System.String)">
             <summary>
@@ -909,6 +911,7 @@
             <param name="pcid">配车ID，如果有，则将货物加入此配车单。如果没有，就新生成配车单并将货物加入配车单</param>
             <param name="fhCode">发货码</param>
             <returns></returns>
+			{"data":{"pcid":"407","text":"操作成功"},"result":true}
         </member>
         <member name="M:LuGangWebServer.DataServer.YanZhengTuoYunDan(System.String,System.String,System.String)">
             <summary>

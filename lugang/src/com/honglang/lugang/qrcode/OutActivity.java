@@ -70,6 +70,7 @@ public class OutActivity extends Activity implements OnClickListener {
 	String driName;
 	String driId;
 	String driNum;
+	String pcId;
 	
 	static final private int GET_CODE = 0;
 	@Override
@@ -205,9 +206,15 @@ public class OutActivity extends Activity implements OnClickListener {
 		private String errMsg;
 		@Override
 		protected Boolean doInBackground(Void... params) {
-			SoapObject rpc = new SoapObject(Constant.NAMESPACE, "GetMxbByFhcodeForChuKu");
+//			SoapObject rpc = new SoapObject(Constant.NAMESPACE, "GetMxbByFhcodeForChuKu");
+//			rpc.addProperty("fhCode", fhCode);
+//			rpc.addProperty("currentUserNo", SessionManager.getInstance().getUsername());
+//			rpc.addProperty("token", SessionManager.getInstance().getTokene());
+			
+			SoapObject rpc = new SoapObject(Constant.NAMESPACE, "PeiCheChuKuAdd");
 			rpc.addProperty("fhCode", fhCode);
-			rpc.addProperty("currentUserNo", SessionManager.getInstance().getUsername());
+			rpc.addProperty("pcid", "");
+			rpc.addProperty("currentUserno", SessionManager.getInstance().getUsername());
 			rpc.addProperty("token", SessionManager.getInstance().getTokene());
 			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER12);
 			envelope.dotNet = true;
@@ -215,41 +222,47 @@ public class OutActivity extends Activity implements OnClickListener {
 			HttpTransportSE transport = new HttpTransportSE(Constant.SERVICE_URL);
 			transport.debug = true;
 			try {
-				transport.call(Constant.NAMESPACE + "GetMxbByFhcodeForChuKu", envelope);
+//				transport.call(Constant.NAMESPACE + "GetMxbByFhcodeForChuKu", envelope);
+				transport.call(Constant.NAMESPACE + "PeiCheChuKuAdd", envelope);
 				SoapObject response = (SoapObject) envelope.bodyIn;
 				if(response != null){
-					JSONTokener parser = new JSONTokener(response.getPropertyAsString("GetMxbByFhcodeForChuKuResult"));
+//					JSONTokener parser = new JSONTokener(response.getPropertyAsString("GetMxbByFhcodeForChuKuResult"));
+					JSONTokener parser = new JSONTokener(response.getPropertyAsString("PeiCheChuKuAddResult"));
 					JSONObject json = (JSONObject) parser.nextValue();
 //					Log.i("suxoyo", fhCode);
-//					Log.i("suxoyo", json.toString());
-					JSONObject data = json.getJSONObject("data");
+					Log.i("suxoyo", json.toString());
+					
 					if (json.getBoolean("result")) {
-						if (data.getInt("currentrowcount") > 0) {
-							JSONArray rows = data.getJSONArray("rows");
-							
-								for (int i = 0; i < rows.length(); i++) {
-									JSONObject obj = rows.getJSONObject(i);
-									HashMap<String, String> map = new HashMap<String, String>();
-									map.put("OID", obj.getString("OID"));
-									map.put("wpmc", obj.getString("wpmc"));
-									map.put("zl", obj.getString("zl"));
-									map.put("sl", obj.getString("sl"));
-									map.put("tiji", obj.getString("tiji"));
-									map.put("zl_danwei", obj.getString("zl_danwei"));
-									map.put("sl_danwei", obj.getString("sl_danwei"));
-									map.put("tiji_danwei", obj.getString("tiji_danwei"));
-									items.add(map);
-								}
-							return true;
-						}else {
-							errMsg = "没有对应订单";
-							return false;
-						}
+						JSONObject data = json.getJSONObject("data");
+						pcId = data.getString("pcid");
+						
+//						if (data.getInt("currentrowcount") > 0) {
+//							JSONArray rows = data.getJSONArray("rows");
+//							
+//								for (int i = 0; i < rows.length(); i++) {
+//									JSONObject obj = rows.getJSONObject(i);
+//									HashMap<String, String> map = new HashMap<String, String>();
+//									map.put("OID", obj.getString("OID"));
+//									map.put("wpmc", obj.getString("wpmc"));
+//									map.put("zl", obj.getString("zl"));
+//									map.put("sl", obj.getString("sl"));
+//									map.put("tiji", obj.getString("tiji"));
+//									map.put("zl_danwei", obj.getString("zl_danwei"));
+//									map.put("sl_danwei", obj.getString("sl_danwei"));
+//									map.put("tiji_danwei", obj.getString("tiji_danwei"));
+//									items.add(map);
+//								}
+//							return true;
+//						}else {
+//							errMsg = "没有对应订单";
+//							return false;
+//						}
 						
 					} else {
 						errMsg = json.getString("msg");
 						return false;
 					}
+					return true;
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -262,14 +275,94 @@ public class OutActivity extends Activity implements OnClickListener {
 		@Override
 		protected void onPostExecute(Boolean result) {
 			if (result) {
-				adapter = new OutAdapter(OutActivity.this, items);
-				if(adapter != null){
-					mListView.setAdapter(adapter);
-					mListView.setCacheColorHint(0);
-					Constant.setListViewHeightBasedOnChildren(mListView);
-				}
+//				adapter = new OutAdapter(OutActivity.this, items);
+//				if(adapter != null){
+//					mListView.setAdapter(adapter);
+//					mListView.setCacheColorHint(0);
+//					Constant.setListViewHeightBasedOnChildren(mListView);
+//				}
+				new LoadInfoTask().execute((Void)null);
 			} else {
-				Toast.makeText(OutActivity.this, errMsg, Toast.LENGTH_SHORT).show();
+				Toast.makeText(OutActivity.this, "订单货物加入明细表失败,请检查您的网络是否正常."+errMsg, Toast.LENGTH_LONG).show();
+				Log.i("suxoyo", errMsg);
+			}
+			super.onPostExecute(result);
+		}
+		
+	}
+	
+	class LoadInfoTask extends AsyncTask<Void, Void, Boolean>{
+
+		private String errMsg;
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			Log.i("suxoyo", pcId);
+			SoapObject rpc = new SoapObject(Constant.NAMESPACE, "GetPCmxb");
+			rpc.addProperty("PCID", Long.parseLong(pcId));
+			rpc.addProperty("currentUserno", SessionManager.getInstance().getUsername());
+			rpc.addProperty("token", SessionManager.getInstance().getTokene());
+			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER12);
+			envelope.dotNet = true;
+			envelope.setOutputSoapObject(rpc);
+			HttpTransportSE transport = new HttpTransportSE(Constant.SERVICE_URL);
+			transport.debug = true;
+			try {
+//				transport.call(Constant.NAMESPACE + "GetMxbByFhcodeForChuKu", envelope);
+				transport.call(Constant.NAMESPACE + "GetPCmxb", envelope);
+				SoapObject response = (SoapObject) envelope.bodyIn;
+				if(response != null){
+//					JSONTokener parser = new JSONTokener(response.getPropertyAsString("GetMxbByFhcodeForChuKuResult"));
+					JSONTokener parser = new JSONTokener(response.getPropertyAsString("GetPCmxbResult"));
+					JSONObject json = (JSONObject) parser.nextValue();
+					Log.i("suxoyo", json.toString());
+					errMsg = json.toString();
+					
+//					if (json.getBoolean("result")) {
+//						JSONObject data = json.getJSONObject("data");
+//						pcId = data.getString("pcid");
+						
+//						if (data.getInt("currentrowcount") > 0) {
+//							JSONArray rows = data.getJSONArray("rows");
+//							
+//								for (int i = 0; i < rows.length(); i++) {
+//									JSONObject obj = rows.getJSONObject(i);
+//									HashMap<String, String> map = new HashMap<String, String>();
+//									map.put("OID", obj.getString("OID"));
+//									map.put("wpmc", obj.getString("wpmc"));
+//									map.put("zl", obj.getString("zl"));
+//									map.put("sl", obj.getString("sl"));
+//									map.put("tiji", obj.getString("tiji"));
+//									map.put("zl_danwei", obj.getString("zl_danwei"));
+//									map.put("sl_danwei", obj.getString("sl_danwei"));
+//									map.put("tiji_danwei", obj.getString("tiji_danwei"));
+//									items.add(map);
+//								}
+//							return true;
+//						}else {
+//							errMsg = "没有对应订单";
+//							return false;
+//						}
+						
+//					} else {
+//						errMsg = json.getString("msg");
+//						return false;
+//					}
+					return true;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+//				errMsg = "加载订单失败,请检查您的网络是否正常";
+				errMsg = e.toString();
+			}
+			return false;
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			if (result) {
+				Toast.makeText(OutActivity.this, errMsg, Toast.LENGTH_LONG).show();
+			} else {
+				Toast.makeText(OutActivity.this, errMsg, Toast.LENGTH_LONG).show();
 			}
 			super.onPostExecute(result);
 		}
@@ -333,6 +426,7 @@ public class OutActivity extends Activity implements OnClickListener {
 				adapter.notifyDataSetChanged();
 			} else {
 				Toast.makeText(OutActivity.this, "操作失败,"+errMsg, Toast.LENGTH_SHORT).show();
+				Log.i("suxoyo", errMsg);
 			}
 			super.onPostExecute(result);
 		}

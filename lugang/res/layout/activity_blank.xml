@@ -40,6 +40,20 @@
 
                 <TextView
                     style="@style/detail"
+                    android:text="发货码" />
+
+                <TextView
+                    android:id="@+id/stuffCode"
+                    android:layout_columnSpan="3"
+                    android:layout_marginLeft="10dp"
+                    android:text=""
+                    android:textColor="@android:color/holo_blue_dark"
+                    android:textSize="15sp" />
+
+                <View style="@style/line" />
+
+                <TextView
+                    style="@style/detail"
                     android:layout_gravity="right|center_vertical"
                     android:text="是否投保" />
 
@@ -48,20 +62,23 @@
                     android:layout_marginLeft="10dp"
                     android:gravity="left"
                     android:orientation="horizontal" >
-                    <RadioButton android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+
+                    <RadioButton
                         android:id="@+id/istb_yes"
-                        android:gravity="left|center"
-                        android:text="@string/yes"/>
-                    
-                    <RadioButton android:layout_width="wrap_content"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/istb_no"
-                        android:layout_marginLeft="20dp"
                         android:gravity="left|center"
+                        android:text="@string/yes" />
+
+                    <RadioButton
+                        android:id="@+id/istb_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
                         android:checked="true"
-                        android:text="@string/no"/>
-                 </RadioGroup>
+                        android:gravity="left|center"
+                        android:text="@string/no" />
+                </RadioGroup>
 
                 <View style="@style/line" />
 
@@ -75,20 +92,23 @@
                     android:layout_marginLeft="10dp"
                     android:gravity="left"
                     android:orientation="horizontal" >
-                    <RadioButton android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+
+                    <RadioButton
                         android:id="@+id/istx_yes"
-                        android:gravity="left|center"
-                        android:text="@string/yes"/>
-                    
-                    <RadioButton android:layout_width="wrap_content"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/istx_no"
-                        android:layout_marginLeft="20dp"
                         android:gravity="left|center"
+                        android:text="@string/yes" />
+
+                    <RadioButton
+                        android:id="@+id/istx_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
                         android:checked="true"
-                        android:text="@string/no"/>
-                 </RadioGroup>
+                        android:gravity="left|center"
+                        android:text="@string/no" />
+                </RadioGroup>
 
                 <View style="@style/line" />
 
@@ -102,22 +122,26 @@
                     android:layout_marginLeft="10dp"
                     android:gravity="left"
                     android:orientation="horizontal" >
-                    <RadioButton android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+
+                    <RadioButton
                         android:id="@+id/sh"
-                        android:gravity="left|center"
-                        android:checked="true"
-                        android:text="送货"/>
-                    
-                    <RadioButton android:layout_width="wrap_content"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:gravity="left|center"
+                        android:text="送货" />
+
+                    <RadioButton
                         android:id="@+id/zt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:gravity="left|center"
-                        android:text="自提"/>
-                 </RadioGroup>
+                        android:text="自提" />
+                </RadioGroup>
 
                 <View style="@style/line" />
+
                 <TextView
                     style="@style/detail"
                     android:layout_columnSpan="4"
@@ -128,27 +152,31 @@
                     android:layout_marginLeft="20dp"
                     android:gravity="left"
                     android:orientation="horizontal" >
-                    <RadioButton android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+
+                    <RadioButton
                         android:id="@+id/xj"
-                        android:gravity="left|center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:checked="true"
-                        android:text="现结"/>
-                    
-                    <RadioButton android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:gravity="left|center"
+                        android:text="现结" />
+
+                    <RadioButton
                         android:id="@+id/tf"
-                        android:layout_marginLeft="20dp"
-                        android:gravity="left|center"
-                        android:text="提付"/>
-                    
-                    <RadioButton android:layout_width="wrap_content"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/jz"
                         android:layout_marginLeft="20dp"
                         android:gravity="left|center"
-                        android:text="记账"/>
-                 </RadioGroup>
+                        android:text="提付" />
+
+                    <RadioButton
+                        android:id="@+id/jz"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:gravity="left|center"
+                        android:text="记账" />
+                </RadioGroup>
 
                 <View style="@style/line" />
 
@@ -164,15 +192,14 @@
 
                 <View style="@style/line" />
 
- 
                 <TextView
                     android:layout_columnSpan="4"
                     android:layout_marginLeft="10dp"
                     android:text="收货人"
                     android:textColor="@android:color/holo_blue_dark"
                     android:textSize="15sp" />
-                
-                 <TextView
+
+                <TextView
                     style="@style/detail"
                     android:text="单位/姓名" />
 
@@ -184,6 +211,7 @@
                     android:text="" />
 
                 <View style="@style/line" />
+
                 <TextView
                     style="@style/detail"
                     android:text="电话" />
@@ -207,8 +235,9 @@
                     style="@style/EditStyle"
                     android:layout_width="200dp"
                     android:layout_columnSpan="3"
-                    android:textColor="@android:color/darker_gray"
-                    android:text="请选择区域" />
+                    android:text="请选择区域"
+                    android:textColor="@android:color/darker_gray" />
+
                 <TextView
                     style="@style/detail"
                     android:text="" />
@@ -222,11 +251,11 @@
                     android:text="" />
 
                 <View style="@style/line" />
-                
+
                 <TextView
                     style="@style/detail"
-                    android:gravity="top|right"
                     android:layout_gravity="top"
+                    android:gravity="top|right"
                     android:text="企业代码\n身份证" />
 
                 <EditText
@@ -247,8 +276,8 @@
                     android:text="托运人"
                     android:textColor="@android:color/holo_blue_dark"
                     android:textSize="15sp" />
-                
-                 <TextView
+
+                <TextView
                     style="@style/detail"
                     android:text="单位/姓名" />
 
@@ -260,6 +289,7 @@
                     android:text="" />
 
                 <View style="@style/line" />
+
                 <TextView
                     style="@style/detail"
                     android:text="电话" />
@@ -283,8 +313,9 @@
                     style="@style/EditStyle"
                     android:layout_width="200dp"
                     android:layout_columnSpan="3"
-                    android:textColor="@android:color/darker_gray"
-                    android:text="请选择区域" />
+                    android:text="请选择区域"
+                    android:textColor="@android:color/darker_gray" />
+
                 <TextView
                     style="@style/detail"
                     android:text="" />
@@ -298,11 +329,11 @@
                     android:text="" />
 
                 <View style="@style/line" />
-                
+
                 <TextView
                     style="@style/detail"
-                    android:gravity="top|right"
                     android:layout_gravity="top"
+                    android:gravity="top|right"
                     android:text="企业代码\n身份证" />
 
                 <EditText
@@ -314,7 +345,7 @@
                     android:gravity="left|center_vertical"
                     android:inputType="number"
                     android:text="" />
-                
+
                 <View style="@style/line" />
 
                 <TextView
@@ -323,8 +354,8 @@
                     android:text="开单人"
                     android:textColor="@android:color/holo_blue_dark"
                     android:textSize="15sp" />
-                
-                 <TextView
+
+                <TextView
                     style="@style/detail"
                     android:text="开单人" />
 
@@ -332,11 +363,12 @@
                     android:id="@+id/name_kd"
                     style="@style/EditStyle"
                     android:layout_columnSpan="3"
-                    android:gravity="left|center_vertical"
                     android:enabled="false"
+                    android:gravity="left|center_vertical"
                     android:text="" />
 
                 <View style="@style/line" />
+
                 <TextView
                     style="@style/detail"
                     android:text="电话" />
@@ -348,20 +380,24 @@
                     android:gravity="left|center_vertical"
                     android:inputType="number"
                     android:text="" />
-                <View style="@style/line"/>
-        
-		        <TextView style="@style/detail"
-		            android:layout_gravity="top"
-		            android:text="备注"/>
-		        <EditText android:layout_columnSpan="3"
-		            android:id="@+id/remark"
-		            android:layout_width="200dp"
-		            android:layout_height="wrap_content"
-		            android:minHeight="50dp"
-		            android:gravity="top|left"
-		            android:layout_marginLeft="10dp"
-		            android:background="@drawable/login_edittext_bg"
-		            android:hint=""/>
+
+                <View style="@style/line" />
+
+                <TextView
+                    style="@style/detail"
+                    android:layout_gravity="top"
+                    android:text="备注" />
+
+                <EditText
+                    android:id="@+id/remark"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnSpan="3"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/login_edittext_bg"
+                    android:gravity="top|left"
+                    android:hint=""
+                    android:minHeight="50dp" />
             </GridLayout>
 
             <TextView
@@ -372,12 +408,13 @@
                 android:textColor="@android:color/holo_blue_dark"
                 android:textSize="15sp" />
 
-            <Button android:id="@+id/add"
+            <Button
+                android:id="@+id/add"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="添加货物"
-                android:textColor="@android:color/holo_orange_dark"/>
+                android:textColor="@android:color/holo_orange_dark" />
 
             <ListView
                 android:id="@+id/stuffList"
