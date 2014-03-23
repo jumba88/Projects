@@ -15,7 +15,7 @@
     <include layout="@layout/logo" />
 
     <ListView
-        android:id="@+id/stuffList"
+        android:id="@+id/formList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"

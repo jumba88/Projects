@@ -24,9 +24,9 @@ import com.google.zxing.ResultPoint;
 import com.google.zxing.client.result.ResultParser;
 import com.honglang.lugang.R;
 import com.honglang.lugang.billsearch.SearchActivity;
+import com.honglang.lugang.out.OutActivity;
 import com.honglang.lugang.qrcode.BlankActivity;
 import com.honglang.lugang.qrcode.InActivity;
-import com.honglang.lugang.qrcode.OutActivity;
 import com.honglang.zxing.camera.CameraManager;
 import com.honglang.zxing.history.HistoryManager;
 import com.honglang.zxing.result.ResultHandler;
@@ -473,6 +473,7 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 			switch (TYPE) {
 			case 0:
 				Intent i = new Intent(CaptureActivity.this, OutActivity.class);
+				i.putExtra("from", 0);
 				i.putExtra("fhCode", rawResult.getText());
 				this.startActivity(i);
 				break;

@@ -2,6 +2,7 @@ package com.honglang.lugang.home;
 
 import com.honglang.lugang.R;
 import com.honglang.lugang.login.LoginActivity;
+import com.honglang.lugang.out.FormListActivity;
 import com.honglang.lugang.qrcode.HistoryActivity;
 import com.honglang.zxing.CaptureActivity;
 
@@ -18,8 +19,9 @@ import android.widget.TextView;
 public class TabFour extends Fragment implements OnClickListener {
 
 	private TextView title;
-	private Button history;
+//	private Button history;
 	private Button out;
+	private Button list;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -31,9 +33,11 @@ public class TabFour extends Fragment implements OnClickListener {
 		super.onViewCreated(view, savedInstanceState);
 		title = (TextView) view.findViewById(R.id.title);
 		title.setText(R.string.tab4);
-		history = (Button) view.findViewById(R.id.history);
-		history.setOnClickListener(this);
+//		history = (Button) view.findViewById(R.id.history);
+//		history.setOnClickListener(this);
 		
+		list = (Button) view.findViewById(R.id.list);
+		list.setOnClickListener(this);
 		out = (Button) view.findViewById(R.id.out);
 		out.setOnClickListener(this);
 	}
@@ -46,11 +50,15 @@ public class TabFour extends Fragment implements OnClickListener {
 			i.putExtra("QRTYPE", 0);
 			this.startActivity(i);
 			break;
-		case R.id.history:
-			Intent intent = new Intent(getActivity(),HistoryActivity.class);
-			intent.putExtra("type", 2);
-			this.startActivity(intent);
+		case R.id.list:
+			Intent in = new Intent(getActivity(),FormListActivity.class);
+			this.startActivity(in);
 			break;
+//		case R.id.history:
+//			Intent intent = new Intent(getActivity(),HistoryActivity.class);
+//			intent.putExtra("type", 2);
+//			this.startActivity(intent);
+//			break;
 		}
 		
 	}

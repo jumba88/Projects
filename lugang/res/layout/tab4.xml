@@ -3,27 +3,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
-    <include layout="@layout/tab_header"/>
-    
-    <View android:layout_width="match_parent"
+
+    <include layout="@layout/tab_header" />
+
+    <View
+        android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="#33B5E5"/>
-    <include layout="@layout/logo"/>
-    
-    <LinearLayout android:layout_width="match_parent"
+        android:background="#33B5E5" />
+
+    <include layout="@layout/logo" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_marginTop="150dp"
-        android:orientation="vertical">
-        
-        <Button style="@style/tabone"
+        android:orientation="vertical" >
+
+        <!-- <Button
             android:id="@+id/history"
-        android:text="@string/singleout"/>
-    
-    	<Button style="@style/tabone"
-    	    android:id="@+id/out"
-        android:text="@string/multiout"/>
+            style="@style/tabone"
+            android:text="@string/singleout" /> -->
+        <Button
+            android:id="@+id/list"
+            style="@style/tabone"
+            android:text="配车单列表" />
+
+        <Button
+            android:id="@+id/out"
+            style="@style/tabone"
+            android:text="@string/multiout" />
     </LinearLayout>
 
 </LinearLayout>

@@ -39,8 +39,8 @@
         </activity>
         <activity
             android:name="com.honglang.lugang.login.LoginActivity"
-            android:theme="@android:style/Theme.Light.NoTitleBar"
             android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
             android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustResize" >
         </activity>
         <activity
@@ -120,20 +120,20 @@
         </activity>
         <activity
             android:name="com.honglang.lugang.office.OrderActivity"
-            android:theme="@android:style/Theme.Holo.Light.NoActionBar"
             android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar"
             android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustResize" >
         </activity>
         <activity
             android:name="com.honglang.lugang.office.CountActivity"
-            android:theme="@android:style/Theme.Holo.Light.NoActionBar"
             android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar"
             android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustResize" >
         </activity>
         <activity
             android:name="com.honglang.zxing.CaptureActivity"
-            android:theme="@android:style/Theme.Holo.Light.NoActionBar"
             android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar"
             android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustResize" >
         </activity>
         <activity
@@ -147,9 +147,9 @@
             android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
         </activity>
         <activity
-            android:name="com.honglang.lugang.qrcode.OutActivity"
-            android:theme="@android:style/Theme.Holo.Light.NoActionBar"
+            android:name="com.honglang.lugang.out.OutActivity"
             android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar"
             android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustResize" >
         </activity>
         <activity
@@ -159,14 +159,14 @@
         </activity>
         <activity
             android:name="com.honglang.lugang.qrcode.BlankActivity"
-            android:theme="@android:style/Theme.Holo.Light.NoActionBar"
             android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar"
             android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustResize" >
         </activity>
         <activity
             android:name="com.honglang.lugang.qrcode.StuffActivity"
-            android:theme="@android:style/Theme.Holo.Light.NoActionBar"
             android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar"
             android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustResize" >
         </activity>
         <activity
@@ -181,6 +181,16 @@
         </activity>
         <activity
             android:name="com.honglang.lugang.login.UserActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
+        </activity>
+        <activity
+            android:name="com.honglang.lugang.out.SaveActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
+        </activity>
+        <activity
+            android:name="com.honglang.lugang.out.FormListActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
         </activity>

@@ -4196,5 +4196,7 @@
     <string name="title_activity_dealing">DealingActivity</string>
     <string name="title_activity_done">DoneActivity</string>
     <string name="title_activity_user">UserActivity</string>
+    <string name="title_activity_save">SaveActivity</string>
+    <string name="title_activity_form_list">FormListActivity</string>
 
 </resources>

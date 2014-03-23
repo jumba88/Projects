@@ -17,7 +17,7 @@ import android.widget.TextView;
 public class TabThree extends Fragment implements OnClickListener {
 
 	private TextView title;
-	private Button history;
+//	private Button history;
 	private Button in;
 	private Button blank;
 	@Override
@@ -31,8 +31,8 @@ public class TabThree extends Fragment implements OnClickListener {
 		super.onViewCreated(view, savedInstanceState);
 		title = (TextView) view.findViewById(R.id.title);
 		title.setText(R.string.tab3);
-		history = (Button) view.findViewById(R.id.history);
-		history.setOnClickListener(this);
+//		history = (Button) view.findViewById(R.id.history);
+//		history.setOnClickListener(this);
 		in = (Button) view.findViewById(R.id.in);
 		in.setOnClickListener(this);
 		blank = (Button) view.findViewById(R.id.blank);
@@ -41,11 +41,11 @@ public class TabThree extends Fragment implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.history:
-			Intent intent = new Intent(getActivity(),HistoryActivity.class);
-			intent.putExtra("type", 1);
-			this.startActivity(intent);
-			break;
+//		case R.id.history:
+//			Intent intent = new Intent(getActivity(),HistoryActivity.class);
+//			intent.putExtra("type", 1);
+//			this.startActivity(intent);
+//			break;
 		case R.id.in:
 			Intent i = new Intent(getActivity(),CaptureActivity.class);
 			i.putExtra("QRTYPE", 1);

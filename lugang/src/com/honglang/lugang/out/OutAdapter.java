@@ -1,4 +1,4 @@
-package com.honglang.lugang.qrcode;
+package com.honglang.lugang.out;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +17,7 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class OutAdapter extends BaseAdapter {
 
@@ -24,21 +25,27 @@ public class OutAdapter extends BaseAdapter {
 	private List<HashMap<String, String>> items;
 	private LayoutInflater inflater;
 	
-	private Boolean isChecked = false;
-	public List<Integer> selected;
-	public List<String> ids;
+	public List<Integer> list;
+	
+//	private Boolean isChecked = false;
+//	public List<Integer> selected;
+//	public List<String> ids;
 	public OutAdapter(Activity activity, List<HashMap<String, String>> items) {
 		super();
 		this.activity = activity;
 		this.items = items;
 		inflater = activity.getLayoutInflater();
 		
-		selected = new ArrayList<Integer>();
-		ids = new ArrayList<String>();
+		list = new ArrayList<Integer>();
 		for (int i = 0; i < items.size(); i++) {
-			selected.add(0);
-			ids.add(items.get(i).get("OID"));
+			list.add(Integer.parseInt(items.get(i).get("zongliang")));
 		}
+//		selected = new ArrayList<Integer>();
+//		ids = new ArrayList<String>();
+//		for (int i = 0; i < items.size(); i++) {
+//			selected.add(0);
+//			ids.add(items.get(i).get("oid"));
+//		}
 	}
 
 	@Override
@@ -62,27 +69,32 @@ public class OutAdapter extends BaseAdapter {
 		if(convertView == null){
 			convertView = inflater.inflate(R.layout.out_item, null);
 		}
-		HashMap<String, String> item = items.get(position);
+		final HashMap<String, String> item = items.get(position);
 		if(item == null){
 			return null;
 		}
 		
-		TextView oid = (TextView) convertView.findViewById(R.id.form_id);
+		TextView code = (TextView) convertView.findViewById(R.id.code);
+		TextView city = (TextView) convertView.findViewById(R.id.city);
+		TextView oid = (TextView) convertView.findViewById(R.id.rkid);
 		TextView name = (TextView) convertView.findViewById(R.id.stuff_name);
 		TextView weight = (TextView) convertView.findViewById(R.id.weight);
 		TextView cubage = (TextView) convertView.findViewById(R.id.cubage);
 		TextView count = (TextView) convertView.findViewById(R.id.count);
-		CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.checkBox);
+//		CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.checkBox);
 		EditText edit = (EditText) convertView.findViewById(R.id.edit);
 		
-		checkBox.setChecked(isChecked);
+//		checkBox.setChecked(isChecked);
 		
-		oid.setText(item.get("OID"));
+		final String number = item.get("yusl");
+		code.setText(item.get("fhcode"));
+		city.setText(item.get("tocity"));
+		oid.setText(item.get("rkid"));
 		name.setText(item.get("wpmc"));
-		weight.setText(item.get("zl")+item.get("zl_danwei"));
-		cubage.setText(item.get("tiji")+item.get("tiji_danwei"));
-		count.setText(item.get("sl")+item.get("sl_danwei"));
-		edit.setText(item.get("sl"));
+		weight.setText(item.get("zongliang")+item.get("zongliangdanwei"));
+		cubage.setText(item.get("tiji"));
+		count.setText(number+item.get("huoh"));
+		edit.setText(number);
 		edit.addTextChangedListener(new TextWatcher() {
 			
 			@Override
@@ -98,23 +110,32 @@ public class OutAdapter extends BaseAdapter {
 			
 			@Override
 			public void afterTextChanged(Editable s) {
-				ids.set(pos, s.toString());
+				if (s != null && s.length() > 0) {
+					if (Integer.parseInt(s.toString()) > Integer.parseInt(item.get("yusl"))) {
+						Toast.makeText(activity, "不能大于预装数量"+number, Toast.LENGTH_LONG).show();
+						s.replace(0, s.length(), item.get("yusl"));
+						return;
+					}else {
+						list.set(pos, Integer.parseInt(s.toString()));
+					}
+				}
+//				ids.set(pos, s.toString());
 			}
 		});
 		
-		checkBox.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				if (isChecked) {
-					isChecked = false;
-					selected.set(pos, 0);
-				} else {
-					isChecked = true;
-					selected.set(pos, 1);
-				}
-			}
-		});
+//		checkBox.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				if (isChecked) {
+//					isChecked = false;
+//					selected.set(pos, 0);
+//				} else {
+//					isChecked = true;
+//					selected.set(pos, 1);
+//				}
+//			}
+//		});
 		
 		return convertView;
 	}

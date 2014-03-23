@@ -16,77 +16,61 @@
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:columnCount="4"
         android:orientation="horizontal" >
 
         <TextView
+            android:text="单号" />
+        
+        <TextView
             android:id="@+id/code"
-            android:layout_columnSpan="2"
-            android:textColor="@android:color/holo_blue_dark"
-            android:text="" />
-        
-        <TextView
-            android:text="目的地" />
-        
-        <TextView
-            android:id="@+id/city"
-            android:layout_marginLeft="5dp"
-            android:text="" />
-        <TextView
-            android:text="货号" />
-        
-        <TextView
-            android:id="@+id/rkid"
-            android:layout_width="100dp"
-            android:layout_marginLeft="5dp"
-            android:textColor="@android:color/holo_red_dark"
-            android:text="" />
-
-        <TextView
-            android:text="名称" />
-        
-        <TextView
-            android:id="@+id/stuff_name"
-            android:layout_marginLeft="5dp"
-            android:textColor="@android:color/holo_blue_dark"
-            android:text="" />
-        
-        <TextView
-            android:text="总量" />
-        
-        <TextView
-            android:id="@+id/weight"
-            android:layout_width="100dp"
+            android:layout_width="50dp"
             android:layout_marginLeft="5dp"
             android:text="" />
 
         <TextView
-            android:text="体积" />
+            android:text="车牌" />
         
         <TextView
-            android:id="@+id/cubage"
+            android:id="@+id/truck"
+            android:layout_marginLeft="5dp"
+            android:text="" />
+        
+        <TextView
+            android:text="司机" />
+        
+        <TextView
+            android:id="@+id/driver"
+            android:layout_width="50dp"
+            android:layout_marginLeft="5dp"
+            android:text="" />
+
+        <TextView
+            android:text="电话" />
+        
+        <TextView
+            android:id="@+id/tel"
             android:layout_marginLeft="5dp"
             android:drawableRight="@drawable/m3"
             android:text="" />
         
         <TextView
-            android:text="数量" />
+            android:text="调度员" />
         
         <TextView
-            android:id="@+id/count"
-            android:layout_width="100dp"
+            android:id="@+id/user"
+            android:layout_width="50dp"
             android:layout_marginLeft="5dp"
             android:text="" />
         <TextView
-            android:text="实装数量" />
+            android:text="制单日期" />
 
-        <EditText
-            android:id="@+id/edit"
-            android:layout_width="100dp"
-            android:background="@drawable/login_edittext_bg"
-            android:gravity="left|center_vertical"
-            android:inputType="number"
-            android:hint="实装数量" />
+        <TextView
+            android:id="@+id/date"
+            android:layout_marginLeft="5dp"
+            android:text="" />
     </GridLayout>
 
 </LinearLayout>
