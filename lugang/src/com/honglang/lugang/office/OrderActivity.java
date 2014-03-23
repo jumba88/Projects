@@ -369,6 +369,7 @@ public class OrderActivity extends Activity implements OnClickListener {
 					orderMap.put("baofei", item.getBaofei());
 					orderMap.put("zongyunfei", item.getZongyunfei());
 					orderMap.put("tbjz", item.getTbjz());
+					orderMap.put("baozhuang", item.getBaozhuang());
 					orderList.add(orderMap);
 				} catch (JSONException e) {
 					e.printStackTrace();
@@ -413,8 +414,10 @@ public class OrderActivity extends Activity implements OnClickListener {
 			if (result) {
 				Toast.makeText(OrderActivity.this, "操作成功,信息已发送到下单人!", Toast.LENGTH_SHORT).show();
 				setResult(RESULT_OK);
+				OrderActivity.this.finish();
 			} else {
 				Toast.makeText(OrderActivity.this, "操作失败,"+errMsg, Toast.LENGTH_SHORT).show();
+				Log.i("suxoyo", errMsg);
 			}
 			super.onPostExecute(result);
 		}
