@@ -20,6 +20,7 @@ import com.honglang.lugang.R.array;
 import com.honglang.lugang.R.id;
 import com.honglang.lugang.R.layout;
 import com.honglang.lugang.qrcode.DriverActivity;
+import com.honglang.zxing.CaptureActivity;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -43,6 +44,9 @@ public class OutActivity extends Activity implements OnClickListener {
 	private TextView title;
 	private Button back;
 	private Button confirm;
+	private Button again;
+	private Button go;
+	
 	private String fhCode;
 
 	// private EditText number;
@@ -75,6 +79,8 @@ public class OutActivity extends Activity implements OnClickListener {
 	String pcId;
 
 	static final private int GET_CODE = 0;
+	
+	private static int FROM;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -90,10 +96,11 @@ public class OutActivity extends Activity implements OnClickListener {
 		back = (Button) this.findViewById(R.id.back);
 		back.setOnClickListener(this);
 		confirm = (Button) this.findViewById(R.id.ok);
-		confirm.setText("确认数量");
+		confirm.setText("确认数量 ");
 		confirm.setVisibility(View.VISIBLE);
 		confirm.setOnClickListener(this);
-		fhCode = this.getIntent().getExtras().getString("fhCode");
+		again = (Button) this.findViewById(R.id.again);
+		go = (Button) this.findViewById(R.id.go);
 
 		// province = (Spinner) this.findViewById(R.id.province);
 		// code = (Spinner) this.findViewById(R.id.code);
@@ -120,12 +127,18 @@ public class OutActivity extends Activity implements OnClickListener {
 		items = new ArrayList<HashMap<String, String>>();
 		outList = new ArrayList<JSONObject>();
 
-		switch (getIntent().getIntExtra("from", 0)) {
+		pcId = getIntent().getStringExtra("pcId");
+		FROM = getIntent().getIntExtra("from", 0);
+		switch (FROM) {
 		case 0:
+			fhCode = this.getIntent().getExtras().getString("fhCode");
 			new LoadTask().execute((Void) null);
+			again.setVisibility(View.VISIBLE);
+			again.setOnClickListener(this);
 			break;
 		case 1:
-			pcId = getIntent().getStringExtra("pcId");
+			go.setVisibility(View.VISIBLE);
+			go.setOnClickListener(this);
 			progress = ProgressDialog.show(OutActivity.this, null, "加载中...",
 					false, false);
 			new LoadInfoTask().execute((Void) null);
@@ -133,18 +146,26 @@ public class OutActivity extends Activity implements OnClickListener {
 		}
 	}
 
-	// @Override
-	// protected void onActivityResult(int requestCode, int resultCode, Intent
-	// data) {
-	// if (requestCode == GET_CODE) {
-	// if (resultCode == RESULT_OK) {
-	// driver.setText(data.getStringExtra("sj"));;
-	// driverNumber.setText(data.getStringExtra("dh"));;
-	// driverId.setText(data.getStringExtra("sfz"));;
-	// }
-	// }
-	// super.onActivityResult(requestCode, resultCode, data);
-	// }
+	 @Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//		if (requestCode == GET_CODE) {
+//			if (resultCode == RESULT_OK) {
+//				driver.setText(data.getStringExtra("sj"));
+//				;
+//				driverNumber.setText(data.getStringExtra("dh"));
+//				;
+//				driverId.setText(data.getStringExtra("sfz"));
+//				;
+//			}
+//		}
+		 if (requestCode == 300) {
+			if (resultCode == RESULT_OK) {
+				fhCode = data.getStringExtra("fhCode");
+				new LoadTask().execute((Void)null);
+			}
+		}
+	 super.onActivityResult(requestCode, resultCode, data);
+	 }
 
 	@Override
 	public void onClick(View v) {
@@ -156,10 +177,23 @@ public class OutActivity extends Activity implements OnClickListener {
 			// ok();
 			new SubmitTask().execute((Void)null);
 			break;
-		case R.id.choose:
-			Intent intent = new Intent(this, DriverActivity.class);
-			this.startActivityForResult(intent, GET_CODE);
+		case R.id.again:
+			Intent data = new Intent();
+			data.putExtra("pcid", pcId);
+			Log.i("suxoyo", "2-pcid="+pcId);
+			setResult(RESULT_OK, data);
+			finish();
 			break;
+		case R.id.go:
+			Intent intent = new Intent(this, CaptureActivity.class);
+			intent.putExtra("QRTYPE", 5);
+			intent.putExtra("pcId", pcId);
+			this.startActivityForResult(intent, 300);
+			break;
+//		case R.id.choose:
+//			Intent intent = new Intent(this, DriverActivity.class);
+//			this.startActivityForResult(intent, GET_CODE);
+//			break;
 		}
 
 	}
@@ -245,7 +279,8 @@ public class OutActivity extends Activity implements OnClickListener {
 			SoapObject rpc = new SoapObject(Constant.NAMESPACE,
 					"PeiCheChuKuAdd");
 			rpc.addProperty("fhCode", fhCode);
-			rpc.addProperty("pcid", "");
+			rpc.addProperty("pcid", pcId);
+			Log.i("suxoyo", "1-pcid="+pcId);
 			rpc.addProperty("currentUserno", SessionManager.getInstance()
 					.getUsername());
 			rpc.addProperty("token", SessionManager.getInstance().getTokene());
@@ -298,6 +333,7 @@ public class OutActivity extends Activity implements OnClickListener {
 						"订单货物加入明细表失败,请检查您的网络是否正常." + errMsg, Toast.LENGTH_LONG)
 						.show();
 				Log.i("suxoyo", errMsg);
+				OutActivity.this.finish();
 			}
 			super.onPostExecute(result);
 		}
@@ -339,6 +375,7 @@ public class OutActivity extends Activity implements OnClickListener {
 						JSONObject data = json.getJSONObject("data");
 
 						if (data.getInt("currentrowcount") > 0) {
+							items.clear();
 							JSONArray rows = data.getJSONArray("rows");
 
 							for (int i = 0; i < rows.length(); i++) {
@@ -389,6 +426,7 @@ public class OutActivity extends Activity implements OnClickListener {
 			} else {
 				Toast.makeText(OutActivity.this, errMsg, Toast.LENGTH_LONG)
 						.show();
+				OutActivity.this.finish();
 			}
 			super.onPostExecute(result);
 		}
@@ -409,10 +447,10 @@ public class OutActivity extends Activity implements OnClickListener {
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			JSONArray array = new JSONArray();
-			JSONObject obj = new JSONObject();
 
 			try {
 				for (int i = 0; i < items.size(); i++) {
+					JSONObject obj = new JSONObject();
 					obj.put("oid", items.get(i).get("oid"));
 					obj.put("sl", adapter.list.get(i));
 					array.put(obj);
@@ -421,8 +459,8 @@ public class OutActivity extends Activity implements OnClickListener {
 				e.printStackTrace();
 			}
 			
-			Log.i("suxoyo", array.toString());
-			Log.i("suxoyo", pcId);
+			Log.i("suxoyo", "array="+array.toString());
+//			Log.i("suxoyo", pcId);
 
 			SoapObject rpc = new SoapObject(Constant.NAMESPACE,
 					"PeiCheChuKuRemove");
@@ -467,19 +505,21 @@ public class OutActivity extends Activity implements OnClickListener {
 			if (result) {
 				Toast.makeText(OutActivity.this, "操作成功", Toast.LENGTH_LONG)
 						.show();
-				 for (int i = 0; i < items.size(); i++) {
-				 if (adapter.list.get(i) == Integer.parseInt(items.get(i).get("yusl"))) {
-				 items.remove(i);
-				 }else {
-					items.get(i).put("zongliang", Integer.parseInt(items.get(i).get("yusl"))-adapter.list.get(i)+"");
-				}
-				 }
-				 Log.i("suxoyo", items.toString());
-				adapter.notifyDataSetChanged();
+//				 for (int i = 0; i < items.size(); i++) {
+//				 if (adapter.list.get(i) == Integer.parseInt(items.get(i).get("yusl"))) {
+//				 items.remove(i);
+//				 }else {
+//					items.get(i).put("zongliang", (Integer.parseInt(items.get(i).get("yusl")) - adapter.list.get(i))+"");
+//					Log.i("suxoyo", (Integer.parseInt(items.get(i).get("yusl")) - adapter.list.get(i))+"for");
+//				}
+//				 }
+//				 Log.i("suxoyo", items.toString());
+//				adapter.notifyDataSetChanged();
+				new LoadInfoTask().execute((Void)null);
 			} else {
 				Toast.makeText(OutActivity.this, "操作失败," + errMsg,
 						Toast.LENGTH_LONG).show();
-				Log.i("suxoyo", errMsg);
+//				Log.i("suxoyo", errMsg);
 			}
 			super.onPostExecute(result);
 		}

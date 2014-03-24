@@ -72,9 +72,8 @@ public class FormListActivity extends Activity implements OnClickListener {
 					long arg3) {
 				HashMap<String, String> item = items.get(arg2);
 				Intent i = new Intent(FormListActivity.this, OutActivity.class);
-				i.putExtra("fhCode", item.get("fhcode"));
 				i.putExtra("pcId", item.get("id"));
-				i.putExtra("form", 1);
+				i.putExtra("from", 1);
 				startActivity(i);
 			}
 		});
@@ -131,7 +130,6 @@ public class FormListActivity extends Activity implements OnClickListener {
 							HashMap<String, String> item = new HashMap<String, String>();
 							item.put("id", obj.getString("id"));
 							item.put("keycode", obj.getString("keycode"));
-							item.put("fhcode", obj.getString("fhcode"));
 							item.put("chep", obj.getString("chep"));
 							item.put("sij", obj.getString("sij"));
 							item.put("sjdh", obj.getString("sjdh"));

@@ -9,6 +9,7 @@ import com.honglang.lugang.R;
 import android.app.Activity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,7 @@ public class OutAdapter extends BaseAdapter {
 		
 		list = new ArrayList<Integer>();
 		for (int i = 0; i < items.size(); i++) {
-			list.add(Integer.parseInt(items.get(i).get("zongliang")));
+			list.add(Integer.parseInt(items.get(i).get("yusl")));
 		}
 //		selected = new ArrayList<Integer>();
 //		ids = new ArrayList<String>();
@@ -73,6 +74,7 @@ public class OutAdapter extends BaseAdapter {
 		if(item == null){
 			return null;
 		}
+		int num = list.get(position);
 		
 		TextView code = (TextView) convertView.findViewById(R.id.code);
 		TextView city = (TextView) convertView.findViewById(R.id.city);
@@ -82,7 +84,7 @@ public class OutAdapter extends BaseAdapter {
 		TextView cubage = (TextView) convertView.findViewById(R.id.cubage);
 		TextView count = (TextView) convertView.findViewById(R.id.count);
 //		CheckBox checkBox = (CheckBox) convertView.findViewById(R.id.checkBox);
-		EditText edit = (EditText) convertView.findViewById(R.id.edit);
+		final EditText edit = (EditText) convertView.findViewById(R.id.edit);
 		
 //		checkBox.setChecked(isChecked);
 		
@@ -94,7 +96,9 @@ public class OutAdapter extends BaseAdapter {
 		weight.setText(item.get("zongliang")+item.get("zongliangdanwei"));
 		cubage.setText(item.get("tiji"));
 		count.setText(number+item.get("huoh"));
-		edit.setText(number);
+//		Log.i("suxoyo", num+"");
+		edit.setText(num+"");
+//		edit.requestFocus();
 		edit.addTextChangedListener(new TextWatcher() {
 			
 			@Override
@@ -111,13 +115,15 @@ public class OutAdapter extends BaseAdapter {
 			@Override
 			public void afterTextChanged(Editable s) {
 				if (s != null && s.length() > 0) {
-					if (Integer.parseInt(s.toString()) > Integer.parseInt(item.get("yusl"))) {
+					if (Integer.parseInt(s.toString()) > Integer.parseInt(number)) {
 						Toast.makeText(activity, "不能大于预装数量"+number, Toast.LENGTH_LONG).show();
-						s.replace(0, s.length(), item.get("yusl"));
+						s.replace(0, s.length(), number);
 						return;
 					}else {
 						list.set(pos, Integer.parseInt(s.toString()));
 					}
+				}else{
+					list.set(pos, 0);
 				}
 //				ids.set(pos, s.toString());
 			}

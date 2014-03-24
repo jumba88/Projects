@@ -122,6 +122,8 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 	private InactivityTimer inactivityTimer;
 	private BeepManager beepManager;
 	private AmbientLightManager ambientLightManager;
+	
+	private String pcId = "";
 
 	ViewfinderView getViewfinderView() {
 		return viewfinderView;
@@ -162,6 +164,9 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 			break;
 		case 4:
 			title.setText("扫描进入货物确认");
+			break;
+		case 5:
+			title.setText("扫描二维码添加货物");
 			break;
 		}
 
@@ -403,6 +408,13 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 				}
 			}
 		}
+		//PeiCheChuKuAdd again
+		if (requestCode == 200) {
+			if (resultCode == RESULT_OK) {
+				pcId = intent.getStringExtra("pcid");
+				Log.i("suxoyo", "3-pcid="+pcId);
+			}
+		}
 	}
 
 	private void decodeOrStoreSavedBitmap(Bitmap bitmap, Result result) {
@@ -474,8 +486,9 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 			case 0:
 				Intent i = new Intent(CaptureActivity.this, OutActivity.class);
 				i.putExtra("from", 0);
+				i.putExtra("pcId", pcId);
 				i.putExtra("fhCode", rawResult.getText());
-				this.startActivity(i);
+				this.startActivityForResult(i, 200);
 				break;
 			case 1:
 				Intent i1 = new Intent(CaptureActivity.this, InActivity.class);
@@ -491,6 +504,12 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 				Intent i3 = new Intent(CaptureActivity.this, SearchActivity.class);
 				i3.putExtra("number", rawResult.getText());
 				this.startActivity(i3);
+				break;
+			case 5:
+				Intent i5 = new Intent();
+				i5.putExtra("fhCode", rawResult.getText());
+				setResult(RESULT_OK,i5);
+				finish();
 				break;
 			}
 			// Log.i("suxoyo", "handleDecode="+rawResult.getText());
