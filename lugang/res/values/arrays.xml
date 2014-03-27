@@ -118,6 +118,13 @@
     <item>其他货类</item>
   </string-array>
   
+  <string-array name="count_type">
+    <item>件</item>
+    <item>箱</item>
+    <item>包</item>
+    <item>车</item>
+  </string-array>
+  
   <string-array name="pack_type">
     <item>无包装</item>
     <item>麻包</item>

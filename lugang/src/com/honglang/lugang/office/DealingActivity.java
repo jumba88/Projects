@@ -25,14 +25,17 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
-public class DealingActivity extends Activity implements OnClickListener {
+public class DealingActivity extends Activity implements OnClickListener,OnScrollListener {
 
 	private TextView title;
 	private Button back;
@@ -40,11 +43,17 @@ public class DealingActivity extends Activity implements OnClickListener {
 	private List<Bill> items;
 	private OfficeAdapter adapter;
 	private ListView mListView;
+	private View footerView;
+	private ProgressBar pb;
+	
 	private int pageSize;
 	private int pageIndex;
 	private String action = "Dealing";
 	private String currentUserNo;
 	private String token;
+	
+	private int curCount;
+	private int totalCount;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -63,10 +72,14 @@ public class DealingActivity extends Activity implements OnClickListener {
 		pageIndex = 1;
 		currentUserNo = SessionManager.getInstance().getUsername();
 		token = SessionManager.getInstance().getTokene();
+		
 		items = new ArrayList<Bill>();
 		new DealingTask().execute((Void)null);
 		adapter = new OfficeAdapter(items, this, 0);
 		mListView = (ListView) this.findViewById(R.id.list_handling);
+		footerView = this.getLayoutInflater().inflate(R.layout.footer, null);
+		pb = (ProgressBar) footerView.findViewById(R.id.pb);
+		mListView.addFooterView(footerView);
 		if(adapter != null){
 			mListView.setAdapter(adapter);
 		}
@@ -107,6 +120,17 @@ public class DealingActivity extends Activity implements OnClickListener {
 		}
 		
 	}
+
+	@Override
+	public void onScroll(AbsListView view, int firstVisibleItem,
+			int visibleItemCount, int totalItemCount) {
+		
+	}
+
+	@Override
+	public void onScrollStateChanged(AbsListView view, int scrollState) {
+		
+	}
 	
 	public class DealingTask extends AsyncTask<Void, Void, Boolean>{
 
@@ -132,7 +156,10 @@ public class DealingActivity extends Activity implements OnClickListener {
 					Log.i("suxoyo", json.toString());
 					if (json.getBoolean("result")) {
 						items.clear();
+						
 						JSONObject data = json.getJSONObject("data");
+						curCount = data.getInt("currentrowcount");
+						totalCount = data.getInt("totalrowcount");
 						JSONArray rows = data.getJSONArray("rows");
 						for (int i = 0; i < rows.length(); i++) {
 							JSONObject obj = rows.getJSONObject(i);
@@ -161,6 +188,7 @@ public class DealingActivity extends Activity implements OnClickListener {
 		protected void onPostExecute(Boolean result) {
 			if (result) {
 				adapter.notifyDataSetChanged();
+				pb.setVisibility(View.GONE);
 			}else{
 				Toast.makeText(DealingActivity.this, errMsg, Toast.LENGTH_SHORT).show();
 			}

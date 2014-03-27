@@ -57,12 +57,15 @@ public class StuffActivity extends Activity implements OnClickListener {
 	public Spinner type;
 	public Spinner pack;
 	public Spinner weightUnit;
+	public Spinner totalUnit;
 	private static final String[] UNIT = new String[] { "t", "kg" };
 	private static String[] STUFF_TYPE;
 	private static String[] PACK_TYPE;
+	private static String[] COUNT_TYPE;
 	private ArrayAdapter<String> tAdapter;
 	private ArrayAdapter<String> pAdapter;
 	private ArrayAdapter<String> uAdapter;
+	private ArrayAdapter<String> cAdapter;
 	
 	public String allUnit;
 
@@ -117,17 +120,28 @@ public class StuffActivity extends Activity implements OnClickListener {
 
 		STUFF_TYPE = this.getResources().getStringArray(R.array.stuff_type);
 		PACK_TYPE = this.getResources().getStringArray(R.array.pack_type);
+		COUNT_TYPE = this.getResources().getStringArray(R.array.count_type);
+		
 		type = (Spinner) this.findViewById(R.id.type);
 		pack = (Spinner) this.findViewById(R.id.pack);
 		weightUnit = (Spinner) this.findViewById(R.id.weightUnit);
+		totalUnit = (Spinner) this.findViewById(R.id.totalUnit);
+		
+		cAdapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_spinner_item, COUNT_TYPE);
+		cAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		totalUnit.setAdapter(cAdapter);
+		
 		tAdapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_spinner_item, STUFF_TYPE);
 		tAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		type.setAdapter(tAdapter);
+		
 		pAdapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_spinner_item, PACK_TYPE);
 		pAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		pack.setAdapter(pAdapter);
+		
 		uAdapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_spinner_item, UNIT);
 		uAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -193,6 +207,17 @@ public class StuffActivity extends Activity implements OnClickListener {
 				pack.setSelection(5);
 			} else if (packStr.equals(PACK_TYPE[6])) {
 				pack.setSelection(6);
+			}
+			
+			String unitStr = stuff.getSl_danwei();
+			if (unitStr.equals(COUNT_TYPE[0])) {
+				totalUnit.setSelection(0);
+			} else if (unitStr.equals(COUNT_TYPE[1])) {
+				totalUnit.setSelection(1);
+			} else if (unitStr.equals(COUNT_TYPE[2])) {
+				totalUnit.setSelection(2);
+			} else if (unitStr.equals(COUNT_TYPE[3])) {
+				totalUnit.setSelection(3);
 			}
 			
 			String zl = stuff.getZl_danwei();
@@ -303,7 +328,7 @@ public class StuffActivity extends Activity implements OnClickListener {
 		stuff.setSl(count);
 		stuff.setBaozhuang(PACK_TYPE[pack.getSelectedItemPosition()]);
 		stuff.setZl(weight.getText().toString());
-		stuff.setSl_danwei("件");
+		stuff.setSl_danwei(COUNT_TYPE[totalUnit.getSelectedItemPosition()]);
 		stuff.setZl_danwei(UNIT[weightUnit.getSelectedItemPosition()]);
 		stuff.setTiji(cubage.getText().toString());
 		stuff.setTiji_danwei("m³");
