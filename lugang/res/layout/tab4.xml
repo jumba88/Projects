@@ -27,7 +27,7 @@
         <Button
             android:id="@+id/list"
             style="@style/tabone"
-            android:text="配车单列表" />
+            android:text="暂存跟车单" />
 
         <Button
             android:id="@+id/out"

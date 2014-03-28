@@ -152,7 +152,7 @@ public class CountActivity extends Activity implements OnClickListener {
 		shf.addTextChangedListener(new CalcWatcher());
 		thf.addTextChangedListener(new CalcWatcher());
 		bxf.addTextChangedListener(new CalcWatcher());
-		tbjz.addTextChangedListener(new CalcWatcher());
+		tbjz.addTextChangedListener(new TbWatcher());
 		
 //		isDsf = (Switch) this.findViewById(R.id.dshk);
 		yes = (RadioButton) this.findViewById(R.id.dshk_yes);
@@ -244,7 +244,14 @@ public class CountActivity extends Activity implements OnClickListener {
 		data.setSonghuofei(shf.getText().toString());
 		data.setBaofei(bxf.getText().toString());
 		data.setZongyunfei(zyf.getText().toString());
-		data.setTbjz(tbjz.getText().toString());
+		String str = tbjz.getText().toString().trim();
+		if (Constant.isNum(str)) {
+			data.setTbjz(str);
+		} else {
+			data.setTbjz("0");
+		}
+//		data.setTbjz(tbjz.getText()+"");
+		
 		data.setJl_danwei(allUnit);
 		data.setBaozhuang(PACK_TYPE[pack.getSelectedItemPosition()]);
 		return data;
@@ -281,7 +288,7 @@ public class CountActivity extends Activity implements OnClickListener {
 			String sh = shf.getText().toString().trim();
 			String bx = bxf.getText().toString().trim();
 			
-			String tb = tbjz.getText().toString().trim();
+//			String tb = tbjz.getText().toString().trim();
 			if (Constant.isNum(yun) && Constant.isNum(bz) && Constant.isNum(th) && Constant.isNum(sh) && Constant.isNum(bx)) {
 				Double y = Double.parseDouble(yun);
 				Double b = Double.parseDouble(bz);
@@ -293,28 +300,56 @@ public class CountActivity extends Activity implements OnClickListener {
 //				bxf.setText(f.format(x));
 				zyf.setText(f.format(sum));
 			}
-			if (EDITABLE) {
-				if (Constant.isNum(tb)) {
-					if (Double.parseDouble(tb) != Double.parseDouble(data.getTbjz())) {
-						confirm.setVisibility(View.VISIBLE);
-					}else{
-						confirm.setVisibility(View.GONE);
-					}
-				}
-			}
+//			if (EDITABLE) {
+//				if (Constant.isNum(tb)) {
+//					if (Double.parseDouble(tb) != Double.parseDouble(data.getTbjz())) {
+//						confirm.setVisibility(View.VISIBLE);
+//					}else{
+//						confirm.setVisibility(View.GONE);
+//					}
+//				}
+//			}
 		}
 
 		@Override
 		public void beforeTextChanged(CharSequence s, int start, int count,
 				int after) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
 		public void onTextChanged(CharSequence s, int start, int before,
 				int count) {
-			// TODO Auto-generated method stub
+			
+		}
+		
+	}
+	
+	class TbWatcher implements TextWatcher{
+
+		@Override
+		public void afterTextChanged(Editable s) {
+			if (EDITABLE) {
+				if (Constant.isNum(s.toString())) {
+					if (Double.parseDouble(s.toString()) != Double.parseDouble(data.getTbjz())) {
+						confirm.setVisibility(View.VISIBLE);
+					}else{
+						confirm.setVisibility(View.GONE);
+					}
+				}
+			}
+			
+		}
+
+		@Override
+		public void beforeTextChanged(CharSequence s, int start, int count,
+				int after) {
+			
+		}
+
+		@Override
+		public void onTextChanged(CharSequence s, int start, int before,
+				int count) {
 			
 		}
 		

@@ -52,7 +52,7 @@ public class FormListActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_form_list);
 		
 		title = (TextView) this.findViewById(R.id.title);
-		title.setText("配车单列表");
+		title.setText("暂存跟车单");
 		back = (Button) this.findViewById(R.id.back);
 		back.setOnClickListener(this);
 		

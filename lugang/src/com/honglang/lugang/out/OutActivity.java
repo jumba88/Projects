@@ -22,6 +22,8 @@ import com.honglang.lugang.R.layout;
 import com.honglang.lugang.qrcode.DriverActivity;
 import com.honglang.zxing.CaptureActivity;
 
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
@@ -46,8 +48,10 @@ public class OutActivity extends Activity implements OnClickListener {
 	private Button confirm;
 	private Button again;
 	private Button go;
-	
+
 	private String fhCode;
+
+	private SoundPool soundPool;
 
 	// private EditText number;
 	// private EditText driver;
@@ -79,7 +83,7 @@ public class OutActivity extends Activity implements OnClickListener {
 	String pcId;
 
 	static final private int GET_CODE = 0;
-	
+
 	private static int FROM;
 
 	@Override
@@ -101,6 +105,10 @@ public class OutActivity extends Activity implements OnClickListener {
 		confirm.setOnClickListener(this);
 		again = (Button) this.findViewById(R.id.again);
 		go = (Button) this.findViewById(R.id.go);
+
+		soundPool = new SoundPool(2, AudioManager.STREAM_SYSTEM, 5);
+		soundPool.load(this, R.raw.success, 1);
+		soundPool.load(this, R.raw.failed, 2);
 
 		// province = (Spinner) this.findViewById(R.id.province);
 		// code = (Spinner) this.findViewById(R.id.code);
@@ -146,26 +154,26 @@ public class OutActivity extends Activity implements OnClickListener {
 		}
 	}
 
-	 @Override
+	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//		if (requestCode == GET_CODE) {
-//			if (resultCode == RESULT_OK) {
-//				driver.setText(data.getStringExtra("sj"));
-//				;
-//				driverNumber.setText(data.getStringExtra("dh"));
-//				;
-//				driverId.setText(data.getStringExtra("sfz"));
-//				;
-//			}
-//		}
-		 if (requestCode == 300) {
+		// if (requestCode == GET_CODE) {
+		// if (resultCode == RESULT_OK) {
+		// driver.setText(data.getStringExtra("sj"));
+		// ;
+		// driverNumber.setText(data.getStringExtra("dh"));
+		// ;
+		// driverId.setText(data.getStringExtra("sfz"));
+		// ;
+		// }
+		// }
+		if (requestCode == 300) {
 			if (resultCode == RESULT_OK) {
 				fhCode = data.getStringExtra("fhCode");
-				new LoadTask().execute((Void)null);
+				new LoadTask().execute((Void) null);
 			}
 		}
-	 super.onActivityResult(requestCode, resultCode, data);
-	 }
+		super.onActivityResult(requestCode, resultCode, data);
+	}
 
 	@Override
 	public void onClick(View v) {
@@ -175,12 +183,12 @@ public class OutActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.ok:
 			// ok();
-			new SubmitTask().execute((Void)null);
+			new SubmitTask().execute((Void) null);
 			break;
 		case R.id.again:
 			Intent data = new Intent();
 			data.putExtra("pcid", pcId);
-			Log.i("suxoyo", "2-pcid="+pcId);
+			Log.i("suxoyo", "2-pcid=" + pcId);
 			setResult(RESULT_OK, data);
 			finish();
 			break;
@@ -190,10 +198,10 @@ public class OutActivity extends Activity implements OnClickListener {
 			intent.putExtra("pcId", pcId);
 			this.startActivityForResult(intent, 300);
 			break;
-//		case R.id.choose:
-//			Intent intent = new Intent(this, DriverActivity.class);
-//			this.startActivityForResult(intent, GET_CODE);
-//			break;
+		// case R.id.choose:
+		// Intent intent = new Intent(this, DriverActivity.class);
+		// this.startActivityForResult(intent, GET_CODE);
+		// break;
 		}
 
 	}
@@ -280,7 +288,7 @@ public class OutActivity extends Activity implements OnClickListener {
 					"PeiCheChuKuAdd");
 			rpc.addProperty("fhCode", fhCode);
 			rpc.addProperty("pcid", pcId);
-			Log.i("suxoyo", "1-pcid="+pcId);
+			Log.i("suxoyo", "1-pcid=" + pcId);
 			rpc.addProperty("currentUserno", SessionManager.getInstance()
 					.getUsername());
 			rpc.addProperty("token", SessionManager.getInstance().getTokene());
@@ -316,8 +324,8 @@ public class OutActivity extends Activity implements OnClickListener {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				// errMsg = "加载订单失败,请检查您的网络是否正常";
 				errMsg = e.toString();
+				errMsg = "操作失败，请稍候重试";
 			}
 			return false;
 		}
@@ -329,11 +337,14 @@ public class OutActivity extends Activity implements OnClickListener {
 				new LoadInfoTask().execute((Void) null);
 			} else {
 				progress.dismiss();
-				Toast.makeText(OutActivity.this,
-						"订单货物加入明细表失败,请检查您的网络是否正常." + errMsg, Toast.LENGTH_LONG)
+				Toast.makeText(OutActivity.this, errMsg, Toast.LENGTH_LONG)
 						.show();
 				Log.i("suxoyo", errMsg);
-				OutActivity.this.finish();
+				soundPool.play(2, 1, 1, 2, 0, 1);
+				if (FROM == 0) {
+					OutActivity.this.finish();
+				}
+
 			}
 			super.onPostExecute(result);
 		}
@@ -407,8 +418,8 @@ public class OutActivity extends Activity implements OnClickListener {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				// errMsg = "加载订单失败,请检查您的网络是否正常";
-				errMsg = e.toString();
+				// errMsg = e.toString();
+				errMsg = "操作失败，请稍候重试";
 			}
 			return false;
 		}
@@ -423,10 +434,14 @@ public class OutActivity extends Activity implements OnClickListener {
 					mListView.setCacheColorHint(0);
 					Constant.setListViewHeightBasedOnChildren(mListView);
 				}
+				soundPool.play(1, 1, 1, 1, 0, 1);
 			} else {
 				Toast.makeText(OutActivity.this, errMsg, Toast.LENGTH_LONG)
 						.show();
-				OutActivity.this.finish();
+				soundPool.play(2, 1, 1, 1, 0, 1);
+				if (FROM == 0) {
+					OutActivity.this.finish();
+				} 
 			}
 			super.onPostExecute(result);
 		}
@@ -458,9 +473,9 @@ public class OutActivity extends Activity implements OnClickListener {
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
-			
-			Log.i("suxoyo", "array="+array.toString());
-//			Log.i("suxoyo", pcId);
+
+			Log.i("suxoyo", "array=" + array.toString());
+			// Log.i("suxoyo", pcId);
 
 			SoapObject rpc = new SoapObject(Constant.NAMESPACE,
 					"PeiCheChuKuRemove");
@@ -493,7 +508,8 @@ public class OutActivity extends Activity implements OnClickListener {
 					}
 				}
 			} catch (Exception e) {
-				errMsg = e.toString();
+				// errMsg = e.toString();
+				errMsg = "操作失败，请稍候重试";
 				e.printStackTrace();
 			}
 			return false;
@@ -505,21 +521,13 @@ public class OutActivity extends Activity implements OnClickListener {
 			if (result) {
 				Toast.makeText(OutActivity.this, "操作成功", Toast.LENGTH_LONG)
 						.show();
-//				 for (int i = 0; i < items.size(); i++) {
-//				 if (adapter.list.get(i) == Integer.parseInt(items.get(i).get("yusl"))) {
-//				 items.remove(i);
-//				 }else {
-//					items.get(i).put("zongliang", (Integer.parseInt(items.get(i).get("yusl")) - adapter.list.get(i))+"");
-//					Log.i("suxoyo", (Integer.parseInt(items.get(i).get("yusl")) - adapter.list.get(i))+"for");
-//				}
-//				 }
-//				 Log.i("suxoyo", items.toString());
-//				adapter.notifyDataSetChanged();
-				new LoadInfoTask().execute((Void)null);
+				soundPool.play(1, 1, 1, 1, 0, 1);
+				new LoadInfoTask().execute((Void) null);
 			} else {
-				Toast.makeText(OutActivity.this, "操作失败," + errMsg,
-						Toast.LENGTH_LONG).show();
-//				Log.i("suxoyo", errMsg);
+				Toast.makeText(OutActivity.this, errMsg, Toast.LENGTH_LONG)
+						.show();
+				soundPool.play(2, 1, 1, 1, 0, 1);
+				OutActivity.this.finish();
 			}
 			super.onPostExecute(result);
 		}

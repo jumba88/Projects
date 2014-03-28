@@ -16,6 +16,7 @@ import com.honglang.lugang.R;
 import com.honglang.lugang.SessionManager;
 import com.honglang.lugang.R.layout;
 import com.honglang.lugang.R.menu;
+import com.honglang.lugang.login.LoginActivity;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -178,7 +179,8 @@ public class DealingActivity extends Activity implements OnClickListener,OnScrol
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				errMsg = e.toString();
+//				errMsg = e.toString();
+				errMsg = "操作失败，请稍候重试";
 				return false;
 			}
 			return false;
@@ -190,7 +192,13 @@ public class DealingActivity extends Activity implements OnClickListener,OnScrol
 				adapter.notifyDataSetChanged();
 				pb.setVisibility(View.GONE);
 			}else{
-				Toast.makeText(DealingActivity.this, errMsg, Toast.LENGTH_SHORT).show();
+				Toast.makeText(DealingActivity.this, errMsg, Toast.LENGTH_LONG).show();
+				if (errMsg.equals("请先登录")) {
+					Intent intent = new Intent(DealingActivity.this, LoginActivity.class);
+					intent.putExtra("dir", 1);
+					DealingActivity.this.startActivity(intent);
+				}
+				DealingActivity.this.finish();
 			}
 			super.onPostExecute(result);
 		}

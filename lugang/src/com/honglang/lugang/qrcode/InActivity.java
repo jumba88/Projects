@@ -25,6 +25,8 @@ import com.honglang.lugang.office.Order;
 import com.honglang.lugang.office.OrderActivity;
 import com.honglang.lugang.office.OrderAdapter;
 
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
@@ -46,6 +48,8 @@ public class InActivity extends Activity implements OnClickListener {
 	private TextView title;
 	private Button back;
 	private Button confirm;
+	
+	private SoundPool soundPool;
 	
 	private ListView mListView;
 	private InAdapter adapter;
@@ -74,6 +78,10 @@ public class InActivity extends Activity implements OnClickListener {
 		confirm.setText("确 认");
 		confirm.setVisibility(View.VISIBLE);
 		confirm.setOnClickListener(this);
+		
+		soundPool = new SoundPool(2, AudioManager.STREAM_SYSTEM, 5);
+		soundPool.load(this,R.raw.success,1);
+		soundPool.load(this,R.raw.failed,2);
 		
 		mListView = (ListView) findViewById(R.id.list);
 		mListView.setOnItemClickListener(new OnItemClickListener() {
@@ -221,8 +229,8 @@ public class InActivity extends Activity implements OnClickListener {
 					new ConfirmTask().execute((Void)null);
 				}
 			} else {
-				Toast.makeText(InActivity.this, errMsg, Toast.LENGTH_SHORT).show();
-//				InActivity.this.finish();
+				Toast.makeText(InActivity.this, errMsg, Toast.LENGTH_LONG).show();
+				InActivity.this.finish();
 			}
 			super.onPostExecute(result);
 		}
@@ -265,7 +273,7 @@ public class InActivity extends Activity implements OnClickListener {
 					}
 				}
 			} catch (Exception e) {
-//				errMsg = e.toString();
+				errMsg = "操作失败,请稍候重试";
 				e.printStackTrace();
 			}
 			return false;
@@ -275,7 +283,8 @@ public class InActivity extends Activity implements OnClickListener {
 		protected void onPostExecute(Boolean result) {
 			progress.dismiss();
 			if (result) {
-				Toast.makeText(InActivity.this, "操作成功", Toast.LENGTH_SHORT).show();
+				Toast.makeText(InActivity.this, "操作成功", Toast.LENGTH_LONG).show();
+				soundPool.play(1, 10, 10, 1, 0, 1);
 				if (formList.size() == 1) {
 					formList.clear();
 				} else {
@@ -286,8 +295,11 @@ public class InActivity extends Activity implements OnClickListener {
 					}
 				}
 				adapter.notifyDataSetChanged();
+				InActivity.this.finish();
 			} else {
-				Toast.makeText(InActivity.this, "操作失败,"+errMsg, Toast.LENGTH_SHORT).show();
+				Toast.makeText(InActivity.this, errMsg, Toast.LENGTH_LONG).show();
+				soundPool.play(2, 30, 30, 2, 0, 1);
+				InActivity.this.finish();
 			}
 			super.onPostExecute(result);
 		}

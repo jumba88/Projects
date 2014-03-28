@@ -18,7 +18,9 @@ public class SplashActivity extends Activity {
 			
 			@Override
 			public void run() {
-				SplashActivity.this.startActivity(new Intent(SplashActivity.this,LoginActivity.class));
+				Intent i = new Intent(SplashActivity.this,LoginActivity.class);
+				i.putExtra("dir", 0);
+				SplashActivity.this.startActivity(i);
 				SplashActivity.this.finish();
 			}
 		}, 1000);

@@ -287,39 +287,39 @@ public class StuffActivity extends Activity implements OnClickListener {
 		String hkStr = dk.getText().toString().trim();
 
 		if (stf == null || stf.equals("")) {
-			Toast.makeText(this, "请输入货物名称!", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "请输入货物名称!", Toast.LENGTH_LONG).show();
 			return;
 		}
 		if (!Constant.isNum(count)) {
-			Toast.makeText(this, "请输入货物数量!", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "请输入货物数量!", Toast.LENGTH_LONG).show();
 			return;
 		}
 		if (!Constant.isNum(yfStr)) {
-			Toast.makeText(this, "请输入运费!", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "请输入运费!", Toast.LENGTH_LONG).show();
 			return;
 		}
 		if (!Constant.isNum(bzfStr)) {
-			Toast.makeText(this, "请输入保险费!", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "请输入保险费!", Toast.LENGTH_LONG).show();
 			return;
 		}
 		if (!Constant.isNum(thfStr)) {
-			Toast.makeText(this, "请输入提货费!", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "请输入提货费!", Toast.LENGTH_LONG).show();
 			return;
 		}
 		if (!Constant.isNum(shfStr)) {
-			Toast.makeText(this, "请输入送货费!", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "请输入送货费!", Toast.LENGTH_LONG).show();
 			return;
 		}
 		if (!Constant.isNum(bxfStr)) {
-			Toast.makeText(this, "请输入保险费!", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "请输入保险费!", Toast.LENGTH_LONG).show();
 			return;
 		}
 		if (!Constant.isNum(tbjzStr)) {
-			Toast.makeText(this, "请输入投保价值!", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "请输入投保价值!", Toast.LENGTH_LONG).show();
 			return;
 		}
 		if (!Constant.isNum(hkStr)) {
-			Toast.makeText(this, "请输入货款!", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "请输入货款!", Toast.LENGTH_LONG).show();
 			return;
 		}
 

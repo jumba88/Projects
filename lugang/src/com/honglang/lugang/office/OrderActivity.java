@@ -160,11 +160,11 @@ public class OrderActivity extends Activity implements OnClickListener {
 	public void ok(){
 		for (int i = 0; i < items.size(); i++) {
 			if (Integer.parseInt(items.get(i).getSl()) == 0) {
-				Toast.makeText(OrderActivity.this, items.get(i).getWpmc()+"没有填写数量", Toast.LENGTH_SHORT).show();
+				Toast.makeText(OrderActivity.this, items.get(i).getWpmc()+"没有填写数量", Toast.LENGTH_LONG).show();
 				return;
 			}
-			if (Double.parseDouble(items.get(i).getYunfei()) == 0) {
-				Toast.makeText(OrderActivity.this, items.get(i).getWpmc()+"没有填写运费", Toast.LENGTH_SHORT).show();
+			if (items.get(i).getYunfei() == null || items.get(i).getYunfei().length() == 0) {
+				Toast.makeText(OrderActivity.this, items.get(i).getWpmc()+"没有填写运费", Toast.LENGTH_LONG).show();
 				return;
 			}
 		}
@@ -173,35 +173,35 @@ public class OrderActivity extends Activity implements OnClickListener {
 	public void yes(){
 		if (checked) {
 			if (sure.getText().toString().isEmpty()) {
-				Toast.makeText(OrderActivity.this, "确认人必须填写！", Toast.LENGTH_SHORT).show();
+				Toast.makeText(OrderActivity.this, "确认人必须填写！", Toast.LENGTH_LONG).show();
 				return;
 			}
 			if (surePhone.getText().toString().isEmpty()) {
-				Toast.makeText(OrderActivity.this, "确认人电话必须填写！", Toast.LENGTH_SHORT).show();
+				Toast.makeText(OrderActivity.this, "确认人电话必须填写！", Toast.LENGTH_LONG).show();
 				return;
 			}
 			new YesTask().execute((Void)null);
 		} else {
-			Toast.makeText(OrderActivity.this, "请先查看核对货物信息再确认", Toast.LENGTH_SHORT).show();
+			Toast.makeText(OrderActivity.this, "请先查看核对货物信息再确认", Toast.LENGTH_LONG).show();
 		}
 	}
 	public void no(){
 		if (checked) {
 			if (sure.getText().toString().isEmpty()) {
-				Toast.makeText(OrderActivity.this, "必须填写确认人！", Toast.LENGTH_SHORT).show();
+				Toast.makeText(OrderActivity.this, "必须填写确认人！", Toast.LENGTH_LONG).show();
 				return;
 			}
 			if (surePhone.getText().toString().isEmpty()) {
-				Toast.makeText(OrderActivity.this, "必须填写确认人电话！", Toast.LENGTH_SHORT).show();
+				Toast.makeText(OrderActivity.this, "必须填写确认人电话！", Toast.LENGTH_LONG).show();
 				return;
 			}
 			if (suggest.getText().toString().isEmpty()) {
-				Toast.makeText(OrderActivity.this, "必须填写意见！", Toast.LENGTH_SHORT).show();
+				Toast.makeText(OrderActivity.this, "必须填写意见！", Toast.LENGTH_LONG).show();
 				return;
 			}
 			new NoTask().execute((Void)null);
 		} else {
-			Toast.makeText(OrderActivity.this, "请先查看核对货物信息再确认", Toast.LENGTH_SHORT).show();
+			Toast.makeText(OrderActivity.this, "请先查看核对货物信息再确认", Toast.LENGTH_LONG).show();
 		}
 	}
 	
@@ -329,7 +329,7 @@ public class OrderActivity extends Activity implements OnClickListener {
 					Constant.setListViewHeightBasedOnChildren(mListView);
 				}
 			} else {
-				Toast.makeText(OrderActivity.this, errMsg, Toast.LENGTH_SHORT).show();
+				Toast.makeText(OrderActivity.this, errMsg, Toast.LENGTH_LONG).show();
 				OrderActivity.this.finish();
 			}
 			super.onPostExecute(result);
@@ -412,11 +412,11 @@ public class OrderActivity extends Activity implements OnClickListener {
 		protected void onPostExecute(Boolean result) {
 			progress.dismiss();
 			if (result) {
-				Toast.makeText(OrderActivity.this, "操作成功,信息已发送到下单人!", Toast.LENGTH_SHORT).show();
+				Toast.makeText(OrderActivity.this, "操作成功,信息已发送到下单人!", Toast.LENGTH_LONG).show();
 				setResult(RESULT_OK);
 				OrderActivity.this.finish();
 			} else {
-				Toast.makeText(OrderActivity.this, "操作失败,"+errMsg, Toast.LENGTH_SHORT).show();
+				Toast.makeText(OrderActivity.this, "操作失败,"+errMsg, Toast.LENGTH_LONG).show();
 				Log.i("suxoyo", errMsg);
 			}
 			super.onPostExecute(result);
@@ -473,11 +473,11 @@ public class OrderActivity extends Activity implements OnClickListener {
 		protected void onPostExecute(Boolean result) {
 			progress.dismiss();
 			if (result) {
-				Toast.makeText(OrderActivity.this, "您已同意托运", Toast.LENGTH_SHORT).show();
+				Toast.makeText(OrderActivity.this, "您已同意托运", Toast.LENGTH_LONG).show();
 				setResult(RESULT_OK);
 				OrderActivity.this.finish();
 			} else {
-				Toast.makeText(OrderActivity.this, "确认出错," + errMsg, Toast.LENGTH_SHORT).show();
+				Toast.makeText(OrderActivity.this, "确认出错," + errMsg, Toast.LENGTH_LONG).show();
 			}
 			super.onPostExecute(result);
 		}
@@ -545,11 +545,11 @@ public class OrderActivity extends Activity implements OnClickListener {
 		protected void onPostExecute(Boolean result) {
 			progress.dismiss();
 			if (result) {
-				Toast.makeText(OrderActivity.this, "您已不同意托运", Toast.LENGTH_SHORT).show();
+				Toast.makeText(OrderActivity.this, "您已不同意托运", Toast.LENGTH_LONG).show();
 				setResult(RESULT_OK);
 				OrderActivity.this.finish();
 			} else {
-				Toast.makeText(OrderActivity.this, "确认出错," + errMsg, Toast.LENGTH_SHORT).show();
+				Toast.makeText(OrderActivity.this, "确认出错," + errMsg, Toast.LENGTH_LONG).show();
 			}
 			super.onPostExecute(result);
 		}

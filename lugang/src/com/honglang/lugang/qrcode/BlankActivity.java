@@ -243,7 +243,7 @@ public class BlankActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.add:
 			if (items.size() == 5) {
-				Toast.makeText(BlankActivity.this, "最多只能添加五项货物", Toast.LENGTH_SHORT).show();
+				Toast.makeText(BlankActivity.this, "最多只能添加五项货物", Toast.LENGTH_LONG).show();
 				return;
 			}
 			Intent intent = new Intent(this, StuffActivity.class);
@@ -278,47 +278,47 @@ public class BlankActivity extends Activity implements OnClickListener {
 		phoneKd = phone_kd.getText().toString().trim(); 
 		
 		if (nameSh == null || nameSh.equals("")) {
-			Toast.makeText(this, "请填写收货人姓名", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "请填写收货人姓名", Toast.LENGTH_LONG).show();
 			return;
 		}
 		if (phoneSh == null || phoneSh.equals("")) {
-			Toast.makeText(this, "请填写收货人电话", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "请填写收货人电话", Toast.LENGTH_LONG).show();
 			return;
 		}
 //		if (codeSh == null || codeSh.equals("")) {
-//			Toast.makeText(this, "请填写收货人身份证号码", Toast.LENGTH_SHORT).show();
+//			Toast.makeText(this, "请填写收货人身份证号码", Toast.LENGTH_LONG).show();
 //			return;
 //		}
 		
 		if (nameTy == null || nameTy.equals("")) {
-			Toast.makeText(this, "请填写托运人姓名", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "请填写托运人姓名", Toast.LENGTH_LONG).show();
 			return;
 		}
 		if (phoneTy == null || phoneTy.equals("")) {
-			Toast.makeText(this, "请填写托运人电话", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "请填写托运人电话", Toast.LENGTH_LONG).show();
 			return;
 		}
 //		if (codeTy == null || codeTy.equals("")) {
-//			Toast.makeText(this, "请填写托运人身份证号码货企业代码", Toast.LENGTH_SHORT).show();
+//			Toast.makeText(this, "请填写托运人身份证号码货企业代码", Toast.LENGTH_LONG).show();
 //			return;
 //		}
 		
 		if (!IS_TO) {
-			Toast.makeText(this, "请填写收货人目标城市", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "请填写收货人目标城市", Toast.LENGTH_LONG).show();
 			return;
 		}
 		if (!IS_FROM) {
-			Toast.makeText(this, "请填写托运人始发城市", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "请填写托运人始发城市", Toast.LENGTH_LONG).show();
 			return;
 		}
 		
 		if (phoneKd == null || phoneKd.equals("")) {
-			Toast.makeText(this, "请填写开单人电话", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "请填写开单人电话", Toast.LENGTH_LONG).show();
 			return;
 		}
 		
 		if (!IS_ADD) {
-			Toast.makeText(this, "您还没有填写要托运的货物", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "您还没有填写要托运的货物", Toast.LENGTH_LONG).show();
 			return;
 		}
 		new ConfirmTask().execute((Void)null);
@@ -391,7 +391,7 @@ public class BlankActivity extends Activity implements OnClickListener {
 		protected void onPostExecute(Boolean result) {
 			progress.dismiss();
 			if (!result) {
-				Toast.makeText(BlankActivity.this, errMsg, Toast.LENGTH_SHORT).show();
+				Toast.makeText(BlankActivity.this, errMsg, Toast.LENGTH_LONG).show();
 				BlankActivity.this.finish();
 			}
 			super.onPostExecute(result);
@@ -521,10 +521,11 @@ public class BlankActivity extends Activity implements OnClickListener {
 		protected void onPostExecute(Boolean result) {
 			progress.dismiss();
 			if (result) {
-				Toast.makeText(BlankActivity.this, "发货码"+fhCode+"入库成功", Toast.LENGTH_SHORT).show();
-				confirm.setEnabled(false);
+				Toast.makeText(BlankActivity.this, "发货码"+fhCode+"入库成功", Toast.LENGTH_LONG).show();
+//				confirm.setEnabled(false);
+				BlankActivity.this.finish();
 			} else {
-				Toast.makeText(BlankActivity.this, "操作失败"+errMsg, Toast.LENGTH_SHORT).show();
+				Toast.makeText(BlankActivity.this, "操作失败"+errMsg, Toast.LENGTH_LONG).show();
 			}
 			super.onPostExecute(result);
 		}

@@ -35,10 +35,15 @@ public class LoginActivity extends Activity {
 	private String userNo;
 	private String pass;
 	private ProgressDialog progress;
+	
+	private static int DIR;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+		
+		DIR = getIntent().getIntExtra("dir", 1);
+		
 		setting = new Setting(this);
 		
 		username = (ClearEditText) this.findViewById(R.id.username);
@@ -119,7 +124,10 @@ public class LoginActivity extends Activity {
 		@Override
 		protected void onPostExecute(Boolean result) {
 			if(result){
-				LoginActivity.this.startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+				if (DIR == 0) {
+					LoginActivity.this.startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+				}
+				
 				LoginActivity.this.finish();
 			}else {
 				Toast.makeText(LoginActivity.this, "登录失败," + errMsg, Toast.LENGTH_LONG).show();
