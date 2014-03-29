@@ -19,6 +19,7 @@ import com.honglang.lugang.SessionManager;
 import com.honglang.lugang.R.layout;
 import com.honglang.lugang.R.menu;
 import com.honglang.lugang.billsearch.BillDetailActivity;
+import com.honglang.lugang.login.LoginActivity;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -309,7 +310,7 @@ public class OrderActivity extends Activity implements OnClickListener {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				errMsg = "加载工单失败,请检查您的网络是否正常";
+				errMsg = "操作失败，请稍候重试";
 			}
 			return false;
 		}
@@ -330,6 +331,11 @@ public class OrderActivity extends Activity implements OnClickListener {
 				}
 			} else {
 				Toast.makeText(OrderActivity.this, errMsg, Toast.LENGTH_LONG).show();
+				if (errMsg.equals("请先登录")) {
+					Intent i = new Intent(OrderActivity.this, LoginActivity.class);
+					i.putExtra("dir", 1);
+					startActivity(i);
+				}
 				OrderActivity.this.finish();
 			}
 			super.onPostExecute(result);
@@ -403,7 +409,8 @@ public class OrderActivity extends Activity implements OnClickListener {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				errMsg = e.toString();
+//				errMsg = e.toString();
+				errMsg = "操作失败，请稍候重试";
 			}
 			return false;
 		}
@@ -416,8 +423,12 @@ public class OrderActivity extends Activity implements OnClickListener {
 				setResult(RESULT_OK);
 				OrderActivity.this.finish();
 			} else {
-				Toast.makeText(OrderActivity.this, "操作失败,"+errMsg, Toast.LENGTH_LONG).show();
-				Log.i("suxoyo", errMsg);
+				Toast.makeText(OrderActivity.this, errMsg, Toast.LENGTH_LONG).show();
+				if (errMsg.equals("请先登录")) {
+					Intent i = new Intent(OrderActivity.this, LoginActivity.class);
+					i.putExtra("dir", 1);
+					startActivity(i);
+				}
 			}
 			super.onPostExecute(result);
 		}
@@ -464,7 +475,8 @@ public class OrderActivity extends Activity implements OnClickListener {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				errMsg = e.toString();
+//				errMsg = e.toString();
+				errMsg = "操作失败，请稍候重试";
 			}
 			return false;
 		}
@@ -477,7 +489,12 @@ public class OrderActivity extends Activity implements OnClickListener {
 				setResult(RESULT_OK);
 				OrderActivity.this.finish();
 			} else {
-				Toast.makeText(OrderActivity.this, "确认出错," + errMsg, Toast.LENGTH_LONG).show();
+				Toast.makeText(OrderActivity.this, errMsg, Toast.LENGTH_LONG).show();
+				if (errMsg.equals("请先登录")) {
+					Intent i = new Intent(OrderActivity.this, LoginActivity.class);
+					i.putExtra("dir", 1);
+					startActivity(i);
+				}
 			}
 			super.onPostExecute(result);
 		}
@@ -536,7 +553,8 @@ public class OrderActivity extends Activity implements OnClickListener {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				errMsg = e.toString();
+//				errMsg = e.toString();
+				errMsg = "操作失败，请稍候重试";
 			}
 			return null;
 		}
@@ -549,7 +567,12 @@ public class OrderActivity extends Activity implements OnClickListener {
 				setResult(RESULT_OK);
 				OrderActivity.this.finish();
 			} else {
-				Toast.makeText(OrderActivity.this, "确认出错," + errMsg, Toast.LENGTH_LONG).show();
+				Toast.makeText(OrderActivity.this, errMsg, Toast.LENGTH_LONG).show();
+				if (errMsg.equals("请先登录")) {
+					Intent i = new Intent(OrderActivity.this, LoginActivity.class);
+					i.putExtra("dir", 1);
+					startActivity(i);
+				}
 			}
 			super.onPostExecute(result);
 		}

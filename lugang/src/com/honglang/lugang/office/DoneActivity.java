@@ -16,17 +16,20 @@ import com.honglang.lugang.R;
 import com.honglang.lugang.SessionManager;
 import com.honglang.lugang.R.layout;
 import com.honglang.lugang.R.menu;
+import com.honglang.lugang.login.LoginActivity;
 import com.honglang.lugang.office.DoneFragment.DealingTask;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class DoneActivity extends Activity implements OnClickListener {
 
@@ -41,8 +44,6 @@ public class DoneActivity extends Activity implements OnClickListener {
 	private int pageSize;
 	private int pageIndex;
 	private String action = "DealtDone";
-	private String currentUserNo;
-	private String token;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -64,8 +65,6 @@ public class DoneActivity extends Activity implements OnClickListener {
 		
 		pageSize = 40;
 		pageIndex = 1;
-		currentUserNo = SessionManager.getInstance().getUsername();
-		token = SessionManager.getInstance().getTokene();
 		items = new ArrayList<Bill>();
 		new DoneTask().execute((Void)null);
 		adapter = new OfficeAdapter(items, this, 1);
@@ -94,8 +93,8 @@ public class DoneActivity extends Activity implements OnClickListener {
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			SoapObject rpc = new SoapObject(Constant.NAMESPACE, action);
-			rpc.addProperty("currentUserNo", currentUserNo);
-			rpc.addProperty("token", token);
+			rpc.addProperty("currentUserNo", SessionManager.getInstance().getUsername());
+			rpc.addProperty("token", SessionManager.getInstance().getTokene());
 			rpc.addProperty("pageSize", pageSize);
 			rpc.addProperty("pageIndex", pageIndex);
 			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER12);
@@ -131,8 +130,8 @@ public class DoneActivity extends Activity implements OnClickListener {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				errMsg = e.toString();
-				return false;
+//				errMsg = e.toString();
+				errMsg = "操作失败，请稍候重试";
 			}
 			return false;
 		}
@@ -141,6 +140,14 @@ public class DoneActivity extends Activity implements OnClickListener {
 		protected void onPostExecute(Boolean result) {
 			if (result) {
 				adapter.notifyDataSetChanged();
+			}else {
+				Toast.makeText(DoneActivity.this, errMsg, Toast.LENGTH_LONG).show();
+				if (errMsg.equals("请先登录")) {
+					Intent i = new Intent(DoneActivity.this, LoginActivity.class);
+					i.putExtra("dir", 1);
+					startActivity(i);
+				}
+				DoneActivity.this.finish();
 			}
 			super.onPostExecute(result);
 		}

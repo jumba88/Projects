@@ -50,8 +50,6 @@ public class DealingActivity extends Activity implements OnClickListener,OnScrol
 	private int pageSize;
 	private int pageIndex;
 	private String action = "Dealing";
-	private String currentUserNo;
-	private String token;
 	
 	private int curCount;
 	private int totalCount;
@@ -71,8 +69,6 @@ public class DealingActivity extends Activity implements OnClickListener,OnScrol
 		
 		pageSize = 40;
 		pageIndex = 1;
-		currentUserNo = SessionManager.getInstance().getUsername();
-		token = SessionManager.getInstance().getTokene();
 		
 		items = new ArrayList<Bill>();
 		new DealingTask().execute((Void)null);
@@ -139,8 +135,8 @@ public class DealingActivity extends Activity implements OnClickListener,OnScrol
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			SoapObject rpc = new SoapObject(Constant.NAMESPACE, action);
-			rpc.addProperty("currentUserNo", currentUserNo);
-			rpc.addProperty("token", token);
+			rpc.addProperty("currentUserNo", SessionManager.getInstance().getUsername());
+			rpc.addProperty("token", SessionManager.getInstance().getTokene());
 			rpc.addProperty("pageSize", pageSize);
 			rpc.addProperty("pageIndex", pageIndex);
 			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER12);
