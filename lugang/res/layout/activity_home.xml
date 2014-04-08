@@ -29,9 +29,11 @@
             android:text="@string/tab2"/>
         <RadioButton android:id="@+id/three"
             style="@style/HomeTabs"
+            android:visibility="gone"
             android:text="@string/tab3"/>
         <RadioButton android:id="@+id/four"
             style="@style/HomeTabs"
+            android:visibility="gone"
             android:text="@string/tab4"/>
         
      </RadioGroup>
