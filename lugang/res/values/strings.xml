@@ -4198,5 +4198,7 @@
     <string name="title_activity_user">UserActivity</string>
     <string name="title_activity_save">SaveActivity</string>
     <string name="title_activity_form_list">FormListActivity</string>
+    <string name="title_activity_issue_stuff">IssueStuffActivity</string>
+    <string name="title_activity_issue_truck">IssueTruckActivity</string>
 
 </resources>

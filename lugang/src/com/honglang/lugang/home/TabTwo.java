@@ -3,6 +3,8 @@ package com.honglang.lugang.home;
 
 import com.honglang.lugang.R;
 import com.honglang.lugang.SessionManager;
+import com.honglang.lugang.issue.IssueStuffActivity;
+import com.honglang.lugang.issue.IssueTruckActivity;
 import com.honglang.lugang.login.UserActivity;
 import com.honglang.lugang.office.DealingActivity;
 import com.honglang.lugang.office.DoneActivity;
@@ -28,6 +30,8 @@ public class TabTwo extends Fragment implements OnClickListener {
 	private Button dealing;
 	private Button done;
 	private Button blank;
+	private Button stuff;
+	private Button truck;
 	
 	private View info;
 	@Override
@@ -60,13 +64,21 @@ public class TabTwo extends Fragment implements OnClickListener {
 		done.setOnClickListener(this);
 		blank = (Button) view.findViewById(R.id.blank);
 		blank.setOnClickListener(this);
+		stuff = (Button) view.findViewById(R.id.stuff);
+		stuff.setOnClickListener(this);
+		truck = (Button) view.findViewById(R.id.truck);
+		truck.setOnClickListener(this);
 		
-		if (SessionManager.getInstance().getUsertype().equals("物流企业") || SessionManager.getInstance().getUsertype().equals("物流园")) {
+		if (SessionManager.getInstance().getUsertype().equals("物流企业")) {
 			dealing.setText("待处理工单");
 			done.setText("已完成工单");
-		} else {
+			blank.setVisibility(View.VISIBLE);
+		} else if(SessionManager.getInstance().getUsertype().equals("VIP会员")){
 			dealing.setText("待处理事项");
 			done.setText("已下单信息");
+		}else {
+			dealing.setVisibility(View.GONE);
+			done.setVisibility(View.GONE);
 		}
 		
 	}
@@ -85,6 +97,12 @@ public class TabTwo extends Fragment implements OnClickListener {
 			break;
 		case R.id.info:
 			getActivity().startActivity(new Intent(getActivity(),UserActivity.class));
+			break;
+		case R.id.stuff:
+			getActivity().startActivity(new Intent(getActivity(),IssueStuffActivity.class));
+			break;
+		case R.id.truck:
+			getActivity().startActivity(new Intent(getActivity(),IssueTruckActivity.class));
 			break;
 		case R.id.blank:
 			Intent i = new Intent(getActivity(),CaptureActivity.class);

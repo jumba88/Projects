@@ -24,6 +24,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -33,12 +34,27 @@ public class HomeActivity extends  FragmentActivity implements OnClickListener{
 	FragmentTabAdapter tabAdapter;
 	private RadioGroup tabs;
 	
+	private RadioButton two;
+	private RadioButton three;
+	private RadioButton four;
+	
 	private long exitTime = 0;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
 		HlApp.getInstance().setHomeActivity(HomeActivity.this);
+		
+		two = (RadioButton) findViewById(R.id.two);
+		three = (RadioButton) findViewById(R.id.three);
+		four = (RadioButton) findViewById(R.id.four);
+		
+		if (SessionManager.getInstance().getUsertype().equals("物流企业")) {
+			three.setVisibility(View.VISIBLE);
+			four.setVisibility(View.VISIBLE);
+		}else {
+			two.setText("我的办公室");
+		}
 		
 		fragments.add(new TabOne());
 		fragments.add(new TabTwo());
@@ -50,7 +66,7 @@ public class HomeActivity extends  FragmentActivity implements OnClickListener{
         tabAdapter.setOnRgsExtraCheckedChangedListener(new FragmentTabAdapter.OnRgsExtraCheckedChangedListener(){
             @Override
             public void OnRgsExtraCheckedChanged(RadioGroup radioGroup, int checkedId, int index) {
-                System.out.println("Extra---- " + index + " checked!!! ");
+//                System.out.println("Extra---- " + index + " checked!!! ");
             }
         });
 		

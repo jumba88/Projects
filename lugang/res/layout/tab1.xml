@@ -17,15 +17,18 @@
         <com.honglang.lugang.ui.ClearEditText 
             android:id="@+id/search"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_weight="3"
+            android:background="@drawable/login_edittext_bg"
             android:hint="请输入运单号"
             android:inputType="number"/>
         
         <Button android:id="@+id/btn"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
+            android:minHeight="1dp"
             android:layout_weight="1"
+            android:textSize="13sp"
             android:text="运单查询"/>
     </LinearLayout>
     

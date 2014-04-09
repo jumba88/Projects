@@ -51,6 +51,7 @@ public class SettingActivity extends Activity implements OnClickListener {
 	
 	public void onLogout(){
 		Intent intent = new Intent(this, LoginActivity.class);
+		intent.putExtra("dir", 0);
 		this.startActivity(intent);
 		HlApp.getInstance().getHomeActivity().finish();
 		this.finish();

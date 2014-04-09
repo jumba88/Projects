@@ -73,6 +73,15 @@
     	
     	<Button style="@style/tabone"
     	    android:id="@+id/blank"
+    	    android:visibility="gone"
         	android:text="扫描进入货物确认"/>
+    	
+    	<Button style="@style/tabone"
+    	    android:id="@+id/stuff"
+        	android:text="货物发布"/>
+    	
+    	<Button style="@style/tabone"
+    	    android:id="@+id/truck"
+        	android:text="空车发布"/>
 
 </LinearLayout>
