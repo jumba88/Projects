@@ -11,6 +11,7 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.honglang.lugang.Constant;
 import com.honglang.lugang.R;
 import com.honglang.lugang.SessionManager;
@@ -36,16 +37,17 @@ import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
-public class DealingActivity extends Activity implements OnClickListener,OnScrollListener {
+public class DealingActivity extends Activity implements OnClickListener {
 
 	private TextView title;
 	private Button back;
 	
 	private List<Bill> items;
 	private OfficeAdapter adapter;
-	private ListView mListView;
+	private PullToRefreshListView mListView;
+//	private ListView mListView;
 	private View footerView;
-	private ProgressBar pb;
+//	private ProgressBar pb;
 	
 	private int pageSize;
 	private int pageIndex;
@@ -73,19 +75,19 @@ public class DealingActivity extends Activity implements OnClickListener,OnScrol
 		items = new ArrayList<Bill>();
 		new DealingTask().execute((Void)null);
 		adapter = new OfficeAdapter(items, this, 0);
-		mListView = (ListView) this.findViewById(R.id.list_handling);
-		footerView = this.getLayoutInflater().inflate(R.layout.footer, null);
-		pb = (ProgressBar) footerView.findViewById(R.id.pb);
-		mListView.addFooterView(footerView);
+//		mListView = (ListView) this.findViewById(R.id.list_handling);
+		mListView = (PullToRefreshListView) this.findViewById(R.id.list_handling);
+		
+		ListView actualListView = mListView.getRefreshableView();
 		if(adapter != null){
-			mListView.setAdapter(adapter);
+			actualListView.setAdapter(adapter);
 		}
 		mListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				Bill bill = items.get(arg2);
+				Bill bill = items.get(arg2-1);
 				if (bill.getCurrent_node_id().equals("7") || bill.getCurrent_node_id().equals("9")) {
 					Intent intent = new Intent(DealingActivity.this, OrderActivity.class);
 					intent.putExtra("bill", bill);
@@ -99,6 +101,8 @@ public class DealingActivity extends Activity implements OnClickListener,OnScrol
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == 111) {
 			if (resultCode == RESULT_OK) {
+				items.clear();
+				pageIndex = 1;
 				new DealingTask().execute((Void)null);
 			}
 		}
@@ -115,17 +119,6 @@ public class DealingActivity extends Activity implements OnClickListener,OnScrol
 		default:
 			break;
 		}
-		
-	}
-
-	@Override
-	public void onScroll(AbsListView view, int firstVisibleItem,
-			int visibleItemCount, int totalItemCount) {
-		
-	}
-
-	@Override
-	public void onScrollStateChanged(AbsListView view, int scrollState) {
 		
 	}
 	
@@ -152,7 +145,6 @@ public class DealingActivity extends Activity implements OnClickListener,OnScrol
 					JSONObject json = (JSONObject) parser.nextValue();
 					Log.i("suxoyo", json.toString());
 					if (json.getBoolean("result")) {
-						items.clear();
 						
 						JSONObject data = json.getJSONObject("data");
 						curCount = data.getInt("currentrowcount");
@@ -186,7 +178,7 @@ public class DealingActivity extends Activity implements OnClickListener,OnScrol
 		protected void onPostExecute(Boolean result) {
 			if (result) {
 				adapter.notifyDataSetChanged();
-				pb.setVisibility(View.GONE);
+//				pb.setVisibility(View.GONE);
 			}else{
 				Toast.makeText(DealingActivity.this, errMsg, Toast.LENGTH_LONG).show();
 				if (errMsg.equals("请先登录")) {

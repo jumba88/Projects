@@ -10,433 +10,571 @@ package com.honglang.lugang;
 public final class R {
     public static final class anim {
         public static final int slide_bottom_in=0x7f040000;
-        public static final int slide_left_in=0x7f040001;
-        public static final int slide_left_out=0x7f040002;
-        public static final int slide_right_in=0x7f040003;
-        public static final int slide_right_out=0x7f040004;
-        public static final int slide_top_out=0x7f040005;
+        public static final int slide_in_from_bottom=0x7f040001;
+        public static final int slide_in_from_top=0x7f040002;
+        public static final int slide_left_in=0x7f040003;
+        public static final int slide_left_out=0x7f040004;
+        public static final int slide_out_to_bottom=0x7f040005;
+        public static final int slide_out_to_top=0x7f040006;
+        public static final int slide_right_in=0x7f040007;
+        public static final int slide_right_out=0x7f040008;
+        public static final int slide_top_out=0x7f040009;
     }
     public static final class array {
-        public static final int abei_city_item=0x7f070127;
-        public static final int akesu_city_item=0x7f070176;
-        public static final int alaer_city_item=0x7f07017e;
-        public static final int alashanmeng_city_item=0x7f07004e;
-        public static final int aleitai_city_item=0x7f07017c;
-        public static final int ali_city_item=0x7f070148;
-        public static final int anhui_province_item=0x7f070014;
-        public static final int anhui_suzhou_city_item=0x7f070097;
-        public static final int ankang_city_item=0x7f070152;
-        public static final int anqing_city_item=0x7f070093;
-        public static final int anshan_city_item=0x7f070051;
-        public static final int anshun_city_item=0x7f07012d;
-        public static final int anyang_city_item=0x7f0700c6;
-        public static final int aomen_city_item=0x7f070182;
-        public static final int aomen_province_item=0x7f070029;
-        public static final int baicheng_city_item=0x7f070064;
-        public static final int baise_city_item=0x7f07010d;
-        public static final int baishan_city_item=0x7f070062;
-        public static final int baiyin_city_item=0x7f070157;
-        public static final int baoding_city_item=0x7f070032;
-        public static final int baoji_city_item=0x7f07014c;
-        public static final int baoshan_city_item=0x7f070136;
-        public static final int baotou_city_item=0x7f070044;
-        public static final int bayannaoer_city_item=0x7f07004a;
-        public static final int bayinguolen_city_item=0x7f070175;
-        public static final int bazhong_city_item=0x7f070125;
-        public static final int beihai_city_item=0x7f070108;
+        public static final int abei_city_item=0x7f0a0127;
+        public static final int akesu_city_item=0x7f0a0176;
+        public static final int alaer_city_item=0x7f0a017e;
+        public static final int alashanmeng_city_item=0x7f0a004e;
+        public static final int aleitai_city_item=0x7f0a017c;
+        public static final int ali_city_item=0x7f0a0148;
+        public static final int anhui_province_item=0x7f0a0014;
+        public static final int anhui_suzhou_city_item=0x7f0a0097;
+        public static final int ankang_city_item=0x7f0a0152;
+        public static final int anqing_city_item=0x7f0a0093;
+        public static final int anshan_city_item=0x7f0a0051;
+        public static final int anshun_city_item=0x7f0a012d;
+        public static final int anyang_city_item=0x7f0a00c6;
+        public static final int aomen_city_item=0x7f0a0182;
+        public static final int aomen_province_item=0x7f0a0029;
+        public static final int baicheng_city_item=0x7f0a0064;
+        public static final int baise_city_item=0x7f0a010d;
+        public static final int baishan_city_item=0x7f0a0062;
+        public static final int baiyin_city_item=0x7f0a0157;
+        public static final int baoding_city_item=0x7f0a0032;
+        public static final int baoji_city_item=0x7f0a014c;
+        public static final int baoshan_city_item=0x7f0a0136;
+        public static final int baotou_city_item=0x7f0a0044;
+        public static final int bayannaoer_city_item=0x7f0a004a;
+        public static final int bayinguolen_city_item=0x7f0a0175;
+        public static final int bazhong_city_item=0x7f0a0125;
+        public static final int beihai_city_item=0x7f0a0108;
         /**  2000多个县 
          */
-        public static final int beijin_city_item=0x7f07002b;
+        public static final int beijin_city_item=0x7f0a002b;
         /**  个地级市 
          */
-        public static final int beijin_province_item=0x7f070009;
-        public static final int bengbu_city_item=0x7f07008e;
-        public static final int benxi_city_item=0x7f070053;
-        public static final int biji_city_item=0x7f070130;
-        public static final int boertala_city_item=0x7f070174;
-        public static final int buyang_city_item=0x7f0700ca;
-        public static final int cangzhou_city_item=0x7f070035;
-        public static final int changchun_city_item=0x7f07005d;
-        public static final int changde_city_item=0x7f0700e7;
-        public static final int changdu_city_item=0x7f070144;
-        public static final int changji_city_item=0x7f070173;
-        public static final int changsha_city_item=0x7f0700e1;
-        public static final int changzhi_city_item=0x7f07003b;
-        public static final int changzhou_city_item=0x7f070077;
-        public static final int chaohu_city_item=0x7f070098;
-        public static final int chaozhou_city_item=0x7f070101;
-        public static final int chengde_city_item=0x7f070034;
-        public static final int chengdu_city_item=0x7f070115;
-        public static final int chifeng_city_item=0x7f070046;
-        public static final int chizhou_city_item=0x7f07009b;
-        public static final int chongqing_city_item=0x7f070114;
-        public static final int chongqing_province_item=0x7f07001e;
-        public static final int chuangzuo_city_item=0x7f070111;
-        public static final int chuxiong_city_item=0x7f07013b;
-        public static final int chuzhou_city_item=0x7f070095;
-        public static final int count_type=0x7f070004;
-        public static final int country_codes=0x7f070000;
-        public static final int dali_city_item=0x7f07013f;
-        public static final int dalian_city_item=0x7f070050;
-        public static final int dandong_city_item=0x7f070054;
-        public static final int daqing_city_item=0x7f07006b;
-        public static final int datong_city_item=0x7f070039;
-        public static final int daxinganling_city_item=0x7f070072;
-        public static final int dazhou_city_item=0x7f070123;
-        public static final int dehuang_city_item=0x7f070140;
-        public static final int deyang_city_item=0x7f070119;
-        public static final int dezhou_city_item=0x7f0700be;
-        public static final int dingxi_city_item=0x7f07015e;
-        public static final int diqing_city_item=0x7f070142;
-        public static final int dongguan_city_item=0x7f0700ff;
-        public static final int dongying_city_item=0x7f0700b5;
-        public static final int eerduosi_city_item=0x7f070048;
-        public static final int enshi_city_item=0x7f0700df;
-        public static final int erzhou_city_item=0x7f0700d8;
-        public static final int fangchenggang_city_item=0x7f070109;
-        public static final int foshan_city_item=0x7f0700f4;
-        public static final int fujian_province_item=0x7f070015;
-        public static final int fuxin_city_item=0x7f070057;
-        public static final int fuyang_city_item=0x7f070096;
-        public static final int ganmu_city_item=0x7f070128;
-        public static final int gannan_city_item=0x7f070161;
-        public static final int gansu_province_item=0x7f070024;
-        public static final int ganzhou_city_item=0x7f0700ac;
-        public static final int geshen_city_item=0x7f070178;
-        public static final int guangan_city_item=0x7f070122;
-        public static final int guangdong_province_item=0x7f07001b;
-        public static final int guangxi_province_item=0x7f07001c;
-        public static final int guangxi_wuzhou_city_item=0x7f070107;
-        public static final int guangyuan_city_item=0x7f07011b;
-        public static final int guangzhou_city_item=0x7f0700ef;
-        public static final int guigang_city_item=0x7f07010b;
-        public static final int guilin_city_item=0x7f070106;
-        public static final int guiyang_city_item=0x7f07012a;
-        public static final int guizhou_province_item=0x7f070020;
-        public static final int guluo_city_item=0x7f070167;
-        public static final int guyuan_city_item=0x7f07016d;
-        public static final int haerbing_city_item=0x7f070066;
-        public static final int haibai_city_item=0x7f070164;
-        public static final int haidong_city_item=0x7f070163;
-        public static final int haikou_city_item=0x7f070112;
-        public static final int hainan_city_item=0x7f070166;
-        public static final int hainan_province_item=0x7f07001d;
-        public static final int haixi_city_item=0x7f070169;
-        public static final int hami_city_item=0x7f070172;
-        public static final int handan_city_item=0x7f070030;
-        public static final int hangzhou_city_item=0x7f070081;
-        public static final int hanzhong_city_item=0x7f070150;
-        public static final int haozhou_city_item=0x7f07009a;
-        public static final int hebi_city_item=0x7f0700c7;
-        public static final int hechi_city_item=0x7f07010f;
-        public static final int hefei_city_item=0x7f07008c;
-        public static final int hegang_city_item=0x7f070069;
-        public static final int heibei_province_item=0x7f07000b;
-        public static final int heihe_city_item=0x7f070070;
-        public static final int heilongjiang_province_item=0x7f070010;
-        public static final int heilongjiang_yichun_city_item=0x7f07006c;
-        public static final int henan_province_item=0x7f070018;
-        public static final int hengshui_city_item=0x7f070037;
-        public static final int hengyang_city_item=0x7f0700e4;
-        public static final int hetian_city_item=0x7f070179;
-        public static final int heyuan_city_item=0x7f0700fc;
-        public static final int heze_city_item=0x7f0700c1;
-        public static final int hezhou_city_item=0x7f07010e;
-        public static final int honghe_city_item=0x7f07013c;
-        public static final int hongkong_city_item=0x7f070181;
-        public static final int hongkong_province_item=0x7f070028;
-        public static final int huaian_city_item=0x7f07007b;
-        public static final int huaibei_city_item=0x7f070091;
-        public static final int huaihua_city_item=0x7f0700ec;
-        public static final int huainan_city_item=0x7f07008f;
-        public static final int huanggang_city_item=0x7f0700dc;
-        public static final int huangnan_city_item=0x7f070165;
-        public static final int huangshan_city_item=0x7f070094;
-        public static final int huangshi_city_item=0x7f0700d4;
-        public static final int hubei_jinzhou_city_item=0x7f0700db;
-        public static final int hubei_province_item=0x7f070019;
-        public static final int huhehaote_city_item=0x7f070043;
-        public static final int huizhou_city_item=0x7f0700f9;
-        public static final int huludao_city_item=0x7f07005c;
-        public static final int hulunbeier_city_item=0x7f070049;
-        public static final int hunan_bingzhou_city_item=0x7f0700ea;
-        public static final int hunan_province_item=0x7f07001a;
-        public static final int huzhou_city_item=0x7f07009d;
-        public static final int jiamusi_city_item=0x7f07006d;
-        public static final int jian_city_item=0x7f0700ad;
-        public static final int jiangmen_city_item=0x7f0700f5;
-        public static final int jiangsu_province_item=0x7f070012;
-        public static final int jiangsu_taizhou_city_item=0x7f07007f;
-        public static final int jiangxi_province_item=0x7f070016;
-        public static final int jiangxi_wuzhou_city_item=0x7f0700af;
-        public static final int jiangxi_yichun_city_item=0x7f0700ae;
-        public static final int jiaozuo_city_item=0x7f0700c9;
-        public static final int jiaxing_city_item=0x7f070084;
-        public static final int jiayuguan_city_item=0x7f070155;
-        public static final int jilin_city_item=0x7f07005e;
-        public static final int jilin_province_item=0x7f07000f;
-        public static final int jinan_city_item=0x7f0700b1;
-        public static final int jinchang_city_item=0x7f070156;
-        public static final int jincheng_city_item=0x7f07003c;
-        public static final int jingdezhen_city_item=0x7f0700a7;
-        public static final int jinhua_city_item=0x7f070087;
-        public static final int jining_city_item=0x7f0700b8;
-        public static final int jinmen_city_item=0x7f0700d9;
-        public static final int jinzhong_city_item=0x7f07003e;
-        public static final int jiujiang_city_item=0x7f0700a9;
-        public static final int jiuquan_city_item=0x7f07015c;
-        public static final int jixi_city_item=0x7f070068;
-        public static final int jiyang_city_item=0x7f070102;
-        public static final int kaifang_city_item=0x7f0700c3;
-        public static final int kaipingshan_city_item=0x7f0700c5;
-        public static final int kelamayi_city_item=0x7f070170;
-        public static final int kemuleisu_city_item=0x7f070177;
-        public static final int kunming_city_item=0x7f070133;
-        public static final int laibing_city_item=0x7f070110;
-        public static final int laiwu_city_item=0x7f0700bc;
-        public static final int langfang_city_item=0x7f070036;
-        public static final int lanzhou_city_item=0x7f070154;
-        public static final int lasa_city_item=0x7f070143;
-        public static final int leihe_city_item=0x7f0700cc;
-        public static final int leshan_city_item=0x7f07011e;
-        public static final int liangshan_city_item=0x7f070129;
-        public static final int lianyungang_city_item=0x7f07007a;
-        public static final int liaocheng_city_item=0x7f0700bf;
-        public static final int liaoning_jinzhou_city_item=0x7f070055;
-        public static final int liaoning_province_item=0x7f07000e;
-        public static final int liaoyang_city_item=0x7f070058;
-        public static final int liaoyuan_city_item=0x7f070060;
-        public static final int lijiang_city_item=0x7f070138;
-        public static final int linfen_city_item=0x7f070041;
-        public static final int lingcang_city_item=0x7f07013a;
-        public static final int linxi_city_item=0x7f0700bd;
-        public static final int linxia_city_item=0x7f070160;
-        public static final int linxia_province_item=0x7f070026;
-        public static final int linzhi_city_item=0x7f070149;
-        public static final int lishui_city_item=0x7f07008b;
-        public static final int liuzhou_city_item=0x7f070105;
-        public static final int longnan_city_item=0x7f07015f;
-        public static final int longyan_city_item=0x7f0700a4;
-        public static final int loudi_city_item=0x7f0700ed;
-        public static final int luan_city_item=0x7f070099;
-        public static final int luoyang_city_item=0x7f0700c4;
-        public static final int lupanshui_city_item=0x7f07012b;
-        public static final int luzhou_city_item=0x7f070118;
-        public static final int lvliang_city_item=0x7f070042;
-        public static final int maanshan_city_item=0x7f070090;
-        public static final int maoming_city_item=0x7f0700f7;
-        public static final int meishan_city_item=0x7f070120;
-        public static final int meizhou_city_item=0x7f0700fa;
-        public static final int mianyang_city_item=0x7f07011a;
-        public static final int mudanjiang_city_item=0x7f07006f;
-        public static final int nanchang_city_item=0x7f0700a6;
-        public static final int nanchong_city_item=0x7f07011f;
-        public static final int nanjing_city_item=0x7f070074;
-        public static final int nanjing_suzhou_city_item=0x7f070078;
-        public static final int nanning_city_item=0x7f070104;
-        public static final int nanp_city_item=0x7f0700a3;
-        public static final int nantong_city_item=0x7f070079;
-        public static final int nanyang_city_item=0x7f0700ce;
-        public static final int naqu_city_item=0x7f070147;
-        public static final int neijiang_city_item=0x7f07011d;
-        public static final int neimenggu_province_item=0x7f07000d;
-        public static final int ningbo_city_item=0x7f070082;
-        public static final int ningde_city_item=0x7f0700a5;
-        public static final int nujiang_city_item=0x7f070141;
-        public static final int pack_type=0x7f070005;
-        public static final int panjin_city_item=0x7f070059;
-        public static final int panzhihua_city_item=0x7f070117;
-        public static final int pingliang_city_item=0x7f07015b;
-        public static final int pingxiang_city_item=0x7f0700a8;
-        public static final int preferences_front_light_options=0x7f070007;
-        public static final int preferences_front_light_values=0x7f070006;
-        public static final int province=0x7f070001;
-        public static final int province_codes=0x7f070002;
+        public static final int beijin_province_item=0x7f0a0009;
+        public static final int bengbu_city_item=0x7f0a008e;
+        public static final int benxi_city_item=0x7f0a0053;
+        public static final int biji_city_item=0x7f0a0130;
+        public static final int boertala_city_item=0x7f0a0174;
+        public static final int buyang_city_item=0x7f0a00ca;
+        public static final int cangzhou_city_item=0x7f0a0035;
+        public static final int changchun_city_item=0x7f0a005d;
+        public static final int changde_city_item=0x7f0a00e7;
+        public static final int changdu_city_item=0x7f0a0144;
+        public static final int changji_city_item=0x7f0a0173;
+        public static final int changsha_city_item=0x7f0a00e1;
+        public static final int changzhi_city_item=0x7f0a003b;
+        public static final int changzhou_city_item=0x7f0a0077;
+        public static final int chaohu_city_item=0x7f0a0098;
+        public static final int chaozhou_city_item=0x7f0a0101;
+        public static final int chengde_city_item=0x7f0a0034;
+        public static final int chengdu_city_item=0x7f0a0115;
+        public static final int chifeng_city_item=0x7f0a0046;
+        public static final int chizhou_city_item=0x7f0a009b;
+        public static final int chongqing_city_item=0x7f0a0114;
+        public static final int chongqing_province_item=0x7f0a001e;
+        public static final int chuangzuo_city_item=0x7f0a0111;
+        public static final int chuxiong_city_item=0x7f0a013b;
+        public static final int chuzhou_city_item=0x7f0a0095;
+        public static final int count_type=0x7f0a0004;
+        public static final int country_codes=0x7f0a0000;
+        public static final int dali_city_item=0x7f0a013f;
+        public static final int dalian_city_item=0x7f0a0050;
+        public static final int dandong_city_item=0x7f0a0054;
+        public static final int daqing_city_item=0x7f0a006b;
+        public static final int datong_city_item=0x7f0a0039;
+        public static final int daxinganling_city_item=0x7f0a0072;
+        public static final int dazhou_city_item=0x7f0a0123;
+        public static final int dehuang_city_item=0x7f0a0140;
+        public static final int deyang_city_item=0x7f0a0119;
+        public static final int dezhou_city_item=0x7f0a00be;
+        public static final int dingxi_city_item=0x7f0a015e;
+        public static final int diqing_city_item=0x7f0a0142;
+        public static final int dongguan_city_item=0x7f0a00ff;
+        public static final int dongying_city_item=0x7f0a00b5;
+        public static final int eerduosi_city_item=0x7f0a0048;
+        public static final int enshi_city_item=0x7f0a00df;
+        public static final int erzhou_city_item=0x7f0a00d8;
+        public static final int fangchenggang_city_item=0x7f0a0109;
+        public static final int foshan_city_item=0x7f0a00f4;
+        public static final int fujian_province_item=0x7f0a0015;
+        public static final int fuxin_city_item=0x7f0a0057;
+        public static final int fuyang_city_item=0x7f0a0096;
+        public static final int ganmu_city_item=0x7f0a0128;
+        public static final int gannan_city_item=0x7f0a0161;
+        public static final int gansu_province_item=0x7f0a0024;
+        public static final int ganzhou_city_item=0x7f0a00ac;
+        public static final int geshen_city_item=0x7f0a0178;
+        public static final int guangan_city_item=0x7f0a0122;
+        public static final int guangdong_province_item=0x7f0a001b;
+        public static final int guangxi_province_item=0x7f0a001c;
+        public static final int guangxi_wuzhou_city_item=0x7f0a0107;
+        public static final int guangyuan_city_item=0x7f0a011b;
+        public static final int guangzhou_city_item=0x7f0a00ef;
+        public static final int guigang_city_item=0x7f0a010b;
+        public static final int guilin_city_item=0x7f0a0106;
+        public static final int guiyang_city_item=0x7f0a012a;
+        public static final int guizhou_province_item=0x7f0a0020;
+        public static final int guluo_city_item=0x7f0a0167;
+        public static final int guyuan_city_item=0x7f0a016d;
+        public static final int haerbing_city_item=0x7f0a0066;
+        public static final int haibai_city_item=0x7f0a0164;
+        public static final int haidong_city_item=0x7f0a0163;
+        public static final int haikou_city_item=0x7f0a0112;
+        public static final int hainan_city_item=0x7f0a0166;
+        public static final int hainan_province_item=0x7f0a001d;
+        public static final int haixi_city_item=0x7f0a0169;
+        public static final int hami_city_item=0x7f0a0172;
+        public static final int handan_city_item=0x7f0a0030;
+        public static final int hangzhou_city_item=0x7f0a0081;
+        public static final int hanzhong_city_item=0x7f0a0150;
+        public static final int haozhou_city_item=0x7f0a009a;
+        public static final int hebi_city_item=0x7f0a00c7;
+        public static final int hechi_city_item=0x7f0a010f;
+        public static final int hefei_city_item=0x7f0a008c;
+        public static final int hegang_city_item=0x7f0a0069;
+        public static final int heibei_province_item=0x7f0a000b;
+        public static final int heihe_city_item=0x7f0a0070;
+        public static final int heilongjiang_province_item=0x7f0a0010;
+        public static final int heilongjiang_yichun_city_item=0x7f0a006c;
+        public static final int henan_province_item=0x7f0a0018;
+        public static final int hengshui_city_item=0x7f0a0037;
+        public static final int hengyang_city_item=0x7f0a00e4;
+        public static final int hetian_city_item=0x7f0a0179;
+        public static final int heyuan_city_item=0x7f0a00fc;
+        public static final int heze_city_item=0x7f0a00c1;
+        public static final int hezhou_city_item=0x7f0a010e;
+        public static final int honghe_city_item=0x7f0a013c;
+        public static final int hongkong_city_item=0x7f0a0181;
+        public static final int hongkong_province_item=0x7f0a0028;
+        public static final int huaian_city_item=0x7f0a007b;
+        public static final int huaibei_city_item=0x7f0a0091;
+        public static final int huaihua_city_item=0x7f0a00ec;
+        public static final int huainan_city_item=0x7f0a008f;
+        public static final int huanggang_city_item=0x7f0a00dc;
+        public static final int huangnan_city_item=0x7f0a0165;
+        public static final int huangshan_city_item=0x7f0a0094;
+        public static final int huangshi_city_item=0x7f0a00d4;
+        public static final int hubei_jinzhou_city_item=0x7f0a00db;
+        public static final int hubei_province_item=0x7f0a0019;
+        public static final int huhehaote_city_item=0x7f0a0043;
+        public static final int huizhou_city_item=0x7f0a00f9;
+        public static final int huludao_city_item=0x7f0a005c;
+        public static final int hulunbeier_city_item=0x7f0a0049;
+        public static final int hunan_bingzhou_city_item=0x7f0a00ea;
+        public static final int hunan_province_item=0x7f0a001a;
+        public static final int huzhou_city_item=0x7f0a009d;
+        public static final int jiamusi_city_item=0x7f0a006d;
+        public static final int jian_city_item=0x7f0a00ad;
+        public static final int jiangmen_city_item=0x7f0a00f5;
+        public static final int jiangsu_province_item=0x7f0a0012;
+        public static final int jiangsu_taizhou_city_item=0x7f0a007f;
+        public static final int jiangxi_province_item=0x7f0a0016;
+        public static final int jiangxi_wuzhou_city_item=0x7f0a00af;
+        public static final int jiangxi_yichun_city_item=0x7f0a00ae;
+        public static final int jiaozuo_city_item=0x7f0a00c9;
+        public static final int jiaxing_city_item=0x7f0a0084;
+        public static final int jiayuguan_city_item=0x7f0a0155;
+        public static final int jilin_city_item=0x7f0a005e;
+        public static final int jilin_province_item=0x7f0a000f;
+        public static final int jinan_city_item=0x7f0a00b1;
+        public static final int jinchang_city_item=0x7f0a0156;
+        public static final int jincheng_city_item=0x7f0a003c;
+        public static final int jingdezhen_city_item=0x7f0a00a7;
+        public static final int jinhua_city_item=0x7f0a0087;
+        public static final int jining_city_item=0x7f0a00b8;
+        public static final int jinmen_city_item=0x7f0a00d9;
+        public static final int jinzhong_city_item=0x7f0a003e;
+        public static final int jiujiang_city_item=0x7f0a00a9;
+        public static final int jiuquan_city_item=0x7f0a015c;
+        public static final int jixi_city_item=0x7f0a0068;
+        public static final int jiyang_city_item=0x7f0a0102;
+        public static final int kaifang_city_item=0x7f0a00c3;
+        public static final int kaipingshan_city_item=0x7f0a00c5;
+        public static final int kelamayi_city_item=0x7f0a0170;
+        public static final int kemuleisu_city_item=0x7f0a0177;
+        public static final int kunming_city_item=0x7f0a0133;
+        public static final int laibing_city_item=0x7f0a0110;
+        public static final int laiwu_city_item=0x7f0a00bc;
+        public static final int langfang_city_item=0x7f0a0036;
+        public static final int lanzhou_city_item=0x7f0a0154;
+        public static final int lasa_city_item=0x7f0a0143;
+        public static final int leihe_city_item=0x7f0a00cc;
+        public static final int leshan_city_item=0x7f0a011e;
+        public static final int liangshan_city_item=0x7f0a0129;
+        public static final int lianyungang_city_item=0x7f0a007a;
+        public static final int liaocheng_city_item=0x7f0a00bf;
+        public static final int liaoning_jinzhou_city_item=0x7f0a0055;
+        public static final int liaoning_province_item=0x7f0a000e;
+        public static final int liaoyang_city_item=0x7f0a0058;
+        public static final int liaoyuan_city_item=0x7f0a0060;
+        public static final int lijiang_city_item=0x7f0a0138;
+        public static final int linfen_city_item=0x7f0a0041;
+        public static final int lingcang_city_item=0x7f0a013a;
+        public static final int linxi_city_item=0x7f0a00bd;
+        public static final int linxia_city_item=0x7f0a0160;
+        public static final int linxia_province_item=0x7f0a0026;
+        public static final int linzhi_city_item=0x7f0a0149;
+        public static final int lishui_city_item=0x7f0a008b;
+        public static final int liuzhou_city_item=0x7f0a0105;
+        public static final int longnan_city_item=0x7f0a015f;
+        public static final int longyan_city_item=0x7f0a00a4;
+        public static final int loudi_city_item=0x7f0a00ed;
+        public static final int luan_city_item=0x7f0a0099;
+        public static final int luoyang_city_item=0x7f0a00c4;
+        public static final int lupanshui_city_item=0x7f0a012b;
+        public static final int luzhou_city_item=0x7f0a0118;
+        public static final int lvliang_city_item=0x7f0a0042;
+        public static final int maanshan_city_item=0x7f0a0090;
+        public static final int maoming_city_item=0x7f0a00f7;
+        public static final int meishan_city_item=0x7f0a0120;
+        public static final int meizhou_city_item=0x7f0a00fa;
+        public static final int mianyang_city_item=0x7f0a011a;
+        public static final int mudanjiang_city_item=0x7f0a006f;
+        public static final int nanchang_city_item=0x7f0a00a6;
+        public static final int nanchong_city_item=0x7f0a011f;
+        public static final int nanjing_city_item=0x7f0a0074;
+        public static final int nanjing_suzhou_city_item=0x7f0a0078;
+        public static final int nanning_city_item=0x7f0a0104;
+        public static final int nanp_city_item=0x7f0a00a3;
+        public static final int nantong_city_item=0x7f0a0079;
+        public static final int nanyang_city_item=0x7f0a00ce;
+        public static final int naqu_city_item=0x7f0a0147;
+        public static final int neijiang_city_item=0x7f0a011d;
+        public static final int neimenggu_province_item=0x7f0a000d;
+        public static final int ningbo_city_item=0x7f0a0082;
+        public static final int ningde_city_item=0x7f0a00a5;
+        public static final int nujiang_city_item=0x7f0a0141;
+        public static final int pack_type=0x7f0a0005;
+        public static final int panjin_city_item=0x7f0a0059;
+        public static final int panzhihua_city_item=0x7f0a0117;
+        public static final int pingliang_city_item=0x7f0a015b;
+        public static final int pingxiang_city_item=0x7f0a00a8;
+        public static final int preferences_front_light_options=0x7f0a0007;
+        public static final int preferences_front_light_values=0x7f0a0006;
+        public static final int province=0x7f0a0001;
+        public static final int province_codes=0x7f0a0002;
         /**  含个省、自治区、直辖市、特别行政区 
          */
-        public static final int province_item=0x7f070008;
-        public static final int putian_city_item=0x7f07009f;
-        public static final int qingdao_city_item=0x7f0700b2;
-        public static final int qingdongnan_city_item=0x7f070131;
-        public static final int qinghai_province_item=0x7f070025;
-        public static final int qinghuangdao_city_item=0x7f07002f;
-        public static final int qingnan_city_item=0x7f070132;
-        public static final int qingxinan_city_item=0x7f07012f;
-        public static final int qingyang_city_item=0x7f07015d;
-        public static final int qingyuan_city_item=0x7f0700fe;
-        public static final int qinzhou_city_item=0x7f07010a;
-        public static final int qiqihaer_city_item=0x7f070067;
-        public static final int qitaihe_city_item=0x7f07006e;
-        public static final int quanzhou_city_item=0x7f0700a1;
-        public static final int qujing_city_item=0x7f070134;
-        public static final int quzhou_city_item=0x7f070088;
-        public static final int rgeze_city_item=0x7f070146;
-        public static final int rizhao_city_item=0x7f0700bb;
-        public static final int sanmenxia_city_item=0x7f0700cd;
-        public static final int sanming_city_item=0x7f0700a0;
-        public static final int sanya_city_item=0x7f070113;
-        public static final int shandong_bingzhou_city_item=0x7f0700c0;
-        public static final int shandong_province_item=0x7f070017;
-        public static final int shanghai_city_item=0x7f070073;
-        public static final int shanghai_province_item=0x7f070011;
-        public static final int shangluo_city_item=0x7f070153;
-        public static final int shangqiu_city_item=0x7f0700cf;
-        public static final int shangrao_city_item=0x7f0700b0;
-        public static final int shannan_city_item=0x7f070145;
-        public static final int shantou_city_item=0x7f0700f3;
-        public static final int shanwei_city_item=0x7f0700fb;
-        public static final int shanxi1_province_item=0x7f07000c;
-        public static final int shanxi2_province_item=0x7f070023;
-        public static final int shaoguan_city_item=0x7f0700f0;
-        public static final int shaoxing_city_item=0x7f070086;
-        public static final int shaoyang_city_item=0x7f0700e5;
-        public static final int shenglongjia_city_item=0x7f0700e0;
-        public static final int shenyang_city_item=0x7f07004f;
-        public static final int shenzhen_city_item=0x7f0700f1;
-        public static final int shihezi_city_item=0x7f07017d;
-        public static final int shijiazhuang_city_item=0x7f07002d;
-        public static final int shiyan_city_item=0x7f0700d5;
-        public static final int shizuishan_city_item=0x7f07016b;
-        public static final int shuangyashan_city_item=0x7f07006a;
-        public static final int shuozhou_city_item=0x7f07003d;
-        public static final int sichuan_province_item=0x7f07001f;
-        public static final int simao_city_item=0x7f070139;
-        public static final int siping_city_item=0x7f07005f;
-        public static final int songyuan_city_item=0x7f070063;
-        public static final int stuff_type=0x7f070003;
-        public static final int suihua_city_item=0x7f070071;
-        public static final int suining_city_item=0x7f07011c;
-        public static final int suizhou_city_item=0x7f0700de;
-        public static final int suqian_city_item=0x7f070080;
-        public static final int tacheng_city_item=0x7f07017b;
-        public static final int taian_city_item=0x7f0700b9;
-        public static final int taiwan_city_item=0x7f070183;
-        public static final int taiwan_province_item=0x7f07002a;
-        public static final int taiyuan_city_item=0x7f070038;
-        public static final int tangshan_city_item=0x7f07002e;
-        public static final int tianjin_city_item=0x7f07002c;
-        public static final int tianjin_province_item=0x7f07000a;
-        public static final int tianshui_city_item=0x7f070158;
-        public static final int tieling_city_item=0x7f07005a;
-        public static final int tongchuan_city_item=0x7f07014b;
-        public static final int tonghua_city_item=0x7f070061;
-        public static final int tongliao_city_item=0x7f070047;
-        public static final int tongling_city_item=0x7f070092;
-        public static final int tongren_city_item=0x7f07012e;
-        public static final int tulyfan_city_item=0x7f070171;
-        public static final int tumushihe_city_item=0x7f07017f;
-        public static final int weifang_city_item=0x7f0700b7;
-        public static final int weihai_city_item=0x7f0700ba;
-        public static final int weinan_city_item=0x7f07014e;
-        public static final int wenshan_city_item=0x7f07013d;
-        public static final int wenzhou_city_item=0x7f070083;
-        public static final int wuhai_city_item=0x7f070045;
-        public static final int wuhan_city_item=0x7f0700d3;
-        public static final int wuhu_city_item=0x7f07008d;
-        public static final int wujiaqu_city_item=0x7f070180;
-        public static final int wulanchabu_city_item=0x7f07004b;
-        public static final int wulumuqi_city_item=0x7f07016f;
-        public static final int wushun_city_item=0x7f070052;
-        public static final int wuwei_city_item=0x7f070159;
-        public static final int wuxi_city_item=0x7f070075;
-        public static final int wuzhong_city_item=0x7f07016c;
-        public static final int xiamen_city_item=0x7f07009e;
-        public static final int xian_city_item=0x7f07014a;
-        public static final int xiangpan_city_item=0x7f0700d7;
-        public static final int xiangtan_city_item=0x7f0700e3;
-        public static final int xiangxi_city_item=0x7f0700ee;
-        public static final int xianning_city_item=0x7f0700dd;
-        public static final int xianyang_city_item=0x7f07014d;
-        public static final int xiaogan_city_item=0x7f0700da;
-        public static final int xilinguolemeng_city_item=0x7f07004d;
-        public static final int xinganmeng_city_item=0x7f07004c;
-        public static final int xingtai_city_item=0x7f070031;
-        public static final int xining_city_item=0x7f070162;
-        public static final int xinjiang_province_item=0x7f070027;
-        public static final int xinxiang_city_item=0x7f0700c8;
-        public static final int xinyang_city_item=0x7f0700d0;
-        public static final int xinyu_city_item=0x7f0700aa;
-        public static final int xinzhou_city_item=0x7f070040;
-        public static final int xishuangbanna_city_item=0x7f07013e;
-        public static final int xizang_province_item=0x7f070022;
-        public static final int xuancheng_city_item=0x7f07009c;
-        public static final int xuchang_city_item=0x7f0700cb;
-        public static final int xuzhou_city_item=0x7f070076;
-        public static final int yaan_city_item=0x7f070124;
-        public static final int yanan_city_item=0x7f07014f;
-        public static final int yanbian_city_item=0x7f070065;
-        public static final int yancheng_city_item=0x7f07007c;
-        public static final int yangjiang_city_item=0x7f0700fd;
-        public static final int yangquan_city_item=0x7f07003a;
-        public static final int yangzhou_city_item=0x7f07007d;
-        public static final int yantai_city_item=0x7f0700b6;
-        public static final int yibing_city_item=0x7f070121;
-        public static final int yichang_city_item=0x7f0700d6;
-        public static final int yili_city_item=0x7f07017a;
-        public static final int yinchuan_city_item=0x7f07016a;
-        public static final int yingkou_city_item=0x7f070056;
-        public static final int yingtan_city_item=0x7f0700ab;
-        public static final int yiyang_city_item=0x7f0700e9;
-        public static final int yongzhou_city_item=0x7f0700eb;
-        public static final int yuelin_city_item=0x7f07010c;
-        public static final int yuexi_city_item=0x7f070135;
-        public static final int yueyang_city_item=0x7f0700e6;
-        public static final int yulin_city_item=0x7f070151;
-        public static final int yuncheng_city_item=0x7f07003f;
-        public static final int yunfu_city_item=0x7f070103;
-        public static final int yunnan_province_item=0x7f070021;
-        public static final int yushu_city_item=0x7f070168;
-        public static final int zaobo_city_item=0x7f0700b3;
-        public static final int zaozhuang_city_item=0x7f0700b4;
-        public static final int zejiang_huzhou_city_item=0x7f070085;
-        public static final int zejiang_taizhou_city_item=0x7f07008a;
-        public static final int zhangjiajie_city_item=0x7f0700e8;
-        public static final int zhangjiakou_city_item=0x7f070033;
-        public static final int zhangjiang_city_item=0x7f0700f6;
-        public static final int zhangyue_city_item=0x7f07015a;
-        public static final int zhangzhou_city_item=0x7f0700a2;
-        public static final int zhaoqing_city_item=0x7f0700f8;
-        public static final int zhaotong_city_item=0x7f070137;
-        public static final int zhaoyang_city_item=0x7f07005b;
-        public static final int zhejiang_province_item=0x7f070013;
-        public static final int zhenjiang_city_item=0x7f07007e;
-        public static final int zhenshou_city_item=0x7f0700c2;
-        public static final int zhongshan_city_item=0x7f070100;
-        public static final int zhongwei_city_item=0x7f07016e;
-        public static final int zhoukou_city_item=0x7f0700d1;
-        public static final int zhoushan_city_item=0x7f070089;
-        public static final int zhuhai_city_item=0x7f0700f2;
-        public static final int zhumadian_city_item=0x7f0700d2;
-        public static final int zhunyi_city_item=0x7f07012c;
-        public static final int zhuzhou_city_item=0x7f0700e2;
-        public static final int zigong_city_item=0x7f070116;
-        public static final int ziyang_city_item=0x7f070126;
+        public static final int province_item=0x7f0a0008;
+        public static final int putian_city_item=0x7f0a009f;
+        public static final int qingdao_city_item=0x7f0a00b2;
+        public static final int qingdongnan_city_item=0x7f0a0131;
+        public static final int qinghai_province_item=0x7f0a0025;
+        public static final int qinghuangdao_city_item=0x7f0a002f;
+        public static final int qingnan_city_item=0x7f0a0132;
+        public static final int qingxinan_city_item=0x7f0a012f;
+        public static final int qingyang_city_item=0x7f0a015d;
+        public static final int qingyuan_city_item=0x7f0a00fe;
+        public static final int qinzhou_city_item=0x7f0a010a;
+        public static final int qiqihaer_city_item=0x7f0a0067;
+        public static final int qitaihe_city_item=0x7f0a006e;
+        public static final int quanzhou_city_item=0x7f0a00a1;
+        public static final int qujing_city_item=0x7f0a0134;
+        public static final int quzhou_city_item=0x7f0a0088;
+        public static final int rgeze_city_item=0x7f0a0146;
+        public static final int rizhao_city_item=0x7f0a00bb;
+        public static final int sanmenxia_city_item=0x7f0a00cd;
+        public static final int sanming_city_item=0x7f0a00a0;
+        public static final int sanya_city_item=0x7f0a0113;
+        public static final int shandong_bingzhou_city_item=0x7f0a00c0;
+        public static final int shandong_province_item=0x7f0a0017;
+        public static final int shanghai_city_item=0x7f0a0073;
+        public static final int shanghai_province_item=0x7f0a0011;
+        public static final int shangluo_city_item=0x7f0a0153;
+        public static final int shangqiu_city_item=0x7f0a00cf;
+        public static final int shangrao_city_item=0x7f0a00b0;
+        public static final int shannan_city_item=0x7f0a0145;
+        public static final int shantou_city_item=0x7f0a00f3;
+        public static final int shanwei_city_item=0x7f0a00fb;
+        public static final int shanxi1_province_item=0x7f0a000c;
+        public static final int shanxi2_province_item=0x7f0a0023;
+        public static final int shaoguan_city_item=0x7f0a00f0;
+        public static final int shaoxing_city_item=0x7f0a0086;
+        public static final int shaoyang_city_item=0x7f0a00e5;
+        public static final int shenglongjia_city_item=0x7f0a00e0;
+        public static final int shenyang_city_item=0x7f0a004f;
+        public static final int shenzhen_city_item=0x7f0a00f1;
+        public static final int shihezi_city_item=0x7f0a017d;
+        public static final int shijiazhuang_city_item=0x7f0a002d;
+        public static final int shiyan_city_item=0x7f0a00d5;
+        public static final int shizuishan_city_item=0x7f0a016b;
+        public static final int shuangyashan_city_item=0x7f0a006a;
+        public static final int shuozhou_city_item=0x7f0a003d;
+        public static final int sichuan_province_item=0x7f0a001f;
+        public static final int simao_city_item=0x7f0a0139;
+        public static final int siping_city_item=0x7f0a005f;
+        public static final int songyuan_city_item=0x7f0a0063;
+        public static final int stuff_type=0x7f0a0003;
+        public static final int suihua_city_item=0x7f0a0071;
+        public static final int suining_city_item=0x7f0a011c;
+        public static final int suizhou_city_item=0x7f0a00de;
+        public static final int suqian_city_item=0x7f0a0080;
+        public static final int tacheng_city_item=0x7f0a017b;
+        public static final int taian_city_item=0x7f0a00b9;
+        public static final int taiwan_city_item=0x7f0a0183;
+        public static final int taiwan_province_item=0x7f0a002a;
+        public static final int taiyuan_city_item=0x7f0a0038;
+        public static final int tangshan_city_item=0x7f0a002e;
+        public static final int tianjin_city_item=0x7f0a002c;
+        public static final int tianjin_province_item=0x7f0a000a;
+        public static final int tianshui_city_item=0x7f0a0158;
+        public static final int tieling_city_item=0x7f0a005a;
+        public static final int tongchuan_city_item=0x7f0a014b;
+        public static final int tonghua_city_item=0x7f0a0061;
+        public static final int tongliao_city_item=0x7f0a0047;
+        public static final int tongling_city_item=0x7f0a0092;
+        public static final int tongren_city_item=0x7f0a012e;
+        public static final int tulyfan_city_item=0x7f0a0171;
+        public static final int tumushihe_city_item=0x7f0a017f;
+        public static final int weifang_city_item=0x7f0a00b7;
+        public static final int weihai_city_item=0x7f0a00ba;
+        public static final int weinan_city_item=0x7f0a014e;
+        public static final int wenshan_city_item=0x7f0a013d;
+        public static final int wenzhou_city_item=0x7f0a0083;
+        public static final int wuhai_city_item=0x7f0a0045;
+        public static final int wuhan_city_item=0x7f0a00d3;
+        public static final int wuhu_city_item=0x7f0a008d;
+        public static final int wujiaqu_city_item=0x7f0a0180;
+        public static final int wulanchabu_city_item=0x7f0a004b;
+        public static final int wulumuqi_city_item=0x7f0a016f;
+        public static final int wushun_city_item=0x7f0a0052;
+        public static final int wuwei_city_item=0x7f0a0159;
+        public static final int wuxi_city_item=0x7f0a0075;
+        public static final int wuzhong_city_item=0x7f0a016c;
+        public static final int xiamen_city_item=0x7f0a009e;
+        public static final int xian_city_item=0x7f0a014a;
+        public static final int xiangpan_city_item=0x7f0a00d7;
+        public static final int xiangtan_city_item=0x7f0a00e3;
+        public static final int xiangxi_city_item=0x7f0a00ee;
+        public static final int xianning_city_item=0x7f0a00dd;
+        public static final int xianyang_city_item=0x7f0a014d;
+        public static final int xiaogan_city_item=0x7f0a00da;
+        public static final int xilinguolemeng_city_item=0x7f0a004d;
+        public static final int xinganmeng_city_item=0x7f0a004c;
+        public static final int xingtai_city_item=0x7f0a0031;
+        public static final int xining_city_item=0x7f0a0162;
+        public static final int xinjiang_province_item=0x7f0a0027;
+        public static final int xinxiang_city_item=0x7f0a00c8;
+        public static final int xinyang_city_item=0x7f0a00d0;
+        public static final int xinyu_city_item=0x7f0a00aa;
+        public static final int xinzhou_city_item=0x7f0a0040;
+        public static final int xishuangbanna_city_item=0x7f0a013e;
+        public static final int xizang_province_item=0x7f0a0022;
+        public static final int xuancheng_city_item=0x7f0a009c;
+        public static final int xuchang_city_item=0x7f0a00cb;
+        public static final int xuzhou_city_item=0x7f0a0076;
+        public static final int yaan_city_item=0x7f0a0124;
+        public static final int yanan_city_item=0x7f0a014f;
+        public static final int yanbian_city_item=0x7f0a0065;
+        public static final int yancheng_city_item=0x7f0a007c;
+        public static final int yangjiang_city_item=0x7f0a00fd;
+        public static final int yangquan_city_item=0x7f0a003a;
+        public static final int yangzhou_city_item=0x7f0a007d;
+        public static final int yantai_city_item=0x7f0a00b6;
+        public static final int yibing_city_item=0x7f0a0121;
+        public static final int yichang_city_item=0x7f0a00d6;
+        public static final int yili_city_item=0x7f0a017a;
+        public static final int yinchuan_city_item=0x7f0a016a;
+        public static final int yingkou_city_item=0x7f0a0056;
+        public static final int yingtan_city_item=0x7f0a00ab;
+        public static final int yiyang_city_item=0x7f0a00e9;
+        public static final int yongzhou_city_item=0x7f0a00eb;
+        public static final int yuelin_city_item=0x7f0a010c;
+        public static final int yuexi_city_item=0x7f0a0135;
+        public static final int yueyang_city_item=0x7f0a00e6;
+        public static final int yulin_city_item=0x7f0a0151;
+        public static final int yuncheng_city_item=0x7f0a003f;
+        public static final int yunfu_city_item=0x7f0a0103;
+        public static final int yunnan_province_item=0x7f0a0021;
+        public static final int yushu_city_item=0x7f0a0168;
+        public static final int zaobo_city_item=0x7f0a00b3;
+        public static final int zaozhuang_city_item=0x7f0a00b4;
+        public static final int zejiang_huzhou_city_item=0x7f0a0085;
+        public static final int zejiang_taizhou_city_item=0x7f0a008a;
+        public static final int zhangjiajie_city_item=0x7f0a00e8;
+        public static final int zhangjiakou_city_item=0x7f0a0033;
+        public static final int zhangjiang_city_item=0x7f0a00f6;
+        public static final int zhangyue_city_item=0x7f0a015a;
+        public static final int zhangzhou_city_item=0x7f0a00a2;
+        public static final int zhaoqing_city_item=0x7f0a00f8;
+        public static final int zhaotong_city_item=0x7f0a0137;
+        public static final int zhaoyang_city_item=0x7f0a005b;
+        public static final int zhejiang_province_item=0x7f0a0013;
+        public static final int zhenjiang_city_item=0x7f0a007e;
+        public static final int zhenshou_city_item=0x7f0a00c2;
+        public static final int zhongshan_city_item=0x7f0a0100;
+        public static final int zhongwei_city_item=0x7f0a016e;
+        public static final int zhoukou_city_item=0x7f0a00d1;
+        public static final int zhoushan_city_item=0x7f0a0089;
+        public static final int zhuhai_city_item=0x7f0a00f2;
+        public static final int zhumadian_city_item=0x7f0a00d2;
+        public static final int zhunyi_city_item=0x7f0a012c;
+        public static final int zhuzhou_city_item=0x7f0a00e2;
+        public static final int zigong_city_item=0x7f0a0116;
+        public static final int ziyang_city_item=0x7f0a0126;
     }
     public static final class attr {
+        /**  BELOW HERE ARE DEPRECEATED. DO NOT USE. 
+         <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+         */
+        public static final int ptrAdapterViewBackground=0x7f010010;
+        /**  Style of Animation should be used displayed when pulling. 
+         <p>Must be one or more (separated by '|') of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>rotate</code></td><td>0x0</td><td></td></tr>
+<tr><td><code>flip</code></td><td>0x1</td><td></td></tr>
+</table>
+         */
+        public static final int ptrAnimationStyle=0x7f01000c;
+        /**  Drawable to use as Loading Indicator. Changes both Header and Footer. 
+         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int ptrDrawable=0x7f010006;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int ptrDrawableBottom=0x7f010012;
+        /**  Drawable to use as Loading Indicator in the Footer View. Overrides value set in ptrDrawable. 
+         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int ptrDrawableEnd=0x7f010008;
+        /**  Drawable to use as Loading Indicator in the Header View. Overrides value set in ptrDrawable. 
+         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int ptrDrawableStart=0x7f010007;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int ptrDrawableTop=0x7f010011;
+        /**  A drawable to use as the background of the Header and Footer Loading Views 
+         <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+         */
+        public static final int ptrHeaderBackground=0x7f010001;
+        /**  Text Color of the Header and Footer Loading Views Sub Header 
+         <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+         */
+        public static final int ptrHeaderSubTextColor=0x7f010003;
+        /**  Base text color, typeface, size, and style for Header and Footer Loading Views 
+         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int ptrHeaderTextAppearance=0x7f01000a;
+        /**  Text Color of the Header and Footer Loading Views 
+         <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+         */
+        public static final int ptrHeaderTextColor=0x7f010002;
+        /** 
+        	Whether PullToRefreshListView has it's extras enabled. This allows the user to be 
+        	able to scroll while refreshing, and behaves better. It acheives this by adding
+        	Header and/or Footer Views to the ListView.
+        
+         <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a boolean value, either "<code>true</code>" or "<code>false</code>".
+         */
+        public static final int ptrListViewExtrasEnabled=0x7f01000e;
+        /**  Mode of Pull-to-Refresh that should be used 
+         <p>Must be one or more (separated by '|') of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>disabled</code></td><td>0x0</td><td></td></tr>
+<tr><td><code>pullFromStart</code></td><td>0x1</td><td></td></tr>
+<tr><td><code>pullFromEnd</code></td><td>0x2</td><td></td></tr>
+<tr><td><code>both</code></td><td>0x3</td><td></td></tr>
+<tr><td><code>manualOnly</code></td><td>0x4</td><td></td></tr>
+<tr><td><code>pullDownFromTop</code></td><td>0x1</td><td> These last two are depreacted </td></tr>
+<tr><td><code>pullUpFromBottom</code></td><td>0x2</td><td></td></tr>
+</table>
+         */
+        public static final int ptrMode=0x7f010004;
+        /**  Whether Android's built-in Over Scroll should be utilised for Pull-to-Refresh. 
+         <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a boolean value, either "<code>true</code>" or "<code>false</code>".
+         */
+        public static final int ptrOverScroll=0x7f010009;
+        /**  A drawable to use as the background of the Refreshable View 
+         <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+         */
+        public static final int ptrRefreshableViewBackground=0x7f010000;
+        /** 
+        	Whether the Drawable should be continually rotated as you pull. This only
+        	takes effect when using the 'Rotate' Animation Style.
+        
+         <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a boolean value, either "<code>true</code>" or "<code>false</code>".
+         */
+        public static final int ptrRotateDrawableWhilePulling=0x7f01000f;
+        /**  Whether the user can scroll while the View is Refreshing 
+         <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a boolean value, either "<code>true</code>" or "<code>false</code>".
+         */
+        public static final int ptrScrollingWhileRefreshingEnabled=0x7f01000d;
+        /**  Whether the Indicator overlay(s) should be used 
+         <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a boolean value, either "<code>true</code>" or "<code>false</code>".
+         */
+        public static final int ptrShowIndicator=0x7f010005;
+        /**  Base text color, typeface, size, and style for Header and Footer Loading Views Sub Header 
+         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int ptrSubHeaderTextAppearance=0x7f01000b;
     }
     public static final class color {
         /**  zxing color 
          */
-        public static final int contents_text=0x7f080003;
-        public static final int encode_view=0x7f080004;
-        public static final int possible_result_points=0x7f080005;
+        public static final int contents_text=0x7f0b0003;
+        public static final int encode_view=0x7f0b0004;
+        public static final int possible_result_points=0x7f0b0005;
         /**  Android standard ICS color 
          */
-        public static final int result_minor_text=0x7f080006;
-        public static final int result_points=0x7f080007;
+        public static final int result_minor_text=0x7f0b0006;
+        public static final int result_points=0x7f0b0007;
         /**  Android standard ICS color 
          */
-        public static final int result_text=0x7f080008;
-        public static final int result_view=0x7f080009;
-        public static final int status_text=0x7f08000a;
-        public static final int tab_btn_off=0x7f080001;
-        public static final int tabs_bg=0x7f080002;
-        public static final int transparent=0x7f08000b;
-        public static final int viewfinder_laser=0x7f08000c;
+        public static final int result_text=0x7f0b0008;
+        public static final int result_view=0x7f0b0009;
+        public static final int status_text=0x7f0b000a;
+        public static final int tab_btn_off=0x7f0b0001;
+        public static final int tabs_bg=0x7f0b0002;
+        public static final int transparent=0x7f0b000b;
+        public static final int viewfinder_laser=0x7f0b000c;
         /**  Android standard ICS color 
          */
-        public static final int viewfinder_mask=0x7f08000d;
-        public static final int white=0x7f080000;
+        public static final int viewfinder_mask=0x7f0b000d;
+        public static final int white=0x7f0b0000;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -445,10 +583,15 @@ public final class R {
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x7f090000;
-        public static final int activity_vertical_margin=0x7f090001;
-        public static final int half_padding=0x7f090003;
-        public static final int standard_padding=0x7f090002;
+        public static final int activity_horizontal_margin=0x7f080005;
+        public static final int activity_vertical_margin=0x7f080006;
+        public static final int half_padding=0x7f080008;
+        public static final int header_footer_left_right_padding=0x7f080003;
+        public static final int header_footer_top_bottom_padding=0x7f080004;
+        public static final int indicator_corner_radius=0x7f080001;
+        public static final int indicator_internal_padding=0x7f080002;
+        public static final int indicator_right_padding=0x7f080000;
+        public static final int standard_padding=0x7f080007;
     }
     public static final class drawable {
         public static final int account_icon=0x7f020000;
@@ -471,317 +614,339 @@ public final class R {
         public static final int custom_tab_indicator_unselected=0x7f020011;
         public static final int custom_tab_indicator_unselected_focused=0x7f020012;
         public static final int custom_tab_indicator_unselected_pressed=0x7f020013;
-        public static final int delete_selector=0x7f020014;
-        public static final int down=0x7f020015;
-        public static final int edit_indicator=0x7f020016;
-        public static final int group=0x7f020017;
-        public static final int ic_launcher=0x7f020018;
-        public static final int icon_user=0x7f020019;
-        public static final int item_bg_long=0x7f02001a;
-        public static final int kg=0x7f02001b;
-        public static final int login_button_bg=0x7f02001c;
-        public static final int login_edit_normal=0x7f02001d;
-        public static final int login_edit_pressed=0x7f02001e;
-        public static final int login_edittext_bg=0x7f02001f;
-        public static final int logo=0x7f020020;
-        public static final int m3=0x7f020021;
-        public static final int search_clear_normal=0x7f020022;
-        public static final int search_clear_pressed=0x7f020023;
-        public static final int splash=0x7f020024;
-        public static final int t=0x7f020025;
-        public static final int tab_btn_bg=0x7f020026;
-        public static final int tab_btn_bg_selector=0x7f020027;
-        public static final int tab_btn_textcolor=0x7f020028;
-        public static final int user=0x7f020029;
-        public static final int wheel_bg=0x7f02002a;
-        public static final int wheel_val=0x7f02002b;
-        public static final int yc_right=0x7f02002c;
+        public static final int default_ptr_flip=0x7f020014;
+        public static final int default_ptr_rotate=0x7f020015;
+        public static final int delete_selector=0x7f020016;
+        public static final int down=0x7f020017;
+        public static final int edit_indicator=0x7f020018;
+        public static final int group=0x7f020019;
+        public static final int ic_launcher=0x7f02001a;
+        public static final int icon_user=0x7f02001b;
+        public static final int indicator_arrow=0x7f02001c;
+        public static final int indicator_bg_bottom=0x7f02001d;
+        public static final int indicator_bg_top=0x7f02001e;
+        public static final int item_bg_long=0x7f02001f;
+        public static final int kg=0x7f020020;
+        public static final int login_button_bg=0x7f020021;
+        public static final int login_edit_normal=0x7f020022;
+        public static final int login_edit_pressed=0x7f020023;
+        public static final int login_edittext_bg=0x7f020024;
+        public static final int logo=0x7f020025;
+        public static final int m3=0x7f020026;
+        public static final int search_clear_normal=0x7f020027;
+        public static final int search_clear_pressed=0x7f020028;
+        public static final int splash=0x7f020029;
+        public static final int t=0x7f02002a;
+        public static final int tab_btn_bg=0x7f02002b;
+        public static final int tab_btn_bg_selector=0x7f02002c;
+        public static final int tab_btn_textcolor=0x7f02002d;
+        public static final int user=0x7f02002e;
+        public static final int wheel_bg=0x7f02002f;
+        public static final int wheel_val=0x7f020030;
+        public static final int yc_right=0x7f020031;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a011b;
-        public static final int add=0x7f0a0030;
-        public static final int address=0x7f0a0036;
-        public static final int address_sh=0x7f0a0026;
-        public static final int address_ty=0x7f0a002b;
-        public static final int again=0x7f0a0077;
-        public static final int all=0x7f0a00c4;
-        public static final int allUnit=0x7f0a0045;
-        public static final int answer=0x7f0a008e;
-        public static final int arriveTime=0x7f0a0084;
-        public static final int assign=0x7f0a0111;
-        public static final int back=0x7f0a00fe;
-        public static final int barcode_image_view=0x7f0a00e8;
-        public static final int bill=0x7f0a0105;
-        public static final int blank=0x7f0a0115;
-        public static final int brand=0x7f0a008b;
-        public static final int btn=0x7f0a010d;
-        public static final int bxf=0x7f0a004b;
-        public static final int bzf=0x7f0a0048;
-        public static final int calc=0x7f0a0047;
-        public static final int cancel=0x7f0a00c1;
-        public static final int card=0x7f0a0094;
-        public static final int charger=0x7f0a0095;
-        public static final int checkBox=0x7f0a00f4;
-        public static final int choose=0x7f0a007d;
-        public static final int city=0x7f0a00f1;
-        public static final int code=0x7f0a007a;
-        public static final int code_sh=0x7f0a0027;
-        public static final int code_ty=0x7f0a002c;
-        public static final int company=0x7f0a0110;
-        public static final int confirm=0x7f0a00c0;
-        public static final int contact=0x7f0a0087;
-        public static final int content=0x7f0a0063;
-        public static final int contents_supplement_text_view=0x7f0a00ef;
-        public static final int contents_text_view=0x7f0a00ee;
-        public static final int count=0x7f0a009b;
-        public static final int count1=0x7f0a00a1;
-        public static final int count2=0x7f0a00a7;
-        public static final int count3=0x7f0a00ad;
-        public static final int count4=0x7f0a00b3;
-        public static final int count5=0x7f0a00b9;
-        public static final int credit=0x7f0a0037;
-        public static final int crosscity=0x7f0a0058;
-        public static final int cubage=0x7f0a0043;
-        public static final int cubageUnit=0x7f0a0044;
-        public static final int date=0x7f0a00fd;
-        public static final int dealing=0x7f0a0113;
-        public static final int decode=0x7f0a0000;
-        public static final int decode_failed=0x7f0a0001;
-        public static final int decode_succeeded=0x7f0a0002;
-        public static final int detail=0x7f0a0088;
-        public static final int details=0x7f0a005f;
-        public static final int dial=0x7f0a003a;
-        public static final int distance=0x7f0a00c6;
-        public static final int district=0x7f0a00f2;
-        public static final int dk=0x7f0a0051;
-        public static final int done=0x7f0a0114;
-        public static final int driver=0x7f0a007c;
-        public static final int driverId=0x7f0a00f5;
-        public static final int driverList=0x7f0a0053;
-        public static final int driver_id=0x7f0a007f;
-        public static final int driver_number=0x7f0a007e;
-        public static final int dshk_no=0x7f0a0050;
-        public static final int dshk_yes=0x7f0a004f;
-        public static final int edit=0x7f0a0108;
-        public static final int email=0x7f0a008f;
-        public static final int embedded=0x7f0a0083;
-        public static final int end=0x7f0a000d;
-        public static final int express=0x7f0a010f;
-        public static final int extra=0x7f0a00bb;
-        public static final int extra_result=0x7f0a00bc;
-        public static final int fax=0x7f0a003b;
-        public static final int formList=0x7f0a0061;
-        public static final int form_id=0x7f0a0060;
-        public static final int format_text_view=0x7f0a00e9;
-        public static final int four=0x7f0a0068;
-        public static final int from=0x7f0a002a;
-        public static final int fromaddress=0x7f0a0057;
-        public static final int fromcity=0x7f0a0055;
-        public static final int gaddress=0x7f0a000e;
-        public static final int garden=0x7f0a005a;
-        public static final int gdial=0x7f0a000c;
-        public static final int getter=0x7f0a000a;
-        public static final int go=0x7f0a0078;
-        public static final int gphone=0x7f0a000b;
-        public static final int haevyprice=0x7f0a005e;
-        public static final int heavy=0x7f0a00f6;
-        public static final int height=0x7f0a009a;
-        public static final int height1=0x7f0a00a0;
-        public static final int height2=0x7f0a00a6;
-        public static final int height3=0x7f0a00ac;
-        public static final int height4=0x7f0a00b2;
-        public static final int height5=0x7f0a00b8;
-        public static final int hint=0x7f0a004e;
-        public static final int history_detail=0x7f0a0102;
-        public static final int history_title=0x7f0a0101;
-        public static final int in=0x7f0a0116;
-        public static final int info=0x7f0a0112;
-        public static final int istb_no=0x7f0a001a;
-        public static final int istb_yes=0x7f0a0019;
-        public static final int istx_no=0x7f0a001c;
-        public static final int istx_yes=0x7f0a001b;
-        public static final int jz=0x7f0a0021;
-        public static final int launch_product_query=0x7f0a0003;
-        public static final int legal=0x7f0a0093;
-        public static final int length=0x7f0a0098;
-        public static final int length1=0x7f0a009e;
-        public static final int length2=0x7f0a00a4;
-        public static final int length3=0x7f0a00aa;
-        public static final int length4=0x7f0a00b0;
-        public static final int length5=0x7f0a00b6;
-        public static final int let01=0x7f0a00c8;
-        public static final int let02=0x7f0a00ca;
-        public static final int let11=0x7f0a00cd;
-        public static final int let12=0x7f0a00cf;
-        public static final int let21=0x7f0a00d2;
-        public static final int let22=0x7f0a00d4;
-        public static final int let31=0x7f0a00d7;
-        public static final int let32=0x7f0a00d9;
-        public static final int let41=0x7f0a00dc;
-        public static final int let42=0x7f0a00de;
-        public static final int let51=0x7f0a00e1;
-        public static final int let52=0x7f0a00e3;
-        public static final int light=0x7f0a00f7;
-        public static final int lightprice=0x7f0a005d;
-        public static final int line1=0x7f0a009d;
-        public static final int line1_result=0x7f0a00d0;
-        public static final int line2=0x7f0a00a3;
-        public static final int line2_result=0x7f0a00d5;
-        public static final int line3=0x7f0a00a9;
-        public static final int line3_result=0x7f0a00da;
-        public static final int line4=0x7f0a00af;
-        public static final int line4_result=0x7f0a00df;
-        public static final int line5=0x7f0a00b5;
-        public static final int line5_result=0x7f0a00e4;
-        public static final int line_result=0x7f0a00cb;
-        public static final int linear=0x7f0a0069;
-        public static final int list=0x7f0a0017;
-        public static final int list_assign=0x7f0a0007;
-        public static final int list_company=0x7f0a0035;
-        public static final int list_express=0x7f0a0054;
-        public static final int list_handling=0x7f0a0052;
-        public static final int list_notice=0x7f0a0062;
-        public static final int list_search=0x7f0a0081;
-        public static final int list_truck=0x7f0a0089;
-        public static final int loation=0x7f0a0118;
-        public static final int login=0x7f0a006a;
-        public static final int logout=0x7f0a0082;
-        public static final int meta_text_view=0x7f0a00ed;
-        public static final int meta_text_view_label=0x7f0a00ec;
-        public static final int minprice=0x7f0a005c;
-        public static final int mobile=0x7f0a0096;
-        public static final int model=0x7f0a008a;
-        public static final int money=0x7f0a00c5;
-        public static final int name=0x7f0a0009;
-        public static final int name_kd=0x7f0a002d;
-        public static final int name_sh=0x7f0a0023;
-        public static final int name_ty=0x7f0a0028;
-        public static final int newstitle=0x7f0a006d;
-        public static final int no=0x7f0a0076;
-        public static final int notSend=0x7f0a010b;
-        public static final int nothing=0x7f0a0080;
-        public static final int notice=0x7f0a0103;
-        public static final int number=0x7f0a007b;
-        public static final int ok=0x7f0a0100;
-        public static final int one=0x7f0a0065;
-        public static final int out=0x7f0a0117;
-        public static final int pack=0x7f0a0040;
-        public static final int park=0x7f0a0119;
-        public static final int password=0x7f0a006c;
-        public static final int path=0x7f0a003c;
-        public static final int pb=0x7f0a00f8;
-        public static final int phone=0x7f0a0039;
-        public static final int phone_kd=0x7f0a002e;
-        public static final int phone_sh=0x7f0a0024;
-        public static final int phone_ty=0x7f0a0029;
-        public static final int postcode=0x7f0a0092;
-        public static final int preview_view=0x7f0a0032;
-        public static final int price=0x7f0a008c;
-        public static final int province=0x7f0a0079;
-        public static final int qrsearch=0x7f0a010e;
-        public static final int question=0x7f0a008d;
-        public static final int quit=0x7f0a0004;
-        public static final int range=0x7f0a0090;
-        public static final int record=0x7f0a0014;
-        public static final int recordView=0x7f0a0016;
-        public static final int remark=0x7f0a002f;
-        public static final int restart_preview=0x7f0a0005;
-        public static final int result=0x7f0a009c;
-        public static final int result1=0x7f0a00a2;
-        public static final int result2=0x7f0a00a8;
-        public static final int result3=0x7f0a00ae;
-        public static final int result4=0x7f0a00b4;
-        public static final int result5=0x7f0a00ba;
-        public static final int result_button_view=0x7f0a00f0;
-        public static final int result_view=0x7f0a00e7;
-        public static final int return_scan_result=0x7f0a0006;
-        public static final int rkid=0x7f0a0106;
-        public static final int saddress=0x7f0a0013;
-        public static final int scope=0x7f0a0038;
-        public static final int scrollView1=0x7f0a0008;
-        public static final int sdial=0x7f0a0011;
-        public static final int search=0x7f0a00f3;
-        public static final int send=0x7f0a010a;
-        public static final int sender=0x7f0a000f;
-        public static final int sent=0x7f0a010c;
-        public static final int sh=0x7f0a001d;
-        public static final int shf=0x7f0a004a;
-        public static final int sphone=0x7f0a0010;
-        public static final int start=0x7f0a0012;
-        public static final int status_view=0x7f0a0034;
-        public static final int stuff=0x7f0a0097;
-        public static final int stuffCode=0x7f0a0018;
-        public static final int stuffList=0x7f0a0031;
-        public static final int stuffName=0x7f0a00fa;
-        public static final int stuffType=0x7f0a00f9;
-        public static final int stuff_name=0x7f0a0107;
-        public static final int suggest=0x7f0a0074;
-        public static final int superior=0x7f0a0091;
-        public static final int sure=0x7f0a0072;
-        public static final int sureGrid=0x7f0a0071;
-        public static final int surePhone=0x7f0a0073;
-        public static final int tabs=0x7f0a0064;
-        public static final int tbjz=0x7f0a004d;
-        public static final int tel=0x7f0a005b;
-        public static final int text=0x7f0a0109;
-        public static final int textView1=0x7f0a0015;
-        public static final int textView7=0x7f0a00e6;
-        public static final int textView9=0x7f0a00be;
-        public static final int tf=0x7f0a0020;
-        public static final int thf=0x7f0a0049;
-        public static final int three=0x7f0a0067;
-        public static final int time=0x7f0a006e;
-        public static final int time_text_view=0x7f0a00eb;
-        public static final int title=0x7f0a00ff;
-        public static final int to=0x7f0a0025;
-        public static final int toaddress=0x7f0a0059;
-        public static final int tocity=0x7f0a0056;
-        public static final int total=0x7f0a003e;
-        public static final int totalCount=0x7f0a0085;
-        public static final int totalMoney=0x7f0a00c7;
-        public static final int totalUnit=0x7f0a003f;
-        public static final int totalWeight=0x7f0a0086;
-        public static final int transport=0x7f0a0070;
-        public static final int truck=0x7f0a00fb;
-        public static final int two=0x7f0a0066;
-        public static final int txt=0x7f0a0104;
-        public static final int type=0x7f0a003d;
-        public static final int type_text_view=0x7f0a00ea;
-        public static final int unit=0x7f0a00c2;
-        public static final int unit01=0x7f0a00c9;
-        public static final int unit02=0x7f0a00cc;
-        public static final int unit11=0x7f0a00ce;
-        public static final int unit12=0x7f0a00d1;
-        public static final int unit21=0x7f0a00d3;
-        public static final int unit22=0x7f0a00d6;
-        public static final int unit31=0x7f0a00d8;
-        public static final int unit32=0x7f0a00db;
-        public static final int unit41=0x7f0a00dd;
-        public static final int unit42=0x7f0a00e0;
-        public static final int unit51=0x7f0a00e2;
-        public static final int unit52=0x7f0a00e5;
-        public static final int unit_extra=0x7f0a00bd;
-        public static final int unit_total=0x7f0a00bf;
-        public static final int update=0x7f0a011a;
-        public static final int user=0x7f0a00fc;
-        public static final int username=0x7f0a006b;
-        public static final int viewfinder_view=0x7f0a0033;
-        public static final int weight=0x7f0a0041;
-        public static final int weightUnit=0x7f0a0042;
-        public static final int width=0x7f0a0099;
-        public static final int width1=0x7f0a009f;
-        public static final int width2=0x7f0a00a5;
-        public static final int width3=0x7f0a00ab;
-        public static final int width4=0x7f0a00b1;
-        public static final int width5=0x7f0a00b7;
-        public static final int xj=0x7f0a001f;
-        public static final int ydqx=0x7f0a0022;
-        public static final int yes=0x7f0a0075;
-        public static final int yesno=0x7f0a006f;
-        public static final int yf=0x7f0a0046;
-        public static final int zl=0x7f0a00c3;
-        public static final int zt=0x7f0a001e;
-        public static final int zyf=0x7f0a004c;
+        public static final int action_settings=0x7f07012c;
+        public static final int add=0x7f07003c;
+        public static final int address=0x7f070042;
+        public static final int address_sh=0x7f070032;
+        public static final int address_ty=0x7f070037;
+        public static final int again=0x7f070083;
+        public static final int all=0x7f0700d0;
+        public static final int allUnit=0x7f070051;
+        public static final int answer=0x7f07009a;
+        public static final int arriveTime=0x7f070090;
+        public static final int assign=0x7f070122;
+        public static final int back=0x7f07010a;
+        public static final int barcode_image_view=0x7f0700f4;
+        public static final int bill=0x7f070111;
+        public static final int blank=0x7f070126;
+        public static final int both=0x7f070003;
+        public static final int brand=0x7f070097;
+        public static final int btn=0x7f07011e;
+        public static final int bxf=0x7f070057;
+        public static final int bzf=0x7f070054;
+        public static final int calc=0x7f070053;
+        public static final int cancel=0x7f0700cd;
+        public static final int card=0x7f0700a0;
+        public static final int charger=0x7f0700a1;
+        public static final int checkBox=0x7f070100;
+        public static final int choose=0x7f070089;
+        public static final int city=0x7f0700fd;
+        public static final int code=0x7f070086;
+        public static final int code_sh=0x7f070033;
+        public static final int code_ty=0x7f070038;
+        public static final int company=0x7f070121;
+        public static final int confirm=0x7f0700cc;
+        public static final int contact=0x7f070093;
+        public static final int content=0x7f07006f;
+        public static final int contents_supplement_text_view=0x7f0700fb;
+        public static final int contents_text_view=0x7f0700fa;
+        public static final int count=0x7f0700a7;
+        public static final int count1=0x7f0700ad;
+        public static final int count2=0x7f0700b3;
+        public static final int count3=0x7f0700b9;
+        public static final int count4=0x7f0700bf;
+        public static final int count5=0x7f0700c5;
+        public static final int credit=0x7f070043;
+        public static final int crosscity=0x7f070064;
+        public static final int cubage=0x7f07004f;
+        public static final int cubageUnit=0x7f070050;
+        public static final int date=0x7f070109;
+        public static final int dealing=0x7f070124;
+        public static final int decode=0x7f07000c;
+        public static final int decode_failed=0x7f07000d;
+        public static final int decode_succeeded=0x7f07000e;
+        public static final int detail=0x7f070094;
+        public static final int details=0x7f07006b;
+        public static final int dial=0x7f070046;
+        public static final int disabled=0x7f070000;
+        public static final int distance=0x7f0700d2;
+        public static final int district=0x7f0700fe;
+        public static final int dk=0x7f07005d;
+        public static final int done=0x7f070125;
+        public static final int driver=0x7f070088;
+        public static final int driverId=0x7f070101;
+        public static final int driverList=0x7f07005f;
+        public static final int driver_id=0x7f07008b;
+        public static final int driver_number=0x7f07008a;
+        public static final int dshk_no=0x7f07005c;
+        public static final int dshk_yes=0x7f07005b;
+        public static final int edit=0x7f070114;
+        public static final int email=0x7f07009b;
+        public static final int embedded=0x7f07008f;
+        public static final int end=0x7f070019;
+        public static final int express=0x7f070120;
+        public static final int extra=0x7f0700c7;
+        public static final int extra_result=0x7f0700c8;
+        public static final int fax=0x7f070047;
+        public static final int fl_inner=0x7f070115;
+        public static final int flip=0x7f070008;
+        public static final int formList=0x7f07006d;
+        public static final int form_id=0x7f07006c;
+        public static final int format_text_view=0x7f0700f5;
+        public static final int four=0x7f070074;
+        public static final int from=0x7f070036;
+        public static final int fromaddress=0x7f070063;
+        public static final int fromcity=0x7f070061;
+        public static final int gaddress=0x7f07001a;
+        public static final int garden=0x7f070066;
+        public static final int gdial=0x7f070018;
+        public static final int getter=0x7f070016;
+        public static final int go=0x7f070084;
+        public static final int gphone=0x7f070017;
+        public static final int gridview=0x7f070009;
+        public static final int haevyprice=0x7f07006a;
+        public static final int heavy=0x7f070102;
+        public static final int height=0x7f0700a6;
+        public static final int height1=0x7f0700ac;
+        public static final int height2=0x7f0700b2;
+        public static final int height3=0x7f0700b8;
+        public static final int height4=0x7f0700be;
+        public static final int height5=0x7f0700c4;
+        public static final int hint=0x7f07005a;
+        public static final int history_detail=0x7f07010e;
+        public static final int history_title=0x7f07010d;
+        public static final int in=0x7f070127;
+        public static final int info=0x7f070123;
+        public static final int istb_no=0x7f070026;
+        public static final int istb_yes=0x7f070025;
+        public static final int istx_no=0x7f070028;
+        public static final int istx_yes=0x7f070027;
+        public static final int jz=0x7f07002d;
+        public static final int launch_product_query=0x7f07000f;
+        public static final int legal=0x7f07009f;
+        public static final int length=0x7f0700a4;
+        public static final int length1=0x7f0700aa;
+        public static final int length2=0x7f0700b0;
+        public static final int length3=0x7f0700b6;
+        public static final int length4=0x7f0700bc;
+        public static final int length5=0x7f0700c2;
+        public static final int let01=0x7f0700d4;
+        public static final int let02=0x7f0700d6;
+        public static final int let11=0x7f0700d9;
+        public static final int let12=0x7f0700db;
+        public static final int let21=0x7f0700de;
+        public static final int let22=0x7f0700e0;
+        public static final int let31=0x7f0700e3;
+        public static final int let32=0x7f0700e5;
+        public static final int let41=0x7f0700e8;
+        public static final int let42=0x7f0700ea;
+        public static final int let51=0x7f0700ed;
+        public static final int let52=0x7f0700ef;
+        public static final int light=0x7f070103;
+        public static final int lightprice=0x7f070069;
+        public static final int line1=0x7f0700a9;
+        public static final int line1_result=0x7f0700dc;
+        public static final int line2=0x7f0700af;
+        public static final int line2_result=0x7f0700e1;
+        public static final int line3=0x7f0700b5;
+        public static final int line3_result=0x7f0700e6;
+        public static final int line4=0x7f0700bb;
+        public static final int line4_result=0x7f0700eb;
+        public static final int line5=0x7f0700c1;
+        public static final int line5_result=0x7f0700f0;
+        public static final int line_result=0x7f0700d7;
+        public static final int linear=0x7f070075;
+        public static final int list=0x7f070023;
+        public static final int list_assign=0x7f070013;
+        public static final int list_company=0x7f070041;
+        public static final int list_express=0x7f070060;
+        public static final int list_handling=0x7f07005e;
+        public static final int list_notice=0x7f07006e;
+        public static final int list_search=0x7f07008d;
+        public static final int list_truck=0x7f070095;
+        public static final int loation=0x7f070129;
+        public static final int login=0x7f070076;
+        public static final int logout=0x7f07008e;
+        public static final int manualOnly=0x7f070004;
+        public static final int meta_text_view=0x7f0700f9;
+        public static final int meta_text_view_label=0x7f0700f8;
+        public static final int minprice=0x7f070068;
+        public static final int mobile=0x7f0700a2;
+        public static final int model=0x7f070096;
+        public static final int money=0x7f0700d1;
+        public static final int name=0x7f070015;
+        public static final int name_kd=0x7f070039;
+        public static final int name_sh=0x7f07002f;
+        public static final int name_ty=0x7f070034;
+        public static final int newstitle=0x7f070079;
+        public static final int no=0x7f070082;
+        public static final int notSend=0x7f07011c;
+        public static final int nothing=0x7f07008c;
+        public static final int notice=0x7f07010f;
+        public static final int number=0x7f070087;
+        public static final int ok=0x7f07010c;
+        public static final int one=0x7f070071;
+        public static final int out=0x7f070128;
+        public static final int pack=0x7f07004c;
+        public static final int park=0x7f07012a;
+        public static final int password=0x7f070078;
+        public static final int path=0x7f070048;
+        public static final int pb=0x7f070104;
+        public static final int phone=0x7f070045;
+        public static final int phone_kd=0x7f07003a;
+        public static final int phone_sh=0x7f070030;
+        public static final int phone_ty=0x7f070035;
+        public static final int postcode=0x7f07009e;
+        public static final int preview_view=0x7f07003e;
+        public static final int price=0x7f070098;
+        public static final int province=0x7f070085;
+        public static final int pullDownFromTop=0x7f070005;
+        public static final int pullFromEnd=0x7f070002;
+        public static final int pullFromStart=0x7f070001;
+        public static final int pullUpFromBottom=0x7f070006;
+        public static final int pull_to_refresh_image=0x7f070116;
+        public static final int pull_to_refresh_progress=0x7f070117;
+        public static final int pull_to_refresh_sub_text=0x7f070119;
+        public static final int pull_to_refresh_text=0x7f070118;
+        public static final int qrsearch=0x7f07011f;
+        public static final int question=0x7f070099;
+        public static final int quit=0x7f070010;
+        public static final int range=0x7f07009c;
+        public static final int record=0x7f070020;
+        public static final int recordView=0x7f070022;
+        public static final int remark=0x7f07003b;
+        public static final int restart_preview=0x7f070011;
+        public static final int result=0x7f0700a8;
+        public static final int result1=0x7f0700ae;
+        public static final int result2=0x7f0700b4;
+        public static final int result3=0x7f0700ba;
+        public static final int result4=0x7f0700c0;
+        public static final int result5=0x7f0700c6;
+        public static final int result_button_view=0x7f0700fc;
+        public static final int result_view=0x7f0700f3;
+        public static final int return_scan_result=0x7f070012;
+        public static final int rkid=0x7f070112;
+        public static final int rotate=0x7f070007;
+        public static final int saddress=0x7f07001f;
+        public static final int scope=0x7f070044;
+        public static final int scrollView1=0x7f070014;
+        public static final int scrollview=0x7f07000b;
+        public static final int sdial=0x7f07001d;
+        public static final int search=0x7f0700ff;
+        public static final int send=0x7f07011b;
+        public static final int sender=0x7f07001b;
+        public static final int sent=0x7f07011d;
+        public static final int sh=0x7f070029;
+        public static final int shf=0x7f070056;
+        public static final int sphone=0x7f07001c;
+        public static final int start=0x7f07001e;
+        public static final int status_view=0x7f070040;
+        public static final int stuff=0x7f0700a3;
+        public static final int stuffCode=0x7f070024;
+        public static final int stuffList=0x7f07003d;
+        public static final int stuffName=0x7f070106;
+        public static final int stuffType=0x7f070105;
+        public static final int stuff_name=0x7f070113;
+        public static final int suggest=0x7f070080;
+        public static final int superior=0x7f07009d;
+        public static final int sure=0x7f07007e;
+        public static final int sureGrid=0x7f07007d;
+        public static final int surePhone=0x7f07007f;
+        public static final int tabs=0x7f070070;
+        public static final int tbjz=0x7f070059;
+        public static final int tel=0x7f070067;
+        public static final int text=0x7f07011a;
+        public static final int textView1=0x7f070021;
+        public static final int textView7=0x7f0700f2;
+        public static final int textView9=0x7f0700ca;
+        public static final int tf=0x7f07002c;
+        public static final int thf=0x7f070055;
+        public static final int three=0x7f070073;
+        public static final int time=0x7f07007a;
+        public static final int time_text_view=0x7f0700f7;
+        public static final int title=0x7f07010b;
+        public static final int to=0x7f070031;
+        public static final int toaddress=0x7f070065;
+        public static final int tocity=0x7f070062;
+        public static final int total=0x7f07004a;
+        public static final int totalCount=0x7f070091;
+        public static final int totalMoney=0x7f0700d3;
+        public static final int totalUnit=0x7f07004b;
+        public static final int totalWeight=0x7f070092;
+        public static final int transport=0x7f07007c;
+        public static final int truck=0x7f070107;
+        public static final int two=0x7f070072;
+        public static final int txt=0x7f070110;
+        public static final int type=0x7f070049;
+        public static final int type_text_view=0x7f0700f6;
+        public static final int unit=0x7f0700ce;
+        public static final int unit01=0x7f0700d5;
+        public static final int unit02=0x7f0700d8;
+        public static final int unit11=0x7f0700da;
+        public static final int unit12=0x7f0700dd;
+        public static final int unit21=0x7f0700df;
+        public static final int unit22=0x7f0700e2;
+        public static final int unit31=0x7f0700e4;
+        public static final int unit32=0x7f0700e7;
+        public static final int unit41=0x7f0700e9;
+        public static final int unit42=0x7f0700ec;
+        public static final int unit51=0x7f0700ee;
+        public static final int unit52=0x7f0700f1;
+        public static final int unit_extra=0x7f0700c9;
+        public static final int unit_total=0x7f0700cb;
+        public static final int update=0x7f07012b;
+        public static final int user=0x7f070108;
+        public static final int username=0x7f070077;
+        public static final int viewfinder_view=0x7f07003f;
+        public static final int webview=0x7f07000a;
+        public static final int weight=0x7f07004d;
+        public static final int weightUnit=0x7f07004e;
+        public static final int width=0x7f0700a5;
+        public static final int width1=0x7f0700ab;
+        public static final int width2=0x7f0700b1;
+        public static final int width3=0x7f0700b7;
+        public static final int width4=0x7f0700bd;
+        public static final int width5=0x7f0700c3;
+        public static final int xj=0x7f07002b;
+        public static final int ydqx=0x7f07002e;
+        public static final int yes=0x7f070081;
+        public static final int yesno=0x7f07007b;
+        public static final int yf=0x7f070052;
+        public static final int zl=0x7f0700cf;
+        public static final int zt=0x7f07002a;
+        public static final int zyf=0x7f070058;
     }
     public static final class layout {
         public static final int activity_assign=0x7f030000;
@@ -846,17 +1011,19 @@ public final class R {
         public static final int office_item=0x7f03003b;
         public static final int order_item=0x7f03003c;
         public static final int out_item=0x7f03003d;
-        public static final int qr_item=0x7f03003e;
-        public static final int search_header=0x7f03003f;
-        public static final int search_item=0x7f030040;
-        public static final int stuff_item=0x7f030041;
-        public static final int tab1=0x7f030042;
-        public static final int tab2=0x7f030043;
-        public static final int tab3=0x7f030044;
-        public static final int tab4=0x7f030045;
-        public static final int tab_header=0x7f030046;
-        public static final int truck_header=0x7f030047;
-        public static final int truck_item=0x7f030048;
+        public static final int pull_to_refresh_header_horizontal=0x7f03003e;
+        public static final int pull_to_refresh_header_vertical=0x7f03003f;
+        public static final int qr_item=0x7f030040;
+        public static final int search_header=0x7f030041;
+        public static final int search_item=0x7f030042;
+        public static final int stuff_item=0x7f030043;
+        public static final int tab1=0x7f030044;
+        public static final int tab2=0x7f030045;
+        public static final int tab3=0x7f030046;
+        public static final int tab4=0x7f030047;
+        public static final int tab_header=0x7f030048;
+        public static final int truck_header=0x7f030049;
+        public static final int truck_item=0x7f03004a;
     }
     public static final class menu {
         public static final int assign=0x7f0d0000;
@@ -898,182 +1065,191 @@ public final class R {
         public static final int success=0x7f060002;
     }
     public static final class string {
-        public static final int about=0x7f0b0018;
-        public static final int action_settings=0x7f0b0001;
-        public static final int app_name=0x7f0b0000;
+        public static final int about=0x7f09001e;
+        public static final int action_settings=0x7f090007;
+        public static final int app_name=0x7f090006;
         /**  zxing 
          */
-        public static final int app_picker_name=0x7f0b0027;
-        public static final int arrivetime=0x7f0b001e;
-        public static final int between=0x7f0b000c;
-        public static final int billsearch=0x7f0b0010;
-        public static final int blank=0x7f0b0014;
-        public static final int bookmark_picker_name=0x7f0b0028;
-        public static final int button_add_calendar=0x7f0b0029;
-        public static final int button_add_contact=0x7f0b002a;
-        public static final int button_book_search=0x7f0b002b;
-        public static final int button_cancel=0x7f0b002c;
-        public static final int button_custom_product_search=0x7f0b002d;
-        public static final int button_dial=0x7f0b002e;
-        public static final int button_email=0x7f0b002f;
-        public static final int button_get_directions=0x7f0b0030;
-        public static final int button_mms=0x7f0b0031;
-        public static final int button_ok=0x7f0b0032;
-        public static final int button_open_browser=0x7f0b0033;
-        public static final int button_product_search=0x7f0b0034;
-        public static final int button_search_book_contents=0x7f0b0035;
-        public static final int button_share_app=0x7f0b0036;
-        public static final int button_share_bookmark=0x7f0b0037;
-        public static final int button_share_by_email=0x7f0b0038;
-        public static final int button_share_by_sms=0x7f0b0039;
-        public static final int button_share_clipboard=0x7f0b003a;
-        public static final int button_share_contact=0x7f0b003b;
-        public static final int button_show_map=0x7f0b003c;
-        public static final int button_sms=0x7f0b003d;
-        public static final int button_web_search=0x7f0b003e;
-        public static final int button_wifi=0x7f0b003f;
-        public static final int cancel=0x7f0b0026;
-        public static final int carinfo=0x7f0b000e;
-        public static final int company=0x7f0b000d;
-        public static final int confirm=0x7f0b0025;
-        public static final int contents_contact=0x7f0b0040;
-        public static final int contents_email=0x7f0b0041;
-        public static final int contents_location=0x7f0b0042;
-        public static final int contents_phone=0x7f0b0043;
-        public static final int contents_sms=0x7f0b0044;
-        public static final int contents_text=0x7f0b0045;
-        public static final int done=0x7f0b001d;
-        public static final int express=0x7f0b000b;
-        public static final int feedback=0x7f0b0017;
-        public static final int group=0x7f0b0021;
-        public static final int handling=0x7f0b001c;
-        public static final int hello_world=0x7f0b009d;
-        public static final int history_clear_one_history_text=0x7f0b0046;
-        public static final int history_clear_text=0x7f0b0047;
-        public static final int history_email_title=0x7f0b0048;
-        public static final int history_empty=0x7f0b0049;
-        public static final int history_empty_detail=0x7f0b004a;
-        public static final int history_send=0x7f0b004b;
-        public static final int history_title=0x7f0b004c;
-        public static final int lastet=0x7f0b000f;
-        public static final int login=0x7f0b0004;
-        public static final int loginname=0x7f0b001f;
-        public static final int logout=0x7f0b001a;
-        public static final int menu_encode_mecard=0x7f0b004d;
-        public static final int menu_encode_vcard=0x7f0b004e;
-        public static final int menu_help=0x7f0b004f;
-        public static final int menu_history=0x7f0b0050;
-        public static final int menu_settings=0x7f0b0051;
-        public static final int menu_share=0x7f0b0052;
-        public static final int msg_bulk_mode_scanned=0x7f0b0053;
-        public static final int msg_camera_framework_bug=0x7f0b0054;
-        public static final int msg_default_format=0x7f0b0055;
-        public static final int msg_default_meta=0x7f0b0056;
-        public static final int msg_default_mms_subject=0x7f0b0057;
-        public static final int msg_default_status=0x7f0b0058;
-        public static final int msg_default_time=0x7f0b0059;
-        public static final int msg_default_type=0x7f0b005a;
-        public static final int msg_encode_contents_failed=0x7f0b005b;
-        public static final int msg_google_books=0x7f0b005c;
-        public static final int msg_google_product=0x7f0b005d;
-        public static final int msg_intent_failed=0x7f0b005e;
-        public static final int msg_redirect=0x7f0b005f;
-        public static final int msg_sbc_book_not_searchable=0x7f0b0060;
-        public static final int msg_sbc_failed=0x7f0b0061;
-        public static final int msg_sbc_no_page_returned=0x7f0b0062;
-        public static final int msg_sbc_page=0x7f0b0063;
-        public static final int msg_sbc_results=0x7f0b0064;
-        public static final int msg_sbc_searching_book=0x7f0b0065;
-        public static final int msg_sbc_snippet_unavailable=0x7f0b0066;
-        public static final int msg_share_explanation=0x7f0b0067;
-        public static final int msg_share_text=0x7f0b0068;
-        public static final int msg_sure=0x7f0b0069;
-        public static final int msg_unmount_usb=0x7f0b006a;
-        public static final int multin=0x7f0b0013;
-        public static final int multiout=0x7f0b0016;
-        public static final int no=0x7f0b0024;
-        public static final int notice=0x7f0b0011;
-        public static final int number=0x7f0b001b;
-        public static final int password=0x7f0b0003;
-        public static final int preferences_actions_title=0x7f0b006b;
-        public static final int preferences_auto_focus_title=0x7f0b006c;
-        public static final int preferences_bulk_mode_summary=0x7f0b006d;
-        public static final int preferences_bulk_mode_title=0x7f0b006e;
-        public static final int preferences_copy_to_clipboard_title=0x7f0b006f;
-        public static final int preferences_custom_product_search_summary=0x7f0b0070;
-        public static final int preferences_custom_product_search_title=0x7f0b0071;
-        public static final int preferences_decode_1D_title=0x7f0b0072;
-        public static final int preferences_decode_Data_Matrix_title=0x7f0b0073;
-        public static final int preferences_decode_QR_title=0x7f0b0074;
-        public static final int preferences_device_bug_workarounds_title=0x7f0b0075;
-        public static final int preferences_disable_continuous_focus_summary=0x7f0b0076;
-        public static final int preferences_disable_continuous_focus_title=0x7f0b0077;
-        public static final int preferences_disable_exposure_title=0x7f0b0078;
-        public static final int preferences_front_light_auto=0x7f0b0079;
-        public static final int preferences_front_light_off=0x7f0b007a;
-        public static final int preferences_front_light_on=0x7f0b007b;
-        public static final int preferences_front_light_summary=0x7f0b007c;
-        public static final int preferences_front_light_title=0x7f0b007d;
-        public static final int preferences_general_title=0x7f0b007e;
-        public static final int preferences_invert_scan_summary=0x7f0b007f;
-        public static final int preferences_invert_scan_title=0x7f0b0080;
-        public static final int preferences_name=0x7f0b0081;
-        public static final int preferences_play_beep_title=0x7f0b0082;
-        public static final int preferences_remember_duplicates_summary=0x7f0b0083;
-        public static final int preferences_remember_duplicates_title=0x7f0b0084;
-        public static final int preferences_result_title=0x7f0b0085;
-        public static final int preferences_scanning_title=0x7f0b0086;
-        public static final int preferences_search_country=0x7f0b0087;
-        public static final int preferences_supplemental_summary=0x7f0b0088;
-        public static final int preferences_supplemental_title=0x7f0b0089;
-        public static final int preferences_try_bsplus=0x7f0b008a;
-        public static final int preferences_try_bsplus_summary=0x7f0b008b;
-        public static final int preferences_vibrate_title=0x7f0b008c;
-        public static final int qrsearch=0x7f0b000a;
-        public static final int record=0x7f0b0022;
-        public static final int result_address_book=0x7f0b008d;
-        public static final int result_calendar=0x7f0b008e;
-        public static final int result_email_address=0x7f0b008f;
-        public static final int result_geo=0x7f0b0090;
-        public static final int result_isbn=0x7f0b0091;
-        public static final int result_product=0x7f0b0092;
-        public static final int result_sms=0x7f0b0093;
-        public static final int result_tel=0x7f0b0094;
-        public static final int result_text=0x7f0b0095;
-        public static final int result_uri=0x7f0b0096;
-        public static final int result_wifi=0x7f0b0097;
-        public static final int sbc_name=0x7f0b0098;
-        public static final int setting=0x7f0b0009;
-        public static final int singlein=0x7f0b0012;
-        public static final int singleout=0x7f0b0015;
-        public static final int tab1=0x7f0b0005;
-        public static final int tab2=0x7f0b0006;
-        public static final int tab3=0x7f0b0007;
-        public static final int tab4=0x7f0b0008;
-        public static final int title_activity_blank=0x7f0b00a5;
-        public static final int title_activity_count=0x7f0b00a0;
-        public static final int title_activity_dealing=0x7f0b00a7;
-        public static final int title_activity_done=0x7f0b00a8;
-        public static final int title_activity_driver=0x7f0b00a4;
-        public static final int title_activity_form=0x7f0b00a2;
-        public static final int title_activity_form_list=0x7f0b00ab;
-        public static final int title_activity_history=0x7f0b009e;
-        public static final int title_activity_in=0x7f0b00a1;
-        public static final int title_activity_issue_stuff=0x7f0b00ac;
-        public static final int title_activity_issue_truck=0x7f0b00ad;
-        public static final int title_activity_order=0x7f0b009f;
-        public static final int title_activity_out=0x7f0b00a3;
-        public static final int title_activity_save=0x7f0b00aa;
-        public static final int title_activity_setting=0x7f0b009c;
-        public static final int title_activity_stuff=0x7f0b00a6;
-        public static final int title_activity_user=0x7f0b00a9;
-        public static final int userinfo=0x7f0b0020;
-        public static final int username=0x7f0b0002;
-        public static final int version=0x7f0b0019;
-        public static final int wifi_changing_network=0x7f0b0099;
-        public static final int wifi_ssid_label=0x7f0b009a;
-        public static final int wifi_type_label=0x7f0b009b;
-        public static final int yes=0x7f0b0023;
+        public static final int app_picker_name=0x7f09002d;
+        public static final int arrivetime=0x7f090024;
+        public static final int between=0x7f090012;
+        public static final int billsearch=0x7f090016;
+        public static final int blank=0x7f09001a;
+        public static final int bookmark_picker_name=0x7f09002e;
+        public static final int button_add_calendar=0x7f09002f;
+        public static final int button_add_contact=0x7f090030;
+        public static final int button_book_search=0x7f090031;
+        public static final int button_cancel=0x7f090032;
+        public static final int button_custom_product_search=0x7f090033;
+        public static final int button_dial=0x7f090034;
+        public static final int button_email=0x7f090035;
+        public static final int button_get_directions=0x7f090036;
+        public static final int button_mms=0x7f090037;
+        public static final int button_ok=0x7f090038;
+        public static final int button_open_browser=0x7f090039;
+        public static final int button_product_search=0x7f09003a;
+        public static final int button_search_book_contents=0x7f09003b;
+        public static final int button_share_app=0x7f09003c;
+        public static final int button_share_bookmark=0x7f09003d;
+        public static final int button_share_by_email=0x7f09003e;
+        public static final int button_share_by_sms=0x7f09003f;
+        public static final int button_share_clipboard=0x7f090040;
+        public static final int button_share_contact=0x7f090041;
+        public static final int button_show_map=0x7f090042;
+        public static final int button_sms=0x7f090043;
+        public static final int button_web_search=0x7f090044;
+        public static final int button_wifi=0x7f090045;
+        public static final int cancel=0x7f09002c;
+        public static final int carinfo=0x7f090014;
+        public static final int company=0x7f090013;
+        public static final int confirm=0x7f09002b;
+        public static final int contents_contact=0x7f090046;
+        public static final int contents_email=0x7f090047;
+        public static final int contents_location=0x7f090048;
+        public static final int contents_phone=0x7f090049;
+        public static final int contents_sms=0x7f09004a;
+        public static final int contents_text=0x7f09004b;
+        public static final int done=0x7f090023;
+        public static final int express=0x7f090011;
+        public static final int feedback=0x7f09001d;
+        public static final int group=0x7f090027;
+        public static final int handling=0x7f090022;
+        public static final int hello_world=0x7f0900a3;
+        public static final int history_clear_one_history_text=0x7f09004c;
+        public static final int history_clear_text=0x7f09004d;
+        public static final int history_email_title=0x7f09004e;
+        public static final int history_empty=0x7f09004f;
+        public static final int history_empty_detail=0x7f090050;
+        public static final int history_send=0x7f090051;
+        public static final int history_title=0x7f090052;
+        public static final int lastet=0x7f090015;
+        public static final int login=0x7f09000a;
+        public static final int loginname=0x7f090025;
+        public static final int logout=0x7f090020;
+        public static final int menu_encode_mecard=0x7f090053;
+        public static final int menu_encode_vcard=0x7f090054;
+        public static final int menu_help=0x7f090055;
+        public static final int menu_history=0x7f090056;
+        public static final int menu_settings=0x7f090057;
+        public static final int menu_share=0x7f090058;
+        public static final int msg_bulk_mode_scanned=0x7f090059;
+        public static final int msg_camera_framework_bug=0x7f09005a;
+        public static final int msg_default_format=0x7f09005b;
+        public static final int msg_default_meta=0x7f09005c;
+        public static final int msg_default_mms_subject=0x7f09005d;
+        public static final int msg_default_status=0x7f09005e;
+        public static final int msg_default_time=0x7f09005f;
+        public static final int msg_default_type=0x7f090060;
+        public static final int msg_encode_contents_failed=0x7f090061;
+        public static final int msg_google_books=0x7f090062;
+        public static final int msg_google_product=0x7f090063;
+        public static final int msg_intent_failed=0x7f090064;
+        public static final int msg_redirect=0x7f090065;
+        public static final int msg_sbc_book_not_searchable=0x7f090066;
+        public static final int msg_sbc_failed=0x7f090067;
+        public static final int msg_sbc_no_page_returned=0x7f090068;
+        public static final int msg_sbc_page=0x7f090069;
+        public static final int msg_sbc_results=0x7f09006a;
+        public static final int msg_sbc_searching_book=0x7f09006b;
+        public static final int msg_sbc_snippet_unavailable=0x7f09006c;
+        public static final int msg_share_explanation=0x7f09006d;
+        public static final int msg_share_text=0x7f09006e;
+        public static final int msg_sure=0x7f09006f;
+        public static final int msg_unmount_usb=0x7f090070;
+        public static final int multin=0x7f090019;
+        public static final int multiout=0x7f09001c;
+        public static final int no=0x7f09002a;
+        public static final int notice=0x7f090017;
+        public static final int number=0x7f090021;
+        public static final int password=0x7f090009;
+        public static final int preferences_actions_title=0x7f090071;
+        public static final int preferences_auto_focus_title=0x7f090072;
+        public static final int preferences_bulk_mode_summary=0x7f090073;
+        public static final int preferences_bulk_mode_title=0x7f090074;
+        public static final int preferences_copy_to_clipboard_title=0x7f090075;
+        public static final int preferences_custom_product_search_summary=0x7f090076;
+        public static final int preferences_custom_product_search_title=0x7f090077;
+        public static final int preferences_decode_1D_title=0x7f090078;
+        public static final int preferences_decode_Data_Matrix_title=0x7f090079;
+        public static final int preferences_decode_QR_title=0x7f09007a;
+        public static final int preferences_device_bug_workarounds_title=0x7f09007b;
+        public static final int preferences_disable_continuous_focus_summary=0x7f09007c;
+        public static final int preferences_disable_continuous_focus_title=0x7f09007d;
+        public static final int preferences_disable_exposure_title=0x7f09007e;
+        public static final int preferences_front_light_auto=0x7f09007f;
+        public static final int preferences_front_light_off=0x7f090080;
+        public static final int preferences_front_light_on=0x7f090081;
+        public static final int preferences_front_light_summary=0x7f090082;
+        public static final int preferences_front_light_title=0x7f090083;
+        public static final int preferences_general_title=0x7f090084;
+        public static final int preferences_invert_scan_summary=0x7f090085;
+        public static final int preferences_invert_scan_title=0x7f090086;
+        public static final int preferences_name=0x7f090087;
+        public static final int preferences_play_beep_title=0x7f090088;
+        public static final int preferences_remember_duplicates_summary=0x7f090089;
+        public static final int preferences_remember_duplicates_title=0x7f09008a;
+        public static final int preferences_result_title=0x7f09008b;
+        public static final int preferences_scanning_title=0x7f09008c;
+        public static final int preferences_search_country=0x7f09008d;
+        public static final int preferences_supplemental_summary=0x7f09008e;
+        public static final int preferences_supplemental_title=0x7f09008f;
+        public static final int preferences_try_bsplus=0x7f090090;
+        public static final int preferences_try_bsplus_summary=0x7f090091;
+        public static final int preferences_vibrate_title=0x7f090092;
+        /**  Just use standard Pull Down String when pulling up. These can be set for languages which require it 
+ Just use standard Pull Down String when pulling up. These can be set for languages which require it 
+         */
+        public static final int pull_to_refresh_from_bottom_pull_label=0x7f090003;
+        public static final int pull_to_refresh_from_bottom_refreshing_label=0x7f090005;
+        public static final int pull_to_refresh_from_bottom_release_label=0x7f090004;
+        public static final int pull_to_refresh_pull_label=0x7f090000;
+        public static final int pull_to_refresh_refreshing_label=0x7f090002;
+        public static final int pull_to_refresh_release_label=0x7f090001;
+        public static final int qrsearch=0x7f090010;
+        public static final int record=0x7f090028;
+        public static final int result_address_book=0x7f090093;
+        public static final int result_calendar=0x7f090094;
+        public static final int result_email_address=0x7f090095;
+        public static final int result_geo=0x7f090096;
+        public static final int result_isbn=0x7f090097;
+        public static final int result_product=0x7f090098;
+        public static final int result_sms=0x7f090099;
+        public static final int result_tel=0x7f09009a;
+        public static final int result_text=0x7f09009b;
+        public static final int result_uri=0x7f09009c;
+        public static final int result_wifi=0x7f09009d;
+        public static final int sbc_name=0x7f09009e;
+        public static final int setting=0x7f09000f;
+        public static final int singlein=0x7f090018;
+        public static final int singleout=0x7f09001b;
+        public static final int tab1=0x7f09000b;
+        public static final int tab2=0x7f09000c;
+        public static final int tab3=0x7f09000d;
+        public static final int tab4=0x7f09000e;
+        public static final int title_activity_blank=0x7f0900ab;
+        public static final int title_activity_count=0x7f0900a6;
+        public static final int title_activity_dealing=0x7f0900ad;
+        public static final int title_activity_done=0x7f0900ae;
+        public static final int title_activity_driver=0x7f0900aa;
+        public static final int title_activity_form=0x7f0900a8;
+        public static final int title_activity_form_list=0x7f0900b1;
+        public static final int title_activity_history=0x7f0900a4;
+        public static final int title_activity_in=0x7f0900a7;
+        public static final int title_activity_issue_stuff=0x7f0900b2;
+        public static final int title_activity_issue_truck=0x7f0900b3;
+        public static final int title_activity_order=0x7f0900a5;
+        public static final int title_activity_out=0x7f0900a9;
+        public static final int title_activity_save=0x7f0900b0;
+        public static final int title_activity_setting=0x7f0900a2;
+        public static final int title_activity_stuff=0x7f0900ac;
+        public static final int title_activity_user=0x7f0900af;
+        public static final int userinfo=0x7f090026;
+        public static final int username=0x7f090008;
+        public static final int version=0x7f09001f;
+        public static final int wifi_changing_network=0x7f09009f;
+        public static final int wifi_ssid_label=0x7f0900a0;
+        public static final int wifi_type_label=0x7f0900a1;
+        public static final int yes=0x7f090029;
     }
     public static final class style {
         /** 
@@ -1128,4 +1304,326 @@ public final class R {
     public static final class xml {
         public static final int preferences=0x7f050000;
     }
+    public static final class styleable {
+        /** Attributes that can be used with a PullToRefresh.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #PullToRefresh_ptrAdapterViewBackground com.honglang.lugang:ptrAdapterViewBackground}</code></td><td> BELOW HERE ARE DEPRECEATED.</td></tr>
+           <tr><td><code>{@link #PullToRefresh_ptrAnimationStyle com.honglang.lugang:ptrAnimationStyle}</code></td><td> Style of Animation should be used displayed when pulling.</td></tr>
+           <tr><td><code>{@link #PullToRefresh_ptrDrawable com.honglang.lugang:ptrDrawable}</code></td><td> Drawable to use as Loading Indicator.</td></tr>
+           <tr><td><code>{@link #PullToRefresh_ptrDrawableBottom com.honglang.lugang:ptrDrawableBottom}</code></td><td></td></tr>
+           <tr><td><code>{@link #PullToRefresh_ptrDrawableEnd com.honglang.lugang:ptrDrawableEnd}</code></td><td> Drawable to use as Loading Indicator in the Footer View.</td></tr>
+           <tr><td><code>{@link #PullToRefresh_ptrDrawableStart com.honglang.lugang:ptrDrawableStart}</code></td><td> Drawable to use as Loading Indicator in the Header View.</td></tr>
+           <tr><td><code>{@link #PullToRefresh_ptrDrawableTop com.honglang.lugang:ptrDrawableTop}</code></td><td></td></tr>
+           <tr><td><code>{@link #PullToRefresh_ptrHeaderBackground com.honglang.lugang:ptrHeaderBackground}</code></td><td> A drawable to use as the background of the Header and Footer Loading Views </td></tr>
+           <tr><td><code>{@link #PullToRefresh_ptrHeaderSubTextColor com.honglang.lugang:ptrHeaderSubTextColor}</code></td><td> Text Color of the Header and Footer Loading Views Sub Header </td></tr>
+           <tr><td><code>{@link #PullToRefresh_ptrHeaderTextAppearance com.honglang.lugang:ptrHeaderTextAppearance}</code></td><td> Base text color, typeface, size, and style for Header and Footer Loading Views </td></tr>
+           <tr><td><code>{@link #PullToRefresh_ptrHeaderTextColor com.honglang.lugang:ptrHeaderTextColor}</code></td><td> Text Color of the Header and Footer Loading Views </td></tr>
+           <tr><td><code>{@link #PullToRefresh_ptrListViewExtrasEnabled com.honglang.lugang:ptrListViewExtrasEnabled}</code></td><td>
+        	Whether PullToRefreshListView has it's extras enabled.</td></tr>
+           <tr><td><code>{@link #PullToRefresh_ptrMode com.honglang.lugang:ptrMode}</code></td><td> Mode of Pull-to-Refresh that should be used </td></tr>
+           <tr><td><code>{@link #PullToRefresh_ptrOverScroll com.honglang.lugang:ptrOverScroll}</code></td><td> Whether Android's built-in Over Scroll should be utilised for Pull-to-Refresh.</td></tr>
+           <tr><td><code>{@link #PullToRefresh_ptrRefreshableViewBackground com.honglang.lugang:ptrRefreshableViewBackground}</code></td><td> A drawable to use as the background of the Refreshable View </td></tr>
+           <tr><td><code>{@link #PullToRefresh_ptrRotateDrawableWhilePulling com.honglang.lugang:ptrRotateDrawableWhilePulling}</code></td><td>
+        	Whether the Drawable should be continually rotated as you pull.</td></tr>
+           <tr><td><code>{@link #PullToRefresh_ptrScrollingWhileRefreshingEnabled com.honglang.lugang:ptrScrollingWhileRefreshingEnabled}</code></td><td> Whether the user can scroll while the View is Refreshing </td></tr>
+           <tr><td><code>{@link #PullToRefresh_ptrShowIndicator com.honglang.lugang:ptrShowIndicator}</code></td><td> Whether the Indicator overlay(s) should be used </td></tr>
+           <tr><td><code>{@link #PullToRefresh_ptrSubHeaderTextAppearance com.honglang.lugang:ptrSubHeaderTextAppearance}</code></td><td> Base text color, typeface, size, and style for Header and Footer Loading Views Sub Header </td></tr>
+           </table>
+           @see #PullToRefresh_ptrAdapterViewBackground
+           @see #PullToRefresh_ptrAnimationStyle
+           @see #PullToRefresh_ptrDrawable
+           @see #PullToRefresh_ptrDrawableBottom
+           @see #PullToRefresh_ptrDrawableEnd
+           @see #PullToRefresh_ptrDrawableStart
+           @see #PullToRefresh_ptrDrawableTop
+           @see #PullToRefresh_ptrHeaderBackground
+           @see #PullToRefresh_ptrHeaderSubTextColor
+           @see #PullToRefresh_ptrHeaderTextAppearance
+           @see #PullToRefresh_ptrHeaderTextColor
+           @see #PullToRefresh_ptrListViewExtrasEnabled
+           @see #PullToRefresh_ptrMode
+           @see #PullToRefresh_ptrOverScroll
+           @see #PullToRefresh_ptrRefreshableViewBackground
+           @see #PullToRefresh_ptrRotateDrawableWhilePulling
+           @see #PullToRefresh_ptrScrollingWhileRefreshingEnabled
+           @see #PullToRefresh_ptrShowIndicator
+           @see #PullToRefresh_ptrSubHeaderTextAppearance
+         */
+        public static final int[] PullToRefresh = {
+            0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003,
+            0x7f010004, 0x7f010005, 0x7f010006, 0x7f010007,
+            0x7f010008, 0x7f010009, 0x7f01000a, 0x7f01000b,
+            0x7f01000c, 0x7f01000d, 0x7f01000e, 0x7f01000f,
+            0x7f010010, 0x7f010011, 0x7f010012
+        };
+        /**
+          <p>
+          @attr description
+           BELOW HERE ARE DEPRECEATED. DO NOT USE. 
+
+
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+          <p>This is a private symbol.
+          @attr name com.honglang.lugang:ptrAdapterViewBackground
+        */
+        public static final int PullToRefresh_ptrAdapterViewBackground = 16;
+        /**
+          <p>
+          @attr description
+           Style of Animation should be used displayed when pulling. 
+
+
+          <p>Must be one or more (separated by '|') of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>rotate</code></td><td>0x0</td><td></td></tr>
+<tr><td><code>flip</code></td><td>0x1</td><td></td></tr>
+</table>
+          <p>This is a private symbol.
+          @attr name com.honglang.lugang:ptrAnimationStyle
+        */
+        public static final int PullToRefresh_ptrAnimationStyle = 12;
+        /**
+          <p>
+          @attr description
+           Drawable to use as Loading Indicator. Changes both Header and Footer. 
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          <p>This is a private symbol.
+          @attr name com.honglang.lugang:ptrDrawable
+        */
+        public static final int PullToRefresh_ptrDrawable = 6;
+        /**
+          <p>This symbol is the offset where the {@link com.honglang.lugang.R.attr#ptrDrawableBottom}
+          attribute's value can be found in the {@link #PullToRefresh} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name com.honglang.lugang:ptrDrawableBottom
+        */
+        public static final int PullToRefresh_ptrDrawableBottom = 18;
+        /**
+          <p>
+          @attr description
+           Drawable to use as Loading Indicator in the Footer View. Overrides value set in ptrDrawable. 
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          <p>This is a private symbol.
+          @attr name com.honglang.lugang:ptrDrawableEnd
+        */
+        public static final int PullToRefresh_ptrDrawableEnd = 8;
+        /**
+          <p>
+          @attr description
+           Drawable to use as Loading Indicator in the Header View. Overrides value set in ptrDrawable. 
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          <p>This is a private symbol.
+          @attr name com.honglang.lugang:ptrDrawableStart
+        */
+        public static final int PullToRefresh_ptrDrawableStart = 7;
+        /**
+          <p>This symbol is the offset where the {@link com.honglang.lugang.R.attr#ptrDrawableTop}
+          attribute's value can be found in the {@link #PullToRefresh} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name com.honglang.lugang:ptrDrawableTop
+        */
+        public static final int PullToRefresh_ptrDrawableTop = 17;
+        /**
+          <p>
+          @attr description
+           A drawable to use as the background of the Header and Footer Loading Views 
+
+
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+          <p>This is a private symbol.
+          @attr name com.honglang.lugang:ptrHeaderBackground
+        */
+        public static final int PullToRefresh_ptrHeaderBackground = 1;
+        /**
+          <p>
+          @attr description
+           Text Color of the Header and Footer Loading Views Sub Header 
+
+
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+          <p>This is a private symbol.
+          @attr name com.honglang.lugang:ptrHeaderSubTextColor
+        */
+        public static final int PullToRefresh_ptrHeaderSubTextColor = 3;
+        /**
+          <p>
+          @attr description
+           Base text color, typeface, size, and style for Header and Footer Loading Views 
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          <p>This is a private symbol.
+          @attr name com.honglang.lugang:ptrHeaderTextAppearance
+        */
+        public static final int PullToRefresh_ptrHeaderTextAppearance = 10;
+        /**
+          <p>
+          @attr description
+           Text Color of the Header and Footer Loading Views 
+
+
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+          <p>This is a private symbol.
+          @attr name com.honglang.lugang:ptrHeaderTextColor
+        */
+        public static final int PullToRefresh_ptrHeaderTextColor = 2;
+        /**
+          <p>
+          @attr description
+          
+        	Whether PullToRefreshListView has it's extras enabled. This allows the user to be 
+        	able to scroll while refreshing, and behaves better. It acheives this by adding
+        	Header and/or Footer Views to the ListView.
+        
+
+
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a boolean value, either "<code>true</code>" or "<code>false</code>".
+          <p>This is a private symbol.
+          @attr name com.honglang.lugang:ptrListViewExtrasEnabled
+        */
+        public static final int PullToRefresh_ptrListViewExtrasEnabled = 14;
+        /**
+          <p>
+          @attr description
+           Mode of Pull-to-Refresh that should be used 
+
+
+          <p>Must be one or more (separated by '|') of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>disabled</code></td><td>0x0</td><td></td></tr>
+<tr><td><code>pullFromStart</code></td><td>0x1</td><td></td></tr>
+<tr><td><code>pullFromEnd</code></td><td>0x2</td><td></td></tr>
+<tr><td><code>both</code></td><td>0x3</td><td></td></tr>
+<tr><td><code>manualOnly</code></td><td>0x4</td><td></td></tr>
+<tr><td><code>pullDownFromTop</code></td><td>0x1</td><td> These last two are depreacted </td></tr>
+<tr><td><code>pullUpFromBottom</code></td><td>0x2</td><td></td></tr>
+</table>
+          <p>This is a private symbol.
+          @attr name com.honglang.lugang:ptrMode
+        */
+        public static final int PullToRefresh_ptrMode = 4;
+        /**
+          <p>
+          @attr description
+           Whether Android's built-in Over Scroll should be utilised for Pull-to-Refresh. 
+
+
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a boolean value, either "<code>true</code>" or "<code>false</code>".
+          <p>This is a private symbol.
+          @attr name com.honglang.lugang:ptrOverScroll
+        */
+        public static final int PullToRefresh_ptrOverScroll = 9;
+        /**
+          <p>
+          @attr description
+           A drawable to use as the background of the Refreshable View 
+
+
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+          <p>This is a private symbol.
+          @attr name com.honglang.lugang:ptrRefreshableViewBackground
+        */
+        public static final int PullToRefresh_ptrRefreshableViewBackground = 0;
+        /**
+          <p>
+          @attr description
+          
+        	Whether the Drawable should be continually rotated as you pull. This only
+        	takes effect when using the 'Rotate' Animation Style.
+        
+
+
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a boolean value, either "<code>true</code>" or "<code>false</code>".
+          <p>This is a private symbol.
+          @attr name com.honglang.lugang:ptrRotateDrawableWhilePulling
+        */
+        public static final int PullToRefresh_ptrRotateDrawableWhilePulling = 15;
+        /**
+          <p>
+          @attr description
+           Whether the user can scroll while the View is Refreshing 
+
+
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a boolean value, either "<code>true</code>" or "<code>false</code>".
+          <p>This is a private symbol.
+          @attr name com.honglang.lugang:ptrScrollingWhileRefreshingEnabled
+        */
+        public static final int PullToRefresh_ptrScrollingWhileRefreshingEnabled = 13;
+        /**
+          <p>
+          @attr description
+           Whether the Indicator overlay(s) should be used 
+
+
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a boolean value, either "<code>true</code>" or "<code>false</code>".
+          <p>This is a private symbol.
+          @attr name com.honglang.lugang:ptrShowIndicator
+        */
+        public static final int PullToRefresh_ptrShowIndicator = 5;
+        /**
+          <p>
+          @attr description
+           Base text color, typeface, size, and style for Header and Footer Loading Views Sub Header 
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          <p>This is a private symbol.
+          @attr name com.honglang.lugang:ptrSubHeaderTextAppearance
+        */
+        public static final int PullToRefresh_ptrSubHeaderTextAppearance = 11;
+    };
 }
