@@ -11,6 +11,11 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnLastItemVisibleListener;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.honglang.lugang.Constant;
 import com.honglang.lugang.R;
 import com.honglang.lugang.SessionManager;
@@ -40,9 +45,10 @@ public class DoneActivity extends Activity implements OnClickListener {
 	private TextView time;
 	private List<Bill> items;
 	private OfficeAdapter adapter;
-	private ListView mListView;
+	private PullToRefreshListView mListView;
 	private int pageSize;
 	private int pageIndex;
+	private int totalCount;
 	private String action = "DealtDone";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +74,17 @@ public class DoneActivity extends Activity implements OnClickListener {
 		items = new ArrayList<Bill>();
 		new DoneTask().execute((Void)null);
 		adapter = new OfficeAdapter(items, this, 1);
-		mListView = (ListView) this.findViewById(R.id.list_handling);
+		mListView = (PullToRefreshListView) this.findViewById(R.id.list_handling);
+		mListView.setMode(Mode.PULL_FROM_END);
+		mListView.setOnRefreshListener(new OnRefreshListener<ListView>() {
+
+			@Override
+			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+				pageIndex++;
+				new DoneTask().execute((Void)null);
+			}
+		});
+		
 		if(adapter != null){
 			mListView.setAdapter(adapter);
 		}
@@ -110,6 +126,7 @@ public class DoneActivity extends Activity implements OnClickListener {
 					JSONObject json = (JSONObject) parser.nextValue();
 					if (json.getBoolean("result")) {
 						JSONObject data = json.getJSONObject("data");
+						totalCount = data.getInt("totalrowcount");
 						JSONArray rows = data.getJSONArray("rows");
 						
 						for (int i = 0; i < rows.length(); i++) {
@@ -140,12 +157,23 @@ public class DoneActivity extends Activity implements OnClickListener {
 		protected void onPostExecute(Boolean result) {
 			if (result) {
 				adapter.notifyDataSetChanged();
+				
+				if (pageIndex > 1) {
+					mListView.onRefreshComplete();
+				}
+				if (totalCount == items.size()) {
+					mListView.setMode(Mode.DISABLED);
+					Toast.makeText(DoneActivity.this, "已加载完所有数据", Toast.LENGTH_LONG).show();
+				}
 			}else {
 				Toast.makeText(DoneActivity.this, errMsg, Toast.LENGTH_LONG).show();
 				if (errMsg.equals("请先登录")) {
 					Intent i = new Intent(DoneActivity.this, LoginActivity.class);
 					i.putExtra("dir", 1);
 					startActivity(i);
+				}
+				if (pageIndex > 1) {
+					pageIndex--;
 				}
 				DoneActivity.this.finish();
 			}
