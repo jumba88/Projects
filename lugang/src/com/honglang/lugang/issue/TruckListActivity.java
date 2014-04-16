@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
-public class IssueTruckActivity extends Activity {
+public class TruckListActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

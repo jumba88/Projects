@@ -3,8 +3,8 @@ package com.honglang.lugang.home;
 
 import com.honglang.lugang.R;
 import com.honglang.lugang.SessionManager;
-import com.honglang.lugang.issue.IssueStuffActivity;
-import com.honglang.lugang.issue.IssueTruckActivity;
+import com.honglang.lugang.issue.StuffListActivity;
+import com.honglang.lugang.issue.TruckListActivity;
 import com.honglang.lugang.login.UserActivity;
 import com.honglang.lugang.office.DealingActivity;
 import com.honglang.lugang.office.DoneActivity;
@@ -99,10 +99,10 @@ public class TabTwo extends Fragment implements OnClickListener {
 			getActivity().startActivity(new Intent(getActivity(),UserActivity.class));
 			break;
 		case R.id.stuff:
-			getActivity().startActivity(new Intent(getActivity(),IssueStuffActivity.class));
+			getActivity().startActivity(new Intent(getActivity(),StuffListActivity.class));
 			break;
 		case R.id.truck:
-			getActivity().startActivity(new Intent(getActivity(),IssueTruckActivity.class));
+			getActivity().startActivity(new Intent(getActivity(),TruckListActivity.class));
 			break;
 		case R.id.blank:
 			Intent i = new Intent(getActivity(),CaptureActivity.class);

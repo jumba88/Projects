@@ -195,12 +195,12 @@
             android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
         </activity>
         <activity
-            android:name="com.honglang.lugang.issue.IssueStuffActivity"
+            android:name="com.honglang.lugang.issue.StuffListActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
         </activity>
         <activity
-            android:name="com.honglang.lugang.issue.IssueTruckActivity"
+            android:name="com.honglang.lugang.issue.TruckListActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
         </activity>
