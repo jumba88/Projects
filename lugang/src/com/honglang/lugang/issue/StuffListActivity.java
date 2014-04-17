@@ -41,7 +41,7 @@ public class StuffListActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_issue_stuff);
+		setContentView(R.layout.activity_stuff_list);
 		
 		init();
 	}

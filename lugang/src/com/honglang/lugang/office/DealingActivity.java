@@ -22,10 +22,12 @@ import com.honglang.lugang.SessionManager;
 import com.honglang.lugang.R.layout;
 import com.honglang.lugang.R.menu;
 import com.honglang.lugang.login.LoginActivity;
+import com.honglang.lugang.truck.TruckActivity;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
@@ -56,7 +58,8 @@ public class DealingActivity extends Activity implements OnClickListener {
 	private int pageSize;
 	private int pageIndex;
 	private String action = "Dealing";
-	
+	private ProgressDialog progress;
+	private boolean ISFIRST = true;
 	private int totalCount;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -136,6 +139,15 @@ public class DealingActivity extends Activity implements OnClickListener {
 	public class DealingTask extends AsyncTask<Void, Void, Boolean>{
 
 		private String errMsg;
+		
+		@Override
+		protected void onPreExecute() {
+			if (ISFIRST) {
+				progress = ProgressDialog.show(DealingActivity.this, null, "加载中...", false, false);
+			}
+			super.onPreExecute();
+		}
+
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			SoapObject rpc = new SoapObject(Constant.NAMESPACE, action);
@@ -154,7 +166,6 @@ public class DealingActivity extends Activity implements OnClickListener {
 				if(response != null){
 					JSONTokener parser = new JSONTokener(response.getPropertyAsString("DealingResult"));
 					JSONObject json = (JSONObject) parser.nextValue();
-					Log.i("suxoyo", json.toString());
 					if (json.getBoolean("result")) {
 						
 						JSONObject data = json.getJSONObject("data");
@@ -186,6 +197,10 @@ public class DealingActivity extends Activity implements OnClickListener {
 
 		@Override
 		protected void onPostExecute(Boolean result) {
+			if (ISFIRST) {
+				progress.dismiss();
+			}
+			ISFIRST = false;
 			if (result) {
 				adapter.notifyDataSetChanged();
 				
@@ -194,7 +209,7 @@ public class DealingActivity extends Activity implements OnClickListener {
 				}
 				if (totalCount == items.size()) {
 					mListView.setMode(Mode.DISABLED);
-					Toast.makeText(DealingActivity.this, "已加载完所有数据", Toast.LENGTH_LONG).show();
+					Toast.makeText(DealingActivity.this, "已加载完所有数据", Toast.LENGTH_SHORT).show();
 				}
 //				pb.setVisibility(View.GONE);
 			}else{

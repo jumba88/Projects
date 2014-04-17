@@ -11,9 +11,14 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.honglang.lugang.Constant;
 import com.honglang.lugang.R;
 import com.honglang.lugang.R.layout;
+import com.honglang.lugang.cityexpress.ExpressActivity;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -28,6 +33,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class TruckActivity extends Activity implements OnClickListener {
 
@@ -35,13 +41,15 @@ public class TruckActivity extends Activity implements OnClickListener {
 	private Button back;
 	private Button ok;
 	
-	private ListView mListView;
+	private PullToRefreshListView mListView;
 	private List<Truck> items;
 	private TruckAdapter adapter;
 	private int pageSize;
 	private int pageIndex;
 	private ProgressDialog progress;
 	private String action = "CarList";
+	private int totalCount;
+	private boolean ISFIRST = true;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -62,7 +70,17 @@ public class TruckActivity extends Activity implements OnClickListener {
 		ok.setVisibility(View.VISIBLE);
 		ok.setOnClickListener(this);
 		
-		mListView = (ListView) this.findViewById(R.id.list_truck);
+		mListView = (PullToRefreshListView) this.findViewById(R.id.list_truck);
+		mListView.setMode(Mode.PULL_FROM_END);
+		mListView.setOnRefreshListener(new OnRefreshListener<ListView>() {
+
+			@Override
+			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+				pageIndex++;
+				new LoadTask().execute((Void)null);
+			}
+		});
+		
 		items = new ArrayList<Truck>();
 		new LoadTask().execute((Void)null);
 		adapter = new TruckAdapter(items, this);
@@ -76,7 +94,7 @@ public class TruckActivity extends Activity implements OnClickListener {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				Intent intent = new Intent(TruckActivity.this,TruckDetailActivity.class);
-				intent.putExtra("Truck", items.get(arg2));
+				intent.putExtra("Truck", items.get(arg2-1));
 				TruckActivity.this.startActivity(intent);
 			}
 		});
@@ -100,7 +118,9 @@ public class TruckActivity extends Activity implements OnClickListener {
 		private String errMsg;
 		@Override
 		protected void onPreExecute() {
-			progress = ProgressDialog.show(TruckActivity.this, null, "加载中...", false, false);
+			if (ISFIRST) {
+				progress = ProgressDialog.show(TruckActivity.this, null, "加载中...", false, false);
+			}
 			super.onPreExecute();
 		}
 
@@ -124,6 +144,7 @@ public class TruckActivity extends Activity implements OnClickListener {
 					JSONObject json = (JSONObject) parser.nextValue();
 					if (json.getBoolean("result")) {
 						JSONObject data = json.getJSONObject("data");
+						totalCount = data.getInt("totalrowcount");
 						JSONArray rows = data.getJSONArray("rows");
 						for (int i = 0; i < rows.length(); i++) {
 							JSONObject obj = rows.getJSONObject(i);
@@ -157,9 +178,20 @@ public class TruckActivity extends Activity implements OnClickListener {
 
 		@Override
 		protected void onPostExecute(Boolean result) {
-			progress.dismiss();
+			if (ISFIRST) {
+				progress.dismiss();
+			}
+			ISFIRST = false;
 			if (result) {
 				adapter.notifyDataSetChanged();
+				
+				if (pageIndex > 1) {
+					mListView.onRefreshComplete();
+				}
+				if (totalCount == items.size()) {
+					mListView.setMode(Mode.DISABLED);
+					Toast.makeText(TruckActivity.this, "已加载完所有数据", Toast.LENGTH_SHORT).show();
+				}
 			}
 			super.onPostExecute(result);
 		}

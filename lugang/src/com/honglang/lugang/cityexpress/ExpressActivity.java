@@ -15,10 +15,15 @@ import org.ksoap2.transport.HttpResponseException;
 import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
 
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.honglang.lugang.Constant;
 import com.honglang.lugang.R;
 import com.honglang.lugang.R.layout;
 import com.honglang.lugang.R.menu;
+import com.honglang.lugang.assign.AssignActivity;
 import com.honglang.lugang.SessionManager;
 
 import android.os.AsyncTask;
@@ -34,13 +39,14 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ExpressActivity extends Activity implements OnClickListener {
 
 	private TextView title;
 	private Button back;
 	private Button ok;
-	private ListView mListView;
+	private PullToRefreshListView mListView;
 //	private Express item;
 	private List<Express> items;
 	private ExpressAdapter adapter;
@@ -49,6 +55,8 @@ public class ExpressActivity extends Activity implements OnClickListener {
 	private int pageIndex;
 	private ProgressDialog progress;
 	private String action = "TkzxList";
+	private int totalCount;
+	private boolean ISFIRST = true;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -70,7 +78,17 @@ public class ExpressActivity extends Activity implements OnClickListener {
 		ok.setVisibility(View.VISIBLE);
 		ok.setOnClickListener(this);
 		
-		mListView = (ListView) this.findViewById(R.id.list_express);
+		mListView = (PullToRefreshListView) this.findViewById(R.id.list_express);
+		mListView.setMode(Mode.PULL_FROM_END);
+		mListView.setOnRefreshListener(new OnRefreshListener<ListView>() {
+
+			@Override
+			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+				pageIndex++;
+				new LoadTask().execute((Void)null);
+			}
+		});
+		
 		items = new ArrayList<Express>();
 		new LoadTask().execute((Void)null);
 		adapter = new ExpressAdapter(items, this);
@@ -86,7 +104,7 @@ public class ExpressActivity extends Activity implements OnClickListener {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				Intent intent = new Intent(ExpressActivity.this, ExpressDetailActivity.class);
-				intent.putExtra("Express", items.get(arg2));
+				intent.putExtra("Express", items.get(arg2-1));
 				ExpressActivity.this.startActivity(intent);
 			}
 		});
@@ -111,15 +129,17 @@ public class ExpressActivity extends Activity implements OnClickListener {
 		private String errMsg;
 		@Override
 		protected void onPreExecute() {
-			progress = ProgressDialog.show(ExpressActivity.this, null, "加载中...");
-			progress.setCancelable(false);
+			if (ISFIRST) {
+				progress = ProgressDialog.show(ExpressActivity.this, null, "加载中...");
+				progress.setCancelable(false);
+			}
 			super.onPreExecute();
 		}
 
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			SoapObject rpc = new SoapObject(Constant.NAMESPACE, action);
-			rpc.addProperty("fromCityName", city);
+			rpc.addProperty("fromCityName", "");
 			rpc.addProperty("toCityName", "");
 			rpc.addProperty("pageSize", pageSize);
 			rpc.addProperty("pageIndex", pageIndex);
@@ -136,6 +156,7 @@ public class ExpressActivity extends Activity implements OnClickListener {
 					JSONObject json = (JSONObject) parser.nextValue();
 					if (json.getBoolean("result")) {
 						JSONObject data = json.getJSONObject("data");
+						totalCount = data.getInt("totalrowcount");
 						JSONArray rows = data.getJSONArray("rows");
 						for (int i = 0; i < rows.length(); i++) {
 							JSONObject obj = rows.getJSONObject(i);
@@ -168,8 +189,17 @@ public class ExpressActivity extends Activity implements OnClickListener {
 		@Override
 		protected void onPostExecute(Boolean result) {
 			progress.dismiss();
+			ISFIRST = false;
 			if (result) {
 				adapter.notifyDataSetChanged();
+				
+				if (pageIndex > 1) {
+					mListView.onRefreshComplete();
+				}
+				if (totalCount == items.size()) {
+					mListView.setMode(Mode.DISABLED);
+					Toast.makeText(ExpressActivity.this, "已加载完所有数据", Toast.LENGTH_SHORT).show();
+				}
 			}
 			
 			super.onPostExecute(result);

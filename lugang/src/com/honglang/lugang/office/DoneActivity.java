@@ -27,6 +27,7 @@ import com.honglang.lugang.office.DoneFragment.DealingTask;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
@@ -50,6 +51,8 @@ public class DoneActivity extends Activity implements OnClickListener {
 	private int pageIndex;
 	private int totalCount;
 	private String action = "DealtDone";
+	private ProgressDialog progress;
+	private boolean ISFIRST = true;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -106,6 +109,15 @@ public class DoneActivity extends Activity implements OnClickListener {
 	class DoneTask extends AsyncTask<Void, Void, Boolean>{
 
 		private String errMsg;
+		
+		@Override
+		protected void onPreExecute() {
+			if (ISFIRST) {
+				progress = ProgressDialog.show(DoneActivity.this, null, "加载中...", false, false);
+			}
+			super.onPreExecute();
+		}
+
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			SoapObject rpc = new SoapObject(Constant.NAMESPACE, action);
@@ -155,6 +167,8 @@ public class DoneActivity extends Activity implements OnClickListener {
 
 		@Override
 		protected void onPostExecute(Boolean result) {
+			progress.dismiss();
+			ISFIRST = false;
 			if (result) {
 				adapter.notifyDataSetChanged();
 				
@@ -163,7 +177,7 @@ public class DoneActivity extends Activity implements OnClickListener {
 				}
 				if (totalCount == items.size()) {
 					mListView.setMode(Mode.DISABLED);
-					Toast.makeText(DoneActivity.this, "已加载完所有数据", Toast.LENGTH_LONG).show();
+					Toast.makeText(DoneActivity.this, "已加载完所有数据", Toast.LENGTH_SHORT).show();
 				}
 			}else {
 				Toast.makeText(DoneActivity.this, errMsg, Toast.LENGTH_LONG).show();

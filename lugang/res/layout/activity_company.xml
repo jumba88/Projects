@@ -12,10 +12,16 @@
     <include layout="@layout/logo"/>
     <include layout="@layout/company_header"/>
     
-    <ListView android:id="@+id/list_company"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:divider="@android:color/transparent">
-        </ListView>
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:id="@+id/list_company"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:cacheColorHint="#00000000"
+        android:divider="@android:color/transparent"
+        android:fadingEdge="none"
+        android:fastScrollEnabled="false"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false"
+        android:smoothScrollbar="true" />
 
 </LinearLayout>

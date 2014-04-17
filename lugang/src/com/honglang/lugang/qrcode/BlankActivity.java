@@ -382,7 +382,8 @@ public class BlankActivity extends Activity implements OnClickListener {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				errMsg = e.toString();
+//				errMsg = e.toString();
+				errMsg = "操作失败，请稍候重试";
 			}
 			return false;
 		}
