@@ -80,8 +80,7 @@ public class DealingActivity extends Activity implements OnClickListener {
 		
 		items = new ArrayList<Bill>();
 		new DealingTask().execute((Void)null);
-		adapter = new OfficeAdapter(items, this, 0);
-//		mListView = (ListView) this.findViewById(R.id.list_handling);
+		
 		mListView = (PullToRefreshListView) this.findViewById(R.id.list_handling);
 		mListView.setMode(Mode.PULL_FROM_END);
 		mListView.setOnRefreshListener(new OnRefreshListener<ListView>() {
@@ -92,10 +91,7 @@ public class DealingActivity extends Activity implements OnClickListener {
 				new DealingTask().execute((Void)null);
 			}
 		});
-//		ListView actualListView = mListView.getRefreshableView();
-		if(adapter != null){
-			mListView.setAdapter(adapter);
-		}
+		
 		mListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -197,12 +193,17 @@ public class DealingActivity extends Activity implements OnClickListener {
 
 		@Override
 		protected void onPostExecute(Boolean result) {
-			if (ISFIRST) {
-				progress.dismiss();
-			}
-			ISFIRST = false;
+			progress.dismiss();
 			if (result) {
-				adapter.notifyDataSetChanged();
+				if (ISFIRST) {
+					adapter = new OfficeAdapter(items, DealingActivity.this, 0);
+					if(adapter != null){
+						mListView.setAdapter(adapter);
+					}
+				}else {
+					adapter.notifyDataSetChanged();
+				}
+				ISFIRST = false;
 				
 				if (pageIndex > 1) {
 					mListView.onRefreshComplete();
@@ -211,7 +212,6 @@ public class DealingActivity extends Activity implements OnClickListener {
 					mListView.setMode(Mode.DISABLED);
 					Toast.makeText(DealingActivity.this, "已加载完所有数据", Toast.LENGTH_SHORT).show();
 				}
-//				pb.setVisibility(View.GONE);
 			}else{
 				Toast.makeText(DealingActivity.this, errMsg, Toast.LENGTH_LONG).show();
 				if (errMsg.equals("请先登录")) {

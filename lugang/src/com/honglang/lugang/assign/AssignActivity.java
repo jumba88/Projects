@@ -85,10 +85,6 @@ public class AssignActivity extends Activity implements OnClickListener {
 		
 		items = new ArrayList<Assign>();
 		new LoadTask().execute((Void)null);
-		adapter = new AssignAdapter(items, this);
-		if(adapter != null){
-			mListView.setAdapter(adapter);
-		}
 		
 		mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -116,7 +112,7 @@ public class AssignActivity extends Activity implements OnClickListener {
 		
 	}
 
-	class LoadTask extends AsyncTask<Void, Void, Integer>{
+	class LoadTask extends AsyncTask<Void, Void, Boolean>{
 
 		private String errMsg;
 		@Override
@@ -129,7 +125,7 @@ public class AssignActivity extends Activity implements OnClickListener {
 		}
 
 		@Override
-		protected Integer doInBackground(Void... params) {
+		protected Boolean doInBackground(Void... params) {
 			SoapObject rpc = new SoapObject(Constant.NAMESPACE, action);
 			rpc.addProperty("fromCityName", "");
 			rpc.addProperty("toCityName", "");
@@ -168,10 +164,10 @@ public class AssignActivity extends Activity implements OnClickListener {
 							item.setZzl(obj.getString("zzl"));
 							items.add(item);
 						}
-						return 1;
+						return true;
 					} else {
 						errMsg = json.getString("msg");
-						return 0;
+						return false;
 					}
 				}
 			} catch (Exception e) {
@@ -179,17 +175,23 @@ public class AssignActivity extends Activity implements OnClickListener {
 				errMsg = e.toString();
 				
 			} 
-			return 0;
+			return false;
 		}
 
 		@Override
-		protected void onPostExecute(Integer result) {
-			if (ISFIRST) {
-				progress.dismiss();
-			}
-			ISFIRST = false;
-			if (result == 1) {
-				adapter.notifyDataSetChanged();
+		protected void onPostExecute(Boolean result) {
+			progress.dismiss();
+			
+			if (result) {
+				if (ISFIRST) {
+					adapter = new AssignAdapter(items, AssignActivity.this);
+					if(adapter != null){
+						mListView.setAdapter(adapter);
+					}
+				}else{
+					adapter.notifyDataSetChanged();
+				}
+				ISFIRST = false;
 				
 				if (pageIndex > 1) {
 					mListView.onRefreshComplete();

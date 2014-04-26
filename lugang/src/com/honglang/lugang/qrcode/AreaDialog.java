@@ -6,6 +6,7 @@ import kankan.wheel.widget.WheelView;
 import kankan.wheel.widget.adapters.ArrayWheelAdapter;
 
 import com.honglang.lugang.R;
+import com.honglang.lugang.issue.IssueStuffActivity;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -294,6 +295,14 @@ public class AreaDialog extends DialogFragment implements OnClickListener {
 			if (getArguments().getInt("area") == 1) {
 				((BlankActivity)getActivity()).to.setText(a);
 				((BlankActivity)getActivity()).IS_TO = true;
+			}
+			if (getArguments().getInt("area") == 10) {
+				((IssueStuffActivity)getActivity()).from.setText(a);
+				((IssueStuffActivity)getActivity()).IS_FROM = true;
+			}
+			if (getArguments().getInt("area") == 11) {
+				((IssueStuffActivity)getActivity()).to.setText(a);
+				((IssueStuffActivity)getActivity()).IS_TO = true;
 			}
 			dismiss();
 			break;

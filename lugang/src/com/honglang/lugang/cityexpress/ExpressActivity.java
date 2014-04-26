@@ -24,6 +24,7 @@ import com.honglang.lugang.R;
 import com.honglang.lugang.R.layout;
 import com.honglang.lugang.R.menu;
 import com.honglang.lugang.assign.AssignActivity;
+import com.honglang.lugang.assign.AssignAdapter;
 import com.honglang.lugang.SessionManager;
 
 import android.os.AsyncTask;
@@ -91,12 +92,6 @@ public class ExpressActivity extends Activity implements OnClickListener {
 		
 		items = new ArrayList<Express>();
 		new LoadTask().execute((Void)null);
-		adapter = new ExpressAdapter(items, this);
-		
-		
-		if(adapter != null){
-			mListView.setAdapter(adapter);
-		}
 		
 		mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -189,9 +184,16 @@ public class ExpressActivity extends Activity implements OnClickListener {
 		@Override
 		protected void onPostExecute(Boolean result) {
 			progress.dismiss();
-			ISFIRST = false;
 			if (result) {
-				adapter.notifyDataSetChanged();
+				if (ISFIRST) {
+					adapter = new ExpressAdapter(items, ExpressActivity.this);
+					if(adapter != null){
+						mListView.setAdapter(adapter);
+					}
+				}else{
+					adapter.notifyDataSetChanged();
+				}
+				ISFIRST = false;
 				
 				if (pageIndex > 1) {
 					mListView.onRefreshComplete();

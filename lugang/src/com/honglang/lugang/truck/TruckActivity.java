@@ -83,10 +83,6 @@ public class TruckActivity extends Activity implements OnClickListener {
 		
 		items = new ArrayList<Truck>();
 		new LoadTask().execute((Void)null);
-		adapter = new TruckAdapter(items, this);
-		if(adapter != null){
-			mListView.setAdapter(adapter);
-		}
 		
 		mListView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -178,12 +174,17 @@ public class TruckActivity extends Activity implements OnClickListener {
 
 		@Override
 		protected void onPostExecute(Boolean result) {
-			if (ISFIRST) {
-				progress.dismiss();
-			}
-			ISFIRST = false;
+			progress.dismiss();
 			if (result) {
-				adapter.notifyDataSetChanged();
+				if (ISFIRST) {
+					adapter = new TruckAdapter(items, TruckActivity.this);
+					if(adapter != null){
+						mListView.setAdapter(adapter);
+					}
+				}else{
+					adapter.notifyDataSetChanged();
+				}
+				ISFIRST = false;
 				
 				if (pageIndex > 1) {
 					mListView.onRefreshComplete();

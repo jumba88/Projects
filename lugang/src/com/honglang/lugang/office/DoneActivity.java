@@ -76,7 +76,7 @@ public class DoneActivity extends Activity implements OnClickListener {
 		pageIndex = 1;
 		items = new ArrayList<Bill>();
 		new DoneTask().execute((Void)null);
-		adapter = new OfficeAdapter(items, this, 1);
+		
 		mListView = (PullToRefreshListView) this.findViewById(R.id.list_handling);
 		mListView.setMode(Mode.PULL_FROM_END);
 		mListView.setOnRefreshListener(new OnRefreshListener<ListView>() {
@@ -88,9 +88,6 @@ public class DoneActivity extends Activity implements OnClickListener {
 			}
 		});
 		
-		if(adapter != null){
-			mListView.setAdapter(adapter);
-		}
 	}
 
 	@Override
@@ -168,9 +165,17 @@ public class DoneActivity extends Activity implements OnClickListener {
 		@Override
 		protected void onPostExecute(Boolean result) {
 			progress.dismiss();
-			ISFIRST = false;
+			
 			if (result) {
-				adapter.notifyDataSetChanged();
+				if (ISFIRST) {
+					adapter = new OfficeAdapter(items, DoneActivity.this, 1);
+					if(adapter != null){
+						mListView.setAdapter(adapter);
+					}
+				} else {
+					adapter.notifyDataSetChanged();
+				}
+				ISFIRST = false;
 				
 				if (pageIndex > 1) {
 					mListView.onRefreshComplete();

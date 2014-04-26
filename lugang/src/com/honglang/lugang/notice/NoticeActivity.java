@@ -77,10 +77,6 @@ public class NoticeActivity extends Activity implements OnClickListener {
 		
 		items = new ArrayList<Notice>();
 		new LoadTask().execute((Void)null);
-		adapter = new NoticeAdapter(items, this);
-		if (adapter != null) {
-			mListView.setAdapter(adapter);
-		}
 		
 		mListView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -158,13 +154,17 @@ public class NoticeActivity extends Activity implements OnClickListener {
 
 		@Override
 		protected void onPostExecute(Boolean result) {
-			if (ISFIRST) {
-				progress.dismiss();
-			}
-			ISFIRST = false;
+			progress.dismiss();
 			if (result) {
-				mListView.requestLayout();
-				adapter.notifyDataSetChanged();
+				if (ISFIRST) {
+					adapter = new NoticeAdapter(items, NoticeActivity.this);
+					if (adapter != null) {
+						mListView.setAdapter(adapter);
+					}
+				}else{
+					adapter.notifyDataSetChanged();
+				}
+				ISFIRST = false;
 				
 				if (pageIndex > 1) {
 					mListView.onRefreshComplete();

@@ -19,6 +19,7 @@ import com.honglang.lugang.R;
 import com.honglang.lugang.SessionManager;
 import com.honglang.lugang.R.layout;
 import com.honglang.lugang.R.menu;
+import com.honglang.lugang.login.LoginActivity;
 import com.honglang.lugang.office.CountActivity;
 import com.honglang.lugang.office.Order;
 import com.honglang.lugang.office.OrderActivity;
@@ -393,6 +394,11 @@ public class BlankActivity extends Activity implements OnClickListener {
 			progress.dismiss();
 			if (!result) {
 				Toast.makeText(BlankActivity.this, errMsg, Toast.LENGTH_LONG).show();
+				if (errMsg.equals("请先登录")) {
+					Intent i = new Intent(BlankActivity.this, LoginActivity.class);
+					i.putExtra("dir", 1);
+					startActivity(i);
+				}
 				BlankActivity.this.finish();
 			}
 			super.onPostExecute(result);
@@ -513,7 +519,8 @@ public class BlankActivity extends Activity implements OnClickListener {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				errMsg = e.toString();
+//				errMsg = e.toString();
+				errMsg = "操作失败，请稍候重试";
 			}
 			return false;
 		}
@@ -526,7 +533,12 @@ public class BlankActivity extends Activity implements OnClickListener {
 //				confirm.setEnabled(false);
 				BlankActivity.this.finish();
 			} else {
-				Toast.makeText(BlankActivity.this, "操作失败"+errMsg, Toast.LENGTH_LONG).show();
+				Toast.makeText(BlankActivity.this, errMsg, Toast.LENGTH_LONG).show();
+				if (errMsg.equals("请先登录")) {
+					Intent i = new Intent(BlankActivity.this, LoginActivity.class);
+					i.putExtra("dir", 1);
+					startActivity(i);
+				}
 			}
 			super.onPostExecute(result);
 		}

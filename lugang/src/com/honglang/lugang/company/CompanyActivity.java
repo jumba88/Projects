@@ -90,11 +90,6 @@ public class CompanyActivity extends Activity implements OnClickListener {
 		items = new  ArrayList<Company>();
 		new LoadTask().execute((Void)null);
 
-		adapter = new CompanyAdapter(items, this);
-		if(adapter != null){
-			mListView.setAdapter(adapter);
-		}
-		
 		mListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -180,12 +175,17 @@ public class CompanyActivity extends Activity implements OnClickListener {
 
 		@Override
 		protected void onPostExecute(Boolean result) {
-			if (ISFIRST) {
-				progress.dismiss();
-			}
-			ISFIRST = false;
+			progress.dismiss();
 			if(result){
-				adapter.notifyDataSetChanged();
+				if (ISFIRST) {
+					adapter = new CompanyAdapter(items, CompanyActivity.this);
+					if(adapter != null){
+						mListView.setAdapter(adapter);
+					}
+				}else{
+					adapter.notifyDataSetChanged();
+				}
+				ISFIRST = false;
 				
 				if (pageIndex > 1) {
 					mListView.onRefreshComplete();
