@@ -22,7 +22,9 @@ import com.google.zxing.Result;
 import com.google.zxing.ResultMetadataType;
 import com.google.zxing.ResultPoint;
 import com.google.zxing.client.result.ResultParser;
+import com.honglang.lugang.Constant;
 import com.honglang.lugang.R;
+import com.honglang.lugang.SessionManager;
 import com.honglang.lugang.billsearch.SearchActivity;
 import com.honglang.lugang.out.OutActivity;
 import com.honglang.lugang.qrcode.BlankActivity;
@@ -42,6 +44,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -71,6 +74,13 @@ import java.util.Date;
 import java.util.EnumSet;
 import java.util.Map;
 
+import org.json.JSONObject;
+import org.json.JSONTokener;
+import org.ksoap2.SoapEnvelope;
+import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapSerializationEnvelope;
+import org.ksoap2.transport.HttpTransportSE;
+
 /**
  * This activity opens the camera and does the actual scanning on a background
  * thread. It draws a viewfinder to help the user place the barcode correctly,
@@ -85,7 +95,21 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 
 	private TextView title;
 	private Button back;
-	private static int TYPE;
+	private int TYPE;
+	
+	private TextView qsno;
+	private TextView jfCount;
+	private TextView jfRecords;
+	private TextView jfCode;
+	private TextView pcno;
+	private TextView pcCount;
+	private TextView pcRecords;
+	private TextView pcCode;
+	private TextView count;
+	private TextView record;
+	private Button sure;
+	
+	private String uniqueKey;
 
 	private static final String TAG = CaptureActivity.class.getSimpleName();
 
@@ -148,6 +172,20 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 		title = (TextView) this.findViewById(R.id.title);
 		back = (Button) this.findViewById(R.id.back);
 		back.setOnClickListener(this);
+		
+		qsno = (TextView) findViewById(R.id.qsno);
+		jfCount = (TextView) findViewById(R.id.jfCount);
+		jfRecords = (TextView) findViewById(R.id.jfRecords);
+		jfCode = (TextView) findViewById(R.id.jfCode);
+		pcno = (TextView) findViewById(R.id.pcno);
+		pcCount = (TextView) findViewById(R.id.pcCount);
+		pcRecords = (TextView) findViewById(R.id.pcRecords);
+		pcCode = (TextView) findViewById(R.id.pcCode);
+		count = (TextView) findViewById(R.id.count);
+		record = (TextView) findViewById(R.id.record);
+		sure = (Button) findViewById(R.id.sure);
+		sure.setOnClickListener(this);
+		
 		TYPE = this.getIntent().getExtras().getInt("QRTYPE");
 		switch (TYPE) {
 		case 0:
@@ -168,8 +206,12 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 		case 5:
 			title.setText("扫描二维码添加货物");
 			break;
+		case 6:
+			title.setText("货物出库");
+			new NewTask().execute((Void)null);
+			break;
 		}
-
+		
 		hasSurface = false;
 		historyManager = new HistoryManager(this);
 		historyManager.trimHistory();
@@ -581,6 +623,69 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 			this.finish();
 			break;
 		}
+	}
+	
+	class NewTask extends AsyncTask<Void, Void, Boolean>{
+
+		String jfNum;
+		String pcNum;
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			SoapObject rpc = new SoapObject(Constant.NAMESPACE, "ChuKuDanNew");
+			rpc.addProperty("currentUserno", SessionManager.getInstance().getUsername());
+			rpc.addProperty("token", SessionManager.getInstance().getTokene());
+			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER12);
+			envelope.dotNet = true;
+			envelope.setOutputSoapObject(rpc);
+			HttpTransportSE transport = new HttpTransportSE(Constant.SERVICE_URL);
+			transport.debug = true;
+			try {
+				transport.call(Constant.NAMESPACE + "ChuKuDanNew", envelope);
+				SoapObject response = (SoapObject) envelope.bodyIn;
+				if(response != null){
+					JSONTokener parser = new JSONTokener(response.getPropertyAsString("ChuKuDanNewResult"));
+					JSONObject obj = (JSONObject) parser.nextValue();
+					Log.i("suxoyo", obj.toString());
+					if (obj.getBoolean("result")) {
+						JSONObject data = obj.getJSONObject("data");
+						jfNum = data.getString("qsno");
+						pcNum = data.getString("pcno");
+						uniqueKey = data.getString("uniqueKey");
+						return true;
+					} else {
+//						errMsg = json.getString("msg");
+						return false;
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+//				errMsg = e.toString();
+//				errMsg = "操作失败，请稍候重试";
+			}
+			return false;
+		}
+		@Override
+		protected void onPostExecute(Boolean result) {
+			if (result) {
+				qsno.setText(jfNum);
+				pcno.setText(pcNum);
+			} else {
+				Toast.makeText(CaptureActivity.this, "操作失败，请稍候重试", Toast.LENGTH_SHORT).show();
+				CaptureActivity.this.finish();
+			}
+			super.onPostExecute(result);
+		}
+		
+	}
+	
+	class OutTask extends AsyncTask<Void, Void, Boolean>{
+
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			
+			return false;
+		}
+		
 	}
 	
 }

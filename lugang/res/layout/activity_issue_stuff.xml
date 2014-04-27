@@ -19,13 +19,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
             <GridLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:background="@drawable/login_edit_normal"
@@ -43,8 +38,7 @@
                     android:layout_columnSpan="3"
                     android:layout_marginLeft="10dp"
                     android:gravity="left|center_vertical"
-                    android:text=""
-                    android:textColor="@android:color/holo_blue_dark" />
+                    android:text="" />
                 
                 <View style="@style/line" />
 
@@ -194,7 +188,6 @@
                     android:hint=""
                     android:minHeight="50dp" />
             </GridLayout>
-        </LinearLayout>
     </ScrollView>
 
 </LinearLayout>

@@ -2,7 +2,18 @@ package com.honglang.lugang.issue;
 
 import java.util.Calendar;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+import org.ksoap2.SoapEnvelope;
+import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapSerializationEnvelope;
+import org.ksoap2.transport.HttpTransportSE;
+
+import com.honglang.lugang.Constant;
 import com.honglang.lugang.R;
+import com.honglang.lugang.SessionManager;
 import com.honglang.lugang.R.layout;
 import com.honglang.lugang.qrcode.AreaDialog;
 
@@ -14,12 +25,14 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -32,6 +45,14 @@ public class IssueStuffActivity extends Activity implements OnClickListener {
 	private Button date;
 	public Button to;
 	public Button from;
+	
+	private EditText name;
+	private EditText total;
+	private EditText weight;
+	private EditText cubage;
+	private EditText contact;
+	private EditText phone;
+	private EditText remark;
 	
 	public Spinner pack;
 	public Spinner weightUnit;
@@ -82,6 +103,14 @@ public class IssueStuffActivity extends Activity implements OnClickListener {
 		to.setOnClickListener(this);
 		from = (Button) this.findViewById(R.id.from);
 		from.setOnClickListener(this);
+		
+		name = (EditText) this.findViewById(R.id.name);
+		total = (EditText) this.findViewById(R.id.total);
+		weight = (EditText) this.findViewById(R.id.weight);
+		cubage = (EditText) this.findViewById(R.id.cubage);
+		contact = (EditText) this.findViewById(R.id.contact);
+		phone = (EditText) this.findViewById(R.id.phone);
+		remark = (EditText) this.findViewById(R.id.remark);
 		
 		pack = (Spinner) this.findViewById(R.id.pack);
 		weightUnit = (Spinner) this.findViewById(R.id.weightUnit);
@@ -148,7 +177,7 @@ public class IssueStuffActivity extends Activity implements OnClickListener {
 			finish();
 			break;
 		case R.id.ok:
-			
+			new ConfirmTask().execute((Void)null);
 			break;
 		case R.id.ydqx:
 			showDialog(DATE_DIALOG_ID);
@@ -174,6 +203,59 @@ public class IssueStuffActivity extends Activity implements OnClickListener {
 
 		@Override
 		protected Boolean doInBackground(Void... params) {
+			JSONArray mxb = new JSONArray();
+			JSONObject json = new JSONObject();
+			try {
+				json.put("name", name.getText());
+				json.put("sl", total.getText());
+				json.put("jl_danwei", COUNT_TYPE[totalUnit.getSelectedItemPosition()]);
+				json.put("zzl", weight.getText());
+				json.put("zldanwei", UNIT[weightUnit.getSelectedItemPosition()]);
+				json.put("tiji", cubage.getText());
+				json.put("tjdanwei", "m³");
+				json.put("baozhuang", PACK_TYPE[pack.getSelectedItemPosition()]);
+				json.put("startaddr", from.getText());
+				json.put("endaddr", to.getText());
+				json.put("usname", contact.getText());
+				json.put("phone", phone.getText());
+				json.put("details", remark.getText());
+				json.put("ydqx", date.getText());
+				mxb.put(json);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			
+			SoapObject rpc = new SoapObject(Constant.NAMESPACE, "PhInfoEdit");
+			rpc.addProperty("id", "");
+			rpc.addProperty("mode", "ADD");
+			rpc.addProperty("jsonMxbArrayString", mxb.toString());
+			rpc.addProperty("currentUserno", SessionManager.getInstance().getUsername());
+			rpc.addProperty("token", SessionManager.getInstance().getTokene());
+			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER12);
+			envelope.dotNet = true;
+			envelope.setOutputSoapObject(rpc);
+			HttpTransportSE transport = new HttpTransportSE(Constant.SERVICE_URL);
+			transport.debug = true;
+			try {
+				transport.call(Constant.NAMESPACE + "PhInfoEdit", envelope);
+				SoapObject response = (SoapObject) envelope.bodyIn;
+				if(response != null){
+					JSONTokener parser = new JSONTokener(response.getPropertyAsString("PhInfoEditResult"));
+					JSONObject obj = (JSONObject) parser.nextValue();
+					Log.i("suxoyo", obj.toString());
+					if (obj.getBoolean("result")) {
+						
+						return true;
+					} else {
+//						errMsg = json.getString("msg");
+						return false;
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+//				errMsg = e.toString();
+//				errMsg = "操作失败，请稍候重试";
+			}
 			
 			return false;
 		}

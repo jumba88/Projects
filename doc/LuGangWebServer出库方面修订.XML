@@ -1,0 +1,95 @@
+<member name="M:LuGangWebServer.DataServer.ChuKuDanNew(System.String,System.String)">
+  <summary>
+    开始出库操作
+  </summary>
+  <param name="currentUserno"></param>
+  <param name="token"></param>
+  <returns>{"uniqueKey":"缓存唯一键值","qsno":"交付出库单的单号","pcno":"配车出库单的单号"}</returns>
+</member>
+<member name="M:LuGangWebServer.DataServer.ChuKu(System.String,System.String,System.String,System.String)">
+  <summary>
+    接口方法出库操作，包含直接交付（到货签收单）与中转（跟车单）
+  </summary>
+  <param name="currentUserno"></param>
+  <param name="token"></param>
+  <param name="uniqueKey">先从ChuKuDanNew接口，获得此值</param>
+  <param name="fhcode"></param>
+  <returns>
+    {
+    "result": true,
+    "data": {
+    "uniqueKey": "a59a70e4-d679-4c8a-9efa-8573fb23798d",
+    "fhCode": "2014041500000856",	//本次扫描到的发货码
+    "jf": "true",	//本次是否有交付出库的
+    "jfCount": "3",	//交付出库区的“数量”
+    "jfRecords": "3",	//交付出库区的“货物记录”
+    "pc": "false",	//本次是否有配车出库的
+    "pcCount": "1", 	//配车出库区的“数量”
+    "pcRecords": "1"	//配车出库区的“货物记录”
+    }
+    }
+  </returns>
+</member>
+<member name="M:LuGangWebServer.DataServer.ChuKuEnd(System.String,System.String,System.String)">
+  <summary>
+    出库操作结束
+  </summary>
+  <param name="currentUserno"></param>
+  <param name="token"></param>
+  <param name="uniqueKey"></param>
+  <returns></returns>
+</member>
+<member name="M:LuGangWebServer.DataServer.ChuKuDanList(System.String,System.String)">
+  <summary>
+    出库单列表
+  </summary>
+  <param name="currentUserno"></param>
+  <param name="token"></param>
+  <returns>
+     rowindex  行序号
+     KEYCODE 出库单号
+     ADDDATE 制单日期,显示时为日期，不要时间部分
+     USID    调试员
+  </returns>
+</member>
+<member name="M:LuGangWebServer.DataServer.ChuKuDanMxb(System.String,System.String,System.String,System.String)">
+  <summary>
+    出库单明细
+  </summary>
+  <param name="currentUserno"></param>
+  <param name="token"></param>
+  <param name="keyCode"></param>
+  <returns>
+    {
+    "result": true,
+    "data": {
+    "totalrowcount": "2",
+    "currentrowcount": "2",
+    "rows": [
+    {
+    "rkid": "1824",  //货号
+    "fhcode": "2014010400000398",//发货码
+    "wpmc": "12",    //品名
+    "zongliang": "12",    //总重量
+    "zongliangdanwei": "kg",    //重量单位，与总重量一起形式重量
+    "tiji": "12",    //体积。单位是m³
+    "yusl": "20",    //数量
+    "huoh": "",  //数量单位
+    "tocity": "广西-南宁市"
+    },
+    {
+    "rkid": "1826",
+    "fhcode": "2014010400000398",
+    "wpmc": "14",
+    "zongliang": "12",    //总重量
+    "zongliangdanwei": "kg",    //重量单位，与总重量一起形式重量
+    "tiji": "12",    //体积。单位是m³
+    "yusl": "5",
+    "huoh": "",
+    "tocity": "广西-南宁市"
+    }
+    ]
+    }
+    }
+  </returns>
+</member>

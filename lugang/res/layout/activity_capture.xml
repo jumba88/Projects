@@ -21,17 +21,160 @@
       android:id="@+id/viewfinder_view"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_centerInParent="true" />
+      android:layout_alignParentTop="true" />
 
   <TextView
       android:id="@+id/status_view"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_alignParentBottom="true"
       android:layout_centerHorizontal="true"
+      android:layout_marginTop="320dp"
       android:background="@color/transparent"
       android:text="@string/msg_default_status"
       android:textColor="@color/status_text" />
+
+  <LinearLayout
+      android:id="@+id/out"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:background="@color/white"
+      android:baselineAligned="false"
+      android:orientation="vertical" >
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/white"
+      android:baselineAligned="false"
+      android:orientation="horizontal" >
+
+      <LinearLayout
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:padding="5dp"
+          android:background="@drawable/linearlayout"
+          android:orientation="vertical" >
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="直接交付出库"
+              android:textSize="15sp"
+              android:textColor="@android:color/holo_blue_dark" />
+
+          <TextView
+              android:id="@+id/qsno"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text=""
+              android:textColor="@android:color/holo_blue_dark" />
+
+          <TextView
+              android:id="@+id/jfCount"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="数量：0票" />
+
+          <TextView
+              android:id="@+id/jfRecords"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="共计0条货物记录" />
+
+          <TextView
+              android:id="@+id/jfCode"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text=""
+              android:textColor="@android:color/holo_red_dark" />
+      </LinearLayout>
+      
+      <LinearLayout
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:padding="5dp"
+          android:background="@drawable/linearlayout"
+          android:orientation="vertical" >
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="中转配车出库"
+              android:textSize="15sp"
+              android:textColor="@android:color/holo_blue_dark" />
+          
+          <TextView
+              android:id="@+id/pcno"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text=""
+              android:textColor="@android:color/holo_blue_dark" />
+
+          <TextView
+              android:id="@+id/pcCount"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="数量：0票" />
+
+          <TextView
+              android:id="@+id/pcRecords"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="共计0条货物记录" />
+
+          <TextView
+              android:id="@+id/pcCode"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text=""
+              android:textColor="@android:color/holo_red_dark" />
+      </LinearLayout>
+  </LinearLayout>
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@drawable/linearlayout"
+      android:baselineAligned="false"
+      android:orientation="horizontal" >
+
+      <LinearLayout
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:padding="5dp"
+          android:orientation="vertical" >
+
+          <TextView
+              android:id="@+id/count"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="合计：0票" />
+
+          <TextView
+              android:id="@+id/record"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="总货物记录数：0条" />
+      </LinearLayout>
+      
+      <LinearLayout
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:padding="5dp"
+          android:orientation="vertical" >
+
+          <Button
+              android:id="@+id/sure"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center"
+              android:text="确定出库" />
+      </LinearLayout>
+  </LinearLayout>
+  </LinearLayout>
 
   </RelativeLayout>
   

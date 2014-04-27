@@ -32,6 +32,12 @@
         <Button
             android:id="@+id/out"
             style="@style/tabone"
+            android:visibility="gone"
+            android:text="@string/multiout" />
+
+        <Button
+            android:id="@+id/another"
+            style="@style/tabone"
             android:text="@string/multiout" />
     </LinearLayout>
 

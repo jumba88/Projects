@@ -20,6 +20,7 @@ public class TabFour extends Fragment implements OnClickListener {
 
 	private TextView title;
 //	private Button history;
+	private Button another;
 	private Button out;
 	private Button list;
 	@Override
@@ -40,6 +41,8 @@ public class TabFour extends Fragment implements OnClickListener {
 		list.setOnClickListener(this);
 		out = (Button) view.findViewById(R.id.out);
 		out.setOnClickListener(this);
+		another = (Button) view.findViewById(R.id.another);
+		another.setOnClickListener(this);
 	}
 	
 	@Override
@@ -49,6 +52,11 @@ public class TabFour extends Fragment implements OnClickListener {
 			Intent i = new Intent(getActivity(),CaptureActivity.class);
 			i.putExtra("QRTYPE", 0);
 			this.startActivity(i);
+			break;
+		case R.id.another:
+			Intent intent = new Intent(getActivity(),CaptureActivity.class);
+			intent.putExtra("QRTYPE", 6);
+			this.startActivity(intent);
 			break;
 		case R.id.list:
 			Intent in = new Intent(getActivity(),FormListActivity.class);
