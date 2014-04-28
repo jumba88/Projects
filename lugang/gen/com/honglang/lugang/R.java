@@ -1087,8 +1087,10 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     }
     public static final class raw {
         public static final int beep=0x7f060000;
-        public static final int failed=0x7f060001;
-        public static final int success=0x7f060002;
+        public static final int both=0x7f060001;
+        public static final int done=0x7f060002;
+        public static final int failed=0x7f060003;
+        public static final int success=0x7f060004;
     }
     public static final class string {
         public static final int about=0x7f09001e;

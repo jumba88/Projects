@@ -26,6 +26,8 @@ import com.honglang.lugang.Constant;
 import com.honglang.lugang.R;
 import com.honglang.lugang.SessionManager;
 import com.honglang.lugang.billsearch.SearchActivity;
+import com.honglang.lugang.login.LoginActivity;
+import com.honglang.lugang.office.DealingActivity;
 import com.honglang.lugang.out.OutActivity;
 import com.honglang.lugang.qrcode.BlankActivity;
 import com.honglang.lugang.qrcode.InActivity;
@@ -37,12 +39,16 @@ import com.honglang.zxing.result.TextResultHandler;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Paint.Cap;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -64,6 +70,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -97,6 +104,7 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 	private Button back;
 	private int TYPE;
 	
+	private LinearLayout linear;
 	private TextView qsno;
 	private TextView jfCount;
 	private TextView jfRecords;
@@ -110,6 +118,11 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 	private Button sure;
 	
 	private String uniqueKey;
+	private String fhCode;
+	
+	private SoundPool soundPool;
+	
+	private ProgressDialog progress;
 
 	private static final String TAG = CaptureActivity.class.getSimpleName();
 
@@ -173,6 +186,7 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 		back = (Button) this.findViewById(R.id.back);
 		back.setOnClickListener(this);
 		
+		linear = (LinearLayout) findViewById(R.id.out);
 		qsno = (TextView) findViewById(R.id.qsno);
 		jfCount = (TextView) findViewById(R.id.jfCount);
 		jfRecords = (TextView) findViewById(R.id.jfRecords);
@@ -185,6 +199,12 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 		record = (TextView) findViewById(R.id.record);
 		sure = (Button) findViewById(R.id.sure);
 		sure.setOnClickListener(this);
+		
+		soundPool = new SoundPool(4, AudioManager.STREAM_SYSTEM, 5);
+		soundPool.load(this, R.raw.success, 1);
+		soundPool.load(this, R.raw.done, 1);
+		soundPool.load(this, R.raw.both, 1);
+		soundPool.load(this, R.raw.failed, 1);
 		
 		TYPE = this.getIntent().getExtras().getInt("QRTYPE");
 		switch (TYPE) {
@@ -208,6 +228,7 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 			break;
 		case 6:
 			title.setText("货物出库");
+			linear.setVisibility(View.VISIBLE);
 			new NewTask().execute((Void)null);
 			break;
 		}
@@ -553,6 +574,10 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 				setResult(RESULT_OK,i5);
 				finish();
 				break;
+			case 6:
+				fhCode = rawResult.getText();
+				new OutTask().execute((Void)null);
+				break;
 			}
 			// Log.i("suxoyo", "handleDecode="+rawResult.getText());
 		}
@@ -622,13 +647,25 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 		case R.id.back:
 			this.finish();
 			break;
+		case R.id.sure:
+			new EndTask().execute((Void)null);
+			break;
 		}
 	}
 	
 	class NewTask extends AsyncTask<Void, Void, Boolean>{
 
+		private String errMsg;
 		String jfNum;
 		String pcNum;
+		@Override
+		protected void onPreExecute() {
+			if (progress != null) {
+				progress = null;
+			}
+			progress = ProgressDialog.show(CaptureActivity.this, null, "正在生成出库单号...", false, false);
+			super.onPreExecute();
+		}
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			SoapObject rpc = new SoapObject(Constant.NAMESPACE, "ChuKuDanNew");
@@ -653,7 +690,220 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 						uniqueKey = data.getString("uniqueKey");
 						return true;
 					} else {
-//						errMsg = json.getString("msg");
+						errMsg = obj.getString("msg");
+						return false;
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+//				errMsg = e.toString();
+				errMsg = "操作失败，请稍候重试";
+			}
+			return false;
+		}
+		@Override
+		protected void onPostExecute(Boolean result) {
+			progress.dismiss();
+			if (result) {
+				qsno.setText(jfNum);
+				pcno.setText(pcNum);
+			} else {
+				Toast.makeText(CaptureActivity.this, errMsg, Toast.LENGTH_LONG).show();
+				if (errMsg.equals("请先登录")) {
+					Intent intent = new Intent(CaptureActivity.this, LoginActivity.class);
+					intent.putExtra("dir", 1);
+					CaptureActivity.this.startActivity(intent);
+				}
+				CaptureActivity.this.finish();
+			}
+			super.onPostExecute(result);
+		}
+		
+	}
+	
+	class OutTask extends AsyncTask<Void, Void, Boolean>{
+
+		private String errMsg;
+		private boolean isJf;
+		private boolean isPc;
+		int strCount;
+		int strRec;
+		
+		int strCount1;
+		int strRec1;
+		
+		@Override
+		protected void onPreExecute() {
+			if (handler != null) {
+				handler.quitSynchronously();
+				handler = null;
+			}
+			inactivityTimer.onPause();
+			ambientLightManager.stop();
+			cameraManager.closeDriver();
+			if (!hasSurface) {
+				SurfaceView surfaceView = (SurfaceView) findViewById(R.id.preview_view);
+				SurfaceHolder surfaceHolder = surfaceView.getHolder();
+				surfaceHolder.removeCallback(CaptureActivity.this);
+			}
+			
+			if (progress != null) {
+				progress = null;
+			}
+			progress = ProgressDialog.show(CaptureActivity.this, null, "正在执行操作...", false, false);
+			super.onPreExecute();
+		}
+
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			SoapObject rpc = new SoapObject(Constant.NAMESPACE, "ChuKu");
+			rpc.addProperty("currentUserno", SessionManager.getInstance().getUsername());
+			rpc.addProperty("token", SessionManager.getInstance().getTokene());
+			rpc.addProperty("uniqueKey", uniqueKey);
+			rpc.addProperty("fhcode", fhCode);
+			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER12);
+			envelope.dotNet = true;
+			envelope.setOutputSoapObject(rpc);
+			HttpTransportSE transport = new HttpTransportSE(Constant.SERVICE_URL);
+			transport.debug = true;
+			try {
+				transport.call(Constant.NAMESPACE + "ChuKu", envelope);
+				SoapObject response = (SoapObject) envelope.bodyIn;
+				if(response != null){
+					JSONTokener parser = new JSONTokener(response.getPropertyAsString("ChuKuResult"));
+					JSONObject obj = (JSONObject) parser.nextValue();
+					Log.i("suxoyo", obj.toString());
+					if (obj.getBoolean("result")) {
+						JSONObject data = obj.getJSONObject("data");
+						isJf = data.getBoolean("jf");
+						isPc = data.getBoolean("pc");
+						strCount = data.getInt("jfCount");
+						strRec = data.getInt("jfRecords");
+						strCount1 = data.getInt("pcCount");
+						strRec1 = data.getInt("pcRecords");
+						return true;
+					} else {
+						errMsg = obj.getString("msg");
+						return false;
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+//				errMsg = e.toString();
+				errMsg = "操作失败，请稍候重试";
+			}
+			return false;
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			progress.dismiss();
+			if (result) {
+				if (isJf && isPc) {
+					soundPool.play(3,1, 1, 0, 0, 1);
+					jfCode.setText(fhCode);
+					jfCount.setText("数量："+strCount+"票");
+					jfRecords.setText("共计"+strRec+"条货物记录");
+					
+					pcCode.setText(fhCode);
+					pcCount.setText("数量："+strCount1+"票");
+					pcRecords.setText("共计"+strRec1+"条货物记录");
+					
+					count.setText("合计："+(strCount+strCount1)+"票");
+					record.setText("总货物记录数："+(strRec+strRec1)+"条");
+				} else {
+					if (isJf) {
+						soundPool.play(1,1, 1, 0, 0, 1);
+						jfCode.setText(fhCode);
+						jfCount.setText("数量："+strCount+"票");
+						jfRecords.setText("共计"+strRec+"条货物记录");
+						
+						count.setText("合计："+(strCount+strCount1)+"票");
+						record.setText("总货物记录数："+(strRec+strRec1)+"条");
+					}
+					if (isPc) {
+						soundPool.play(2,1, 1, 0, 0, 1);
+						pcCode.setText(fhCode);
+						pcCount.setText("数量："+strCount1+"票");
+						pcRecords.setText("共计"+strRec1+"条货物记录");
+						
+						count.setText("合计："+(strCount+strCount1)+"票");
+						record.setText("总货物记录数："+(strRec+strRec1)+"条");
+					}
+				}
+				
+			} else {
+				Toast.makeText(CaptureActivity.this, errMsg, Toast.LENGTH_LONG).show();
+				soundPool.play(4,1, 1, 0, 0, 1);
+				if (errMsg.equals("请先登录")) {
+					Intent intent = new Intent(CaptureActivity.this, LoginActivity.class);
+					intent.putExtra("dir", 1);
+					CaptureActivity.this.startActivity(intent);
+				}
+			}
+			
+			resetStatusView();
+			handler = null;
+			lastResult = null;
+
+			resetStatusView();
+
+			SurfaceView surfaceView = (SurfaceView) findViewById(R.id.preview_view);
+			SurfaceHolder surfaceHolder = surfaceView.getHolder();
+			if (hasSurface) {
+				// The activity was paused but not stopped, so the surface still
+				// exists. Therefore
+				// surfaceCreated() won't be called, so init the camera here.
+				initCamera(surfaceHolder);
+			} else {
+				// Install the callback and wait for surfaceCreated() to init the
+				// camera.
+				surfaceHolder.addCallback(CaptureActivity.this);
+			}
+
+			beepManager.updatePrefs();
+			ambientLightManager.start(cameraManager);
+
+			inactivityTimer.onResume();
+
+			super.onPostExecute(result);
+		}
+		
+	}
+
+	class EndTask extends AsyncTask<Void, Void, Boolean>{
+
+		@Override
+		protected void onPreExecute() {
+			if (progress != null) {
+				progress = null;
+			}
+			progress = ProgressDialog.show(CaptureActivity.this, null, "正在执行操作...", false, false);
+			super.onPreExecute();
+		}
+
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			SoapObject rpc = new SoapObject(Constant.NAMESPACE, "ChuKuEnd");
+			rpc.addProperty("currentUserno", SessionManager.getInstance().getUsername());
+			rpc.addProperty("token", SessionManager.getInstance().getTokene());
+			rpc.addProperty("uniqueKey", uniqueKey);
+			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER12);
+			envelope.dotNet = true;
+			envelope.setOutputSoapObject(rpc);
+			HttpTransportSE transport = new HttpTransportSE(Constant.SERVICE_URL);
+			transport.debug = true;
+			try {
+				transport.call(Constant.NAMESPACE + "ChuKuEnd", envelope);
+				SoapObject response = (SoapObject) envelope.bodyIn;
+				if(response != null){
+					JSONTokener parser = new JSONTokener(response.getPropertyAsString("ChuKuEndResult"));
+					JSONObject obj = (JSONObject) parser.nextValue();
+					Log.i("suxoyo", obj.toString());
+					if (obj.getBoolean("result")) {
+						return true;
+					} else {
+//						errMsg = obj.getString("msg");
 						return false;
 					}
 				}
@@ -664,26 +914,13 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 			}
 			return false;
 		}
-		@Override
-		protected void onPostExecute(Boolean result) {
-			if (result) {
-				qsno.setText(jfNum);
-				pcno.setText(pcNum);
-			} else {
-				Toast.makeText(CaptureActivity.this, "操作失败，请稍候重试", Toast.LENGTH_SHORT).show();
-				CaptureActivity.this.finish();
-			}
-			super.onPostExecute(result);
-		}
-		
-	}
-	
-	class OutTask extends AsyncTask<Void, Void, Boolean>{
 
 		@Override
-		protected Boolean doInBackground(Void... params) {
-			
-			return false;
+		protected void onPostExecute(Boolean result) {
+			progress.dismiss();
+			Toast.makeText(CaptureActivity.this, "操作完成", Toast.LENGTH_SHORT).show();
+			CaptureActivity.this.finish();
+			super.onPostExecute(result);
 		}
 		
 	}

@@ -72,7 +72,7 @@ public class TabTwo extends Fragment implements OnClickListener {
 		if (SessionManager.getInstance().getUsertype().equals("物流企业")) {
 			dealing.setText("待处理工单");
 			done.setText("已完成工单");
-			blank.setVisibility(View.VISIBLE);
+//			blank.setVisibility(View.VISIBLE);
 		} else if(SessionManager.getInstance().getUsertype().equals("VIP会员")){
 			dealing.setText("待处理事项");
 			done.setText("已下单信息");

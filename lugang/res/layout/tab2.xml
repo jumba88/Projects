@@ -64,6 +64,11 @@
         
     </LinearLayout>
     
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="120dp"
+        android:orientation="vertical">
     <Button style="@style/tabone"
     	    android:id="@+id/dealing"
         	android:text=""/>
@@ -79,10 +84,13 @@
     	
     	<Button style="@style/tabone"
     	    android:id="@+id/stuff"
+    	    android:visibility="gone"
         	android:text="货物发布"/>
     	
     	<Button style="@style/tabone"
     	    android:id="@+id/truck"
+    	    android:visibility="gone"
         	android:text="空车发布"/>
 
+</LinearLayout>
 </LinearLayout>
