@@ -29,6 +29,7 @@ import com.honglang.lugang.billsearch.SearchActivity;
 import com.honglang.lugang.login.LoginActivity;
 import com.honglang.lugang.office.DealingActivity;
 import com.honglang.lugang.out.OutActivity;
+import com.honglang.lugang.out.PreviewActivity;
 import com.honglang.lugang.qrcode.BlankActivity;
 import com.honglang.lugang.qrcode.InActivity;
 import com.honglang.zxing.camera.CameraManager;
@@ -105,6 +106,8 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 	private int TYPE;
 	
 	private LinearLayout linear;
+	private LinearLayout jf;
+	private LinearLayout pc;
 	private TextView qsno;
 	private TextView jfCount;
 	private TextView jfRecords;
@@ -119,6 +122,8 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 	
 	private String uniqueKey;
 	private String fhCode;
+	private String jfNum;
+	private String pcNum;
 	
 	private SoundPool soundPool;
 	
@@ -187,6 +192,11 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 		back.setOnClickListener(this);
 		
 		linear = (LinearLayout) findViewById(R.id.out);
+		jf = (LinearLayout) findViewById(R.id.jf);
+		jf.setOnClickListener(this);
+		pc = (LinearLayout) findViewById(R.id.pc);
+		pc.setOnClickListener(this);
+		
 		qsno = (TextView) findViewById(R.id.qsno);
 		jfCount = (TextView) findViewById(R.id.jfCount);
 		jfRecords = (TextView) findViewById(R.id.jfRecords);
@@ -647,6 +657,18 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 		case R.id.back:
 			this.finish();
 			break;
+		case R.id.jf:
+			Intent i1 = new Intent(this, PreviewActivity.class);
+			i1.putExtra("type", 1);
+			i1.putExtra("keycode", jfNum);
+			startActivity(i1);
+			break;
+		case R.id.pc:
+			Intent i2 = new Intent(this, PreviewActivity.class);
+			i2.putExtra("type", 2);
+			i2.putExtra("keycode", pcNum);
+			startActivity(i2);
+			break;
 		case R.id.sure:
 			new EndTask().execute((Void)null);
 			break;
@@ -656,8 +678,6 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 	class NewTask extends AsyncTask<Void, Void, Boolean>{
 
 		private String errMsg;
-		String jfNum;
-		String pcNum;
 		@Override
 		protected void onPreExecute() {
 			if (progress != null) {

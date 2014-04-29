@@ -4200,5 +4200,6 @@
     <string name="title_activity_form_list">FormListActivity</string>
     <string name="title_activity_issue_stuff">IssueStuffActivity</string>
     <string name="title_activity_issue_truck">IssueTruckActivity</string>
+    <string name="title_activity_preview">PreviewActivity</string>
 
 </resources>

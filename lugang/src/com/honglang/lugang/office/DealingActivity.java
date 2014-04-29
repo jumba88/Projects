@@ -52,7 +52,7 @@ public class DealingActivity extends Activity implements OnClickListener {
 	private OfficeAdapter adapter;
 	private PullToRefreshListView mListView;
 //	private ListView mListView;
-	private View footerView;
+//	private View footerView;
 //	private ProgressBar pb;
 	
 	private int pageSize;
@@ -219,9 +219,7 @@ public class DealingActivity extends Activity implements OnClickListener {
 					intent.putExtra("dir", 1);
 					DealingActivity.this.startActivity(intent);
 				}
-				if (pageIndex > 1) {
-					pageIndex--;
-				}
+				
 				DealingActivity.this.finish();
 			}
 			super.onPostExecute(result);
