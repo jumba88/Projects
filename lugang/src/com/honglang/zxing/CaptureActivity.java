@@ -28,7 +28,9 @@ import com.honglang.lugang.SessionManager;
 import com.honglang.lugang.billsearch.SearchActivity;
 import com.honglang.lugang.login.LoginActivity;
 import com.honglang.lugang.office.DealingActivity;
+import com.honglang.lugang.office.OrderActivity;
 import com.honglang.lugang.out.OutActivity;
+import com.honglang.lugang.out.OutListActivity;
 import com.honglang.lugang.out.PreviewActivity;
 import com.honglang.lugang.qrcode.BlankActivity;
 import com.honglang.lugang.qrcode.InActivity;
@@ -103,6 +105,7 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 
 	private TextView title;
 	private Button back;
+//	private Button ok;
 	private int TYPE;
 	
 	private LinearLayout linear;
@@ -124,6 +127,8 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 	private String fhCode;
 	private String jfNum;
 	private String pcNum;
+	
+	private boolean isExist = false;
 	
 	private SoundPool soundPool;
 	
@@ -190,6 +195,10 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 		title = (TextView) this.findViewById(R.id.title);
 		back = (Button) this.findViewById(R.id.back);
 		back.setOnClickListener(this);
+//		ok = (Button) this.findViewById(R.id.ok);
+//		ok.setText("查询");
+//		ok.setVisibility(View.VISIBLE);
+//		ok.setOnClickListener(this);
 		
 		linear = (LinearLayout) findViewById(R.id.out);
 		jf = (LinearLayout) findViewById(R.id.jf);
@@ -578,6 +587,12 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 				i3.putExtra("number", rawResult.getText());
 				this.startActivity(i3);
 				break;
+			case 4:
+				Intent i4 = new Intent(CaptureActivity.this, OrderActivity.class);
+				i4.putExtra("scan", true);
+				i4.putExtra("fhCode", rawResult.getText());
+				this.startActivity(i4);
+				break;
 			case 5:
 				Intent i5 = new Intent();
 				i5.putExtra("fhCode", rawResult.getText());
@@ -585,8 +600,10 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 				finish();
 				break;
 			case 6:
-				fhCode = rawResult.getText();
-				new OutTask().execute((Void)null);
+				if (isExist) {
+					fhCode = rawResult.getText();
+					new OutTask().execute((Void)null);
+				}
 				break;
 			}
 			// Log.i("suxoyo", "handleDecode="+rawResult.getText());
@@ -657,6 +674,9 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 		case R.id.back:
 			this.finish();
 			break;
+//		case R.id.ok:
+//			startActivity(new Intent(this, OutListActivity.class));
+//			break;
 		case R.id.jf:
 			Intent i1 = new Intent(this, PreviewActivity.class);
 			i1.putExtra("type", 1);
@@ -684,6 +704,7 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 				progress = null;
 			}
 			progress = ProgressDialog.show(CaptureActivity.this, null, "正在生成出库单号...", false, false);
+			
 			super.onPreExecute();
 		}
 		@Override
@@ -727,6 +748,7 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 			if (result) {
 				qsno.setText(jfNum);
 				pcno.setText(pcNum);
+				isExist = true;
 			} else {
 				Toast.makeText(CaptureActivity.this, errMsg, Toast.LENGTH_LONG).show();
 				if (errMsg.equals("请先登录")) {
@@ -736,6 +758,7 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 				}
 				CaptureActivity.this.finish();
 			}
+			
 			super.onPostExecute(result);
 		}
 		

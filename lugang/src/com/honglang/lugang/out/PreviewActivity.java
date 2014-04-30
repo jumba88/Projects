@@ -52,7 +52,7 @@ public class PreviewActivity extends Activity implements OnClickListener {
 	private PreviewAdapter adapter;
 	private List<HashMap<String, String>> items;
 	
-	private boolean isFirst = true;
+//	private boolean isFirst = true;
 	private ProgressDialog progress;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -98,9 +98,7 @@ public class PreviewActivity extends Activity implements OnClickListener {
 		private String errMsg;
 		@Override
 		protected void onPreExecute() {
-			if (isFirst) {
-				progress = ProgressDialog.show(PreviewActivity.this, null, "加载中...", false, false);
-			}
+			progress = ProgressDialog.show(PreviewActivity.this, null, "加载中...", false, false);
 			super.onPreExecute();
 		}
 
@@ -110,7 +108,6 @@ public class PreviewActivity extends Activity implements OnClickListener {
 			rpc.addProperty("currentUserno", SessionManager.getInstance().getUsername());
 			rpc.addProperty("token", SessionManager.getInstance().getTokene());
 			rpc.addProperty("keyCode", keyCode);
-			Log.i("suxoyo", keyCode);
 			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER12);
 			envelope.dotNet = true;
 			envelope.setOutputSoapObject(rpc);

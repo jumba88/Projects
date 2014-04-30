@@ -82,7 +82,7 @@ public class InActivity extends Activity implements OnClickListener {
 		
 		soundPool = new SoundPool(2, AudioManager.STREAM_SYSTEM, 5);
 		soundPool.load(this,R.raw.success,1);
-		soundPool.load(this,R.raw.failed,2);
+		soundPool.load(this,R.raw.failed,1);
 		
 		mListView = (ListView) findViewById(R.id.list);
 		mListView.setOnItemClickListener(new OnItemClickListener() {

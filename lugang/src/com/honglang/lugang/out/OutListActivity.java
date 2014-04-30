@@ -1,6 +1,7 @@
-package com.honglang.lugang.office;
+package com.honglang.lugang.out;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -22,73 +23,71 @@ import com.honglang.lugang.SessionManager;
 import com.honglang.lugang.R.layout;
 import com.honglang.lugang.R.menu;
 import com.honglang.lugang.login.LoginActivity;
-import com.honglang.lugang.truck.TruckActivity;
+import com.honglang.lugang.office.Bill;
+import com.honglang.lugang.office.DealingActivity;
+import com.honglang.lugang.office.DealingActivity.DealingTask;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AbsListView;
-import android.widget.AbsListView.OnScrollListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
-public class DealingActivity extends Activity implements OnClickListener {
+public class OutListActivity extends Activity implements OnClickListener {
 
 	private TextView title;
 	private Button back;
 	
-	private List<Bill> items;
-	private OfficeAdapter adapter;
-	private PullToRefreshListView mListView;
-//	private ListView mListView;
-//	private View footerView;
-//	private ProgressBar pb;
-	
 	private int pageSize;
 	private int pageIndex;
-	private String action = "Dealing";
+	
+	private boolean isFirst = true;
+	
 	private ProgressDialog progress;
-	private boolean ISFIRST = true;
-	private int totalCount;
+	private MyAdapter adapter;
+	
+	private PullToRefreshListView mListView;
+	private List<HashMap<String, String>> items;
+	private LayoutInflater inflater;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_dealing);
+		setContentView(R.layout.activity_out_list);
 		
+		init();
+	}
+
+	private void init(){
 		title = (TextView) this.findViewById(R.id.title);
-		if (SessionManager.getInstance().getUsertype().equals("物流企业") || SessionManager.getInstance().getUsertype().equals("物流园")) {
-			title.setText("待处理工单");
-		}else{
-			title.setText("待处理事项 ");
-		}
+		title.setText("出库单查询 ");
 		back = (Button) this.findViewById(R.id.back);
 		back.setOnClickListener(this);
 		
 		pageSize = 40;
 		pageIndex = 1;
 		
-		items = new ArrayList<Bill>();
-		new DealingTask().execute((Void)null);
-		
-		mListView = (PullToRefreshListView) this.findViewById(R.id.list_handling);
+		items = new ArrayList<HashMap<String,String>>();
+		inflater = this.getLayoutInflater();
+		mListView = (PullToRefreshListView) this.findViewById(R.id.list);
 		mListView.setMode(Mode.PULL_FROM_END);
 		mListView.setOnRefreshListener(new OnRefreshListener<ListView>() {
 
 			@Override
 			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
 				pageIndex++;
-				new DealingTask().execute((Void)null);
+				new LoadTask().execute((Void)null);
 			}
 		});
 		
@@ -97,58 +96,80 @@ public class DealingActivity extends Activity implements OnClickListener {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				Bill bill = items.get(arg2-1);
-				if (bill.getCurrent_node_id().equals("7") || bill.getCurrent_node_id().equals("9")) {
-					Intent intent = new Intent(DealingActivity.this, OrderActivity.class);
-					intent.putExtra("scan", false);
-					intent.putExtra("bill", bill);
-					startActivityForResult(intent, 111);
-				}
+				HashMap<String, String> item = items.get(arg2-1);
+				Intent intent = new Intent(OutListActivity.this, PreviewActivity.class);
+				intent.putExtra("type", 0);
+				intent.putExtra("keycode", item.get("keycode"));
+				startActivity(intent);
 			}
 		});
+		
+		new LoadTask().execute((Void)null);
 	}
-
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == 111) {
-			if (resultCode == RESULT_OK) {
-				items.clear();
-				pageIndex = 1;
-				new DealingTask().execute((Void)null);
-			}
-		}
-		super.onActivityResult(requestCode, resultCode, data);
-	}
-
+	
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.back:
 			finish();
 			break;
+		}
+	}
 
-		default:
-			break;
+	class MyAdapter extends BaseAdapter{
+
+		@Override
+		public int getCount() {
+			return items.size();
+		}
+
+		@Override
+		public Object getItem(int position) {
+			return items.get(position);
+		}
+
+		@Override
+		public long getItemId(int position) {
+			return position;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			if(convertView == null){
+				convertView = inflater.inflate(R.layout.out_list_item, null);
+			}
+			HashMap<String, String> item = items.get(position);
+			if(item == null){
+				return null;
+			}
+			
+			TextView code = (TextView) convertView.findViewById(R.id.code);
+			TextView time = (TextView) convertView.findViewById(R.id.time);
+			
+			code.setText(item.get("keycode"));
+			time.setText(item.get("adddate"));
+			
+			return convertView;
 		}
 		
 	}
 	
-	public class DealingTask extends AsyncTask<Void, Void, Boolean>{
+	class LoadTask extends AsyncTask<Void, Void, Boolean>{
 
 		private String errMsg;
-		
+		private int totalCount;
 		@Override
 		protected void onPreExecute() {
-			if (ISFIRST) {
-				progress = ProgressDialog.show(DealingActivity.this, null, "加载中...", false, false);
+			if (isFirst) {
+				progress = ProgressDialog.show(OutListActivity.this, null, "加载中...", false, false);
 			}
 			super.onPreExecute();
 		}
 
 		@Override
 		protected Boolean doInBackground(Void... params) {
-			SoapObject rpc = new SoapObject(Constant.NAMESPACE, action);
-			rpc.addProperty("currentUserNo", SessionManager.getInstance().getUsername());
+			SoapObject rpc = new SoapObject(Constant.NAMESPACE, "ChuKuDanList");
+			rpc.addProperty("currentUserno", SessionManager.getInstance().getUsername());
 			rpc.addProperty("token", SessionManager.getInstance().getTokene());
 			rpc.addProperty("pageSize", pageSize);
 			rpc.addProperty("pageIndex", pageIndex);
@@ -158,10 +179,10 @@ public class DealingActivity extends Activity implements OnClickListener {
 			HttpTransportSE transport = new HttpTransportSE(Constant.SERVICE_URL);
 			transport.debug = true;
 			try {
-				transport.call(Constant.NAMESPACE + action, envelope);
+				transport.call(Constant.NAMESPACE + "ChuKuDanList", envelope);
 				SoapObject response = (SoapObject) envelope.bodyIn;
 				if(response != null){
-					JSONTokener parser = new JSONTokener(response.getPropertyAsString("DealingResult"));
+					JSONTokener parser = new JSONTokener(response.getPropertyAsString("ChuKuDanListResult"));
 					JSONObject json = (JSONObject) parser.nextValue();
 					if (json.getBoolean("result")) {
 						
@@ -170,11 +191,9 @@ public class DealingActivity extends Activity implements OnClickListener {
 						JSONArray rows = data.getJSONArray("rows");
 						for (int i = 0; i < rows.length(); i++) {
 							JSONObject obj = rows.getJSONObject(i);
-							Bill item = new Bill();
-							item.setTitle(obj.getString("title"));
-							item.setTrun_time(obj.getString("trun_time"));
-							item.setCurrent_node_id(obj.getString("current_node_id"));
-							item.setForm_oid(obj.getString("form_oid"));
+							HashMap<String, String> item = new HashMap<String, String>();
+							item.put("keycode", obj.getString("keycode"));
+							item.put("adddate", obj.getString("adddate"));
 							items.add(item);
 						}
 						return true;
@@ -187,7 +206,6 @@ public class DealingActivity extends Activity implements OnClickListener {
 				e.printStackTrace();
 //				errMsg = e.toString();
 				errMsg = "操作失败，请稍候重试";
-				return false;
 			}
 			return false;
 		}
@@ -196,44 +214,34 @@ public class DealingActivity extends Activity implements OnClickListener {
 		protected void onPostExecute(Boolean result) {
 			progress.dismiss();
 			if (result) {
-				if (ISFIRST) {
-					adapter = new OfficeAdapter(items, DealingActivity.this, 0);
-					if(adapter != null){
-						mListView.setAdapter(adapter);
-					}
-				}else {
+				if (isFirst) {
+					adapter = new MyAdapter();
+					mListView.setAdapter(adapter);
+				} else {
 					adapter.notifyDataSetChanged();
 				}
-				ISFIRST = false;
+				
+				isFirst = false;
 				
 				if (pageIndex > 1) {
 					mListView.onRefreshComplete();
 				}
 				if (totalCount == items.size()) {
 					mListView.setMode(Mode.DISABLED);
-					Toast.makeText(DealingActivity.this, "已加载完所有数据", Toast.LENGTH_SHORT).show();
+					Toast.makeText(OutListActivity.this, "已加载完所有数据", Toast.LENGTH_SHORT).show();
 				}
-			}else{
-				Toast.makeText(DealingActivity.this, errMsg, Toast.LENGTH_LONG).show();
+			} else {
+				Toast.makeText(OutListActivity.this, errMsg, Toast.LENGTH_LONG).show();
 				if (errMsg.equals("请先登录")) {
-					Intent intent = new Intent(DealingActivity.this, LoginActivity.class);
+					Intent intent = new Intent(OutListActivity.this, LoginActivity.class);
 					intent.putExtra("dir", 1);
-					DealingActivity.this.startActivity(intent);
+					OutListActivity.this.startActivity(intent);
 				}
-				
-				DealingActivity.this.finish();
+				OutListActivity.this.finish();
 			}
 			super.onPostExecute(result);
 		}
 		
 	}
-
-
-//	@Override
-//	public boolean onCreateOptionsMenu(Menu menu) {
-//		// Inflate the menu; this adds items to the action bar if it is present.
-//		getMenuInflater().inflate(R.menu.dealing, menu);
-//		return true;
-//	}
 
 }

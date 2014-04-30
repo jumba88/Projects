@@ -3,6 +3,7 @@ package com.honglang.lugang.home;
 import com.honglang.lugang.R;
 import com.honglang.lugang.login.LoginActivity;
 import com.honglang.lugang.out.FormListActivity;
+import com.honglang.lugang.out.OutListActivity;
 import com.honglang.lugang.qrcode.HistoryActivity;
 import com.honglang.zxing.CaptureActivity;
 
@@ -21,6 +22,7 @@ public class TabFour extends Fragment implements OnClickListener {
 	private TextView title;
 //	private Button history;
 	private Button another;
+	private Button search;
 	private Button out;
 	private Button list;
 	@Override
@@ -43,6 +45,8 @@ public class TabFour extends Fragment implements OnClickListener {
 		out.setOnClickListener(this);
 		another = (Button) view.findViewById(R.id.another);
 		another.setOnClickListener(this);
+		search = (Button) view.findViewById(R.id.search);
+		search.setOnClickListener(this);
 	}
 	
 	@Override
@@ -57,6 +61,9 @@ public class TabFour extends Fragment implements OnClickListener {
 			Intent intent = new Intent(getActivity(),CaptureActivity.class);
 			intent.putExtra("QRTYPE", 6);
 			this.startActivity(intent);
+			break;
+		case R.id.search:
+			startActivity(new Intent(getActivity(), OutListActivity.class));
 			break;
 		case R.id.list:
 			Intent in = new Intent(getActivity(),FormListActivity.class);

@@ -21,6 +21,8 @@ import com.honglang.lugang.R.menu;
 import com.honglang.lugang.billsearch.BillDetailActivity;
 import com.honglang.lugang.login.LoginActivity;
 
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
@@ -54,6 +56,9 @@ public class OrderActivity extends Activity implements OnClickListener {
 	private EditText suggest;
 	private Button yes;
 	private Button no;
+	
+	private SoundPool soundPool;
+	
 	private ListView mListView;
 	private List<Order> items;
 	private List<Order> cache;
@@ -62,6 +67,7 @@ public class OrderActivity extends Activity implements OnClickListener {
 	private String action = "GetFormInfoByFormOid";
 	private String confirmAction = "PaiCheShouHuoRuKu";
 	private Bill bill;
+	private String fhCode;
 	private HashMap<String, String> infoMap;
 	public static int position;
 	public List<Integer> submit;
@@ -82,23 +88,17 @@ public class OrderActivity extends Activity implements OnClickListener {
 		
 		back = (Button) this.findViewById(R.id.back);
 		back.setOnClickListener(this);
+		title.setText("等待货物入库");
+		confirm = (Button) this.findViewById(R.id.ok);
+		confirm.setText("确 认");
+		confirm.setOnClickListener(this);
+		
+		soundPool = new SoundPool(2, AudioManager.STREAM_SYSTEM, 5);
+		soundPool.load(this,R.raw.success,1);
+		soundPool.load(this,R.raw.failed,1);
 		
 		sureGrid = this.findViewById(R.id.sureGrid);
 		yesNo = this.findViewById(R.id.yesno);
-		
-		bill = (Bill) this.getIntent().getExtras().getSerializable("bill");
-		if (bill.getCurrent_node_id().equals("7")) {
-			title.setText("等待货物入库");
-			confirm = (Button) this.findViewById(R.id.ok);
-			confirm.setText("确 认");
-			confirm.setVisibility(View.VISIBLE);
-			confirm.setOnClickListener(this);
-		}
-		if (bill.getCurrent_node_id().equals("9")) {
-			title.setText("托运 确认");
-			sureGrid.setVisibility(View.VISIBLE);
-			yesNo.setVisibility(View.VISIBLE);
-		}
 		
 		sure = (EditText) this.findViewById(R.id.sure);
 		surePhone = (EditText) this.findViewById(R.id.surePhone);
@@ -118,7 +118,25 @@ public class OrderActivity extends Activity implements OnClickListener {
 		items = new ArrayList<Order>();
 		cache = new ArrayList<Order>();
 		submit = new ArrayList<Integer>();
-		new LoadTask().execute((Void)null);
+		
+		if (getIntent().getBooleanExtra("scan", false)) {
+			fhCode = getIntent().getStringExtra("fhCode");
+			new Load2Task().execute((Void)null);
+			confirm.setVisibility(View.VISIBLE);
+		} else {
+			bill = (Bill) this.getIntent().getExtras().getSerializable("bill");
+			if (bill.getCurrent_node_id().equals("7")) {
+				confirm.setVisibility(View.VISIBLE);
+			}
+			if (bill.getCurrent_node_id().equals("9")) {
+				title.setText("托运 确认");
+				sureGrid.setVisibility(View.VISIBLE);
+				yesNo.setVisibility(View.VISIBLE);
+			}
+			
+			new LoadTask().execute((Void)null);
+		}
+		
 		mListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -331,6 +349,117 @@ public class OrderActivity extends Activity implements OnClickListener {
 				}
 			} else {
 				Toast.makeText(OrderActivity.this, errMsg, Toast.LENGTH_LONG).show();
+				if (errMsg.equals("请先登录")) {
+					Intent i = new Intent(OrderActivity.this, LoginActivity.class);
+					i.putExtra("dir", 1);
+					startActivity(i);
+				}
+				OrderActivity.this.finish();
+			}
+			super.onPostExecute(result);
+		}
+		
+	}
+	
+	class Load2Task extends AsyncTask<Void, Void, Boolean>{
+		
+		private String errMsg;
+		@Override
+		protected void onPreExecute() {
+			progress = ProgressDialog.show(OrderActivity.this, null, "加载中...", false, false);
+			super.onPreExecute();
+		}
+		
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			SoapObject rpc = new SoapObject(Constant.NAMESPACE, "GetFormInfoByFormOid2Fhcode");
+			rpc.addProperty("fhCode", fhCode);
+			rpc.addProperty("currentUserno", SessionManager.getInstance().getUsername());
+			rpc.addProperty("token", SessionManager.getInstance().getTokene());
+			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER12);
+			envelope.dotNet = true;
+			envelope.setOutputSoapObject(rpc);
+			HttpTransportSE transport = new HttpTransportSE(Constant.SERVICE_URL);
+			transport.debug = true;
+			try {
+				transport.call(Constant.NAMESPACE + "GetFormInfoByFormOid2Fhcode", envelope);
+				SoapObject response = (SoapObject) envelope.bodyIn;
+				if(response != null){
+					JSONTokener parser = new JSONTokener(response.getPropertyAsString("GetFormInfoByFormOid2FhcodeResult"));
+					JSONObject json = (JSONObject) parser.nextValue();
+					Log.i("suxoyo", json.toString());
+					if (json.getBoolean("result")) {
+						items.clear();
+						JSONObject data = json.getJSONObject("data");
+						JSONObject form = data.getJSONObject("form");
+						JSONObject info = form.getJSONObject("row");
+						infoMap = new HashMap<String, String>();
+						infoMap.put("fhcode", info.getString("fhcode"));
+						infoMap.put("tocity", info.getString("tocity"));
+						infoMap.put("wuliu", info.getString("wuliu"));
+						
+						JSONObject mxb = data.getJSONObject("mxb");
+						JSONArray rows = mxb.getJSONArray("rows");
+						for (int i = 0; i < rows.length(); i++) {
+							JSONObject obj = rows.getJSONObject(i);
+//							Log.i("suxoyo", obj.toString());
+							Order item = new Order();
+							item.setOid(obj.getString("oid"));
+							item.setWplx(obj.getString("wplx"));
+							item.setWpmc(obj.getString("wpmc"));
+							item.setJl_danwei(obj.getString("jl_danwei"));
+							item.setSl(obj.getString("sl"));
+							item.setSl_danwei(obj.getString("sl_danwei"));
+							item.setZl(obj.getString("zl"));
+							item.setZl_danwei(obj.getString("zl_danwei").trim());
+							item.setTiji(obj.getString("tiji"));
+							item.setTiji_danwei(obj.getString("tiji_danwei"));
+							item.setYunfei(obj.getString("yunfei"));
+							item.setBaozhuang(obj.getString("baozhuang"));
+							item.setBaozhuangfei(obj.getString("baozhuangfei"));
+							item.setTihuofei(obj.getString("tihuofei"));
+							item.setSonghuofei(obj.getString("songhuofei"));
+							item.setBaofei(obj.getString("baofei"));
+							item.setZongyunfei(obj.getString("zongyunfei"));
+							item.setTbjz(obj.getString("tbjz"));
+							item.setIsdsf(obj.getString("isdsf"));
+							item.setHuok(obj.getString("huok"));
+							items.add(item);
+							cache.add(item);
+							submit.add(1);
+						}
+						return true;
+					} else {
+						errMsg = json.getString("msg");
+						return false;
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				errMsg = "操作失败，请稍候重试";
+			}
+			return false;
+		}
+		
+		@Override
+		protected void onPostExecute(Boolean result) {
+			progress.dismiss();
+			if (result) {
+				soundPool.play(1, 1, 1, 1, 0, 1);
+				
+				stuffCode.setText(infoMap.get("fhcode"));
+				end.setText(infoMap.get("tocity"));
+				transport.setText(infoMap.get("wuliu"));
+				
+				adapter = new OrderAdapter(items, OrderActivity.this);
+				if(adapter != null){
+					mListView.setAdapter(adapter);
+					mListView.setCacheColorHint(0);
+					Constant.setListViewHeightBasedOnChildren(mListView);
+				}
+			} else {
+				Toast.makeText(OrderActivity.this, errMsg, Toast.LENGTH_LONG).show();
+				soundPool.play(2, 1, 1, 1, 0, 1);
 				if (errMsg.equals("请先登录")) {
 					Intent i = new Intent(OrderActivity.this, LoginActivity.class);
 					i.putExtra("dir", 1);

@@ -25,6 +25,8 @@ import com.honglang.lugang.office.Order;
 import com.honglang.lugang.office.OrderActivity;
 import com.honglang.lugang.office.OrderAdapter;
 
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
@@ -106,6 +108,8 @@ public class BlankActivity extends Activity implements OnClickListener {
 	
 	public static int position;
 	
+	private SoundPool soundPool;
+	
 	String nameTy;
 	String phoneTy;
 	String addressTy;
@@ -144,6 +148,10 @@ public class BlankActivity extends Activity implements OnClickListener {
 		fhCode = this.getIntent().getStringExtra("fhCode");
 		stuffCode = (TextView) findViewById(R.id.stuffCode);
 		stuffCode.setText(fhCode);
+		
+		soundPool = new SoundPool(2, AudioManager.STREAM_SYSTEM, 5);
+		soundPool.load(this,R.raw.success,1);
+		soundPool.load(this,R.raw.failed,1);
 		
 		new LoadTask().execute((Void)null);
 		
@@ -530,10 +538,12 @@ public class BlankActivity extends Activity implements OnClickListener {
 			progress.dismiss();
 			if (result) {
 				Toast.makeText(BlankActivity.this, "发货码"+fhCode+"入库成功", Toast.LENGTH_LONG).show();
+				soundPool.play(1, 1, 1, 1, 0, 1);
 //				confirm.setEnabled(false);
 				BlankActivity.this.finish();
 			} else {
 				Toast.makeText(BlankActivity.this, errMsg, Toast.LENGTH_LONG).show();
+				soundPool.play(2, 1, 1, 1, 0, 1);
 				if (errMsg.equals("请先登录")) {
 					Intent i = new Intent(BlankActivity.this, LoginActivity.class);
 					i.putExtra("dir", 1);

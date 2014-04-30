@@ -35,11 +35,17 @@
             style="@style/tabone"
             android:visibility="gone"
             android:text="@string/multiout" />
+        
+        <Button
+            android:id="@+id/search"
+            style="@style/tabone"
+            android:text="出库单查询" />
 
         <Button
             android:id="@+id/another"
             style="@style/tabone"
             android:text="@string/multiout" />
+        
     </LinearLayout>
 
 </LinearLayout>

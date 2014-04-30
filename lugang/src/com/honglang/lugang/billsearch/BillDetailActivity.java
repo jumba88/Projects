@@ -18,6 +18,8 @@ import com.honglang.lugang.R.layout;
 import com.honglang.lugang.R.menu;
 import com.honglang.lugang.truck.Truck;
 
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -51,6 +53,8 @@ public class BillDetailActivity extends Activity implements OnClickListener {
 	private TextView record;
 	private View rec;
 	
+	private SoundPool soundPool;
+	
 	private String gnumber;
 	private String snumber;
 	private String number;
@@ -76,6 +80,10 @@ public class BillDetailActivity extends Activity implements OnClickListener {
 		title.setText("运单详情");
 		back = (Button) this.findViewById(R.id.back);
 		back.setOnClickListener(this);
+		
+		soundPool = new SoundPool(2, AudioManager.STREAM_SYSTEM, 5);
+		soundPool.load(this,R.raw.success,1);
+		soundPool.load(this,R.raw.failed,1);
 		
 		name = (TextView) this.findViewById(R.id.name);
 		getter = (TextView) this.findViewById(R.id.getter);
@@ -205,6 +213,8 @@ public class BillDetailActivity extends Activity implements OnClickListener {
 		protected void onPostExecute(Boolean result) {
 			progress.dismiss();
 			if (result) {
+				soundPool.play(1, 1, 1, 1, 0, 1);
+				
 				name.setText(infoMap.get("fhcode"));
 				getter.setText(infoMap.get("shr"));
 				gaddress.setText(infoMap.get("dizhi"));
@@ -236,6 +246,7 @@ public class BillDetailActivity extends Activity implements OnClickListener {
 				}
 			}else{
 				Toast.makeText(BillDetailActivity.this, "查询不到该运单信息", Toast.LENGTH_SHORT).show();
+				soundPool.play(2, 1, 1, 1, 0, 1);
 				BillDetailActivity.this.finish();
 			}
 			super.onPostExecute(result);
