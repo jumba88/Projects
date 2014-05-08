@@ -147,7 +147,7 @@ public class NoticeActivity extends Activity implements OnClickListener {
 			} catch (Exception e) {
 				e.printStackTrace();
 				errMsg = e.toString();
-				return false;
+				errMsg = "加载失败，请稍候重试";
 			}
 			return false;
 		}
@@ -173,6 +173,9 @@ public class NoticeActivity extends Activity implements OnClickListener {
 					mListView.setMode(Mode.DISABLED);
 					Toast.makeText(NoticeActivity.this, "已加载完所有数据", Toast.LENGTH_SHORT).show();
 				}
+			}else {
+				Toast.makeText(NoticeActivity.this, errMsg, Toast.LENGTH_SHORT).show();
+				NoticeActivity.this.finish();
 			}
 			super.onPostExecute(result);
 		}

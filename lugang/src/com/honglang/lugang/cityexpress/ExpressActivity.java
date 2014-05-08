@@ -176,7 +176,8 @@ public class ExpressActivity extends Activity implements OnClickListener {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				errMsg = e.toString();
+//				errMsg = e.toString();
+				errMsg = "加载失败，请稍候重试";
 			} 
 			return false;
 		}
@@ -202,6 +203,9 @@ public class ExpressActivity extends Activity implements OnClickListener {
 					mListView.setMode(Mode.DISABLED);
 					Toast.makeText(ExpressActivity.this, "已加载完所有数据", Toast.LENGTH_SHORT).show();
 				}
+			}else {
+				Toast.makeText(ExpressActivity.this, errMsg, Toast.LENGTH_SHORT).show();
+				ExpressActivity.this.finish();
 			}
 			
 			super.onPostExecute(result);

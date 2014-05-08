@@ -117,6 +117,7 @@ public class CompanyActivity extends Activity implements OnClickListener {
 
 	class LoadTask extends AsyncTask<Void, Void, Boolean>{
 
+		private String errMsg;
 		@Override
 		protected void onPreExecute() {
 			if (ISFIRST) {
@@ -163,12 +164,13 @@ public class CompanyActivity extends Activity implements OnClickListener {
 						}
 						return true;
 					} else {
-//						errMsg = json.getString("msg");
+						errMsg = json.getString("msg");
 						return false;
 					}
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
+//				e.printStackTrace();
+				errMsg = "加载失败，请稍候重试";
 			}
 			return false;
 		}
@@ -194,6 +196,9 @@ public class CompanyActivity extends Activity implements OnClickListener {
 					mListView.setMode(Mode.DISABLED);
 					Toast.makeText(CompanyActivity.this, "已加载完所有数据", Toast.LENGTH_SHORT).show();
 				}
+			}else {
+				Toast.makeText(CompanyActivity.this, errMsg, Toast.LENGTH_SHORT).show();
+				CompanyActivity.this.finish();
 			}
 			super.onPostExecute(result);
 		}

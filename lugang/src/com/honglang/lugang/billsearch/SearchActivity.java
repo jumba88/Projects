@@ -17,6 +17,8 @@ import com.honglang.lugang.R;
 import com.honglang.lugang.R.layout;
 import com.honglang.lugang.R.menu;
 
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
@@ -45,6 +47,8 @@ public class SearchActivity extends Activity implements OnClickListener {
 	private List<String> recordList;
 	private ProgressDialog progress;
 	private String action = "LZView";
+	
+	private SoundPool soundPool;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -63,6 +67,10 @@ public class SearchActivity extends Activity implements OnClickListener {
 		ok.setText("运单详情");
 		ok.setVisibility(View.VISIBLE);
 		ok.setOnClickListener(this);
+		
+		soundPool = new SoundPool(2, AudioManager.STREAM_SYSTEM, 5);
+		soundPool.load(this,R.raw.success,1);
+		soundPool.load(this,R.raw.failed,1);
 		
 		recordList = new ArrayList<String>();
 		mListView = (ListView) this.findViewById(R.id.list_search);
@@ -140,6 +148,8 @@ public class SearchActivity extends Activity implements OnClickListener {
 		protected void onPostExecute(Boolean result) {
 			progress.dismiss();
 			if (result) {
+				soundPool.play(1, 1, 1, 1, 0, 1);
+				
 				if (recordList.size() > 0) {
 					adapter = new SearchAdapter(recordList, SearchActivity.this);
 					if (adapter != null) {
@@ -150,6 +160,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 				}
 				
 			}else{
+				soundPool.play(2, 1, 1, 1, 0, 1);
 				nothing.setVisibility(View.VISIBLE);
 			}
 			super.onPostExecute(result);

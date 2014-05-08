@@ -6,6 +6,10 @@ import java.util.Calendar;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import org.ksoap2.SoapEnvelope;
+import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapSerializationEnvelope;
+import org.ksoap2.transport.HttpTransportSE;
 
 import com.honglang.lugang.Constant;
 import com.honglang.lugang.R;
@@ -73,7 +77,7 @@ public class LoginActivity extends Activity {
 			return;
 		}
 		if(!TextUtils.isEmpty(userNo) && !TextUtils.isEmpty(pass)){
-			new LoginTask().execute(userNo,pass);
+			new LoginTask().execute((Void)null);
 //			Intent i = new Intent(LoginActivity.this, StuffActivity.class);
 //			i.putExtra("action", 100);
 //			LoginActivity.this.startActivity(i);
@@ -81,9 +85,8 @@ public class LoginActivity extends Activity {
 		}
 	}
 	
-	class LoginTask extends AsyncTask<String, String, Boolean>{
+	class LoginTask extends AsyncTask<Void, Void, Boolean>{
 
-		private String loginResult;
 		private String errMsg;
 		@Override
 		protected void onPreExecute() {
@@ -92,37 +95,47 @@ public class LoginActivity extends Activity {
 			super.onPreExecute();
 		}
 		@Override
-		protected Boolean doInBackground(String... params) {
-			loginResult = Constant.login(params[0], params[1]);
-			Log.i("Login", "" + loginResult);
+		protected Boolean doInBackground(Void... params) {
 			
-			if (loginResult != null && loginResult.length() > 0) {
+			SoapObject request = new SoapObject(Constant.NAMESPACE, "Login");
+			request.addProperty("userNO", userNo);
+			request.addProperty("pass", pass);
+			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER12);
+			HttpTransportSE transport = new HttpTransportSE(Constant.SERVICE_URL);
+			transport.debug = true;
+			envelope.dotNet = true;
+			envelope.setOutputSoapObject(request);
+			
 				try {
-					JSONTokener jsonParser = new JSONTokener(loginResult);
-					JSONObject json = (JSONObject) jsonParser.nextValue();
-					if (json.getBoolean("result")) {
-						setting.saveAccount(params[0]);
-						setting.savePwd(params[1]);
-						SessionManager.getInstance().setUsername(params[0]);
-						
-						JSONObject data = json.getJSONObject("data");
-						SessionManager.getInstance().setTokene(data.getString("token"));
-						SessionManager.getInstance().setCity(data.getString("city"));
-						SessionManager.getInstance().setUsertype(data.getString("usertype"));
-						return true;
-					}else{
-						errMsg = json.getString("msg");
-						return false;
+					transport.call(Constant.NAMESPACE + "Login", envelope);
+					SoapObject obj = (SoapObject) envelope.bodyIn;
+					if(obj != null){
+						JSONTokener jsonParser = new JSONTokener(obj.getPropertyAsString("LoginResult"));
+						JSONObject json = (JSONObject) jsonParser.nextValue();
+						if (json.getBoolean("result")) {
+							
+							JSONObject data = json.getJSONObject("data");
+							SessionManager.getInstance().setUsername(userNo);
+							SessionManager.getInstance().setTokene(data.getString("token"));
+							SessionManager.getInstance().setCity(data.getString("city"));
+							SessionManager.getInstance().setUsertype(data.getString("usertype"));
+							return true;
+						}else{
+							errMsg = json.getString("msg");
+							return false;
+						}
 					}
-				} catch (JSONException e) {
-					errMsg = e.toString();
+					
+				} catch (Exception e) {
+//					errMsg = e.toString();
 					e.printStackTrace();
+					errMsg = "请检查网络连接是否正常";
 				}
-			}
 			return false;
 		}
 		@Override
 		protected void onPostExecute(Boolean result) {
+			progress.dismiss();
 			if(result){
 				if (DIR == 0) {
 					LoginActivity.this.startActivity(new Intent(LoginActivity.this, HomeActivity.class));
@@ -132,7 +145,7 @@ public class LoginActivity extends Activity {
 			}else {
 				Toast.makeText(LoginActivity.this, "登录失败," + errMsg, Toast.LENGTH_LONG).show();
 			}
-			progress.dismiss();
+			
 			super.onPostExecute(result);
 		}
 		

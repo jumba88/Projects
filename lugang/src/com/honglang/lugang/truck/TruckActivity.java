@@ -166,8 +166,8 @@ public class TruckActivity extends Activity implements OnClickListener {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				errMsg = e.toString();
-				return false;
+//				errMsg = e.toString();
+				errMsg = "加载失败，请稍候重试";
 			}
 			return false;
 		}
@@ -193,6 +193,9 @@ public class TruckActivity extends Activity implements OnClickListener {
 					mListView.setMode(Mode.DISABLED);
 					Toast.makeText(TruckActivity.this, "已加载完所有数据", Toast.LENGTH_SHORT).show();
 				}
+			}else {
+				Toast.makeText(TruckActivity.this, errMsg, Toast.LENGTH_SHORT).show();
+				TruckActivity.this.finish();
 			}
 			super.onPostExecute(result);
 		}

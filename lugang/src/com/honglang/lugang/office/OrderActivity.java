@@ -64,10 +64,12 @@ public class OrderActivity extends Activity implements OnClickListener {
 	private List<Order> cache;
 	private OrderAdapter adapter;
 	private ProgressDialog progress;
+	private ProgressDialog progressDialog;
 	private String action = "GetFormInfoByFormOid";
 	private String confirmAction = "PaiCheShouHuoRuKu";
 	private Bill bill;
 	private String fhCode;
+	private String formOid;
 	private HashMap<String, String> infoMap;
 	public static int position;
 	public List<Integer> submit;
@@ -127,6 +129,7 @@ public class OrderActivity extends Activity implements OnClickListener {
 			bill = (Bill) this.getIntent().getExtras().getSerializable("bill");
 			if (bill.getCurrent_node_id().equals("7")) {
 				confirm.setVisibility(View.VISIBLE);
+				formOid = bill.getForm_oid();
 			}
 			if (bill.getCurrent_node_id().equals("9")) {
 				title.setText("托运 确认");
@@ -182,12 +185,13 @@ public class OrderActivity extends Activity implements OnClickListener {
 				Toast.makeText(OrderActivity.this, items.get(i).getWpmc()+"没有填写数量", Toast.LENGTH_LONG).show();
 				return;
 			}
-			if (items.get(i).getYunfei() == null || items.get(i).getYunfei().length() == 0) {
+			Log.i("suxoyo",  "YF="+Integer.parseInt(items.get(i).getYunfei().toString()));
+			if (items.get(i).getYunfei() == null) {
 				Toast.makeText(OrderActivity.this, items.get(i).getWpmc()+"没有填写运费", Toast.LENGTH_LONG).show();
 				return;
 			}
 		}
-		new ConfirmTask().execute((Void)null);
+//		new ConfirmTask().execute((Void)null);
 	}
 	public void yes(){
 		if (checked) {
@@ -398,11 +402,12 @@ public class OrderActivity extends Activity implements OnClickListener {
 						infoMap.put("tocity", info.getString("tocity"));
 						infoMap.put("wuliu", info.getString("wuliu"));
 						
+						formOid = info.getString("formoid");
+						
 						JSONObject mxb = data.getJSONObject("mxb");
 						JSONArray rows = mxb.getJSONArray("rows");
 						for (int i = 0; i < rows.length(); i++) {
 							JSONObject obj = rows.getJSONObject(i);
-//							Log.i("suxoyo", obj.toString());
 							Order item = new Order();
 							item.setOid(obj.getString("oid"));
 							item.setWplx(obj.getString("wplx"));
@@ -478,7 +483,10 @@ public class OrderActivity extends Activity implements OnClickListener {
 		private List<JSONObject> orderList;
 		@Override
 		protected void onPreExecute() {
-			progress = ProgressDialog.show(OrderActivity.this, null, "货物正在入库...", false, false);
+			if (progressDialog != null) {
+				progressDialog = null;
+			}
+			progressDialog = ProgressDialog.show(OrderActivity.this, null, "货物正在入库...", false, false);
 			super.onPreExecute();
 		}
 
@@ -512,7 +520,7 @@ public class OrderActivity extends Activity implements OnClickListener {
 			}
 //			Log.i("suxoyo", orderList.toString());
 			SoapObject rpc = new SoapObject(Constant.NAMESPACE, confirmAction);
-			rpc.addProperty("formOid", Long.parseLong(bill.getForm_oid()));
+			rpc.addProperty("formOid", Long.parseLong(formOid));
 			rpc.addProperty("jsonMxbArrayString", orderList.toString());
 			rpc.addProperty("currentUserno", SessionManager.getInstance().getUsername());
 			rpc.addProperty("token", SessionManager.getInstance().getTokene());
@@ -546,7 +554,7 @@ public class OrderActivity extends Activity implements OnClickListener {
 
 		@Override
 		protected void onPostExecute(Boolean result) {
-			progress.dismiss();
+			progressDialog.dismiss();
 			if (result) {
 				Toast.makeText(OrderActivity.this, "操作成功,信息已发送到下单人!", Toast.LENGTH_LONG).show();
 				setResult(RESULT_OK);

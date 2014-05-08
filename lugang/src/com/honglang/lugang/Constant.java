@@ -24,7 +24,6 @@ public class Constant {
 	public static final String SERVICE_URL = "http://service.6gang.com.cn:8888/DataServer.asmx";
 //	public static final String SERVICE_URL = "http://service.6gang.com.cn:9999//DataServer.asmx";
 //	public static final String SERVICE_URL = "http://192.168.1.168:84/DataServer.asmx";
-	public static final String loginAction = "Login";
 	
 	/*
 	 * verify mobile number
@@ -44,34 +43,6 @@ public class Constant {
 		return str.matches("^[-+]?(([0-9]+)([.]([0-9]+))?|([.]([0-9]+))?)$");
 	}
 	
-	public static String login(String userNo, String pass){
-		SoapObject request = new SoapObject(Constant.NAMESPACE, loginAction);
-		request.addProperty("userNO", userNo);
-		request.addProperty("pass", pass);
-		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER12);
-		HttpTransportSE transport = new HttpTransportSE(Constant.SERVICE_URL);
-		transport.debug = true;
-		envelope.dotNet = true;
-		envelope.setOutputSoapObject(request);
-		
-		try {
-			transport.call(Constant.NAMESPACE + loginAction, envelope);
-			SoapObject obj = (SoapObject) envelope.bodyIn;
-			if(obj != null){
-				return obj.getProperty("LoginResult").toString();
-			}else{
-				return null;
-			}
-			
-		} catch (HttpResponseException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (XmlPullParserException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
 	/** 解决scrollview与listview共存 */
 	public static void setListViewHeightBasedOnChildren(ListView listView) {
 		ListAdapter listAdapter = listView.getAdapter();
