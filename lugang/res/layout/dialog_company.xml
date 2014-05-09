@@ -26,6 +26,14 @@
 <View android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="#33B5E5"/>
+<TextView android:id="@+id/zero"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:layout_gravity="center"
+    android:visibility="gone"
+    android:text="无查询结果"
+    android:textSize="20sp"/>
 <ListView android:id="@+id/list_company"
         android:layout_height="match_parent"
         android:layout_width="match_parent"

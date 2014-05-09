@@ -46,9 +46,10 @@
         
         <TextView style="@style/detail"
             android:text="途经城市"/>
-        <TextView android:text=""
+        <TextView android:text="无"
             android:id="@+id/crosscity"
             android:layout_width="200dp"
+            android:background="@drawable/cross_selector"
             android:singleLine="true"
             android:layout_marginLeft="10dp"
             android:layout_columnSpan="3"/>

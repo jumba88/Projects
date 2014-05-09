@@ -1,13 +1,31 @@
 package com.honglang.lugang.cityexpress;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+import org.ksoap2.SoapEnvelope;
+import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapSerializationEnvelope;
+import org.ksoap2.transport.HttpTransportSE;
+
+import com.honglang.lugang.Constant;
 import com.honglang.lugang.R;
 import com.honglang.lugang.R.layout;
 import com.honglang.lugang.R.menu;
+import com.honglang.lugang.out.OutListActivity;
 
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,6 +50,9 @@ public class ExpressDetailActivity extends Activity implements OnClickListener {
 	private TextView haevyprice;
 	private TextView details;
 	private String number;
+	
+	private ProgressDialog progress;
+	private List<HashMap<String, String>> items;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -46,6 +67,8 @@ public class ExpressDetailActivity extends Activity implements OnClickListener {
 		back = (Button) this.findViewById(R.id.back);
 		back.setOnClickListener(this);
 		
+		crosscity = (TextView) this.findViewById(R.id.crosscity);
+		crosscity.setOnClickListener(this);
 		fromcity = (TextView) this.findViewById(R.id.fromcity);
 		fromcity.setText(data.getFromcity());
 		tocity = (TextView) this.findViewById(R.id.tocity);
@@ -84,6 +107,9 @@ public class ExpressDetailActivity extends Activity implements OnClickListener {
 		details.setText(data.getDetails());
 		dial = (Button) this.findViewById(R.id.dial);
 		dial.setOnClickListener(this);
+		
+		items = new ArrayList<HashMap<String,String>>();
+		new LoadTask().execute((Void)null);
 	}
 //	@Override
 //	public boolean onCreateOptionsMenu(Menu menu) {
@@ -102,7 +128,75 @@ public class ExpressDetailActivity extends Activity implements OnClickListener {
 			Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + number.replace("-", "")));
 			this.startActivity(intent);
 			break;
+		case R.id.crosscity:
+			Intent i = new Intent(this, CrossActivity.class);
+			i.putExtra("cross", (Serializable)items);
+			startActivity(i);
+			break;
 		}
+	}
+	
+	class LoadTask extends AsyncTask<Void, Void, Boolean>{
+
+		private String cross = "";
+		@Override
+		protected void onPreExecute() {
+			if (progress != null) {
+				progress = null;
+			}
+			progress = ProgressDialog.show(ExpressDetailActivity.this, null, "加载中...", false, false);
+			super.onPreExecute();
+		}
+
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			SoapObject rpc = new SoapObject(Constant.NAMESPACE, "TkzxTJDList");
+			rpc.addProperty("zxid", data.getId());
+			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER12);
+			envelope.dotNet = true;
+			envelope.setOutputSoapObject(rpc);
+			HttpTransportSE transport = new HttpTransportSE(Constant.SERVICE_URL);
+			transport.debug = true;
+			try {
+				transport.call(Constant.NAMESPACE + "TkzxTJDList", envelope);
+				SoapObject response = (SoapObject) envelope.bodyIn;
+				if (response != null) {
+					JSONTokener parser = new JSONTokener(response.getPropertyAsString("TkzxTJDListResult"));
+					JSONObject json = (JSONObject) parser.nextValue();
+					if (json.getBoolean("result")) {
+						JSONObject data = json.getJSONObject("data");
+						JSONArray rows = data.getJSONArray("rows");
+						for (int i = 0; i < rows.length(); i++) {
+							HashMap<String, String> item = new HashMap<String, String>();
+							JSONObject obj = rows.getJSONObject(i);
+							item.put("city", obj.getString("city"));
+							item.put("address", obj.getString("address"));
+							items.add(item);
+							
+							cross += obj.getString("city") + "->";
+						}
+						return true;
+					}
+				}
+			} catch (Exception e) {
+				Log.i("suxoyo", e.toString());
+			}
+			return false;
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			progress.dismiss();
+			if (result) {
+				if (items.size() > 0) {
+					crosscity.setText(cross);
+				}else {
+					crosscity.setClickable(false);
+				}
+			}
+			super.onPostExecute(result);
+		}
+		
 	}
 
 }

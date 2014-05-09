@@ -185,13 +185,17 @@ public class OrderActivity extends Activity implements OnClickListener {
 				Toast.makeText(OrderActivity.this, items.get(i).getWpmc()+"没有填写数量", Toast.LENGTH_LONG).show();
 				return;
 			}
-			Log.i("suxoyo",  "YF="+Integer.parseInt(items.get(i).getYunfei().toString()));
-			if (items.get(i).getYunfei() == null) {
+			if (items.get(i).getYunfei() == null || items.get(i).getYunfei().length() == 0) {
 				Toast.makeText(OrderActivity.this, items.get(i).getWpmc()+"没有填写运费", Toast.LENGTH_LONG).show();
 				return;
+			}else {
+				if (Double.parseDouble(items.get(i).getYunfei()) == 0){
+					Toast.makeText(OrderActivity.this, items.get(i).getWpmc()+"没有填写运费", Toast.LENGTH_LONG).show();
+					return;
+				}
 			}
 		}
-//		new ConfirmTask().execute((Void)null);
+		new ConfirmTask().execute((Void)null);
 	}
 	public void yes(){
 		if (checked) {

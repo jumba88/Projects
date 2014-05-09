@@ -4202,5 +4202,6 @@
     <string name="title_activity_issue_truck">IssueTruckActivity</string>
     <string name="title_activity_preview">PreviewActivity</string>
     <string name="title_activity_out_list">OutListActivity</string>
+    <string name="title_activity_cross">CrossActivity</string>
 
 </resources>

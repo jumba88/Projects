@@ -27,6 +27,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class SearchTruckDialog extends Dialog implements android.view.View.OnClickListener {
@@ -34,6 +35,8 @@ public class SearchTruckDialog extends Dialog implements android.view.View.OnCli
 	private EditText to;
 	private EditText from;
 	private Button search;
+	
+	private TextView zero;
 	
 	private ListView mListView;
 	private List<Truck> items;
@@ -56,6 +59,8 @@ public class SearchTruckDialog extends Dialog implements android.view.View.OnCli
 		from = (EditText) findViewById(R.id.from);
 		search = (Button) findViewById(R.id.search);
 		search.setOnClickListener(this);
+		
+		zero = (TextView) findViewById(R.id.zero);
 		
 		pageSize = 40;
 		pageIndex = 1;
@@ -84,6 +89,8 @@ public class SearchTruckDialog extends Dialog implements android.view.View.OnCli
 			if (items.size() > 0) {
 				items.clear();
 				adapter.notifyDataSetChanged();
+			}else {
+				zero.setVisibility(View.GONE);
 			}
 			new LoadTask().execute((Void)null);
 			break;
@@ -155,7 +162,11 @@ public class SearchTruckDialog extends Dialog implements android.view.View.OnCli
 		@Override
 		protected void onPostExecute(Boolean result) {
 			if (result) {
-				adapter.notifyDataSetChanged();
+				if (items.size() == 0) {
+					zero.setVisibility(View.VISIBLE);
+				}else {
+					adapter.notifyDataSetChanged();
+				}
 			}
 			super.onPostExecute(result);
 		}

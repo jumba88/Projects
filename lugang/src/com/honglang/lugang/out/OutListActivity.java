@@ -173,6 +173,9 @@ public class OutListActivity extends Activity implements OnClickListener {
 			rpc.addProperty("token", SessionManager.getInstance().getTokene());
 			rpc.addProperty("pageSize", pageSize);
 			rpc.addProperty("pageIndex", pageIndex);
+			rpc.addProperty("keyCode", "");
+			rpc.addProperty("startDate", "");
+			rpc.addProperty("endDate", "");
 			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER12);
 			envelope.dotNet = true;
 			envelope.setOutputSoapObject(rpc);
