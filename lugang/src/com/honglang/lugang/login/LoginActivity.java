@@ -137,6 +137,8 @@ public class LoginActivity extends Activity {
 		protected void onPostExecute(Boolean result) {
 			progress.dismiss();
 			if(result){
+				setting.saveAccount(userNo);
+				setting.savePwd(pass);
 				if (DIR == 0) {
 					LoginActivity.this.startActivity(new Intent(LoginActivity.this, HomeActivity.class));
 				}

@@ -32,6 +32,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -49,6 +50,7 @@ public class OutListActivity extends Activity implements OnClickListener {
 
 	private TextView title;
 	private Button back;
+	private Button ok;
 	
 	private int pageSize;
 	private int pageIndex;
@@ -74,6 +76,10 @@ public class OutListActivity extends Activity implements OnClickListener {
 		title.setText("出库单查询 ");
 		back = (Button) this.findViewById(R.id.back);
 		back.setOnClickListener(this);
+		ok = (Button) this.findViewById(R.id.ok);
+		ok.setText("查询");
+		ok.setVisibility(View.VISIBLE);
+		ok.setOnClickListener(this);
 		
 		pageSize = 40;
 		pageIndex = 1;
@@ -112,6 +118,11 @@ public class OutListActivity extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.back:
 			finish();
+			break;
+		case R.id.ok:
+//			SearchFormDialog dialog = new SearchFormDialog(this, android.R.style.Theme_Light_NoTitleBar);
+//			dialog.show();
+			startActivity(new Intent(this,SearchFormActivity.class));
 			break;
 		}
 	}
@@ -205,8 +216,10 @@ public class OutListActivity extends Activity implements OnClickListener {
 						return false;
 					}
 				}
+				transport.reset();
 			} catch (Exception e) {
 				e.printStackTrace();
+				Log.i("suxoyo", e.toString());
 //				errMsg = e.toString();
 				errMsg = "操作失败，请稍候重试";
 			}

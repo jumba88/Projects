@@ -4203,5 +4203,6 @@
     <string name="title_activity_preview">PreviewActivity</string>
     <string name="title_activity_out_list">OutListActivity</string>
     <string name="title_activity_cross">CrossActivity</string>
+    <string name="title_activity_search_form">SearchFormActivity</string>
 
 </resources>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="3dp"
+    android:layout_marginRight="10dp"
+    android:orientation="horizontal" >
+    
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="从"/>
+    <Button android:id="@+id/from"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        style="@style/EditStyle"
+        android:text=""/>
+    <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="截止"/>
+    <Button android:id="@+id/to"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        style="@style/EditStyle"
+        android:text=""/>
+</LinearLayout>
+    <LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="3dp"
+    android:layout_marginRight="10dp"
+    android:orientation="horizontal" >
+    
+    <EditText android:id="@+id/number"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        style="@style/EditStyle"
+        android:gravity="left|center_vertical"
+        android:inputType="textCapCharacters"
+        android:hint="出库单号"/>
+  
+    <Button android:id="@+id/search"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="查询"/>
+</LinearLayout>
+<View android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#33B5E5"/>
+<TextView android:id="@+id/zero"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:layout_gravity="center"
+    android:visibility="gone"
+    android:text="无查询结果"
+    android:textSize="20sp"/>
+<ListView android:id="@+id/list_form"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:divider="@android:color/transparent">
+        </ListView>
+
+</LinearLayout>

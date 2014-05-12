@@ -22,7 +22,6 @@ import com.honglang.lugang.SessionManager;
 import com.honglang.lugang.R.layout;
 import com.honglang.lugang.R.menu;
 import com.honglang.lugang.login.LoginActivity;
-import com.honglang.lugang.truck.TruckActivity;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -183,6 +182,7 @@ public class DealingActivity extends Activity implements OnClickListener {
 						return false;
 					}
 				}
+				transport.reset();
 			} catch (Exception e) {
 				e.printStackTrace();
 //				errMsg = e.toString();

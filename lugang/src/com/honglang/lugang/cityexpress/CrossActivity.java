@@ -92,7 +92,7 @@ public class CrossActivity extends Activity implements OnClickListener {
 				return null;
 			}
 			TextView city = (TextView) convertView.findViewById(R.id.city);
-			TextView address = (TextView) convertView.findViewById(R.id.time);
+			TextView address = (TextView) convertView.findViewById(R.id.address);
 			
 			city.setText(item.get("city"));
 			address.setText(item.get("address"));
