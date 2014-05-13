@@ -12,7 +12,7 @@
         android:minWidth="1dp"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="8dp"
         android:background="@drawable/back"
         android:text="" />
     

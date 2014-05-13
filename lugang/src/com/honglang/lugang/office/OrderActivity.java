@@ -25,6 +25,7 @@ import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -47,10 +48,14 @@ public class OrderActivity extends Activity implements OnClickListener {
 	private Button back;
 	private Button confirm;
 	private View sureGrid;
+	private View grid;
 	private View yesNo;
 	private TextView stuffCode;
 	private TextView end;
 	private TextView transport;
+	private TextView qr;
+	private TextView qrtext;
+	
 	private EditText sure;
 	private EditText surePhone;
 	private EditText suggest;
@@ -99,6 +104,7 @@ public class OrderActivity extends Activity implements OnClickListener {
 		soundPool.load(this,R.raw.success,1);
 		soundPool.load(this,R.raw.failed,1);
 		
+		grid = this.findViewById(R.id.grid);
 		sureGrid = this.findViewById(R.id.sureGrid);
 		yesNo = this.findViewById(R.id.yesno);
 		
@@ -115,6 +121,8 @@ public class OrderActivity extends Activity implements OnClickListener {
 		stuffCode = (TextView) this.findViewById(R.id.stuffCode);
 		end = (TextView) this.findViewById(R.id.end);
 		transport = (TextView) this.findViewById(R.id.transport);
+		qr = (TextView) this.findViewById(R.id.qr);
+		qrtext = (TextView) this.findViewById(R.id.qrtext);
 		
 		mListView = (ListView) this.findViewById(R.id.stuffList);
 		items = new ArrayList<Order>();
@@ -297,6 +305,9 @@ public class OrderActivity extends Activity implements OnClickListener {
 						infoMap.put("fhcode", info.getString("fhcode"));
 						infoMap.put("tocity", info.getString("tocity"));
 						infoMap.put("wuliu", info.getString("wuliu"));
+						infoMap.put("qrr", info.getString("qrr"));
+						infoMap.put("qrrdh", info.getString("qrrdh"));
+						infoMap.put("qrtext", info.getString("qrtext"));
 						
 						JSONObject mxb = data.getJSONObject("mxb");
 						JSONArray rows = mxb.getJSONArray("rows");
@@ -348,6 +359,11 @@ public class OrderActivity extends Activity implements OnClickListener {
 				stuffCode.setText(infoMap.get("fhcode"));
 				end.setText(infoMap.get("tocity"));
 				transport.setText(infoMap.get("wuliu"));
+				if (infoMap.get("qrr") != null && !infoMap.get("qrr").equals("") ) {
+					grid.setVisibility(View.VISIBLE);
+					qr.setText(infoMap.get("qrr")+" "+infoMap.get("qrrdh"));
+					qrtext.setText(infoMap.get("qrtext"));
+				}
 				
 				adapter = new OrderAdapter(items, OrderActivity.this);
 				if(adapter != null){
@@ -405,6 +421,9 @@ public class OrderActivity extends Activity implements OnClickListener {
 						infoMap.put("fhcode", info.getString("fhcode"));
 						infoMap.put("tocity", info.getString("tocity"));
 						infoMap.put("wuliu", info.getString("wuliu"));
+						infoMap.put("qrr", info.getString("qrr"));
+						infoMap.put("qrrdh", info.getString("qrrdh"));
+						infoMap.put("qrtext", info.getString("qrtext"));
 						
 						formOid = info.getString("formoid");
 						
@@ -459,6 +478,11 @@ public class OrderActivity extends Activity implements OnClickListener {
 				stuffCode.setText(infoMap.get("fhcode"));
 				end.setText(infoMap.get("tocity"));
 				transport.setText(infoMap.get("wuliu"));
+				if (infoMap.get("qrr") != null) {
+					grid.setVisibility(View.VISIBLE);
+					qr.setText(infoMap.get("qrr")+" "+infoMap.get("qrrdh"));
+					qrtext.setText(infoMap.get("qrtext"));
+				}
 				
 				adapter = new OrderAdapter(items, OrderActivity.this);
 				if(adapter != null){
@@ -667,10 +691,12 @@ public class OrderActivity extends Activity implements OnClickListener {
 			
 			SoapObject rpc = new SoapObject(Constant.NAMESPACE, "TuoYunQueRenNo");
 			rpc.addProperty("formOid", Long.parseLong(bill.getForm_oid()));
-			rpc.addProperty("tuoyunren", SessionManager.getInstance().getAccount().getName()+"");
+//			rpc.addProperty("tuoyunren", SessionManager.getInstance().getAccount().getName()+"");
 			rpc.addProperty("currentUserno", SessionManager.getInstance().getUsername());
 			rpc.addProperty("token", SessionManager.getInstance().getTokene());
 			rpc.addProperty("jsonMxbArrayString", noList.toString());
+			rpc.addProperty("tuoyunren", sure.getText().toString()+"");
+			rpc.addProperty("dianhua", surePhone.getText().toString()+"");
 			rpc.addProperty("yijian", suggest.getText().toString()+"");
 			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER12);
 			envelope.dotNet = true;
