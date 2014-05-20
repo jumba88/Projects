@@ -194,7 +194,7 @@ public class SearchFormActivity extends Activity implements OnClickListener {
 			rpc.addProperty("token", SessionManager.getInstance().getTokene());
 			rpc.addProperty("pageSize", pageSize);
 			rpc.addProperty("pageIndex", pageIndex);
-			rpc.addProperty("keyCode", number.getText()+"");
+			rpc.addProperty("keyCode", number.getText().toString().trim()+"");
 			rpc.addProperty("startDate", from.getText()+"");
 			rpc.addProperty("endDate", to.getText()+"");
 			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER12);
@@ -242,6 +242,8 @@ public class SearchFormActivity extends Activity implements OnClickListener {
 				}else {
 					adapter.notifyDataSetChanged();
 				}
+			}else {
+				zero.setVisibility(View.VISIBLE);
 			}
 			super.onPostExecute(result);
 		}

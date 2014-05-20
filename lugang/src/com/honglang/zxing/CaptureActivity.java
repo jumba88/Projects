@@ -39,7 +39,7 @@ import com.honglang.zxing.history.HistoryManager;
 import com.honglang.zxing.result.ResultHandler;
 import com.honglang.zxing.result.ResultHandlerFactory;
 import com.honglang.zxing.result.TextResultHandler;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -76,14 +76,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.Map;
-
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.ksoap2.SoapEnvelope;
@@ -100,6 +98,7 @@ import org.ksoap2.transport.HttpTransportSE;
  * @author dswitkin@google.com (Daniel Switkin)
  * @author Sean Owen
  */
+@SuppressLint("NewApi")
 public final class CaptureActivity extends Activity implements OnClickListener,
 		SurfaceHolder.Callback {
 
@@ -854,6 +853,9 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 					
 					count.setText("合计："+(strCount+strCount1)+"票");
 					record.setText("总货物记录数："+(strRec+strRec1)+"条");
+					
+					jf.setBackground(getResources().getDrawable(android.R.color.holo_green_light));
+					pc.setBackground(getResources().getDrawable(android.R.color.holo_purple));
 				} else {
 					if (isJf) {
 						soundPool.play(1,1, 1, 0, 0, 1);
@@ -863,6 +865,8 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 						
 						count.setText("合计："+(strCount+strCount1)+"票");
 						record.setText("总货物记录数："+(strRec+strRec1)+"条");
+						
+						jf.setBackground(getResources().getDrawable(android.R.color.holo_green_light));
 					}
 					if (isPc) {
 						soundPool.play(2,1, 1, 0, 0, 1);
@@ -872,8 +876,13 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 						
 						count.setText("合计："+(strCount+strCount1)+"票");
 						record.setText("总货物记录数："+(strRec+strRec1)+"条");
+						
+						pc.setBackground(getResources().getDrawable(android.R.color.holo_purple));
 					}
 				}
+//				new Handler().postDelayed(r, 3000);
+				h.removeCallbacks(r);
+				h.postDelayed(r, 3000);
 				
 			} else {
 				Toast.makeText(CaptureActivity.this, errMsg, Toast.LENGTH_LONG).show();
@@ -913,6 +922,16 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 		}
 		
 	}
+	
+	Runnable r = new Runnable() {
+		
+		@Override
+		public void run() {
+			jf.setBackground(getResources().getDrawable(R.drawable.linearlayout));
+			pc.setBackground(getResources().getDrawable(R.drawable.linearlayout));
+		}
+	};
+	Handler h = new Handler();
 
 	class EndTask extends AsyncTask<Void, Void, Boolean>{
 
