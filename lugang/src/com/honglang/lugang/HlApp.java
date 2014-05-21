@@ -8,8 +8,12 @@ import java.util.List;
 
 
 
+
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 public class HlApp extends Application {
 
@@ -60,6 +64,16 @@ public class HlApp extends Application {
 			instance = new HlApp();
 		}
 		return instance;
+	}
+	
+	/**
+	 * 检测网络是否可用
+	 * @return
+	 */
+	public boolean isNetworkConnected() {
+		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo ni = cm.getActiveNetworkInfo();
+		return ni != null && ni.isConnectedOrConnecting();
 	}
 
 }

@@ -2,6 +2,7 @@
 <resources>
     
     <color name="white">#fff</color>
+    <color name="gray">#d6d6d6</color>
     <color name="tab_btn_off">#8d8d8d</color>
     <color name="tabs_bg">#80807F</color>
     

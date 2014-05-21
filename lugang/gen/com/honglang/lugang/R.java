@@ -555,25 +555,26 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     public static final class color {
         /**  zxing color 
          */
-        public static final int contents_text=0x7f0b0003;
-        public static final int encode_view=0x7f0b0004;
-        public static final int possible_result_points=0x7f0b0005;
+        public static final int contents_text=0x7f0b0004;
+        public static final int encode_view=0x7f0b0005;
+        public static final int gray=0x7f0b0001;
+        public static final int possible_result_points=0x7f0b0006;
         /**  Android standard ICS color 
          */
-        public static final int result_minor_text=0x7f0b0006;
-        public static final int result_points=0x7f0b0007;
+        public static final int result_minor_text=0x7f0b0007;
+        public static final int result_points=0x7f0b0008;
         /**  Android standard ICS color 
          */
-        public static final int result_text=0x7f0b0008;
-        public static final int result_view=0x7f0b0009;
-        public static final int status_text=0x7f0b000a;
-        public static final int tab_btn_off=0x7f0b0001;
-        public static final int tabs_bg=0x7f0b0002;
-        public static final int transparent=0x7f0b000b;
-        public static final int viewfinder_laser=0x7f0b000c;
+        public static final int result_text=0x7f0b0009;
+        public static final int result_view=0x7f0b000a;
+        public static final int status_text=0x7f0b000b;
+        public static final int tab_btn_off=0x7f0b0002;
+        public static final int tabs_bg=0x7f0b0003;
+        public static final int transparent=0x7f0b000c;
+        public static final int viewfinder_laser=0x7f0b000d;
         /**  Android standard ICS color 
          */
-        public static final int viewfinder_mask=0x7f0b000d;
+        public static final int viewfinder_mask=0x7f0b000e;
         public static final int white=0x7f0b0000;
     }
     public static final class dimen {

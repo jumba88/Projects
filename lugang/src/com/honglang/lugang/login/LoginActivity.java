@@ -12,6 +12,7 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
 import com.honglang.lugang.Constant;
+import com.honglang.lugang.HlApp;
 import com.honglang.lugang.R;
 import com.honglang.lugang.SessionManager;
 import com.honglang.lugang.Setting;
@@ -76,6 +77,11 @@ public class LoginActivity extends Activity {
 			password.setShakeAnimation();
 			return;
 		}
+		
+//		if (!HlApp.getInstance().isNetworkConnected()) {
+//			Toast.makeText(this, "无法联网,请检查您的网络设置", Toast.LENGTH_LONG).show();
+//			return;
+//		}
 		if(!TextUtils.isEmpty(userNo) && !TextUtils.isEmpty(pass)){
 			new LoginTask().execute((Void)null);
 //			Intent i = new Intent(LoginActivity.this, StuffActivity.class);

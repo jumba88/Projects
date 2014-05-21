@@ -854,8 +854,8 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 					count.setText("合计："+(strCount+strCount1)+"票");
 					record.setText("总货物记录数："+(strRec+strRec1)+"条");
 					
-					jf.setBackground(getResources().getDrawable(android.R.color.holo_green_light));
-					pc.setBackground(getResources().getDrawable(android.R.color.holo_purple));
+					jf.setBackgroundDrawable(getResources().getDrawable(android.R.color.holo_orange_light));
+					pc.setBackgroundDrawable(getResources().getDrawable(android.R.color.holo_orange_light));
 				} else {
 					if (isJf) {
 						soundPool.play(1,1, 1, 0, 0, 1);
@@ -866,7 +866,8 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 						count.setText("合计："+(strCount+strCount1)+"票");
 						record.setText("总货物记录数："+(strRec+strRec1)+"条");
 						
-						jf.setBackground(getResources().getDrawable(android.R.color.holo_green_light));
+//						jf.setBackground(getResources().getDrawable(android.R.color.holo_green_light));
+						jf.setBackgroundDrawable(getResources().getDrawable(android.R.color.holo_orange_light));
 					}
 					if (isPc) {
 						soundPool.play(2,1, 1, 0, 0, 1);
@@ -877,7 +878,7 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 						count.setText("合计："+(strCount+strCount1)+"票");
 						record.setText("总货物记录数："+(strRec+strRec1)+"条");
 						
-						pc.setBackground(getResources().getDrawable(android.R.color.holo_purple));
+						pc.setBackgroundDrawable(getResources().getDrawable(android.R.color.holo_orange_light));
 					}
 				}
 //				new Handler().postDelayed(r, 3000);
@@ -927,8 +928,8 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 		
 		@Override
 		public void run() {
-			jf.setBackground(getResources().getDrawable(R.drawable.linearlayout));
-			pc.setBackground(getResources().getDrawable(R.drawable.linearlayout));
+			jf.setBackgroundDrawable(getResources().getDrawable(R.drawable.linearlayout));
+			pc.setBackgroundDrawable(getResources().getDrawable(R.drawable.linearlayout));
 		}
 	};
 	Handler h = new Handler();
