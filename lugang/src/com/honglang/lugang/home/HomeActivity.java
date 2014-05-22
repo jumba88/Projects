@@ -38,12 +38,15 @@ public class HomeActivity extends  FragmentActivity implements OnClickListener{
 	private RadioButton three;
 	private RadioButton four;
 	
+	private HlApp app;
+	
 	private long exitTime = 0;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
-		HlApp.getInstance().setHomeActivity(HomeActivity.this);
+		app = (HlApp) getApplication();
+		app.setHomeActivity(HomeActivity.this);
 		
 		two = (RadioButton) findViewById(R.id.two);
 		three = (RadioButton) findViewById(R.id.three);
@@ -90,6 +93,14 @@ public class HomeActivity extends  FragmentActivity implements OnClickListener{
             System.exit(0);
         }
     }
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if (!app.isNetworkConnected()) {
+			Toast.makeText(this, "当前网络不可用，请检查网络设置", Toast.LENGTH_SHORT).show();
+		}
+	}
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {

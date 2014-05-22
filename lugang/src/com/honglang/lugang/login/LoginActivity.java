@@ -33,6 +33,7 @@ import android.content.Intent;
 
 public class LoginActivity extends Activity {
 
+	private HlApp app;
 	private Setting setting;
 	private String account;
 	private ClearEditText username;
@@ -49,6 +50,7 @@ public class LoginActivity extends Activity {
 		
 		DIR = getIntent().getIntExtra("dir", 1);
 		
+		app = (HlApp)getApplication();
 		setting = new Setting(this);
 		
 		username = (ClearEditText) this.findViewById(R.id.username);
@@ -77,13 +79,13 @@ public class LoginActivity extends Activity {
 			password.setShakeAnimation();
 			return;
 		}
-		
-//		if (!HlApp.getInstance().isNetworkConnected()) {
-//			Toast.makeText(this, "无法联网,请检查您的网络设置", Toast.LENGTH_LONG).show();
-//			return;
-//		}
 		if(!TextUtils.isEmpty(userNo) && !TextUtils.isEmpty(pass)){
-			new LoginTask().execute((Void)null);
+			if (app.isNetworkConnected()) {
+				new LoginTask().execute((Void)null);
+			} else {
+				Toast.makeText(this, "当前网络不可用，请检查网络设置", Toast.LENGTH_LONG).show();
+			}
+//			new LoginTask().execute((Void)null);
 //			Intent i = new Intent(LoginActivity.this, StuffActivity.class);
 //			i.putExtra("action", 100);
 //			LoginActivity.this.startActivity(i);

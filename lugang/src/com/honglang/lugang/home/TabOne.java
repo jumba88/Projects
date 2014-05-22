@@ -1,5 +1,7 @@
 package com.honglang.lugang.home;
 
+import com.honglang.lugang.Constant;
+import com.honglang.lugang.HlApp;
 import com.honglang.lugang.R;
 import com.honglang.lugang.SessionManager;
 import com.honglang.lugang.assign.AssignActivity;
@@ -26,6 +28,8 @@ import android.widget.Toast;
 
 public class TabOne extends Fragment implements OnClickListener {
 
+	private HlApp app;
+	
 	private TextView title;
 	private Button qr;
 	private Button city;
@@ -45,6 +49,8 @@ public class TabOne extends Fragment implements OnClickListener {
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+		app = (HlApp) getActivity().getApplication();
+		
 		title = (TextView) view.findViewById(R.id.title);
 		title.setText(R.string.tab1);
 		city = (Button) view.findViewById(R.id.city);
@@ -81,23 +87,47 @@ public class TabOne extends Fragment implements OnClickListener {
 //			getActivity().startActivity(new Intent(getActivity(),SettingActivity.class));
 			break;
 		case R.id.qrsearch:
+			if (!app.isNetworkConnected()) {
+				Toast.makeText(getActivity(), "当前网络不可用，请检查网络设置", Toast.LENGTH_SHORT).show();
+				return;
+			}
 			Intent i = new Intent(getActivity(),CaptureActivity.class);
 			i.putExtra("QRTYPE", 3);
 			getActivity().startActivity(i);
 			break;
 		case R.id.express:
+			if (!app.isNetworkConnected()) {
+				Toast.makeText(getActivity(), "当前网络不可用，请检查网络设置", Toast.LENGTH_SHORT).show();
+				return;
+			}
 			getActivity().startActivity(new Intent(getActivity(),ExpressActivity.class));
 			break;
 		case R.id.company:
+			if (!app.isNetworkConnected()) {
+				Toast.makeText(getActivity(), "当前网络不可用，请检查网络设置", Toast.LENGTH_SHORT).show();
+				return;
+			}
 			getActivity().startActivity(new Intent(getActivity(),CompanyActivity.class));
 			break;
 		case R.id.truck:
+			if (!app.isNetworkConnected()) {
+				Toast.makeText(getActivity(), "当前网络不可用，请检查网络设置", Toast.LENGTH_SHORT).show();
+				return;
+			}
 			getActivity().startActivity(new Intent(getActivity(),TruckActivity.class));
 			break;
 		case R.id.assign:
+			if (!app.isNetworkConnected()) {
+				Toast.makeText(getActivity(), "当前网络不可用，请检查网络设置", Toast.LENGTH_SHORT).show();
+				return;
+			}
 			getActivity().startActivity(new Intent(getActivity(),AssignActivity.class));
 			break;
 		case R.id.btn:
+			if (!app.isNetworkConnected()) {
+				Toast.makeText(getActivity(), "当前网络不可用，请检查网络设置", Toast.LENGTH_SHORT).show();
+				return;
+			}
 			String code = number.getText().toString().trim();
 			if (code != null && code.length() != 0) {
 				Intent intent = new Intent(getActivity(),SearchActivity.class);
@@ -109,6 +139,10 @@ public class TabOne extends Fragment implements OnClickListener {
 			}
 			break;
 		case R.id.notice:
+			if (!app.isNetworkConnected()) {
+				Toast.makeText(getActivity(), "当前网络不可用，请检查网络设置", Toast.LENGTH_SHORT).show();
+				return;
+			}
 			getActivity().startActivity(new Intent(getActivity(),NoticeActivity.class));
 			break;
 		}
