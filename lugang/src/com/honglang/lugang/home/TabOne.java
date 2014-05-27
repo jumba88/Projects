@@ -87,10 +87,10 @@ public class TabOne extends Fragment implements OnClickListener {
 //			getActivity().startActivity(new Intent(getActivity(),SettingActivity.class));
 			break;
 		case R.id.qrsearch:
-			if (!app.isNetworkConnected()) {
-				Toast.makeText(getActivity(), "当前网络不可用，请检查网络设置", Toast.LENGTH_SHORT).show();
-				return;
-			}
+//			if (!app.isNetworkConnected()) {
+//				Toast.makeText(getActivity(), "当前网络不可用，请检查网络设置", Toast.LENGTH_SHORT).show();
+//				return;
+//			}
 			Intent i = new Intent(getActivity(),CaptureActivity.class);
 			i.putExtra("QRTYPE", 3);
 			getActivity().startActivity(i);

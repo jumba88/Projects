@@ -182,7 +182,7 @@
 
                 <TextView
                     style="@style/detail"
-                    android:text="送抵期限" />
+                    android:text="运抵期限" />
 
                 <Button
                     android:id="@+id/ydqx"
@@ -221,7 +221,7 @@
                     style="@style/EditStyle"
                     android:layout_columnSpan="3"
                     android:gravity="left|center_vertical"
-                    android:inputType="number"
+                    android:inputType="phone"
                     android:text="" />
 
                 <View style="@style/line" />
@@ -256,7 +256,7 @@
                     style="@style/detail"
                     android:layout_gravity="top"
                     android:gravity="top|right"
-                    android:text="企业代码\n身份证" />
+                    android:text="身份证" />
 
                 <EditText
                     android:id="@+id/code_sh"
@@ -299,7 +299,7 @@
                     style="@style/EditStyle"
                     android:layout_columnSpan="3"
                     android:gravity="left|center_vertical"
-                    android:inputType="number"
+                    android:inputType="phone"
                     android:text="" />
 
                 <View style="@style/line" />
@@ -378,7 +378,7 @@
                     style="@style/EditStyle"
                     android:layout_columnSpan="3"
                     android:gravity="left|center_vertical"
-                    android:inputType="number"
+                    android:inputType="phone"
                     android:text="" />
 
                 <View style="@style/line" />

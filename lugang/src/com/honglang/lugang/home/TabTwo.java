@@ -1,6 +1,7 @@
 package com.honglang.lugang.home;
 
 
+import com.honglang.lugang.HlApp;
 import com.honglang.lugang.R;
 import com.honglang.lugang.SessionManager;
 import com.honglang.lugang.issue.StuffListActivity;
@@ -20,9 +21,12 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class TabTwo extends Fragment implements OnClickListener {
 
+	private HlApp app;
+	
 	private TextView title;
 	private TextView user;
 	private TextView type;
@@ -43,6 +47,8 @@ public class TabTwo extends Fragment implements OnClickListener {
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+		app = (HlApp) getActivity().getApplication();
+		
 		title = (TextView) view.findViewById(R.id.title);
 		title.setText(R.string.tab2);
 		city = (Button) view.findViewById(R.id.city);
@@ -90,12 +96,24 @@ public class TabTwo extends Fragment implements OnClickListener {
 			getActivity().startActivity(new Intent(getActivity(),SettingActivity.class));
 			break;
 		case R.id.dealing:
+			if (!app.isNetworkConnected()) {
+				Toast.makeText(getActivity(), "当前网络不可用，请检查网络设置", Toast.LENGTH_SHORT).show();
+				return;
+			}
 			getActivity().startActivity(new Intent(getActivity(),DealingActivity.class));
 			break;
 		case R.id.done:
+			if (!app.isNetworkConnected()) {
+				Toast.makeText(getActivity(), "当前网络不可用，请检查网络设置", Toast.LENGTH_SHORT).show();
+				return;
+			}
 			getActivity().startActivity(new Intent(getActivity(),DoneActivity.class));
 			break;
 		case R.id.info:
+			if (!app.isNetworkConnected()) {
+				Toast.makeText(getActivity(), "当前网络不可用，请检查网络设置", Toast.LENGTH_SHORT).show();
+				return;
+			}
 			getActivity().startActivity(new Intent(getActivity(),UserActivity.class));
 			break;
 		case R.id.stuff:

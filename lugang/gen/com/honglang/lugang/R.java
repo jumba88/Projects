@@ -709,7 +709,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int count4=0x7f0700d1;
         public static final int count5=0x7f0700d7;
         public static final int credit=0x7f070050;
-        public static final int crosscity=0x7f070071;
+        public static final int crosscity=0x7f070070;
         public static final int cubage=0x7f07005c;
         public static final int cubageUnit=0x7f07005d;
         public static final int date=0x7f07011a;
@@ -750,7 +750,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int format_text_view=0x7f070107;
         public static final int four=0x7f070081;
         public static final int from=0x7f070036;
-        public static final int fromaddress=0x7f070070;
+        public static final int fromaddress=0x7f070071;
         public static final int fromcity=0x7f07006e;
         public static final int gaddress=0x7f07001a;
         public static final int garden=0x7f070073;
@@ -829,7 +829,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int list_stuff=0x7f0700a7;
         public static final int list_truck=0x7f0700a8;
         public static final int loation=0x7f070141;
-        public static final int login=0x7f070084;
+        public static final int login=0x7f070086;
         public static final int logout=0x7f0700a1;
         public static final int manualOnly=0x7f070004;
         public static final int meta_text_view=0x7f07010b;
@@ -853,7 +853,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int out=0x7f070041;
         public static final int pack=0x7f070059;
         public static final int park=0x7f070142;
-        public static final int password=0x7f070086;
+        public static final int password=0x7f070085;
         public static final int path=0x7f070055;
         public static final int pb=0x7f070115;
         public static final int pc=0x7f070047;
@@ -969,7 +969,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int unit_total=0x7f0700dd;
         public static final int update=0x7f070143;
         public static final int user=0x7f070119;
-        public static final int username=0x7f070085;
+        public static final int username=0x7f070084;
         public static final int viewfinder_view=0x7f07003f;
         public static final int webview=0x7f07000a;
         public static final int weight=0x7f07005a;

@@ -17,6 +17,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase.OnLastItemVisibleLis
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.honglang.lugang.Constant;
+import com.honglang.lugang.HlApp;
 import com.honglang.lugang.R;
 import com.honglang.lugang.SessionManager;
 import com.honglang.lugang.R.layout;
@@ -28,6 +29,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -38,6 +40,8 @@ import android.widget.Toast;
 
 public class DoneActivity extends Activity implements OnClickListener {
 
+	private HlApp app;
+	
 	private TextView title;
 	private Button back;
 	
@@ -56,6 +60,7 @@ public class DoneActivity extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_done);
+		app = (HlApp) getApplication();
 		
 		title = (TextView) this.findViewById(R.id.title);
 		if (SessionManager.getInstance().getUsertype().equals("物流企业") || SessionManager.getInstance().getUsertype().equals("物流园")) {
@@ -82,6 +87,14 @@ public class DoneActivity extends Activity implements OnClickListener {
 
 			@Override
 			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+//				if (!app.isNetworkConnected()) {
+//					Toast.makeText(DoneActivity.this, "当前网络不可用，请检查网络设置", Toast.LENGTH_SHORT).show();
+//					((PullToRefreshListView)refreshView).onRefreshComplete();
+////					return;
+//				}else {
+//					pageIndex++;
+//					new DoneTask().execute((Void)null);
+//				}
 				pageIndex++;
 				new DoneTask().execute((Void)null);
 			}
@@ -108,6 +121,10 @@ public class DoneActivity extends Activity implements OnClickListener {
 		
 		@Override
 		protected void onPreExecute() {
+			if (!app.isNetworkConnected()) {
+				Toast.makeText(DoneActivity.this, "当前网络不可用，请检查网络设置", Toast.LENGTH_SHORT).show();
+				return;
+			}
 			if (ISFIRST) {
 				progress = ProgressDialog.show(DoneActivity.this, null, "加载中...", false, false);
 			}
@@ -185,7 +202,10 @@ public class DoneActivity extends Activity implements OnClickListener {
 					Toast.makeText(DoneActivity.this, "已加载完所有数据", Toast.LENGTH_SHORT).show();
 				}
 			}else {
-				Toast.makeText(DoneActivity.this, errMsg, Toast.LENGTH_LONG).show();
+				if (app.isNetworkConnected()) {
+					Toast.makeText(DoneActivity.this, errMsg, Toast.LENGTH_LONG).show();
+				}
+				
 				if (errMsg.equals("请先登录")) {
 					Intent i = new Intent(DoneActivity.this, LoginActivity.class);
 					i.putExtra("dir", 1);
@@ -193,8 +213,12 @@ public class DoneActivity extends Activity implements OnClickListener {
 				}
 				if (pageIndex > 1) {
 					pageIndex--;
+					mListView.onRefreshComplete();
 				}
-				DoneActivity.this.finish();
+				if (ISFIRST) {
+					DoneActivity.this.finish();
+				}
+				
 			}
 			super.onPostExecute(result);
 		}

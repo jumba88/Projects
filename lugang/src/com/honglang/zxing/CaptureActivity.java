@@ -23,6 +23,7 @@ import com.google.zxing.ResultMetadataType;
 import com.google.zxing.ResultPoint;
 import com.google.zxing.client.result.ResultParser;
 import com.honglang.lugang.Constant;
+import com.honglang.lugang.HlApp;
 import com.honglang.lugang.R;
 import com.honglang.lugang.SessionManager;
 import com.honglang.lugang.billsearch.SearchActivity;
@@ -39,6 +40,7 @@ import com.honglang.zxing.history.HistoryManager;
 import com.honglang.zxing.result.ResultHandler;
 import com.honglang.zxing.result.ResultHandlerFactory;
 import com.honglang.zxing.result.TextResultHandler;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -76,12 +78,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.Map;
+
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.ksoap2.SoapEnvelope;
@@ -102,6 +106,7 @@ import org.ksoap2.transport.HttpTransportSE;
 public final class CaptureActivity extends Activity implements OnClickListener,
 		SurfaceHolder.Callback {
 
+	private HlApp app;
 	private TextView title;
 	private Button back;
 //	private Button ok;
@@ -191,6 +196,7 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 		window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		setContentView(R.layout.activity_capture);
 		
+		app = (HlApp) getApplication();
 		title = (TextView) this.findViewById(R.id.title);
 		back = (Button) this.findViewById(R.id.back);
 		back.setOnClickListener(this);
@@ -565,6 +571,11 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 			
 			switch (TYPE) {
 			case 0:
+//				if (!app.isNetworkConnected()) {
+//					Toast.makeText(CaptureActivity.this, "当前网络不可用，请检查网络设置", Toast.LENGTH_SHORT).show();
+//					resetCamera();
+//					return;
+//				}
 				Intent i = new Intent(CaptureActivity.this, OutActivity.class);
 				i.putExtra("from", 0);
 				i.putExtra("pcId", pcId);
@@ -572,25 +583,46 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 				this.startActivityForResult(i, 200);
 				break;
 			case 1:
+//				if (!app.isNetworkConnected()) {
+//					Toast.makeText(CaptureActivity.this, "当前网络不可用，请检查网络设置", Toast.LENGTH_SHORT).show();
+//					resetCamera();
+//					return;
+//				}
 				Intent i1 = new Intent(CaptureActivity.this, InActivity.class);
 				i1.putExtra("fhCode", rawResult.getText());
 				this.startActivity(i1);
 				break;
 			case 2:
+//				if (!app.isNetworkConnected()) {
+//					Toast.makeText(CaptureActivity.this, "当前网络不可用，请检查网络设置", Toast.LENGTH_SHORT).show();
+//					resetCamera();
+//					return;
+//				}
 				Intent i2 = new Intent(CaptureActivity.this, BlankActivity.class);
 				i2.putExtra("fhCode", rawResult.getText());
 				this.startActivity(i2);
 				break;
 			case 3:
+//				if (!app.isNetworkConnected()) {
+//					Toast.makeText(CaptureActivity.this, "当前网络不可用，请检查网络设置", Toast.LENGTH_SHORT).show();
+//					resetCamera();
+//					return;
+//				}
 				Intent i3 = new Intent(CaptureActivity.this, SearchActivity.class);
 				i3.putExtra("number", rawResult.getText());
 				this.startActivity(i3);
 				break;
 			case 4:
+//				if (!app.isNetworkConnected()) {
+//					Toast.makeText(CaptureActivity.this, "当前网络不可用，请检查网络设置", Toast.LENGTH_SHORT).show();
+//					resetCamera();
+//					return;
+//				}
 				Intent i4 = new Intent(CaptureActivity.this, OrderActivity.class);
 				i4.putExtra("scan", true);
 				i4.putExtra("fhCode", rawResult.getText());
 				this.startActivity(i4);
+				this.finish();
 				break;
 			case 5:
 				Intent i5 = new Intent();
@@ -599,13 +631,17 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 				finish();
 				break;
 			case 6:
+//				if (!app.isNetworkConnected()) {
+//					Toast.makeText(CaptureActivity.this, "当前网络不可用，请检查网络设置", Toast.LENGTH_SHORT).show();
+//					resetCamera();
+//					return;
+//				}
 				if (isExist) {
 					fhCode = rawResult.getText();
 					new OutTask().execute((Void)null);
 				}
 				break;
 			}
-			// Log.i("suxoyo", "handleDecode="+rawResult.getText());
 		}
 
 	}
@@ -662,6 +698,32 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 		viewfinderView.setVisibility(View.VISIBLE);
 		lastResult = null;
 	}
+	
+	private void resetCamera(){
+//		resetStatusView();
+		handler = null;
+		lastResult = null;
+
+		resetStatusView();
+
+		SurfaceView surfaceView = (SurfaceView) findViewById(R.id.preview_view);
+		SurfaceHolder surfaceHolder = surfaceView.getHolder();
+		if (hasSurface) {
+			// The activity was paused but not stopped, so the surface still
+			// exists. Therefore
+			// surfaceCreated() won't be called, so init the camera here.
+			initCamera(surfaceHolder);
+		} else {
+			// Install the callback and wait for surfaceCreated() to init the
+			// camera.
+			surfaceHolder.addCallback(CaptureActivity.this);
+		}
+
+		beepManager.updatePrefs();
+		ambientLightManager.start(cameraManager);
+
+		inactivityTimer.onResume();
+	}
 
 	public void drawViewfinder() {
 		viewfinderView.drawViewfinder();
@@ -677,12 +739,20 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 //			startActivity(new Intent(this, OutListActivity.class));
 //			break;
 		case R.id.jf:
+			if (!app.isNetworkConnected()) {
+				Toast.makeText(CaptureActivity.this, "当前网络不可用，请检查网络设置", Toast.LENGTH_SHORT).show();
+				return;
+			}
 			Intent i1 = new Intent(this, PreviewActivity.class);
 			i1.putExtra("type", 1);
 			i1.putExtra("keycode", jfNum);
 			startActivity(i1);
 			break;
 		case R.id.pc:
+			if (!app.isNetworkConnected()) {
+				Toast.makeText(CaptureActivity.this, "当前网络不可用，请检查网络设置", Toast.LENGTH_SHORT).show();
+				return;
+			}
 			Intent i2 = new Intent(this, PreviewActivity.class);
 			i2.putExtra("type", 2);
 			i2.putExtra("keycode", pcNum);
@@ -789,6 +859,11 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 				surfaceHolder.removeCallback(CaptureActivity.this);
 			}
 			
+			if (!app.isNetworkConnected()) {
+				Toast.makeText(CaptureActivity.this, "当前网络不可用，请检查网络设置", Toast.LENGTH_SHORT).show();
+				return;
+			}
+			
 			if (progress != null) {
 				progress = null;
 			}
@@ -863,10 +938,11 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 						jfCount.setText("数量："+strCount+"票");
 						jfRecords.setText("共计"+strRec+"条货物记录");
 						
+						pcCode.setText("");
+						
 						count.setText("合计："+(strCount+strCount1)+"票");
 						record.setText("总货物记录数："+(strRec+strRec1)+"条");
 						
-//						jf.setBackground(getResources().getDrawable(android.R.color.holo_green_light));
 						jf.setBackgroundDrawable(getResources().getDrawable(android.R.color.holo_orange_light));
 					}
 					if (isPc) {
@@ -874,6 +950,8 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 						pcCode.setText(fhCode);
 						pcCount.setText("数量："+strCount1+"票");
 						pcRecords.setText("共计"+strRec1+"条货物记录");
+						
+						jfCode.setText("");
 						
 						count.setText("合计："+(strCount+strCount1)+"票");
 						record.setText("总货物记录数："+(strRec+strRec1)+"条");
@@ -886,7 +964,10 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 				h.postDelayed(r, 3000);
 				
 			} else {
-				Toast.makeText(CaptureActivity.this, errMsg, Toast.LENGTH_LONG).show();
+				if (app.isNetworkConnected()) {
+					Toast.makeText(CaptureActivity.this, errMsg, Toast.LENGTH_LONG).show();
+				}
+				
 				soundPool.play(4,1, 1, 0, 0, 1);
 				if (errMsg.equals("请先登录")) {
 					Intent intent = new Intent(CaptureActivity.this, LoginActivity.class);
@@ -894,30 +975,7 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 					CaptureActivity.this.startActivity(intent);
 				}
 			}
-			
-			resetStatusView();
-			handler = null;
-			lastResult = null;
-
-			resetStatusView();
-
-			SurfaceView surfaceView = (SurfaceView) findViewById(R.id.preview_view);
-			SurfaceHolder surfaceHolder = surfaceView.getHolder();
-			if (hasSurface) {
-				// The activity was paused but not stopped, so the surface still
-				// exists. Therefore
-				// surfaceCreated() won't be called, so init the camera here.
-				initCamera(surfaceHolder);
-			} else {
-				// Install the callback and wait for surfaceCreated() to init the
-				// camera.
-				surfaceHolder.addCallback(CaptureActivity.this);
-			}
-
-			beepManager.updatePrefs();
-			ambientLightManager.start(cameraManager);
-
-			inactivityTimer.onResume();
+			resetCamera();
 
 			super.onPostExecute(result);
 		}

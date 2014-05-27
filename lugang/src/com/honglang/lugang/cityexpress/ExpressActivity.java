@@ -20,6 +20,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.honglang.lugang.Constant;
+import com.honglang.lugang.HlApp;
 import com.honglang.lugang.R;
 import com.honglang.lugang.R.layout;
 import com.honglang.lugang.R.menu;
@@ -44,6 +45,8 @@ import android.widget.Toast;
 
 public class ExpressActivity extends Activity implements OnClickListener {
 
+	private HlApp app;
+	
 	private TextView title;
 	private Button back;
 	private Button ok;
@@ -62,6 +65,7 @@ public class ExpressActivity extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_express);
+		app = (HlApp) getApplication();
 		city = SessionManager.getInstance().getCity();
 		pageSize = 40;
 		pageIndex = 1;
@@ -124,6 +128,10 @@ public class ExpressActivity extends Activity implements OnClickListener {
 		private String errMsg;
 		@Override
 		protected void onPreExecute() {
+			if (!app.isNetworkConnected()) {
+				Toast.makeText(ExpressActivity.this, "当前网络不可用，请检查网络设置", Toast.LENGTH_SHORT).show();
+				return;
+			}
 			if (ISFIRST) {
 				progress = ProgressDialog.show(ExpressActivity.this, null, "加载中...");
 				progress.setCancelable(false);

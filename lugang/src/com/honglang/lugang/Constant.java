@@ -22,8 +22,8 @@ import android.widget.Toast;
 public class Constant {
 
 	public static final String NAMESPACE = "http://www.6gang.com.cn/";
-//	public static final String SERVICE_URL = "http://service.6gang.com.cn/DataServer.asmx";
-	public static final String SERVICE_URL = "http://service.6gang.com.cn:8888/DataServer.asmx";
+	public static final String SERVICE_URL = "http://service.6gang.com.cn/DataServer.asmx";
+//	public static final String SERVICE_URL = "http://service.6gang.com.cn:8888/DataServer.asmx";
 //	public static final String SERVICE_URL = "http://service.6gang.com.cn:9999//DataServer.asmx";
 //	public static final String SERVICE_URL = "http://192.168.1.168:84/DataServer.asmx";
 	
@@ -36,6 +36,14 @@ public class Constant {
         return m.matches();
     }
 	/*
+	 * verify phone number
+	 */
+	public static boolean isPhoneNO(String number) {
+		Pattern p = Pattern.compile("((\\d{11})|^((\\d{7,8})|(\\d{4}|\\d{3})-(\\d{7,8})|(\\d{4}|\\d{3})-(\\d{7,8})-(\\d{4}|\\d{3}|\\d{2}|\\d{1})|(\\d{7,8})-(\\d{4}|\\d{3}|\\d{2}|\\d{1}))$)");
+		Matcher m = p.matcher(number);
+		return m.matches();
+	}
+	/*
 	 * verify number
 	 */
 	public static boolean isNum(String str){
@@ -44,6 +52,18 @@ public class Constant {
 		}
 		return str.matches("^[-+]?(([0-9]+)([.]([0-9]+))?|([.]([0-9]+))?)$");
 	}
+	
+	/**
+     * 验证身份证号是否符合规则
+     * @param text 身份证号
+     * @return
+     */
+     public static boolean isId(String text) {
+          String regx = "[0-9]{17}x";
+          String reg1 = "[0-9]{15}";
+          String regex = "[0-9]{18}";
+          return text.matches(regx) || text.matches(reg1) || text.matches(regex);
+    }
 	
 	/** 解决scrollview与listview共存 */
 	public static void setListViewHeightBasedOnChildren(ListView listView) {

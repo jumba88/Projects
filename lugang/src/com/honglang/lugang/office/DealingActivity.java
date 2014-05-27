@@ -17,6 +17,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase.OnLastItemVisibleLis
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.honglang.lugang.Constant;
+import com.honglang.lugang.HlApp;
 import com.honglang.lugang.R;
 import com.honglang.lugang.SessionManager;
 import com.honglang.lugang.R.layout;
@@ -44,6 +45,8 @@ import android.widget.Toast;
 
 public class DealingActivity extends Activity implements OnClickListener {
 
+	private HlApp app;
+	
 	private TextView title;
 	private Button back;
 	
@@ -64,6 +67,7 @@ public class DealingActivity extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_dealing);
+		app = (HlApp) getApplication();
 		
 		title = (TextView) this.findViewById(R.id.title);
 		if (SessionManager.getInstance().getUsertype().equals("物流企业") || SessionManager.getInstance().getUsertype().equals("物流园")) {
@@ -138,6 +142,10 @@ public class DealingActivity extends Activity implements OnClickListener {
 		
 		@Override
 		protected void onPreExecute() {
+			if (!app.isNetworkConnected()) {
+				Toast.makeText(DealingActivity.this, "当前网络不可用，请检查网络设置", Toast.LENGTH_SHORT).show();
+				return;
+			}
 			if (ISFIRST) {
 				progress = ProgressDialog.show(DealingActivity.this, null, "加载中...", false, false);
 			}
@@ -214,14 +222,23 @@ public class DealingActivity extends Activity implements OnClickListener {
 					Toast.makeText(DealingActivity.this, "已加载完所有数据", Toast.LENGTH_SHORT).show();
 				}
 			}else{
-				Toast.makeText(DealingActivity.this, errMsg, Toast.LENGTH_LONG).show();
+				if (app.isNetworkConnected()) {
+					Toast.makeText(DealingActivity.this, errMsg, Toast.LENGTH_LONG).show();
+				}
+				
 				if (errMsg.equals("请先登录")) {
 					Intent intent = new Intent(DealingActivity.this, LoginActivity.class);
 					intent.putExtra("dir", 1);
 					DealingActivity.this.startActivity(intent);
 				}
+				if (pageIndex > 1) {
+					pageIndex--;
+					mListView.onRefreshComplete();
+				}
+				if (ISFIRST) {
+					DealingActivity.this.finish();
+				}
 				
-				DealingActivity.this.finish();
 			}
 			super.onPostExecute(result);
 		}

@@ -35,16 +35,6 @@
         <View style="@style/line"/>
         
         <TextView style="@style/detail"
-            android:text="出发站地址"/>
-        <TextView android:layout_columnSpan="3"
-            android:id="@+id/fromaddress"
-            android:layout_width="200dp"
-            android:layout_marginLeft="10dp"
-            android:text=""/>
-        
-        <View style="@style/line"/>
-        
-        <TextView style="@style/detail"
             android:text="途经城市"/>
         <TextView android:text="无"
             android:id="@+id/crosscity"
@@ -53,6 +43,17 @@
             android:singleLine="true"
             android:layout_marginLeft="10dp"
             android:layout_columnSpan="3"/>
+        
+        <View style="@style/line"/>
+        
+        <TextView style="@style/detail"
+            android:text="出发站地址"/>
+        <TextView android:layout_columnSpan="3"
+            android:id="@+id/fromaddress"
+            android:layout_width="200dp"
+            android:layout_marginLeft="10dp"
+            android:text=""/>
+        
         
         <View style="@style/line"/>
         

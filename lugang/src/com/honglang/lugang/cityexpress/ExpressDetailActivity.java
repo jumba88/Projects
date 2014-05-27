@@ -172,8 +172,12 @@ public class ExpressDetailActivity extends Activity implements OnClickListener {
 							item.put("city", obj.getString("city"));
 							item.put("address", obj.getString("address"));
 							items.add(item);
+							if (i < (rows.length()-1)) {
+								cross += obj.getString("city") + "->";
+							} else {
+								cross += obj.getString("city");
+							}
 							
-							cross += obj.getString("city") + "->";
 						}
 						return true;
 					}

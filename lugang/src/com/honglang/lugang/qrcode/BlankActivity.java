@@ -36,6 +36,8 @@ import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -67,6 +69,7 @@ public class BlankActivity extends Activity implements OnClickListener {
 	public boolean IS_TO = false;
 	public boolean IS_FROM = false;
 	public boolean IS_ADD = false;
+	public boolean IS_SETDATE = false;
 	
 	private TextView stuffCode;
 	
@@ -176,6 +179,7 @@ public class BlankActivity extends Activity implements OnClickListener {
 		nameKd = SessionManager.getInstance().getAccount().getName();
 		name_kd.setText(nameKd+"");
 		phone_kd = (EditText) this.findViewById(R.id.phone_kd);
+//		phone_kd.addTextChangedListener(new PhoneWatcher());
 		remark = (EditText) this.findViewById(R.id.remark);
 		
 		name_ty = (EditText) this.findViewById(R.id.name_ty);
@@ -185,6 +189,7 @@ public class BlankActivity extends Activity implements OnClickListener {
 		
 		name_sh = (EditText) this.findViewById(R.id.name_sh);
 		phone_sh = (EditText) this.findViewById(R.id.phone_sh);
+//		phone_sh.addTextChangedListener(new PhoneWatcher());
 		address_sh = (EditText) this.findViewById(R.id.address_sh);
 		code_sh = (EditText) this.findViewById(R.id.code_sh);
 		
@@ -238,6 +243,7 @@ public class BlankActivity extends Activity implements OnClickListener {
             mMonth = monthOfYear;
             mDay = dayOfMonth;
             updateDisplay();
+            IS_SETDATE = true;
 		}
 	};
 
@@ -286,6 +292,11 @@ public class BlankActivity extends Activity implements OnClickListener {
 		
 		phoneKd = phone_kd.getText().toString().trim(); 
 		
+		if (!IS_SETDATE) {
+			Toast.makeText(this, "请填写运抵期限", Toast.LENGTH_LONG).show();
+			return;
+		}
+		
 		if (nameSh == null || nameSh.equals("")) {
 			Toast.makeText(this, "请填写收货人姓名", Toast.LENGTH_LONG).show();
 			return;
@@ -294,10 +305,6 @@ public class BlankActivity extends Activity implements OnClickListener {
 			Toast.makeText(this, "请填写收货人电话", Toast.LENGTH_LONG).show();
 			return;
 		}
-//		if (codeSh == null || codeSh.equals("")) {
-//			Toast.makeText(this, "请填写收货人身份证号码", Toast.LENGTH_LONG).show();
-//			return;
-//		}
 		
 		if (nameTy == null || nameTy.equals("")) {
 			Toast.makeText(this, "请填写托运人姓名", Toast.LENGTH_LONG).show();
@@ -326,6 +333,27 @@ public class BlankActivity extends Activity implements OnClickListener {
 			return;
 		}
 		
+		if (!Constant.isPhoneNO(phoneSh)) {
+			Toast.makeText(BlankActivity.this, "请填写正确的收货人电话", Toast.LENGTH_LONG).show();
+			return;
+		}
+		if (!Constant.isPhoneNO(phoneTy)) {
+			Toast.makeText(BlankActivity.this, "请填写正确的托运人电话", Toast.LENGTH_LONG).show();
+			return;
+		}
+		if (!Constant.isPhoneNO(phoneKd)) {
+			Toast.makeText(BlankActivity.this, "请填写正确的开单人电话", Toast.LENGTH_LONG).show();
+			return;
+		}
+		
+		if (codeSh != null && !codeSh.equals("")) {
+			if (!Constant.isId(codeSh)) {
+				Toast.makeText(this, "请填写正确的收货人身份证号码", Toast.LENGTH_LONG).show();
+				return;
+
+			}
+		}
+		
 		if (!IS_ADD) {
 			Toast.makeText(this, "您还没有填写要托运的货物", Toast.LENGTH_LONG).show();
 			return;
@@ -333,6 +361,29 @@ public class BlankActivity extends Activity implements OnClickListener {
 		new ConfirmTask().execute((Void)null);
 	}
 
+	class PhoneWatcher implements TextWatcher{
+
+		@Override
+		public void afterTextChanged(Editable s) {
+			if (!Constant.isPhoneNO(s.toString())) {
+				Toast.makeText(BlankActivity.this, "请填写正确的电话", Toast.LENGTH_LONG).show();
+			}
+		}
+
+		@Override
+		public void beforeTextChanged(CharSequence s, int start, int count,
+				int after) {
+			
+		}
+
+		@Override
+		public void onTextChanged(CharSequence s, int start, int before,
+				int count) {
+			
+		}
+		
+	}
+	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
