@@ -119,7 +119,7 @@ public class AssignActivity extends Activity implements OnClickListener {
 		protected void onPreExecute() {
 			if (ISFIRST) {
 				progress = ProgressDialog.show(AssignActivity.this, null, "加载中...");
-				progress.setCancelable(false);
+				progress.setCancelable(true);
 			}
 			super.onPreExecute();
 		}

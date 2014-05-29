@@ -105,7 +105,7 @@ public class NoticeActivity extends Activity implements OnClickListener {
 		@Override
 		protected void onPreExecute() {
 			if (ISFIRST) {
-				progress = ProgressDialog.show(NoticeActivity.this, null, "加载中...", false, false);
+				progress = ProgressDialog.show(NoticeActivity.this, null, "加载中...", false, true);
 			}
 			super.onPreExecute();
 		}

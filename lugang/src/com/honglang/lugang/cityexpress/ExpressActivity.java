@@ -134,7 +134,7 @@ public class ExpressActivity extends Activity implements OnClickListener {
 			}
 			if (ISFIRST) {
 				progress = ProgressDialog.show(ExpressActivity.this, null, "加载中...");
-				progress.setCancelable(false);
+				progress.setCancelable(true);
 			}
 			super.onPreExecute();
 		}

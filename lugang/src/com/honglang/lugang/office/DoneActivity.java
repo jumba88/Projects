@@ -126,7 +126,7 @@ public class DoneActivity extends Activity implements OnClickListener {
 				return;
 			}
 			if (ISFIRST) {
-				progress = ProgressDialog.show(DoneActivity.this, null, "加载中...", false, false);
+				progress = ProgressDialog.show(DoneActivity.this, null, "加载中...", false, true);
 			}
 			super.onPreExecute();
 		}

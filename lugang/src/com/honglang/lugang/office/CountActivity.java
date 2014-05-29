@@ -91,6 +91,7 @@ public class CountActivity extends Activity implements OnClickListener {
 			thf.setFocusable(false);
 			shf.setFocusable(false);
 			bxf.setFocusable(false);
+			bxf.setEnabled(false);
 			hint.setVisibility(View.VISIBLE);
 			EDITABLE = true;
 		}
@@ -333,6 +334,7 @@ public class CountActivity extends Activity implements OnClickListener {
 				if (Constant.isNum(s.toString())) {
 					if (Double.parseDouble(s.toString()) != Double.parseDouble(data.getTbjz())) {
 						confirm.setVisibility(View.VISIBLE);
+						bxf.setText(Double.parseDouble(s.toString())*5/10000+"");
 					}else{
 						confirm.setVisibility(View.GONE);
 					}

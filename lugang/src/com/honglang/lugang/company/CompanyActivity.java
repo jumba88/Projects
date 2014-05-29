@@ -121,7 +121,7 @@ public class CompanyActivity extends Activity implements OnClickListener {
 		@Override
 		protected void onPreExecute() {
 			if (ISFIRST) {
-				progress = ProgressDialog.show(CompanyActivity.this, null, "加载中...", false, false);
+				progress = ProgressDialog.show(CompanyActivity.this, null, "加载中...", false, true);
 			}
 			super.onPreExecute();
 		}

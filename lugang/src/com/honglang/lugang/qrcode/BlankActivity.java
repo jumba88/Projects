@@ -49,6 +49,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,9 +72,11 @@ public class BlankActivity extends Activity implements OnClickListener {
 	public boolean IS_FROM = false;
 	public boolean IS_ADD = false;
 	public boolean IS_SETDATE = false;
+	public boolean TB = false;
 	
 	private TextView stuffCode;
 	
+	private RadioGroup tb_rg;
 	private RadioButton istb;
 	private RadioButton istx;
 	private RadioButton sh;
@@ -167,6 +171,25 @@ public class BlankActivity extends Activity implements OnClickListener {
 		from = (Button) this.findViewById(R.id.from);
 		from.setOnClickListener(this);
 		
+		tb_rg = (RadioGroup) findViewById(R.id.tb);
+		tb_rg.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+				switch (checkedId) {
+				case R.id.istb_yes:
+					TB = true;
+					break;
+				case R.id.istb_no:
+					TB = false;
+					for (int i = 0; i < items.size(); i++) {
+						items.get(i).setTbjz("0.00");
+						items.get(i).setBaofei("0.00");
+					}
+					break;
+				}
+			}
+		});
 		istb = (RadioButton) findViewById(R.id.istb_yes);
 		istx = (RadioButton) findViewById(R.id.istx_yes);
 		sh = (RadioButton) findViewById(R.id.sh);
@@ -207,6 +230,7 @@ public class BlankActivity extends Activity implements OnClickListener {
 				Intent intent = new Intent(BlankActivity.this, StuffActivity.class);
 				intent.putExtra("action", EDIT_CODE);
 				intent.putExtra("stuff", order);
+				intent.putExtra("tb", TB);
 				startActivityForResult(intent, EDIT_CODE);
 			}
 		});
@@ -263,6 +287,7 @@ public class BlankActivity extends Activity implements OnClickListener {
 			}
 			Intent intent = new Intent(this, StuffActivity.class);
 			intent.putExtra("action", ADD_CODE);
+			intent.putExtra("tb", TB);
 			this.startActivityForResult(intent, ADD_CODE);
 			break;
 		case R.id.ok:
@@ -333,15 +358,15 @@ public class BlankActivity extends Activity implements OnClickListener {
 			return;
 		}
 		
-		if (!Constant.isPhoneNO(phoneSh)) {
+		if (!Constant.isPhoneNO(phoneSh) && !Constant.isMobileNO(phoneSh)) {
 			Toast.makeText(BlankActivity.this, "请填写正确的收货人电话", Toast.LENGTH_LONG).show();
 			return;
 		}
-		if (!Constant.isPhoneNO(phoneTy)) {
+		if (!Constant.isPhoneNO(phoneTy) && !Constant.isMobileNO(phoneTy)) {
 			Toast.makeText(BlankActivity.this, "请填写正确的托运人电话", Toast.LENGTH_LONG).show();
 			return;
 		}
-		if (!Constant.isPhoneNO(phoneKd)) {
+		if (!Constant.isPhoneNO(phoneKd) && !Constant.isMobileNO(phoneKd)) {
 			Toast.makeText(BlankActivity.this, "请填写正确的开单人电话", Toast.LENGTH_LONG).show();
 			return;
 		}

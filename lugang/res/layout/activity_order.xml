@@ -161,7 +161,18 @@
                         android:layout_columnSpan="3"
                         android:layout_marginLeft="10dp"
                         android:background="@drawable/login_edittext_bg"
+                        android:inputType="phone"
                         android:hint="确认人电话" />
+                    
+                    <TextView
+                    style="@style/detail"
+                    android:text="" />
+                	<TextView
+                    android:id="@+id/phone_sh"
+                    android:layout_columnSpan="3"
+                    android:paddingLeft="5dp"
+                    android:textColor="@android:color/holo_red_light"
+                    android:text="如:0772-3261068或13607728888" />
 
                     <View style="@style/line" />
 

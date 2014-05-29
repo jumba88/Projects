@@ -99,7 +99,7 @@ public class LoginActivity extends Activity {
 		@Override
 		protected void onPreExecute() {
 			progress = ProgressDialog.show(LoginActivity.this, null, "登录中...");
-			progress.setCancelable(false);
+			progress.setCancelable(true);
 			super.onPreExecute();
 		}
 		@Override

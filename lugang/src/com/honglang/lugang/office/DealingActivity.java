@@ -147,7 +147,7 @@ public class DealingActivity extends Activity implements OnClickListener {
 				return;
 			}
 			if (ISFIRST) {
-				progress = ProgressDialog.show(DealingActivity.this, null, "加载中...", false, false);
+				progress = ProgressDialog.show(DealingActivity.this, null, "加载中...", false, true);
 			}
 			super.onPreExecute();
 		}

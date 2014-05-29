@@ -18,6 +18,7 @@ import android.app.DialogFragment;
 import android.content.Intent;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,6 +27,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +36,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 
 public class StuffActivity extends Activity implements OnClickListener {
 
+	private static boolean ISTB;
 	private TextView title;
 	private Button back;
 	private Button confirm;
@@ -51,6 +55,7 @@ public class StuffActivity extends Activity implements OnClickListener {
 	public EditText tbjz;
 	public EditText dk;
 
+	private RadioGroup rg;
 	private RadioButton yes;
 	private RadioButton no;
 
@@ -109,12 +114,35 @@ public class StuffActivity extends Activity implements OnClickListener {
 		tbjz = (EditText) this.findViewById(R.id.tbjz);
 		dk = (EditText) this.findViewById(R.id.dk);
 		
+		ISTB = getIntent().getBooleanExtra("tb", false);
+		if (!ISTB) {
+			tbjz.setEnabled(false);
+		}
+		
 		yf.addTextChangedListener(new CalcWatcher());
 		bzf.addTextChangedListener(new CalcWatcher());
 		shf.addTextChangedListener(new CalcWatcher());
 		thf.addTextChangedListener(new CalcWatcher());
 		tbjz.addTextChangedListener(new CalcWatcher());
 
+		rg = (RadioGroup) findViewById(R.id.rg);
+		rg.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+				switch (checkedId) {
+				case R.id.dshk_yes:
+					dk.setEnabled(true);
+					break;
+
+				case R.id.dshk_no:
+					dk.setEnabled(false);
+					dk.setText("0.00");
+					break;
+				}
+				
+			}
+		});
 		yes = (RadioButton) findViewById(R.id.dshk_yes);
 		no = (RadioButton) findViewById(R.id.dshk_no);
 
@@ -290,7 +318,7 @@ public class StuffActivity extends Activity implements OnClickListener {
 			Toast.makeText(this, "请输入货物名称!", Toast.LENGTH_LONG).show();
 			return;
 		}
-		if (!Constant.isNum(count)) {
+		if (!Constant.isInt(count)) {
 			Toast.makeText(this, "请输入货物数量!", Toast.LENGTH_LONG).show();
 			return;
 		}
@@ -310,13 +338,20 @@ public class StuffActivity extends Activity implements OnClickListener {
 			Toast.makeText(this, "请输入送货费!", Toast.LENGTH_LONG).show();
 			return;
 		}
-		if (!Constant.isNum(bxfStr)) {
-			Toast.makeText(this, "请输入保险费!", Toast.LENGTH_LONG).show();
-			return;
-		}
-		if (!Constant.isNum(tbjzStr)) {
-			Toast.makeText(this, "请输入投保价值!", Toast.LENGTH_LONG).show();
-			return;
+//		if (!Constant.isNum(bxfStr)) {
+//			Toast.makeText(this, "请输入保险费!", Toast.LENGTH_LONG).show();
+//			return;
+//		}
+		
+		if (ISTB) {
+			if (!Constant.isNum(tbjzStr)) {
+				Toast.makeText(this, "请输入投保价值!", Toast.LENGTH_LONG).show();
+				return;
+			}
+			if (Constant.isNum(tbjzStr) && Double.parseDouble(tbjzStr) < 2000) {
+				Toast.makeText(this, "投保价值最低2000元!", Toast.LENGTH_LONG).show();
+				return;
+			}
 		}
 		if (!Constant.isNum(hkStr)) {
 			Toast.makeText(this, "请输入货款!", Toast.LENGTH_LONG).show();
@@ -389,7 +424,7 @@ public class StuffActivity extends Activity implements OnClickListener {
 				Double b = Double.parseDouble(bz);
 				Double t = Double.parseDouble(th);
 				Double ds = Double.parseDouble(sh);
-				Double x = Double.parseDouble(tb)*2/1000;
+				Double x = Double.parseDouble(tb)*5/10000;
 				Double sum = y + b + t + ds + x;
 				DecimalFormat f = new DecimalFormat("0.00");
 				bxf.setText(f.format(x));
@@ -401,14 +436,12 @@ public class StuffActivity extends Activity implements OnClickListener {
 		@Override
 		public void beforeTextChanged(CharSequence s, int start, int count,
 				int after) {
-			// TODO Auto-generated method stub
 			
 		}
 
 		@Override
 		public void onTextChanged(CharSequence s, int start, int before,
 				int count) {
-			// TODO Auto-generated method stub
 			
 		}
 		}

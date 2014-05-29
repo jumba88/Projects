@@ -58,6 +58,7 @@
                     android:text="是否投保" />
 
                 <RadioGroup
+                    android:id="@+id/tb"
                     android:layout_columnSpan="3"
                     android:layout_marginLeft="10dp"
                     android:gravity="left"
@@ -223,6 +224,15 @@
                     android:gravity="left|center_vertical"
                     android:inputType="phone"
                     android:text="" />
+                
+                <TextView
+                    style="@style/detail"
+                    android:text="" />
+                <TextView
+                    android:layout_columnSpan="3"
+                    android:paddingLeft="5dp"
+                    android:textColor="@android:color/holo_red_light"
+                    android:text="如:0772-3261068或13607728888" />
 
                 <View style="@style/line" />
 
@@ -301,6 +311,15 @@
                     android:gravity="left|center_vertical"
                     android:inputType="phone"
                     android:text="" />
+                
+                <TextView
+                    style="@style/detail"
+                    android:text="" />
+                <TextView
+                    android:layout_columnSpan="3"
+                    android:paddingLeft="5dp"
+                    android:textColor="@android:color/holo_red_light"
+                    android:text="如:0772-3261068或13607728888" />
 
                 <View style="@style/line" />
 
@@ -380,6 +399,15 @@
                     android:gravity="left|center_vertical"
                     android:inputType="phone"
                     android:text="" />
+                
+                <TextView
+                    style="@style/detail"
+                    android:text="" />
+                <TextView
+                    android:layout_columnSpan="3"
+                    android:paddingLeft="5dp"
+                    android:textColor="@android:color/holo_red_light"
+                    android:text="如:0772-3261068或13607728888" />
 
                 <View style="@style/line" />
 

@@ -46,7 +46,7 @@ public class HomeActivity extends  FragmentActivity implements OnClickListener{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
 		app = (HlApp) getApplication();
-		app.setHomeActivity(HomeActivity.this);
+		HlApp.getInstance().setHomeActivity(HomeActivity.this);
 		
 		two = (RadioButton) findViewById(R.id.two);
 		three = (RadioButton) findViewById(R.id.three);

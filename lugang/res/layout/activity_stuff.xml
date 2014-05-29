@@ -220,6 +220,15 @@
             android:inputType="numberDecimal"
             android:text="0.00"/>
         
+        <TextView
+                    style="@style/detail"
+                    android:text="" />
+                <TextView
+                    android:layout_columnSpan="3"
+                    android:paddingLeft="5dp"
+                    android:textColor="@android:color/holo_red_light"
+                    android:text="投保价值最低2000元起" />
+        
         <View style="@style/line"/>
         <TextView
             style="@style/order"
@@ -227,6 +236,7 @@
             android:text="代收货款" />
 
         <RadioGroup
+                    android:id="@+id/rg"
                     android:layout_columnSpan="3"
                     android:layout_marginLeft="10dp"
                     android:gravity="left"
@@ -254,20 +264,12 @@
         <EditText android:layout_columnSpan="3"
             android:id="@+id/dk"
             style="@style/EditStyle"
+            android:enabled="false"
             android:inputType="numberDecimal"
             android:text="0.00"/>
         
     </GridLayout>
     </LinearLayout>
     </ScrollView>
-    
-    <FrameLayout
-            android:id="@+id/embedded"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:layout_gravity="top|center_horizontal"
-            android:padding="6dp"
-            android:gravity="top|center_horizontal" />
 
 </LinearLayout>

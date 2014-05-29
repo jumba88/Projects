@@ -31,7 +31,7 @@ public class Constant {
 	 * verify mobile number
 	 */
 	public static boolean isMobileNO(String mobiles) {
-        Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+        Pattern p = Pattern.compile("^(13|15|18|14|17)[0-9]{9}$");
         Matcher m = p.matcher(mobiles);
         return m.matches();
     }
@@ -39,7 +39,7 @@ public class Constant {
 	 * verify phone number
 	 */
 	public static boolean isPhoneNO(String number) {
-		Pattern p = Pattern.compile("((\\d{11})|^((\\d{7,8})|(\\d{4}|\\d{3})-(\\d{7,8})|(\\d{4}|\\d{3})-(\\d{7,8})-(\\d{4}|\\d{3}|\\d{2}|\\d{1})|(\\d{7,8})-(\\d{4}|\\d{3}|\\d{2}|\\d{1}))$)");
+		Pattern p = Pattern.compile("^(([0\\+]\\d{2,3}-)?(0\\d{2,3})-)?(\\d{7,8})(-(\\d{3,}))?$");
 		Matcher m = p.matcher(number);
 		return m.matches();
 	}
@@ -51,6 +51,16 @@ public class Constant {
 			return false;
 		}
 		return str.matches("^[-+]?(([0-9]+)([.]([0-9]+))?|([.]([0-9]+))?)$");
+	}
+	
+	/*
+	 * verify int
+	 */
+	public static boolean isInt(String str){
+		if (str == null || str.equals("")) {
+			return false;
+		}
+		return str.matches("^[1-9]\\d*$");
 	}
 	
 	/**

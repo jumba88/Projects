@@ -211,8 +211,14 @@ public class OrderActivity extends Activity implements OnClickListener {
 				Toast.makeText(OrderActivity.this, "确认人必须填写！", Toast.LENGTH_LONG).show();
 				return;
 			}
-			if (surePhone.getText().toString().isEmpty()) {
+			
+			String phoneStr = surePhone.getText().toString().trim();
+			if (phoneStr.isEmpty()) {
 				Toast.makeText(OrderActivity.this, "确认人电话必须填写！", Toast.LENGTH_LONG).show();
+				return;
+			}
+			if (!Constant.isPhoneNO(phoneStr) && !Constant.isMobileNO(phoneStr)) {
+				Toast.makeText(OrderActivity.this, "请填写符合格式的电话号码！", Toast.LENGTH_LONG).show();
 				return;
 			}
 			new YesTask().execute((Void)null);
@@ -228,6 +234,10 @@ public class OrderActivity extends Activity implements OnClickListener {
 			}
 			if (surePhone.getText().toString().isEmpty()) {
 				Toast.makeText(OrderActivity.this, "必须填写确认人电话！", Toast.LENGTH_LONG).show();
+				return;
+			}
+			if (!Constant.isPhoneNO(surePhone.getText().toString().trim()) &&  !Constant.isMobileNO(surePhone.getText().toString().trim())) {
+				Toast.makeText(OrderActivity.this, "请填写符合格式的电话号码！", Toast.LENGTH_LONG).show();
 				return;
 			}
 			if (suggest.getText().toString().isEmpty()) {
@@ -273,7 +283,7 @@ public class OrderActivity extends Activity implements OnClickListener {
 		private String errMsg;
 		@Override
 		protected void onPreExecute() {
-			progress = ProgressDialog.show(OrderActivity.this, null, "加载中...", false, false);
+			progress = ProgressDialog.show(OrderActivity.this, null, "加载中...", false, true);
 			super.onPreExecute();
 		}
 
@@ -390,7 +400,7 @@ public class OrderActivity extends Activity implements OnClickListener {
 		private String errMsg;
 		@Override
 		protected void onPreExecute() {
-			progress = ProgressDialog.show(OrderActivity.this, null, "加载中...", false, false);
+			progress = ProgressDialog.show(OrderActivity.this, null, "加载中...", false, true);
 			super.onPreExecute();
 		}
 		
@@ -514,7 +524,7 @@ public class OrderActivity extends Activity implements OnClickListener {
 			if (progressDialog != null) {
 				progressDialog = null;
 			}
-			progressDialog = ProgressDialog.show(OrderActivity.this, null, "货物正在入库...", false, false);
+			progressDialog = ProgressDialog.show(OrderActivity.this, null, "货物正在入库...", false, true);
 			super.onPreExecute();
 		}
 
@@ -605,7 +615,7 @@ public class OrderActivity extends Activity implements OnClickListener {
 		private String errMsg;
 		@Override
 		protected void onPreExecute() {
-			progress = ProgressDialog.show(OrderActivity.this, null, "正在确认...", false, false);
+			progress = ProgressDialog.show(OrderActivity.this, null, "正在确认...", false, true);
 			super.onPreExecute();
 		}
 
@@ -669,7 +679,7 @@ public class OrderActivity extends Activity implements OnClickListener {
 		private String errMsg;
 		@Override
 		protected void onPreExecute() {
-			progress = ProgressDialog.show(OrderActivity.this, null, "正在确认...", false, false);
+			progress = ProgressDialog.show(OrderActivity.this, null, "正在确认...", false, true);
 			super.onPreExecute();
 		}
 		

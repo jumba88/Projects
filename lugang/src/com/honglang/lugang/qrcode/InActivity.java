@@ -248,7 +248,7 @@ public class InActivity extends Activity implements OnClickListener {
 		private String errMsg;
 		@Override
 		protected void onPreExecute() {
-			progress = ProgressDialog.show(InActivity.this, null, "正在提交...", false, false);
+			progress = ProgressDialog.show(InActivity.this, null, "正在提交...", false, true);
 			super.onPreExecute();
 		}
 
@@ -304,7 +304,7 @@ public class InActivity extends Activity implements OnClickListener {
 				InActivity.this.finish();
 			} else {
 				Toast.makeText(InActivity.this, errMsg, Toast.LENGTH_LONG).show();
-				soundPool.play(2, 30, 30, 2, 0, 1);
+				soundPool.play(2, 10, 10, 1, 0, 1);
 				if (errMsg.equals("请先登录")) {
 					Intent i = new Intent(InActivity.this, LoginActivity.class);
 					i.putExtra("dir", 1);
