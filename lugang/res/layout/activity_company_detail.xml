@@ -63,10 +63,9 @@
             android:layout_marginLeft="10dp"
             android:textColor="@android:color/holo_orange_light"
             android:text="0772-1010110"/>
-        <Button android:layout_height="30dp"
+        <Button android:layout_height="wrap_content"
+            android:minHeight="1dp"
             android:id="@+id/dial"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/login_button_bg"
             android:textColor="@android:color/white"

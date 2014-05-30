@@ -186,6 +186,7 @@
         <EditText android:layout_columnSpan="3"
             android:id="@+id/bxf"
             style="@style/EditStyle"
+            android:enabled="false"
             android:inputType="numberDecimal"
             android:text=""/>
         
@@ -217,6 +218,7 @@
         <EditText android:layout_columnSpan="3"
             android:id="@+id/tbjz"
             style="@style/EditStyle"
+            android:enabled="false"
             android:inputType="numberDecimal"
             android:text=""/>
         <TextView

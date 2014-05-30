@@ -90,8 +90,7 @@ public class CountActivity extends Activity implements OnClickListener {
 			bzf.setFocusable(false);
 			thf.setFocusable(false);
 			shf.setFocusable(false);
-			bxf.setFocusable(false);
-			bxf.setEnabled(false);
+			tbjz.setEnabled(true);
 			hint.setVisibility(View.VISIBLE);
 			EDITABLE = true;
 		}
@@ -214,10 +213,7 @@ public class CountActivity extends Activity implements OnClickListener {
 			this.finish();
 			break;
 		case R.id.ok:
-			Intent data = new Intent();
-			data.putExtra("item", getResult());
-			setResult(RESULT_OK, data);
-			this.finish();
+			ok();
 			break;
 		case R.id.weight:
 			showDialog();
@@ -234,7 +230,27 @@ public class CountActivity extends Activity implements OnClickListener {
 		
 	}
 	//get the final result
-	public Order getResult(){
+	public void ok(){
+		if (!Constant.isInt(total.getText().toString())) {
+			Toast.makeText(this, "请输入货物数量!", Toast.LENGTH_LONG).show();
+			return;
+		}
+		if (!Constant.isNum(yf.getText().toString())) {
+			Toast.makeText(CountActivity.this, "运费不能为空,至少为0或大于0", Toast.LENGTH_LONG).show();
+			return;
+		}
+		if (!Constant.isNum(bzf.getText().toString())) {
+			Toast.makeText(CountActivity.this, "包装费不能为空,至少为0或大于0", Toast.LENGTH_LONG).show();
+			return;
+		}
+		if (!Constant.isNum(thf.getText().toString())) {
+			Toast.makeText(CountActivity.this, "提货费不能为空,至少为0或大于0", Toast.LENGTH_LONG).show();
+			return;
+		}
+		if (!Constant.isNum(shf.getText().toString())) {
+			Toast.makeText(CountActivity.this, "送货费不能为空,至少为0或大于0", Toast.LENGTH_LONG).show();
+			return;
+		}
 		data.setSl(total.getText().toString());
 		data.setZl(weight.getText().toString());
 		data.setZl_danwei(UNIT[weightUnit.getSelectedItemPosition()]);
@@ -246,16 +262,24 @@ public class CountActivity extends Activity implements OnClickListener {
 		data.setBaofei(bxf.getText().toString());
 		data.setZongyunfei(zyf.getText().toString());
 		String str = tbjz.getText().toString().trim();
-		if (Constant.isNum(str)) {
-			data.setTbjz(str);
-		} else {
-			data.setTbjz("0");
+		if (EDITABLE) {
+			if (!Constant.isNum(str)) {
+				Toast.makeText(this, "请输入投保价值!", Toast.LENGTH_LONG).show();
+				return;
+			}
+			if (Double.parseDouble(str) < 2000) {
+				Toast.makeText(this, "投保价值最低2000元!", Toast.LENGTH_LONG).show();
+				return;
+			}
 		}
-//		data.setTbjz(tbjz.getText()+"");
+		data.setTbjz(str);
 		
 		data.setJl_danwei(allUnit);
 		data.setBaozhuang(PACK_TYPE[pack.getSelectedItemPosition()]);
-		return data;
+		Intent i = new Intent();
+		i.putExtra("item", data);
+		setResult(RESULT_OK, i);
+		this.finish();
 	}
 	
 	
