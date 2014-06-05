@@ -173,6 +173,7 @@ public class DoneActivity extends Activity implements OnClickListener {
 				transport.reset();
 			} catch (Exception e) {
 				e.printStackTrace();
+				Log.i("suxoyo", e.toString());
 //				errMsg = e.toString();
 				errMsg = "操作失败，请稍候重试";
 			}

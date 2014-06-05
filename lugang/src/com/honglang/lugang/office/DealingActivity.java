@@ -1,5 +1,6 @@
 package com.honglang.lugang.office;
 
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -193,6 +194,7 @@ public class DealingActivity extends Activity implements OnClickListener {
 				transport.reset();
 			} catch (Exception e) {
 				e.printStackTrace();
+				Log.i("suxoyo", e.toString());
 //				errMsg = e.toString();
 				errMsg = "操作失败，请稍候重试";
 				return false;

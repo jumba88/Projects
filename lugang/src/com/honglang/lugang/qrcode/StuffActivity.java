@@ -327,7 +327,7 @@ public class StuffActivity extends Activity implements OnClickListener {
 			return;
 		}
 		if (!Constant.isNum(bzfStr)) {
-			Toast.makeText(this, "请输入保险费!", Toast.LENGTH_LONG).show();
+			Toast.makeText(this, "请输入包装费!", Toast.LENGTH_LONG).show();
 			return;
 		}
 		if (!Constant.isNum(thfStr)) {

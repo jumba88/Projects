@@ -67,10 +67,10 @@ public class LoginActivity extends Activity {
 		userNo = username.getText().toString().trim();
 		pass = password.getText().toString().trim();
 		Calendar c = Calendar.getInstance();
-		if (c.get(Calendar.MONTH) > 4) {
-			Toast.makeText(this, "测试版本过期,请安装新版本", Toast.LENGTH_LONG).show();
-			return;
-		}
+//		if (c.get(Calendar.MONTH) > 4) {
+//			Toast.makeText(this, "测试版本过期,请安装新版本", Toast.LENGTH_LONG).show();
+//			return;
+//		}
 		if(TextUtils.isEmpty(userNo)){
 			username.setShakeAnimation();
 			return;
