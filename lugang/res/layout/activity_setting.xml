@@ -12,22 +12,58 @@
     <include layout="@layout/logo"/>
     
     <Button style="@style/tabfour"
+        android:id="@+id/feedback"
         android:text="@string/feedback"/>
     
     <Button style="@style/tabfour"
+        android:id="@+id/about"
         android:text="@string/about"/>
     
     <Button style="@style/tabfour"
+        android:id="@+id/version"
         android:text="@string/version"/>
+
+    <Switch
+            android:id="@+id/switcher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:background="@android:color/white"
+            android:textOn="开启"
+            android:textOff="关闭"
+            android:text="工单提醒"
+            android:textSize="20sp" />
+
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:visibility="invisible"
+        android:orientation="vertical" >
+
+        <CheckBox
+            android:id="@+id/checkBox1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="铃声提醒" />
+
+        <CheckBox
+            android:id="@+id/checkBox2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="震动提醒" />
+
+    </LinearLayout>
     
     <Button android:id="@+id/logout"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_gravity="center|bottom"
+        android:layout_marginTop="50dp"
         android:singleLine="true"
         android:padding="2dp"
-        android:layout_marginTop="150dp"
-        android:background="#FF4444"
+        android:background="@drawable/logout_btn"
         android:textSize="25sp"
         android:textColor="@color/white"
         android:text="@string/logout"/>

@@ -331,6 +331,14 @@ public class BlankActivity extends Activity implements OnClickListener {
 			return;
 		}
 		
+		if (!codeSh.isEmpty()) {
+//			Toast.makeText(this, "请填写正确的收货人身份证号码", Toast.LENGTH_LONG).show();
+			if (!Constant.isId(codeSh)) {
+				Toast.makeText(this, "请填写正确的收货人身份证号码", Toast.LENGTH_LONG).show();
+				return;
+			}
+		}
+		
 		if (nameTy == null || nameTy.equals("")) {
 			Toast.makeText(this, "请填写托运人姓名", Toast.LENGTH_LONG).show();
 			return;
@@ -369,14 +377,6 @@ public class BlankActivity extends Activity implements OnClickListener {
 		if (!Constant.isPhoneNO(phoneKd) && !Constant.isMobileNO(phoneKd)) {
 			Toast.makeText(BlankActivity.this, "请填写正确的开单人电话", Toast.LENGTH_LONG).show();
 			return;
-		}
-		
-		if (codeSh != null && !codeSh.equals("")) {
-			if (!Constant.isId(codeSh)) {
-				Toast.makeText(this, "请填写正确的收货人身份证号码", Toast.LENGTH_LONG).show();
-				return;
-
-			}
 		}
 		
 		if (!IS_ADD) {

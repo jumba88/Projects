@@ -50,9 +50,11 @@ public class CountActivity extends Activity implements OnClickListener {
 	private TextView hint;
 	private EditText total;
 //	private EditText weight;
-	public Button weight;
-	public Button cubage;
+	public EditText weight;
+	public EditText cubage;
 	public Button calc;
+	public Button calcWeight;
+	public Button calcCubage;
 	public EditText yf;
 	public EditText bzf;
 	public EditText thf;
@@ -84,6 +86,8 @@ public class CountActivity extends Activity implements OnClickListener {
 			total.setFocusable(false);
 			weight.setEnabled(false);
 			cubage.setEnabled(false);
+			calcWeight.setEnabled(false);
+			calcCubage.setEnabled(false);
 			calc.setEnabled(false);
 			weightUnit.setEnabled(false);
 			yf.setEnabled(false);
@@ -111,11 +115,15 @@ public class CountActivity extends Activity implements OnClickListener {
 		name = (TextView) this.findViewById(R.id.name);
 		totalUnit = (TextView) this.findViewById(R.id.totalUnit);
 		total = (EditText) this.findViewById(R.id.total);
-		weight = (Button) this.findViewById(R.id.weight);
-		cubage = (Button) this.findViewById(R.id.cubage);
+		weight = (EditText) this.findViewById(R.id.weight);
+		cubage = (EditText) this.findViewById(R.id.cubage);
 		cubage.setOnClickListener(this);
 		calc = (Button) this.findViewById(R.id.calc);
 		calc.setOnClickListener(this);
+		calcWeight = (Button) this.findViewById(R.id.calcWeight);
+		calcWeight.setOnClickListener(this);
+		calcCubage = (Button) this.findViewById(R.id.calcCubage);
+		calcCubage.setOnClickListener(this);
 		
 		yf = (EditText) this.findViewById(R.id.yf);
 //		allUnit = (TextView) this.findViewById(R.id.allUnit);
@@ -215,10 +223,10 @@ public class CountActivity extends Activity implements OnClickListener {
 		case R.id.ok:
 			ok();
 			break;
-		case R.id.weight:
+		case R.id.calcWeight:
 			showDialog();
 			break;
-		case R.id.cubage:
+		case R.id.calcCubage:
 			DialogFragment frag = CalcCubDialog.newInstance(0);
 			frag.show(getFragmentManager(), "cubage");
 			break;
@@ -235,19 +243,19 @@ public class CountActivity extends Activity implements OnClickListener {
 			Toast.makeText(this, "请输入货物数量!", Toast.LENGTH_LONG).show();
 			return;
 		}
-		if (!Constant.isNum(yf.getText().toString())) {
+		if (!Constant.isNumber(yf.getText().toString())) {
 			Toast.makeText(CountActivity.this, "运费不能为空,至少为0或大于0", Toast.LENGTH_LONG).show();
 			return;
 		}
-		if (!Constant.isNum(bzf.getText().toString())) {
+		if (!Constant.isNumber(bzf.getText().toString())) {
 			Toast.makeText(CountActivity.this, "包装费不能为空,至少为0或大于0", Toast.LENGTH_LONG).show();
 			return;
 		}
-		if (!Constant.isNum(thf.getText().toString())) {
+		if (!Constant.isNumber(thf.getText().toString())) {
 			Toast.makeText(CountActivity.this, "提货费不能为空,至少为0或大于0", Toast.LENGTH_LONG).show();
 			return;
 		}
-		if (!Constant.isNum(shf.getText().toString())) {
+		if (!Constant.isNumber(shf.getText().toString())) {
 			Toast.makeText(CountActivity.this, "送货费不能为空,至少为0或大于0", Toast.LENGTH_LONG).show();
 			return;
 		}
@@ -263,7 +271,7 @@ public class CountActivity extends Activity implements OnClickListener {
 		data.setZongyunfei(zyf.getText().toString());
 		String str = tbjz.getText().toString().trim();
 		if (EDITABLE) {
-			if (!Constant.isNum(str)) {
+			if (!Constant.isNumber(str)) {
 				Toast.makeText(this, "请输入投保价值!", Toast.LENGTH_LONG).show();
 				return;
 			}

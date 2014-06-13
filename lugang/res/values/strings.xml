@@ -24,9 +24,9 @@
     <string name="blank">空白托运单入库</string>
     <string name="singleout">出库记录</string>
     <string name="multiout">货物出库</string>
-    <string name="feedback">留言反馈</string>
-    <string name="about">关于我们</string>
-    <string name="version">版本信息</string>
+    <string name="feedback">反馈客服</string>
+    <string name="about">关于软件</string>
+    <string name="version">版本更新</string>
     <string name="logout">注销登录</string>
     <string name="number">序号</string>
     <string name="handling">待处理事项</string>
@@ -40,6 +40,7 @@
     <string name="no">否</string>
     <string name="confirm">确认</string>
     <string name="cancel">取消</string>
+    <string name="about_content">路港网安卓版1.0版本\n\n本软件由广西路港科技有限公司开发，版权所有 </string>
 
     <!-- zxing -->
     <string name="app_picker_name">应用</string>

@@ -52,6 +52,13 @@ public class Constant {
 		}
 		return str.matches("^[-+]?(([0-9]+)([.]([0-9]+))?|([.]([0-9]+))?)$");
 	}
+	public static boolean isNumber(String str){
+		if (str == null || str.equals("")) {
+			return false;
+		}
+//		return str.matches("^[1-9]\\d*.\\d{1,2}|0.\\d{1,2}|0$");
+		return str.matches("^([1-9]\\d*\\.\\d{1,2}|[1-9]\\d*|0\\.\\d{1,2}|0)$");
+	}
 	
 	/*
 	 * verify int
@@ -69,10 +76,11 @@ public class Constant {
      * @return
      */
      public static boolean isId(String text) {
-          String regx = "[0-9]{17}x";
-          String reg1 = "[0-9]{15}";
-          String regex = "[0-9]{18}";
-          return text.matches(regx) || text.matches(reg1) || text.matches(regex);
+//          String str = "^(\\d{6})(\\d{4})(\\d{2})(\\d{2})(\\d{3})([0-9]|X)$";
+          String reg1 = "^(\\d{15}|\\d{18}|\\d{17}(X|x))$";
+          String reg2 = "^[1-9]([0-9]{14}|[0-9]{17})$";
+          return text.matches(reg1) || text.matches(reg2);
+//          return text.matches(str);
     }
 	
 	/** 解决scrollview与listview共存 */

@@ -84,14 +84,20 @@
             style="@style/order"
             android:text="总重量" />
 
-        <Button android:layout_columnSpan="2"
+        <EditText android:layout_columnSpan="1"
             android:id="@+id/weight"
             style="@style/EditStyle"
+            android:layout_width="120dp"
+            android:inputType="numberDecimal"
             android:text="0"/>
         
 
         <Spinner android:layout_columnSpan="1"
             android:id="@+id/weightUnit" />
+        <Button android:id="@+id/calcWeight"
+            android:minWidth="1dp"
+            android:background="@drawable/calc_btn"
+            android:minHeight="1dp"/>
         
         <View style="@style/line"/>
         
@@ -99,15 +105,21 @@
             style="@style/order"
             android:text="总体积" />
 
-        <Button android:layout_columnSpan="2"
+        <EditText android:layout_columnSpan="1"
             android:id="@+id/cubage"
             style="@style/EditStyle"
+            android:layout_width="120dp"
+            android:inputType="numberDecimal"
             android:text="0"/>
         
         <TextView android:layout_columnSpan="1"
             android:id="@+id/cubageUnit"
             android:background="@drawable/m3"
             android:text=""/>
+        <Button android:id="@+id/calcCubage"
+            android:background="@drawable/calc_btn"
+            android:minWidth="1dp"
+            android:minHeight="1dp"/>
         </GridLayout>
         
         <GridLayout android:layout_width="wrap_content"
@@ -141,7 +153,9 @@
             android:inputType="numberDecimal"
             android:text="0.00"/>
         <Button android:id="@+id/calc"
+            android:layout_marginRight="5dp"
             android:background="@drawable/calc_btn"
+            android:minWidth="1dp"
             android:minHeight="1dp"/>
         
         <View style="@style/line"/>

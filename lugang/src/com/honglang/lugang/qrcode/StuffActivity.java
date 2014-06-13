@@ -41,9 +41,11 @@ public class StuffActivity extends Activity implements OnClickListener {
 	private Button back;
 	private Button confirm;
 
-	public Button weight;
-	public Button cubage;
+	public EditText weight;
+	public EditText cubage;
 	public Button calc;
+	public Button calcWeight;
+	public Button calcCubage;
 	public EditText yf;
 	public EditText name;
 	public EditText total;
@@ -95,12 +97,14 @@ public class StuffActivity extends Activity implements OnClickListener {
 		confirm.setVisibility(View.VISIBLE);
 		confirm.setOnClickListener(this);
 
-		weight = (Button) this.findViewById(R.id.weight);
-		weight.setOnClickListener(this);
-		cubage = (Button) this.findViewById(R.id.cubage);
-		cubage.setOnClickListener(this);
+		weight = (EditText) this.findViewById(R.id.weight);
+		cubage = (EditText) this.findViewById(R.id.cubage);
 		calc = (Button) this.findViewById(R.id.calc);
 		calc.setOnClickListener(this);
+		calcWeight = (Button) this.findViewById(R.id.calcWeight);
+		calcWeight.setOnClickListener(this);
+		calcCubage = (Button) this.findViewById(R.id.calcCubage);
+		calcCubage.setOnClickListener(this);
 		yf = (EditText) this.findViewById(R.id.yf);
 //		yf.setOnClickListener(this);
 
@@ -288,10 +292,10 @@ public class StuffActivity extends Activity implements OnClickListener {
 		case R.id.ok:
 			confirm();
 			break;
-		case R.id.weight:
+		case R.id.calcWeight:
 			showDialog();
 			break;
-		case R.id.cubage:
+		case R.id.calcCubage:
 			DialogFragment frag = CalcCubDialog.newInstance(1);
 			frag.show(getFragmentManager(), "cubage");
 			break;
@@ -313,6 +317,8 @@ public class StuffActivity extends Activity implements OnClickListener {
 		String bxfStr = bxf.getText().toString().trim();
 		String tbjzStr = tbjz.getText().toString().trim();
 		String hkStr = dk.getText().toString().trim();
+		String weightStr = weight.getText().toString().trim();
+		String cbStr = cubage.getText().toString().trim();
 
 		if (stf == null || stf.equals("")) {
 			Toast.makeText(this, "请输入货物名称!", Toast.LENGTH_LONG).show();
@@ -322,20 +328,28 @@ public class StuffActivity extends Activity implements OnClickListener {
 			Toast.makeText(this, "请输入货物数量!", Toast.LENGTH_LONG).show();
 			return;
 		}
-		if (!Constant.isNum(yfStr)) {
-			Toast.makeText(this, "请输入运费!", Toast.LENGTH_LONG).show();
+		if (!Constant.isNumber(weightStr)) {
+			Toast.makeText(this, "请输入总重量,最多保留两位小数!", Toast.LENGTH_LONG).show();
 			return;
 		}
-		if (!Constant.isNum(bzfStr)) {
-			Toast.makeText(this, "请输入包装费!", Toast.LENGTH_LONG).show();
+		if (!Constant.isNumber(cbStr)) {
+			Toast.makeText(this, "请输入总体积,最多保留两位小数!", Toast.LENGTH_LONG).show();
 			return;
 		}
-		if (!Constant.isNum(thfStr)) {
-			Toast.makeText(this, "请输入提货费!", Toast.LENGTH_LONG).show();
+		if (!Constant.isNumber(yfStr)) {
+			Toast.makeText(this, "请输入运费,最多保留两位小数!", Toast.LENGTH_LONG).show();
 			return;
 		}
-		if (!Constant.isNum(shfStr)) {
-			Toast.makeText(this, "请输入送货费!", Toast.LENGTH_LONG).show();
+		if (!Constant.isNumber(bzfStr)) {
+			Toast.makeText(this, "请输入包装费,最多保留两位小数!", Toast.LENGTH_LONG).show();
+			return;
+		}
+		if (!Constant.isNumber(thfStr)) {
+			Toast.makeText(this, "请输入提货费,最多保留两位小数!", Toast.LENGTH_LONG).show();
+			return;
+		}
+		if (!Constant.isNumber(shfStr)) {
+			Toast.makeText(this, "请输入送货费,最多保留两位小数!", Toast.LENGTH_LONG).show();
 			return;
 		}
 //		if (!Constant.isNum(bxfStr)) {
@@ -344,16 +358,16 @@ public class StuffActivity extends Activity implements OnClickListener {
 //		}
 		
 		if (ISTB) {
-			if (!Constant.isNum(tbjzStr)) {
+			if (!Constant.isNumber(tbjzStr)) {
 				Toast.makeText(this, "请输入投保价值!", Toast.LENGTH_LONG).show();
 				return;
 			}
-			if (Constant.isNum(tbjzStr) && Double.parseDouble(tbjzStr) < 2000) {
+			if (Constant.isNumber(tbjzStr) && Double.parseDouble(tbjzStr) < 2000) {
 				Toast.makeText(this, "投保价值最低2000元!", Toast.LENGTH_LONG).show();
 				return;
 			}
 		}
-		if (!Constant.isNum(hkStr)) {
+		if (!Constant.isNumber(hkStr)) {
 			Toast.makeText(this, "请输入货款!", Toast.LENGTH_LONG).show();
 			return;
 		}
@@ -362,10 +376,10 @@ public class StuffActivity extends Activity implements OnClickListener {
 		stuff.setWpmc(stf);
 		stuff.setSl(count);
 		stuff.setBaozhuang(PACK_TYPE[pack.getSelectedItemPosition()]);
-		stuff.setZl(weight.getText().toString());
+		stuff.setZl(weightStr);
 		stuff.setSl_danwei(COUNT_TYPE[totalUnit.getSelectedItemPosition()]);
 		stuff.setZl_danwei(UNIT[weightUnit.getSelectedItemPosition()]);
-		stuff.setTiji(cubage.getText().toString());
+		stuff.setTiji(cbStr);
 		stuff.setTiji_danwei("m³");
 		stuff.setYunfei(yfStr);
 		stuff.setBaozhuangfei(bzfStr);

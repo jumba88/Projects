@@ -601,6 +601,7 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 				Intent i2 = new Intent(CaptureActivity.this, BlankActivity.class);
 				i2.putExtra("fhCode", rawResult.getText());
 				this.startActivity(i2);
+				this.finish();
 				break;
 			case 3:
 //				if (!app.isNetworkConnected()) {

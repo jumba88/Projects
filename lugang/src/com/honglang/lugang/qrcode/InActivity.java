@@ -219,6 +219,7 @@ public class InActivity extends Activity implements OnClickListener {
 		protected void onPostExecute(Boolean result) {
 //			progress.dismiss();
 			if (result) {
+				soundPool.play(1, 10, 10, 1, 0, 1);
 				adapter = new InAdapter(InActivity.this, formList);
 				if(adapter != null){
 					mListView.setAdapter(adapter);
@@ -230,6 +231,7 @@ public class InActivity extends Activity implements OnClickListener {
 					new ConfirmTask().execute((Void)null);
 				}
 			} else {
+				soundPool.play(2, 10, 10, 1, 0, 1);
 				Toast.makeText(InActivity.this, errMsg, Toast.LENGTH_LONG).show();
 				if (errMsg.equals("请先登录")) {
 					Intent i = new Intent(InActivity.this, LoginActivity.class);
