@@ -23,7 +23,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.TextView;
-
+/**
+ * 计算运费对话框
+ * @author Administrator
+ *
+ */
 public class CalcMoneyDialog extends DialogFragment implements OnClickListener {
 
 	private int weight;

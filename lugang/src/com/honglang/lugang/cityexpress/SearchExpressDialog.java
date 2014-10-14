@@ -89,6 +89,7 @@ public class SearchExpressDialog extends Dialog implements android.view.View.OnC
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.search:
+			search.setEnabled(false);
 			if (items.size() > 0) {
 				items.clear();
 				adapter.notifyDataSetChanged();
@@ -170,7 +171,7 @@ public class SearchExpressDialog extends Dialog implements android.view.View.OnC
 					adapter.notifyDataSetChanged();
 				}
 			}
-			
+			search.setEnabled(true);
 			super.onPostExecute(result);
 		}
 		

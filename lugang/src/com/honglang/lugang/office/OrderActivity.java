@@ -81,7 +81,7 @@ public class OrderActivity extends Activity implements OnClickListener {
 	// Definition of the one requestCode we use for receiving results.
 	static final private int GET_CODE = 0;
 	
-	private static boolean checked = false;
+	private static boolean checked = false;//用户是否查看货物
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -90,6 +90,7 @@ public class OrderActivity extends Activity implements OnClickListener {
 		init();
 	}
 
+	//初始化
 	private void init(){
 		title = (TextView) this.findViewById(R.id.title);
 		
@@ -129,7 +130,7 @@ public class OrderActivity extends Activity implements OnClickListener {
 		cache = new ArrayList<Order>();
 		submit = new ArrayList<Integer>();
 		
-		if (getIntent().getBooleanExtra("scan", false)) {
+		if (getIntent().getBooleanExtra("scan", false)) {//从扫描空白托运单进入页面
 			fhCode = getIntent().getStringExtra("fhCode");
 			new Load2Task().execute((Void)null);
 			confirm.setVisibility(View.VISIBLE);
@@ -187,6 +188,7 @@ public class OrderActivity extends Activity implements OnClickListener {
 		}
 	}
 	
+	//物流企业确认
 	public void ok(){
 		for (int i = 0; i < items.size(); i++) {
 			if (Integer.parseInt(items.get(i).getSl()) == 0) {
@@ -205,6 +207,8 @@ public class OrderActivity extends Activity implements OnClickListener {
 		}
 		new ConfirmTask().execute((Void)null);
 	}
+	
+	//VIP会员同意确认
 	public void yes(){
 		if (checked) {
 			if (sure.getText().toString().isEmpty()) {
@@ -226,6 +230,7 @@ public class OrderActivity extends Activity implements OnClickListener {
 			Toast.makeText(OrderActivity.this, "请先查看核对货物信息再确认", Toast.LENGTH_LONG).show();
 		}
 	}
+	//VIP会员不同意确认
 	public void no(){
 		if (checked) {
 			if (sure.getText().toString().isEmpty()) {
@@ -256,7 +261,7 @@ public class OrderActivity extends Activity implements OnClickListener {
 			if (resultCode == RESULT_OK) {
 				Order item = new Order();
 				item = (Order) data.getExtras().getSerializable("item");
-				Log.i("suxoyo", item.getTbjz() +"/" + cache.get(position).getTbjz());
+				//修改投保价值，设置为0
 				if (Double.parseDouble(item.getTbjz()) != Double
 						.parseDouble(cache.get(position).getTbjz())) {
 					submit.set(position, 0);
@@ -269,6 +274,7 @@ public class OrderActivity extends Activity implements OnClickListener {
 			for (int i = 0; i < submit.size(); i++) {
 				sum += submit.get(i);
 			}
+			//不等于，说明用户修改了投保价值，只能不同意确认
 			if (submit.size() != sum) {
 				yes.setEnabled(false);
 			} else {
@@ -305,7 +311,6 @@ public class OrderActivity extends Activity implements OnClickListener {
 				if(response != null){
 					JSONTokener parser = new JSONTokener(response.getPropertyAsString("GetFormInfoByFormOidResult"));
 					JSONObject json = (JSONObject) parser.nextValue();
-					Log.i("suxoyo", json.toString());
 					if (json.getBoolean("result")) {
 						items.clear();
 						JSONObject data = json.getJSONObject("data");
@@ -395,6 +400,11 @@ public class OrderActivity extends Activity implements OnClickListener {
 		
 	}
 	
+	/**
+	 * 加载空白托运单
+	 * @author Administrator
+	 *
+	 */
 	class Load2Task extends AsyncTask<Void, Void, Boolean>{
 		
 		private String errMsg;
@@ -421,7 +431,6 @@ public class OrderActivity extends Activity implements OnClickListener {
 				if(response != null){
 					JSONTokener parser = new JSONTokener(response.getPropertyAsString("GetFormInfoByFormOid2FhcodeResult"));
 					JSONObject json = (JSONObject) parser.nextValue();
-					Log.i("suxoyo", json.toString());
 					if (json.getBoolean("result")) {
 						items.clear();
 						JSONObject data = json.getJSONObject("data");
@@ -515,6 +524,11 @@ public class OrderActivity extends Activity implements OnClickListener {
 		
 	}
 
+	/**
+	 * 提交确认货物入库
+	 * @author Administrator
+	 *
+	 */
 	class ConfirmTask extends AsyncTask<Void, Void, Boolean>{
 
 		private String errMsg;
@@ -556,7 +570,6 @@ public class OrderActivity extends Activity implements OnClickListener {
 					e.printStackTrace();
 				}
 			}
-//			Log.i("suxoyo", orderList.toString());
 			SoapObject rpc = new SoapObject(Constant.NAMESPACE, confirmAction);
 			rpc.addProperty("formOid", Long.parseLong(formOid));
 			rpc.addProperty("jsonMxbArrayString", orderList.toString());
@@ -573,7 +586,6 @@ public class OrderActivity extends Activity implements OnClickListener {
 				if(response != null){
 					JSONTokener parser = new JSONTokener(response.getPropertyAsString("PaiCheShouHuoRuKuResult"));
 					JSONObject json = (JSONObject) parser.nextValue();
-//					Log.i("suxoyo", json.toString());
 					if (json.getBoolean("result")) {
 						
 						return true;
@@ -610,6 +622,11 @@ public class OrderActivity extends Activity implements OnClickListener {
 		
 	}
 	
+	/**
+	 * VIP会员同意确认
+	 * @author Administrator
+	 *
+	 */
 	class YesTask extends AsyncTask<Void, Void, Boolean>{
 
 		private String errMsg;
@@ -635,11 +652,9 @@ public class OrderActivity extends Activity implements OnClickListener {
 			try {
 				transport.call(Constant.NAMESPACE + "TuoYunQueRenYes", envelope);
 				SoapObject response = (SoapObject) envelope.bodyIn;
-				Log.i("suxoyo", response.toString());
 				if(response != null){
 					JSONTokener parser = new JSONTokener(response.getPropertyAsString("TuoYunQueRenYesResult"));
 					JSONObject json = (JSONObject) parser.nextValue();
-					Log.i("suxoyo", json.toString());
 					if (json.getBoolean("result")) {
 						
 						return true;
@@ -675,6 +690,12 @@ public class OrderActivity extends Activity implements OnClickListener {
 		}
 		
 	}
+	
+	/**
+	 * VIP会员不同意货物确认
+	 * @author Administrator
+	 *
+	 */
 	class NoTask extends AsyncTask<Void, Void, Boolean>{
 		private String errMsg;
 		@Override
@@ -719,7 +740,6 @@ public class OrderActivity extends Activity implements OnClickListener {
 				if(response != null){
 					JSONTokener parser = new JSONTokener(response.getPropertyAsString("TuoYunQueRenNoResult"));
 					JSONObject json = (JSONObject) parser.nextValue();
-					Log.i("suxoyo", json.toString());
 					if (json.getBoolean("result")) {
 						
 						return true;

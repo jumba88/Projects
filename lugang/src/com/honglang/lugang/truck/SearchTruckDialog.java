@@ -86,6 +86,7 @@ public class SearchTruckDialog extends Dialog implements android.view.View.OnCli
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.search:
+			search.setEnabled(false);
 			if (items.size() > 0) {
 				items.clear();
 				adapter.notifyDataSetChanged();
@@ -168,6 +169,7 @@ public class SearchTruckDialog extends Dialog implements android.view.View.OnCli
 					adapter.notifyDataSetChanged();
 				}
 			}
+			search.setEnabled(true);
 			super.onPostExecute(result);
 		}
 		

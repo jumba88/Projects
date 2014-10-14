@@ -902,6 +902,7 @@ public final class CaptureActivity extends Activity implements OnClickListener,
 						return true;
 					} else {
 						errMsg = obj.getString("msg");
+//						Log.i("suxoyo", errMsg);
 						return false;
 					}
 				}

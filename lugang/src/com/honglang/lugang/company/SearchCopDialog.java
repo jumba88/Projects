@@ -89,6 +89,7 @@ public class SearchCopDialog extends Dialog implements android.view.View.OnClick
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.search:
+			search.setEnabled(false);
 			if (items.size() > 0) {
 				items.clear();
 				adapter.notifyDataSetChanged();
@@ -166,6 +167,8 @@ public class SearchCopDialog extends Dialog implements android.view.View.OnClick
 					adapter.notifyDataSetChanged();
 				}
 			}
+			
+			search.setEnabled(true);
 			super.onPostExecute(result);
 		}
 		

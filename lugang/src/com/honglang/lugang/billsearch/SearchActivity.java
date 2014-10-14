@@ -163,6 +163,7 @@ public class SearchActivity extends Activity implements OnClickListener {
 				soundPool.play(2, 1, 1, 1, 0, 1);
 				nothing.setVisibility(View.VISIBLE);
 			}
+			Log.i("suxoyo", ""+errMsg);
 			super.onPostExecute(result);
 		}
 		

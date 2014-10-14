@@ -20,7 +20,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
+/**
+ * 计算体积对话框
+ * @author Administrator
+ *
+ */
 public class CalcCubDialog extends DialogFragment implements OnClickListener {
 
 	private EditText length;

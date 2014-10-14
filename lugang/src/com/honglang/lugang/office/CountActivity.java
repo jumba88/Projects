@@ -100,6 +100,7 @@ public class CountActivity extends Activity implements OnClickListener {
 		}
 	}
 	
+	//初始化各种控件
 	private void init(){
 		title = (TextView) this.findViewById(R.id.title);
 		title.setText("费用计算");
@@ -290,7 +291,7 @@ public class CountActivity extends Activity implements OnClickListener {
 		this.finish();
 	}
 	
-	
+	//弹出计算重量对话框
 	public void showDialog(){
 		DialogFragment newFragment = CalcWeightDialog.newInstance(weightUnit.getSelectedItemPosition(),0);
         newFragment.show(getFragmentManager(), "weight");
@@ -311,6 +312,7 @@ public class CountActivity extends Activity implements OnClickListener {
 		
 	}
 	
+	//根据输入的包装费，提货费，送货费和保险费计算运费
 	class CalcWatcher implements TextWatcher{
 
 		@Override
@@ -357,13 +359,14 @@ public class CountActivity extends Activity implements OnClickListener {
 		}
 		
 	}
-	
+	//根据投保价值计算保险费
 	class TbWatcher implements TextWatcher{
 
 		@Override
 		public void afterTextChanged(Editable s) {
 			if (EDITABLE) {
 				if (Constant.isNum(s.toString())) {
+					//输入与原来不符
 					if (Double.parseDouble(s.toString()) != Double.parseDouble(data.getTbjz())) {
 						confirm.setVisibility(View.VISIBLE);
 						bxf.setText(Double.parseDouble(s.toString())*5/10000+"");

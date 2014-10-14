@@ -43,7 +43,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
-
+/**
+ * 待处理工单
+ */
 public class DealingActivity extends Activity implements OnClickListener {
 
 	private HlApp app;
@@ -137,6 +139,11 @@ public class DealingActivity extends Activity implements OnClickListener {
 		
 	}
 	
+	/**
+	 * 加载待处理工单列表的异步任务
+	 * @author Administrator
+	 *
+	 */
 	public class DealingTask extends AsyncTask<Void, Void, Boolean>{
 
 		private String errMsg;
@@ -147,12 +154,15 @@ public class DealingActivity extends Activity implements OnClickListener {
 				Toast.makeText(DealingActivity.this, "当前网络不可用，请检查网络设置", Toast.LENGTH_SHORT).show();
 				return;
 			}
+			
+			//进入页面首次加载，显示加载对话框
 			if (ISFIRST) {
 				progress = ProgressDialog.show(DealingActivity.this, null, "加载中...", false, true);
 			}
 			super.onPreExecute();
 		}
 
+		//以下为网络请求加载数据
 		@Override
 		protected Boolean doInBackground(Void... params) {
 			SoapObject rpc = new SoapObject(Constant.NAMESPACE, action);
@@ -194,7 +204,6 @@ public class DealingActivity extends Activity implements OnClickListener {
 				transport.reset();
 			} catch (Exception e) {
 				e.printStackTrace();
-				Log.i("suxoyo", e.toString());
 //				errMsg = e.toString();
 				errMsg = "操作失败，请稍候重试";
 				return false;
@@ -206,7 +215,7 @@ public class DealingActivity extends Activity implements OnClickListener {
 		protected void onPostExecute(Boolean result) {
 			progress.dismiss();
 			if (result) {
-				if (ISFIRST) {
+				if (ISFIRST) {//首次加载，设置适配器
 					adapter = new OfficeAdapter(items, DealingActivity.this, 0);
 					if(adapter != null){
 						mListView.setAdapter(adapter);
@@ -219,24 +228,29 @@ public class DealingActivity extends Activity implements OnClickListener {
 				if (pageIndex > 1) {
 					mListView.onRefreshComplete();
 				}
+				
+				//上拉刷新加载完所有数据
 				if (totalCount == items.size()) {
 					mListView.setMode(Mode.DISABLED);
 					Toast.makeText(DealingActivity.this, "已加载完所有数据", Toast.LENGTH_SHORT).show();
 				}
-			}else{
+			}else{//加载出错
+				//有网络情况下提示错误信息
 				if (app.isNetworkConnected()) {
 					Toast.makeText(DealingActivity.this, errMsg, Toast.LENGTH_LONG).show();
 				}
-				
+				//未登录跳转到登录页面
 				if (errMsg.equals("请先登录")) {
 					Intent intent = new Intent(DealingActivity.this, LoginActivity.class);
 					intent.putExtra("dir", 1);
 					DealingActivity.this.startActivity(intent);
 				}
+				//上拉加载更多出错，自减1
 				if (pageIndex > 1) {
 					pageIndex--;
 					mListView.onRefreshComplete();
 				}
+				//首次加载出错退出
 				if (ISFIRST) {
 					DealingActivity.this.finish();
 				}
